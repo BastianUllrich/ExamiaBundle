@@ -84,10 +84,33 @@ class MemberUserDataModule extends \Module
             case "Aufsicht" :
                 $content .=
                 '
-                <tr class="row_4 row_first even">
+                <tr class="row_4 even">
                     <td class="label">Handynummer</td>
                     <td class="value">' .
                         $userdata->mobile
+                    .'</td>
+                </tr>
+                ';
+            break;
+            case "Student" :
+                $content .=
+                '
+                <tr class="row_4 even">
+                    <td class="label">Studiengang</td>
+                    <td class="value">' .
+                    $userdata->study_course
+                    .'</td>
+                </tr>
+                <tr class="row_5 odd">
+                    <td class="label">Hochschule | Fachbereich</td>
+                    <td class="value">' .
+                    $userdata->department
+                    .'</td>
+                </tr>
+                <tr class="row_6 even">
+                    <td class="label">Ansprechpartner im BliZ</td>
+                    <td class="value">' .
+                    $userdata->contact_person
                     .'</td>
                 </tr>
                 ';

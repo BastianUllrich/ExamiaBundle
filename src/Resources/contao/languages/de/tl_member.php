@@ -2,7 +2,7 @@
 
 $GLOBALS['TL_LANG']['tl_member']['usertype'] = array
  	(
-		'Typ',
+		'Benutzertyp',
 		'Bitte wählen Sie den Typ des neuen Mitglieds'
 	);
 

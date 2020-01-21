@@ -5,6 +5,8 @@
 
 <table class="single_record">
     <tbody>
+        <?= $this->trans('tl_member.contact1') ?>
+        <?= $this->trans('tl_member.contact2') ?>
         <?= $this->content; ?>
     </tbody>
 </table>

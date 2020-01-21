@@ -41,6 +41,7 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
+        \Contao\System::loadLanguageFile('tl_member', 'de');
         $this->Template->content = $this->getContent();
     }
 
@@ -94,17 +95,12 @@ class MemberUserDataModule extends \Module
             break;
 
             case "Student" :
-                switch ($userdata->contact_person) {
-                    case "contact1" : $contactPerson = "Zeki Öztürk"; break;
-                    case "contact2" : $contactPerson = "David Smida"; break;
-                    default : $contactPerson = "ohne";
-                }
                 $content .=
                 '
                 <tr class="row_4 even">
                     <td class="label">Ansprechpartner im BliZ</td>
                     <td class="value">' .
-                    $contactPerson
+                    $userdata->contact_person
                     .'</td>
                 </tr>
                 ';

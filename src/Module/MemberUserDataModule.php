@@ -48,26 +48,34 @@ class MemberUserDataModule extends \Module
 
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
-        $userdata = MemberModel::findBy('id', $userID);
 
+        $userdata = MemberModel::findBy('id', $userID);
         // Content für alle Anwender
         $content =
         '
         <tr class="row_0 row_first even">
             <td class="label">Vorname</td>
-            <td class="value"><?= $userdata->firstname; ?> </td>
+            <td class="value">' .
+                $userdata->firstname
+            .'</td>
         </tr>
         <tr class="row_1 odd">
             <td class="label">Nachname</td>
-            <td class="value"><?= $userdata->lastname; ?> </td>
+            <td class="value">' .
+                $userdata->lastname
+            .'</td>
         </tr>
         <tr class="row_2 even">
             <td class="label">E-Mail-Adresse</td>
-            <td class="value"><?= $userdata->email; ?> </td>
+            <td class="value">' .
+                $userdata->email
+            .'</td>
         </tr>
         <tr class="row_3 odd">
             <td class="label">Benutzername</td>
-            <td class="value"><?= $userdata->uname; ?> </td>
+            <td class="value">' .
+                $userdata->username
+            .'</td>
         </tr>
         ';
 

@@ -92,25 +92,19 @@ class MemberUserDataModule extends \Module
                 </tr>
                 ';
             break;
+            
             case "Student" :
+                switch ($userdata->contact_person) {
+                    case "contact1" : $contactPerson = "David Smida"; break;
+                    case "contact2" : $contactPerson = "Zeki Öztürk"; break;
+                    default : $contactPerson = "ohne";
+                }
                 $content .=
                 '
                 <tr class="row_4 even">
-                    <td class="label">Studiengang</td>
-                    <td class="value">' .
-                    $userdata->study_course
-                    .'</td>
-                </tr>
-                <tr class="row_5 odd">
-                    <td class="label">Hochschule | Fachbereich</td>
-                    <td class="value">' .
-                    $userdata->department
-                    .'</td>
-                </tr>
-                <tr class="row_6 even">
                     <td class="label">Ansprechpartner im BliZ</td>
                     <td class="value">' .
-                    $userdata->contact_person
+                    $contactPerson
                     .'</td>
                 </tr>
                 ';

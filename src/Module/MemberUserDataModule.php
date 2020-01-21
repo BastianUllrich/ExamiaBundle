@@ -54,7 +54,7 @@ class MemberUserDataModule extends \Module
         $this->Template->firstname = $firstname;
         $this->Template->lastname = $lastname;
         $this->Template->email = $email;
-        $this->Template->uname = $username;
+        $this->Template->uname = $username->username;
     }
 
     public function getUserData($userID) {

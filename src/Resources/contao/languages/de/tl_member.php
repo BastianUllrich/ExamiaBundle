@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['TL_LANG']['tl_member']['type'] = array
+$GLOBALS['TL_LANG']['tl_member']['usertype'] = array
  	(
 		'Typ',
 		'Bitte wählen Sie den Typ des neuen Mitglieds'

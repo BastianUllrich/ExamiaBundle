@@ -5,7 +5,7 @@
 $GLOBALS['TL_DCA']['tl_member']['palettes']['__selector__'][] = 'usertype';
 
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] =
-   '{groups_legend},groups;{login_legend},username,password;usertype';
+   '{groups_legend},groups;{login_legend},username,password;';
 
 $GLOBALS['TL_DCA']['tl_member']['subpalettes']['usertype_Student'] =
   '{personal_legend},firstname,lastname,usertype;{personal_legend},handicaps,handicaps_others;{contact_legend},email,phone,mobile;{study_legend},department,study_course,chipcard_nr,contact_person;{exam_legend},extra_time,extra_time_minutes_percent,rehab_devices,rehab_devices_others,comments;';
@@ -22,13 +22,12 @@ $GLOBALS['TL_DCA']['tl_member']['subpalettes']['usertype_Administrator'] =
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['usertype'] = array
 		(
-			'label'		=> $GLOBALS['TL_LANG']['tl_member']['type'],
+			'label'		=> $GLOBALS['TL_LANG']['tl_member']['usertype'],
 			'inputType'	=> 'select',
 			'options'	=> array('Student', 'Aufsicht', 'Administrator'),
 			'eval'		=> array(
 						'includeBlankOption'	=> true,
 						'mandatory'		=> true,
-						'tl_class'		=> 'w50'
 			),
 			'sql'		=> "varchar(20) NOT NULL default ''"
 		);

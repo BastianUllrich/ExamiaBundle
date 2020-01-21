@@ -1,0 +1,10 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<ul>
+    <li><?= $this->members; ?> </li>
+    <li><?= $this->user; ?> </li>
+</ul>
+
+<?php $this->endblock(); ?>

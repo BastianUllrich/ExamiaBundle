@@ -1,0 +1,23 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+<h2 class="ce_headline first "><?= $this->headline; ?></h2>
+
+<table class="single_record">
+    <tbody>
+        <tr class="row_0 row_first even">
+            <td class="label">Vorname</td>
+            <td class="value"><?= $this->firstname; ?> </td>
+        </tr>
+        <tr class="row_1 odd">
+            <td class="label">Nachname</td>
+            <td class="value"><?= $this->lastname; ?> </td>
+        </tr>
+        <tr class="row_2 even">
+            <td class="label">E-Mail-Adresse</td>
+            <td class="value"><?= $this->email; ?> </td>
+        </tr>
+    </tbody>
+</table>
+
+<?php $this->endblock(); ?>

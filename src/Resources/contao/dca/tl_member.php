@@ -8,13 +8,13 @@ $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] =
    '{groups_legend},groups;{login_legend},username,password;usertype';
 
 $GLOBALS['TL_DCA']['tl_member']['subpalettes']['usertype_Student'] =
-  '{personal_legend},firstname,lastname;{personal_legend},handicaps,handicaps_others;{contact_legend},email,phone,mobile;{study_legend},department,study_course,chipcard_nr,contact_person;{exam_legend},extra_time,extra_time_minutes_percent,rehab_devices,rehab_devices_others,comments;';
+  '{personal_legend},firstname,lastname,usertype;{personal_legend},handicaps,handicaps_others;{contact_legend},email,phone,mobile;{study_legend},department,study_course,chipcard_nr,contact_person;{exam_legend},extra_time,extra_time_minutes_percent,rehab_devices,rehab_devices_others,comments;';
 
 $GLOBALS['TL_DCA']['tl_member']['subpalettes']['usertype_Aufsicht'] =
-  '{personal_legend},firstname,lastname;{contact_legend},email,phone,mobile;';
+  '{personal_legend},firstname,lastname,usertype;{contact_legend},email,phone,mobile;';
 
 $GLOBALS['TL_DCA']['tl_member']['subpalettes']['usertype_Administrator'] =
-  '{personal_legend},firstname,lastname;{contact_legend},email;';
+  '{personal_legend},firstname,lastname,usertype;{contact_legend},email;';
 
 
 

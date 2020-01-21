@@ -28,6 +28,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['usertype'] = array
 			'eval'		=> array(
 						'includeBlankOption'	=> true,
 						'mandatory'		=> true,
+                        'feEditable'		=> true,
+                        'feViewable'		=> true,
 			),
 			'sql'		=> "varchar(20) NOT NULL default ''"
 		);

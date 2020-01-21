@@ -92,11 +92,11 @@ class MemberUserDataModule extends \Module
                 </tr>
                 ';
             break;
-            
+
             case "Student" :
                 switch ($userdata->contact_person) {
-                    case "contact1" : $contactPerson = "David Smida"; break;
-                    case "contact2" : $contactPerson = "Zeki Öztürk"; break;
+                    case "contact1" : $contactPerson = "Zeki Öztürk"; break;
+                    case "contact2" : $contactPerson = "David Smida"; break;
                     default : $contactPerson = "ohne";
                 }
                 $content .=

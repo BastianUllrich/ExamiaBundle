@@ -79,6 +79,22 @@ class MemberUserDataModule extends \Module
         </tr>
         ';
 
+        // Content für verschiedene Mitgliedergruppen
+        switch ($userdata->usertype) {
+            case "Aufsicht" :
+                $content .=
+                '
+                <tr class="row_4 row_first even">
+                    <td class="label">Handynummer</td>
+                    <td class="value">' .
+                        $userdata->mobile
+                    .'</td>
+                </tr>
+                ';
+            break;
+            default : $content .= '';
+        }
+
         return $content;
     }
 }

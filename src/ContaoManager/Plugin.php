@@ -14,7 +14,7 @@ use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Baul\ExamiaBundle\BaulTestBundle;
+use Baul\ExamiaBundle\BaulExamiaBundle;
 
 class Plugin implements BundlePluginInterface
 {

@@ -41,7 +41,6 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
-        \Contao\System::loadLanguageFile('tl_member', 'de');
         $this->Template->content = $this->getContent();
     }
 

@@ -55,6 +55,7 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
             'inputType' => 'select',
 	        //Optionen aus Funktion getAttendee() holen
             'options_callback' => ['tl_attendees_exams', 'getAttendee'],
+            'foreign_key' => 'tl_member.id',
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'default' => 0]
         ],
@@ -63,6 +64,7 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
             'inputType' => 'select',
 	        //Optionen aus Funktion getExam() holen
             'options_callback' => ['tl_attendees_exams', 'getExam'],
+            'foreign_key' => 'tl_exams.id',
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'default' => 0]
         ],
@@ -93,6 +95,7 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
             'inputType' => 'select',
             //Optionen aus Funktion getAssistant() holen
             'options_callback' => ['tl_attendees_exams', 'getAssistant'],
+            'foreign_key' => 'tl_member.id(usertype=Administrator)',
             'eval' => ['mandatory' => false, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'default' => 0]
         ],

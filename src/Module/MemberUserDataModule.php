@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -40,19 +41,23 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
-        $firstname = $this->getUserData()->firstname;
-        $lastname =  $this->getUserData()->lastname;
-        $email = $this->getUserData()->email;
+        $objUser = FrontendUser::getInstance();
+        $userID = $objUser->id;
+        $objUserName = $objUser->username;
+
+        $firstname = $this->getUserData($userID)->firstname;
+        $lastname =  $this->getUserData($userID)->lastname;
+        $email = $this->getUserData($userID)->email;
+
+        $username = MemberModel::findBy('username', $objUserName);
 
         $this->Template->firstname = $firstname;
         $this->Template->lastname = $lastname;
         $this->Template->email = $email;
+        $this->Template->uname = $username;
     }
 
-    public function getUserData() {
-        $objUser = FrontendUser::getInstance();
-        $userID = $objUser->id;
-
+    public function getUserData($userID) {
         $this->import('Database');
         $result = Database::getInstance()->prepare("SELECT * FROM tl_member WHERE id = $userID")->query();
         return $result;

@@ -17,6 +17,10 @@
             <td class="label">E-Mail-Adresse</td>
             <td class="value"><?= $this->email; ?> </td>
         </tr>
+        <tr class="row_3 odd">
+            <td class="label">Benutzername</td>
+            <td class="value"><?= $this->uname; ?> </td>
+        </tr>
     </tbody>
 </table>
 

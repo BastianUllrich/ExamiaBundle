@@ -1,7 +1,6 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
-use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
 

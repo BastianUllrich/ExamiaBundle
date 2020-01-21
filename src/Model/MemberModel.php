@@ -8,7 +8,7 @@ class MemberModel extends Model
 {
     protected static $strTable = 'tl_member';
 
-    // Funktionen implementieren
+    // Individuelle Funktionen implementieren
 
 
 }

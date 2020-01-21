@@ -41,15 +41,14 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
-        $objUser = FrontendUser::getInstance();
-        $userID = $objUser->id;
-
-        $userdata = MemberModel::findBy('id', $userID);
-
-        $this->Template->content = $this->getContent($this->$userdata);
+        $this->Template->content = $this->getContent();
     }
 
-    public function getContent($userdata) {
+    public function getContent() {
+
+        $objUser = FrontendUser::getInstance();
+        $userID = $objUser->id;
+        $userdata = MemberModel::findBy('id', $userID);
 
         // Content für alle Anwender
         $content =

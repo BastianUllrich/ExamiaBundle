@@ -46,7 +46,7 @@ class MemberUserDataModule extends \Module
 
         $userdata = MemberModel::findBy('id', $userID);
 
-        $this->Template->content = $this->getContent($userdata);
+        $this->Template->content = $this->getContent($this->$userdata);
     }
 
     public function getContent($userdata) {

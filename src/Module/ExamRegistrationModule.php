@@ -106,12 +106,15 @@ class ExamRegistrationModule extends \Module
         $tools = \Input::post('tools');
         $remarks = \Input::post('remarks');
 
-        $timestamp = time();
         $this->import('Database');
 
-        $db_query = "INSERT INTO tl_exams VALUES ('', $timestamp, $exam_title, $exam_date, $timestamp, $exam_duration, $department, $tools, 'noch nicht angefordert', $remarks, $lecturer_title, $lecturer_firstname, $lecturer_lastname, $lecturer_email, $lecturer_mobile)";
-        if ($this->Database->execute($db_query)) {
-            $this->Template->erfolg = "Absenden erfolgreich";
+        $set = array('tstamp' => time(), 'exam_title' => $exam_title, 'lecturer_title' => $lecturer_title, '$lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
+                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'exam_date' => $exam_date, 'exam_begin' => $exam_begin,
+                    'exam_duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks);
+
+        if ($objInsert = $this->Database->prepare("INSERT INTO tl_log %s")->set($set)->execute()) {
+            $this->Template->erfolg = "Absenden erfolgreich, neue ID: ";
+            $this->Template->erfolg .= $objInsert->insertId;
         }
     }
 }

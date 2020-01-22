@@ -5,7 +5,6 @@
 <?php if ($this->headline): ?>
 <<?= $this->h2 ?>><?= $this->headline ?></<?= $this->h2 ?>>
 <?php endif; ?>
-<?php $this->showTemplateVars(); ?>
 <form action="" id="<?= $this->formId ?>" method="post">
 <div class="formbody">
     <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
@@ -51,57 +50,59 @@
             <input type="text" name="lecturer_mobile_title" id="lecturer_mobile_title" class="text" value="" maxlength="255" autocomplete="on">
         </div>
     </fieldset>
-    <div class="widget widget-select select mandatory">
-        <label for="department" class="mandatory">
-            <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
-        </label>
-        <input class="select-dropdown dropdown-trigger" type="text" readonly="true">
-        <select name="department" id="department" class="select mandatory" required="">
-            <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
-            <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->department2; ?></option>
-            <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>><?= $this->department3; ?></option>
-            <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>><?= $this->department4; ?></option>
-            <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>><?= $this->department5; ?></option>
-            <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>><?= $this->department6; ?></option>
-            <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>><?= $this->department7; ?></option>
-            <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>><?= $this->department8; ?></option>
-            <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>><?= $this->department9; ?></option>
-            <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>><?= $this->department10; ?></option>
-            <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>><?= $this->department11; ?></option>
-            <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>><?= $this->department12; ?></option>
-            <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>><?= $this->department13; ?></option>
-            <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>><?= $this->department14; ?></option>
-        </select>
-    </div>
-    <div class="widget widget-text mandatory">
-        <label for="exam_date" class="mandatory">
-            <?= $this->exam_date_label; ?>
-        </label>
-        <input type="date" name="exam_date" id="exam_date" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
-    </div>
-    <div class="widget widget-text mandatory">
-        <label for="exam_begin" class="mandatory">
-            <span class="invisible">Pflichtfeld </span><?= $this->exam_begin_label; ?><span class="mandatory">*</span>
-        </label>
-        <input type="text" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
-    </div>
-    <div class="widget widget-text mandatory">
-        <label for="exam_duration" class="mandatory">
-            <span class="invisible">Pflichtfeld </span><?= $this->exam_duration_label; ?><span class="mandatory">*</span>
-        </label>
-        <input type="text" name="exam_duration" id="exam_duration" class="text mandatory" value="" required="" maxlength="3" autocomplete="on">
-    </div>
-    <div class="widget widget-textarea">
-        <label for="tools" class=""><?= $this->tools_label; ?></label>
-        <textarea name="tools" id="tools" class="textarea" rows="4" cols="255" maxlength="255"></textarea>
-    </div>
-    <div class="widget widget-textarea">
-        <label for="remarks" class=""><?= $this->remarks_label; ?></label>
-        <textarea name="remarks" id="remarks" class="textarea" rows="4" cols="255" maxlength="255"></textarea>
-    </div>
-    <div class="widget widget-submit">
-        <button type="submit" class="submit">Anmeldung absenden</button>
-    </div>
+    <fieldset>
+        <div class="widget widget-select select mandatory">
+            <label for="department" class="mandatory">
+                <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
+            </label>
+            <input class="select-dropdown dropdown-trigger" type="text" readonly="true">
+            <select name="department" id="department" class="select mandatory" required="">
+                <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
+                <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->department2; ?></option>
+                <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>><?= $this->department3; ?></option>
+                <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>><?= $this->department4; ?></option>
+                <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>><?= $this->department5; ?></option>
+                <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>><?= $this->department6; ?></option>
+                <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>><?= $this->department7; ?></option>
+                <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>><?= $this->department8; ?></option>
+                <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>><?= $this->department9; ?></option>
+                <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>><?= $this->department10; ?></option>
+                <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>><?= $this->department11; ?></option>
+                <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>><?= $this->department12; ?></option>
+                <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>><?= $this->department13; ?></option>
+                <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>><?= $this->department14; ?></option>
+            </select>
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="exam_date" class="mandatory">
+                <?= $this->exam_date_label; ?>
+            </label>
+            <input type="date" name="exam_date" id="exam_date" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="exam_begin" class="mandatory">
+                <span class="invisible">Pflichtfeld </span><?= $this->exam_begin_label; ?><span class="mandatory">*</span>
+            </label>
+            <input type="text" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="exam_duration" class="mandatory">
+                <span class="invisible">Pflichtfeld </span><?= $this->exam_duration_label; ?><span class="mandatory">*</span>
+            </label>
+            <input type="text" name="exam_duration" id="exam_duration" class="text mandatory" value="" required="" maxlength="3" autocomplete="on">
+        </div>
+        <div class="widget widget-textarea">
+            <label for="tools" class=""><?= $this->tools_label; ?></label>
+            <textarea name="tools" id="tools" class="textarea" rows="4" cols="255" maxlength="255"></textarea>
+        </div>
+        <div class="widget widget-textarea">
+            <label for="remarks" class=""><?= $this->remarks_label; ?></label>
+            <textarea name="remarks" id="remarks" class="textarea" rows="4" cols="255" maxlength="255"></textarea>
+        </div>
+        <div class="widget widget-submit">
+            <button type="submit" class="submit">Anmeldung absenden</button>
+        </div>
+    </fieldset>
 </div>
 </form>
 

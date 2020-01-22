@@ -62,7 +62,7 @@ class ExamRegistrationModule extends \Module
         $this->Template->lecturer_lastname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];
         $this->Template->lecturer_email_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'][0];
         $this->Template->lecturer_mobile_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'][0];
-        $this->Template->lecturer_department_label = $GLOBALS['TL_LANG']['tl_exams']['department'][0];
+        $this->Template->department_label = $GLOBALS['TL_LANG']['tl_exams']['department'][0];
 
         $this->Template->department1 = $GLOBALS['TL_LANG']['tl_exams']['department1'];
         $this->Template->department2 = $GLOBALS['TL_LANG']['tl_exams']['department2'];

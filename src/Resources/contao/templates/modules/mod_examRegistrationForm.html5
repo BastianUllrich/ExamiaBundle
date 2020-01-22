@@ -52,7 +52,7 @@
     </fieldset>
     <fieldset>
         <div class="widget widget-select select mandatory">
-            <label for="department" class="mandatory">
+            <label for="department" class="select mandatory">
                 <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
             </label>
             <input class="select-dropdown dropdown-trigger" type="text" readonly="true">

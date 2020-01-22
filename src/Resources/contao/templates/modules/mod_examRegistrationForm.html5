@@ -5,7 +5,7 @@
 <?php if ($this->headline): ?>
 <<?= $this->h2 ?>><?= $this->headline ?></<?= $this->h2 ?>>
 <?php endif; ?>
-
+<?php $this->showTemplateVars(); ?>
 <form action="" id="<?= $this->formId ?>" method="post">
 <div class="formbody">
     <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
@@ -51,28 +51,12 @@
             <input type="text" name="lecturer_mobile_title" id="lecturer_mobile_title" class="text" value="" maxlength="255" autocomplete="on">
         </div>
     </fieldset>
-    <div class="widget widget-select selecz mandatory">
+    <div class="widget widget-select select mandatory">
         <label for="department" class="mandatory">
             <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
         </label>
-        <input class="select-dropdown dropdown-trigger" type="text" readonly="true" data-target="select_department_exam_reg">
-        <ul id="select_department_exam_reg" class="dropdown-content select-dropdown" style="">
-            <li id="select_department_exam_reg0" tabindex="0"><span><?= $this->department1; ?></span></li>
-            <li id="select_department_exam_reg1" tabindex="0"><span><?= $this->department2; ?></span></li>
-            <li id="select_department_exam_reg2" tabindex="0"><span><?= $this->department3; ?></span></li>
-            <li id="select_department_exam_reg3" tabindex="0"><span><?= $this->department4; ?></span></li>
-            <li id="select_department_exam_reg4" tabindex="0"><span><?= $this->department5; ?></span></li>
-            <li id="select_department_exam_reg5" tabindex="0"><span><?= $this->department6; ?></span></li>
-            <li id="select_department_exam_reg6" tabindex="0"><span><?= $this->department7; ?></span></li>
-            <li id="select_department_exam_reg7" tabindex="0"><span><?= $this->department8; ?></span></li>
-            <li id="select_department_exam_reg8" tabindex="0"><span><?= $this->department9; ?></span></li>
-            <li id="select_department_exam_reg9" tabindex="0"><span><?= $this->department10; ?></span></li>
-            <li id="select_department_exam_reg10" tabindex="0"><span><?= $this->department11; ?></span></li>
-            <li id="select_department_exam_reg11" tabindex="0"><span><?= $this->department12; ?></span></li>
-            <li id="select_department_exam_reg12" tabindex="0"><span><?= $this->department13; ?></span></li>
-            <li id="select_department_exam_reg13" tabindex="0"><span><?= $this->department14; ?></span></li>
-        </ul>
-        <select name="department" id="department" class="select mandatory" required="" tabindex="-1">
+        <input class="select-dropdown dropdown-trigger" type="text" readonly="true">
+        <select name="department" id="department" class="select mandatory" required="">
             <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
             <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->department2; ?></option>
             <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>><?= $this->department3; ?></option>

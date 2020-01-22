@@ -55,14 +55,14 @@ class ExamRegistrationModule extends \Module
         $userdata = MemberModel::findBy('id', $userID);
 
         // Variablen für das Template setzen
-        $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'];
-        $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
-        $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'];
-        $this->Template->lecturer_firstname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'];
-        $this->Template->lecturer_lastname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'];
-        $this->Template->lecturer_email_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'];
-        $this->Template->lecturer_mobile_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'];
-        $this->Template->lecturer_department_label = $GLOBALS['TL_LANG']['tl_exams']['department'];
+        $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
+        $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'][0];
+        $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
+        $this->Template->lecturer_firstname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'][0];
+        $this->Template->lecturer_lastname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];
+        $this->Template->lecturer_email_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'][0];
+        $this->Template->lecturer_mobile_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'][0];
+        $this->Template->lecturer_department_label = $GLOBALS['TL_LANG']['tl_exams']['department'][0];
 
         $this->Template->department1 = $GLOBALS['TL_LANG']['tl_exams']['department1'];
         $this->Template->department2 = $GLOBALS['TL_LANG']['tl_exams']['department2'];
@@ -80,11 +80,11 @@ class ExamRegistrationModule extends \Module
         $this->Template->department14 = $GLOBALS['TL_LANG']['tl_exams']['department14'];
         $this->Template->usr_department = $userdata->department;
 
-        $this->Template->exam_date_label = $GLOBALS['TL_LANG']['tl_exams']['date'];
-        $this->Template->exam_begin_label = $GLOBALS['TL_LANG']['tl_exams']['time_begin'];
-        $this->Template->exam_duration_label = $GLOBALS['TL_LANG']['tl_exams']['exam_duration'];
-        $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'];
-        $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'];
+        $this->Template->exam_date_label = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
+        $this->Template->exam_begin_label = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->exam_duration_label = $GLOBALS['TL_LANG']['tl_exams']['exam_duration'][0];
+        $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
+        $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
     }
 }

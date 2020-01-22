@@ -119,7 +119,7 @@ class ExamRegistrationModule extends \Module
             $this->Template->erfolg .= $objInsert->insertId;
 
             $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                            'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+                            'rehab_devices_others' => $rehab_devices_others, 'extra_time' => 0, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
             if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
                 $this->Template->erfolg .= ", weitere ID: ";
                 $this->Template->erfolg .= $newObjInsert->insertId;

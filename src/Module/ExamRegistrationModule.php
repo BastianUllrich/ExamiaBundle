@@ -88,11 +88,11 @@ class ExamRegistrationModule extends \Module
         // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
 
-            $this->registerExam();
+            $this->registerExam($userID, $userdata->rehab_devices, $userdata->rehab_devices_others, $userdata->extra_time, $userdata->extra_time_minutes_percent);
         }
     }
 
-    public function registerExam() {
+    public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_minutes_percent) {
         $exam_title = \Input::post('exam_title');
         $lecturer_title = \Input::post('lecturer_title');
         $lecturer_firstname = \Input::post('lecturer_firstname');
@@ -114,8 +114,16 @@ class ExamRegistrationModule extends \Module
                     'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
         if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
+
             $this->Template->erfolg = "Absenden erfolgreich, neue ID: ";
             $this->Template->erfolg .= $objInsert->insertId;
+
+            $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
+                            'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+            if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+                $this->Template->erfolg .= ", weitere ID: "
+                $this->Template->erfolg .= $newObjInsert->insertId;
+            }
         }
     }
 }

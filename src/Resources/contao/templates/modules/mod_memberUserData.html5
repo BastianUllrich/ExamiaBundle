@@ -26,6 +26,18 @@
         <td class="label">Ansprechpartner im BliZ</td>
         <td class="value"><?= $this->contact; ?></td>
     </tr>
+    <?php }
+    if (!empty($this->department)) { ?>
+    <tr class="row_5 odd">
+        <td class="label">Fachbereich</td>
+        <td class="value"><?= $this->department; ?></td>
+    </tr>
+    <?php }
+    if (!empty($this->course)) { ?>
+    <tr class="row_6 even">
+        <td class="label">Studiengang</td>
+        <td class="value"><?= $this->course; ?></td>
+    </tr>
     <?php } ?>
 
     </tbody>

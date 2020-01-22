@@ -41,27 +41,24 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
+        // Sprachdatei einbinden
+        $this->loadLanguageFile('tl_member');
+
+        // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
+        // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);
 
-        $this->loadLanguageFile('tl_member');
-
+        // Variablen für das Template setzen
         $this->Template->firstname = $userdata->firstname;
         $this->Template->lastname = $userdata->lastname;
         $this->Template->email = $userdata->email;
         $this->Template->username = $userdata->username;
-
         $this->Template->contact = $GLOBALS['TL_LANG']['tl_member'][$userdata->contact_person];
-        /*
-        if ($userdata->contact_person == 'contact1') {
-            $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact1'];
-        }
-        elseif ($userdata->contact_person == 'contact2') {
-            $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact2'];
-        }
-        */
+        $this->Template->department = $GLOBALS['TL_LANG']['tl_member'][$userdata->department];
+        $this->Template->course = $GLOBALS['TL_LANG']['tl_member'][$userdata->study_course];
 
     }
 }

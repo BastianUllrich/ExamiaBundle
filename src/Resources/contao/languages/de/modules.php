@@ -1,7 +1,6 @@
 <?php
 
 // Frontend modules
-$GLOBALS['TL_LANG']['FMD']['memberList'] = ['Mitgliederliste', 'Gibt eine Mitgliederliste aus'];
 $GLOBALS['TL_LANG']['FMD']['memberGreeting'] = ['Begrüßung der Mitglieder', 'Gibt eine Willkommens-Nachricht an das Mitglied aus'];
 $GLOBALS['TL_LANG']['FMD']['memberUserData'] = ['Stammdaten des Mitglieds', 'Gibt die Stammdaten des Mitglieds aus'];
 

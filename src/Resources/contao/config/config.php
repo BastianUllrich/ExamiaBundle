@@ -1,6 +1,5 @@
 <?php
 // Frontend modules
-$GLOBALS['FE_MOD']['examia']['memberList'] = 'Baul\ExamiaBundle\Module\MemberListModule';
 $GLOBALS['FE_MOD']['examia']['memberGreeting'] = 'Baul\ExamiaBundle\Module\MemberGreetingModule';
 $GLOBALS['FE_MOD']['examia']['memberUserData'] = 'Baul\ExamiaBundle\Module\MemberUserDataModule';
 

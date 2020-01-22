@@ -102,7 +102,7 @@ class ExamRegistrationModule extends \Module
         $department = \Input::post('department');
         $exam_date = \Input::post('exam_date');
         $exam_begin = \Input::post('exam_begin');
-        $exam_duration = \Input::post('duration');
+        $exam_duration = \Input::post('exam_duration');
         $tools = \Input::post('tools');
         $remarks = \Input::post('remarks');
         $status = 'status1';

@@ -13,7 +13,7 @@ class ExamRegistrationModule extends \Module
     /**
      * @var string
      */
-    protected $strTemplate = 'mod_memberUserData';
+    protected $strTemplate = 'mod_examRegistrationForm';
 
     /**
      * Displays a wildcard in the back end.

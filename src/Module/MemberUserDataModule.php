@@ -41,72 +41,22 @@ class MemberUserDataModule extends \Module
      */
     protected function compile()
     {
-        $this->Template->content = $this->getContent();
-    }
-
-    public function getContent() {
-
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
         $userdata = MemberModel::findBy('id', $userID);
-        // Content für alle Anwender
-        $content =
-        '
-        <tr class="row_0 row_first even">
-            <td class="label">Vorname</td>
-            <td class="value">' .
-                $userdata->firstname
-            .'</td>
-        </tr>
-        <tr class="row_1 odd">
-            <td class="label">Nachname</td>
-            <td class="value">' .
-                $userdata->lastname
-            .'</td>
-        </tr>
-        <tr class="row_2 even">
-            <td class="label">E-Mail-Adresse</td>
-            <td class="value">' .
-                $userdata->email
-            .'</td>
-        </tr>
-        <tr class="row_3 odd">
-            <td class="label">Benutzername</td>
-            <td class="value">' .
-                $userdata->username
-            .'</td>
-        </tr>
-        ';
 
-        // Content für verschiedene Mitgliedergruppen
-        switch ($userdata->usertype) {
-            case "Aufsicht" :
-                $content .=
-                '
-                <tr class="row_4 even">
-                    <td class="label">Handynummer</td>
-                    <td class="value">' .
-                        $userdata->mobile
-                    .'</td>
-                </tr>
-                ';
-            break;
+        $this->Template->firstname = $userdata->firstname;
+        $this->Template->lastname = $userdata->lastname;
+        $this->Template->email = $userdata->email;
+        $this->Template->username = $userdata->username;
 
-            case "Student" :
-                $content .=
-                '
-                <tr class="row_4 even">
-                    <td class="label">Ansprechpartner im BliZ</td>
-                    <td class="value">' .
-                    $userdata->contact_person
-                    .'</td>
-                </tr>
-                ';
-            break;
-            default : $content .= '';
+        if ($userdata->contact_person == 'contact1') {
+            $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact1'];
+        }
+        elseif ($userdata->contact_person == 'contact2') {
+            $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact2'];
         }
 
-        return $content;
     }
 }

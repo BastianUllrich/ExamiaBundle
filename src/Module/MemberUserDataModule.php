@@ -53,12 +53,15 @@ class MemberUserDataModule extends \Module
         $this->Template->email = $userdata->email;
         $this->Template->username = $userdata->username;
 
+        $this->Template->contact = $GLOBALS['TL_LANG']['tl_member'][$userdata->contact_person];
+        /*
         if ($userdata->contact_person == 'contact1') {
             $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact1'];
         }
         elseif ($userdata->contact_person == 'contact2') {
             $this->Template->contact = $GLOBALS['TL_LANG']['tl_member']['contact2'];
         }
+        */
 
     }
 }

@@ -113,7 +113,7 @@ class ExamRegistrationModule extends \Module
                     'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_date, 'exam_begin' => $exam_begin,
                     'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
-        if ($objInsert = $this->Database->prepare("INSERT INTO tl_log %s")->set($set)->execute()) {
+        if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
             $this->Template->erfolg = "Absenden erfolgreich, neue ID: ";
             $this->Template->erfolg .= $objInsert->insertId;
         }

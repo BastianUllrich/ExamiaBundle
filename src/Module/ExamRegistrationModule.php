@@ -109,7 +109,7 @@ class ExamRegistrationModule extends \Module
         $timestamp = time();
         $this->import('Database');
 
-        $db_query = "INSERT INTO tl_exams VALUES ('', $timestamp, $exam_title, $exam_date, $exam_begin, $exam_duration, $department, $tools, 'noch nicht angefordert', $remarks, $lecturer_title, $lecturer_firstname, $lecturer_lastname, $lecturer_email, $lecturer_mobile)";
+        $db_query = "INSERT INTO tl_exams VALUES ('', $timestamp, $exam_title, $exam_date, $timestamp, $exam_duration, $department, $tools, 'noch nicht angefordert', $remarks, $lecturer_title, $lecturer_firstname, $lecturer_lastname, $lecturer_email, $lecturer_mobile)";
         if ($this->Database->execute($db_query)) {
             $this->Template->erfolg = "Absenden erfolgreich";
         }

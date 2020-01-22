@@ -56,7 +56,7 @@ class ExamRegistrationModule extends \Module
 
         // Variablen für das Template setzen
         $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
-        $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'][0];
+        $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
         $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
         $this->Template->lecturer_firstname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'][0];
         $this->Template->lecturer_lastname_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];

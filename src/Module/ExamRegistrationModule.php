@@ -55,6 +55,8 @@ class ExamRegistrationModule extends \Module
         $userdata = MemberModel::findBy('id', $userID);
 
         // Variablen für das Template setzen
+        $this->Template->headline = "Klausuranmeldung";
+
         $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
         $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
         $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];

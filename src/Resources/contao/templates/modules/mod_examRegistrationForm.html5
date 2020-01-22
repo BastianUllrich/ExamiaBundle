@@ -102,5 +102,5 @@
     </fieldset>
 </div>
 </form>
-<?= $this->formname; ?>
+<?= $this->erfolg; ?>
 <?php $this->endblock(); ?>

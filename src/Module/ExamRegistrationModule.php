@@ -85,6 +85,8 @@ class ExamRegistrationModule extends \Module
         $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
-        $this->Template->formname = \Contao\Input::post('FORM_SUBMIT');
+        if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
+            $this->Template->erfolg = "Absenden registriert";
+        }
     }
 }

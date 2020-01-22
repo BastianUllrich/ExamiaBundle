@@ -46,6 +46,8 @@ class MemberUserDataModule extends \Module
 
         $userdata = MemberModel::findBy('id', $userID);
 
+        $this->loadLanguageFile('tl_member');
+
         $this->Template->firstname = $userdata->firstname;
         $this->Template->lastname = $userdata->lastname;
         $this->Template->email = $userdata->email;

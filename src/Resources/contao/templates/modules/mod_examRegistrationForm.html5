@@ -55,7 +55,6 @@
             <label for="department" class="select mandatory">
                 <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
             </label>
-            <input class="select-dropdown dropdown-trigger" type="text" readonly="true">
             <select name="department" id="department" class="select mandatory" required="">
                 <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
                 <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->department2; ?></option>

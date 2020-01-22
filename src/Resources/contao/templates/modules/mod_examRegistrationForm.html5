@@ -9,48 +9,49 @@
 <div class="formbody">
     <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
     <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-    <div class="widget widget-text mandatory">
-        <label for="exam_title" class="mandatory">
-            <span class="invisible">Pflichtfeld </span><?= $this->title_label; ?><span class="mandatory">*</span>
-        </label>
-        <input type="text" name="exam_title" id="exam_title" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
-    </div>
-
     <fieldset>
-        <legend><?= $this->lecturer_legend ?></legend>
+        <div class="widget widget-text mandatory">
+            <label for="exam_title" class="mandatory">
+                <span class="invisible">Pflichtfeld </span><?= $this->title_label; ?><span class="mandatory">*</span>
+            </label>
+            <input type="text" name="exam_title" id="exam_title" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
+        </div>
 
-        <div class="widget widget-text">
-            <label for="lecturer_title">
-                <?= $this->lecturer_title_label; ?>
-            </label>
-            <input type="text" name="lecturer_title" id="lecturer_title" class="text" value="" maxlength="255" autocomplete="on">
-        </div>
-        <div class="widget widget-text mandatory">
-            <label for="lecturer_firstname" class="mandatory">
-                <span class="invisible">Pflichtfeld </span><?= $this->lecturer_firstname_label; ?><span class="mandatory">*</span>
-            </label>
-            <input type="text" name="lecturer_firstname" id="lecturer_firstname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
-        </div>
-        <div class="widget widget-text mandatory">
-            <label for="lecturer_lastname" class="mandatory">
-                <span class="invisible">Pflichtfeld </span><?= $this->lecturer_lastname_label; ?><span class="mandatory">*</span>
-            </label>
-            <input type="text" name="lecturer_lastname" id="lecturer_lastname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
-        </div>
-        <div class="widget widget-text mandatory">
-            <label for="lecturer_email" class="mandatory">
-                <span class="invisible">Pflichtfeld </span><?= $this->lecturer_email_label; ?><span class="mandatory">*</span>
-            </label>
-            <input type="email" name="lecturer_email" id="lecturer_email" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
-        </div>
-        <div class="widget widget-text">
-            <label for="lecturer_mobile">
-                <?= $this->lecturer_mobile_label; ?>
-            </label>
-            <input type="text" name="lecturer_mobile" id="lecturer_mobile" class="text" value="" maxlength="255" autocomplete="on">
-        </div>
-    </fieldset>
-    <fieldset>
+        <fieldset>
+            <legend><?= $this->lecturer_legend ?></legend>
+
+            <div class="widget widget-text">
+                <label for="lecturer_title">
+                    <?= $this->lecturer_title_label; ?>
+                </label>
+                <input type="text" name="lecturer_title" id="lecturer_title" class="text" value="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text mandatory">
+                <label for="lecturer_firstname" class="mandatory">
+                    <span class="invisible">Pflichtfeld </span><?= $this->lecturer_firstname_label; ?><span class="mandatory">*</span>
+                </label>
+                <input type="text" name="lecturer_firstname" id="lecturer_firstname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text mandatory">
+                <label for="lecturer_lastname" class="mandatory">
+                    <span class="invisible">Pflichtfeld </span><?= $this->lecturer_lastname_label; ?><span class="mandatory">*</span>
+                </label>
+                <input type="text" name="lecturer_lastname" id="lecturer_lastname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text mandatory">
+                <label for="lecturer_email" class="mandatory">
+                    <span class="invisible">Pflichtfeld </span><?= $this->lecturer_email_label; ?><span class="mandatory">*</span>
+                </label>
+                <input type="email" name="lecturer_email" id="lecturer_email" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text">
+                <label for="lecturer_mobile">
+                    <?= $this->lecturer_mobile_label; ?>
+                </label>
+                <input type="text" name="lecturer_mobile" id="lecturer_mobile" class="text" value="" maxlength="255" autocomplete="on">
+            </div>
+        </fieldset>
+
         <div class="widget widget-select select mandatory">
             <label for="department" class="select mandatory">
                 <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
@@ -76,7 +77,7 @@
             <label for="exam_date" class="mandatory">
                 <span class="invisible">Pflichtfeld </span><?= $this->exam_date_label; ?><span class="mandatory">*</span>
             </label>
-            <input type="date" name="exam_date" id="exam_date" class="text mandatory" value="<?php echo date('d.m.Y'); ?>" required="" maxlength="10" autocomplete="on">
+            <input type="date" name="exam_date" id="exam_date" class="text mandatory" required="" maxlength="10" autocomplete="on"><?php echo date('d.m.Y'); ?>
         </div>
         <div class="widget widget-text mandatory">
             <label for="exam_begin" class="mandatory">

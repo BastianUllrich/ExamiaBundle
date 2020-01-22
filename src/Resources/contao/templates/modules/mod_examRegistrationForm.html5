@@ -77,7 +77,7 @@
             <label for="exam_date" class="mandatory">
                 <span class="invisible">Pflichtfeld </span><?= $this->exam_date_label; ?><span class="mandatory">*</span>
             </label>
-            <input type="date" name="exam_date" id="exam_date" class="text mandatory" required="" maxlength="10" autocomplete="on"><?php echo date('d.m.Y'); ?>
+            <input type="date" name="exam_date" id="exam_date" class="text mandatory" value="<?php echo date('Y-m-d'); ?>" required="" maxlength="10" autocomplete="on">
         </div>
         <div class="widget widget-text mandatory">
             <label for="exam_begin" class="mandatory">

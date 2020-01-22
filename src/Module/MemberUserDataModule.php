@@ -58,7 +58,7 @@ class MemberUserDataModule extends \Module
         $this->Template->username = $userdata->username;
         $this->Template->contact = $GLOBALS['TL_LANG']['tl_member'][$userdata->contact_person];
         $this->Template->department = $GLOBALS['TL_LANG']['tl_member'][$userdata->department];
-        $this->Template->course = $GLOBALS['TL_LANG']['tl_member'][$userdata->study_course];
+        $this->Template->course = $userdata->study_course;
 
     }
 }

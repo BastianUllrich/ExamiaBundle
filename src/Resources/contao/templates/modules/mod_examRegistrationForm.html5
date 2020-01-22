@@ -2,9 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-<?php if ($this->headline): ?>
-<?= $this->h2 ?><?= $this->headline ?><?= $this->h2 ?>
-<?php endif; ?>
 <form action="" id="<?= $this->formId ?>" method="post">
 <div class="formbody">
     <input type="hidden" name="FORM_SUBMIT" value="examRegistration">

@@ -85,8 +85,33 @@ class ExamRegistrationModule extends \Module
         $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
+        // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
-            $this->Template->erfolg = "Absenden registriert";
+
+            $this->registerExam();
+        }
+    }
+
+    public function registerExam() {
+        $exam_title = \Input::post('exam_title');
+        $lecturer_title = \Input::post('lecturer_title');
+        $lecturer_firstname = \Input::post('lecturer_firstname');
+        $lecturer_lastname = \Input::post('lecturer_lastname');
+        $lecturer_email = \Input::post('lecturer_email');
+        $lecturer_mobile = \Input::post('lecturer_mobile');
+        $department = \Input::post('department');
+        $exam_date = \Input::post('exam_date');
+        $exam_begin = \Input::post('exam_begin');
+        $exam_duration = \Input::post('duration');
+        $tools = \Input::post('tools');
+        $remarks = \Input::post('remarks');
+
+        $timestamp = time();
+        $this->import('Database');
+
+        $db_query = "INSERT INTO tl_exams VALUES ('', $timestamp, $exam_title, $exam_date, $exam_begin, $exam_duration, $department, $tools, 'noch nicht angefordert', $remarks, $lecturer_title, $lecturer_firstname, $lecturer_lastname, $lecturer_email, $lecturer_mobile)";
+        if ($result = Database::getInstance()->prepare()->query($db_query)) {
+            $this->Template->erfolg = "Absenden erfolgreich";
         }
     }
 }

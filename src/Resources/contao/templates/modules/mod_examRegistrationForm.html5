@@ -47,7 +47,7 @@
             <label for="lecturer_mobile">
                 <?= $this->lecturer_mobile_label; ?>
             </label>
-            <input type="text" name="lecturer_mobile_title" id="lecturer_mobile_title" class="text" value="" maxlength="255" autocomplete="on">
+            <input type="text" name="lecturer_mobile" id="lecturer_mobile" class="text" value="" maxlength="255" autocomplete="on">
         </div>
     </fieldset>
     <fieldset>

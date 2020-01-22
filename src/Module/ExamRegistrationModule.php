@@ -56,7 +56,6 @@ class ExamRegistrationModule extends \Module
 
         // Variablen für das Template setzen
         $this->Template->headline = "Klausuranmeldung";
-
         $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
         $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
         $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
@@ -65,7 +64,6 @@ class ExamRegistrationModule extends \Module
         $this->Template->lecturer_email_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'][0];
         $this->Template->lecturer_mobile_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'][0];
         $this->Template->department_label = $GLOBALS['TL_LANG']['tl_exams']['department'][0];
-
         $this->Template->department1 = $GLOBALS['TL_LANG']['tl_exams']['department1'];
         $this->Template->department2 = $GLOBALS['TL_LANG']['tl_exams']['department2'];
         $this->Template->department3 = $GLOBALS['TL_LANG']['tl_exams']['department3'];
@@ -81,12 +79,12 @@ class ExamRegistrationModule extends \Module
         $this->Template->department13 = $GLOBALS['TL_LANG']['tl_exams']['department13'];
         $this->Template->department14 = $GLOBALS['TL_LANG']['tl_exams']['department14'];
         $this->Template->usr_department = $userdata->department;
-
         $this->Template->exam_date_label = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
         $this->Template->exam_begin_label = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->exam_duration_label = $GLOBALS['TL_LANG']['tl_exams']['exam_duration'][0];
         $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
+        $this->Template->formname = \Contao\Input::post('FORM_SUBMIT');
     }
 }

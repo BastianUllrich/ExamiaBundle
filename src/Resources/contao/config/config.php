@@ -2,6 +2,7 @@
 // Frontend modules
 $GLOBALS['FE_MOD']['examia']['memberGreeting'] = 'Baul\ExamiaBundle\Module\MemberGreetingModule';
 $GLOBALS['FE_MOD']['examia']['memberUserData'] = 'Baul\ExamiaBundle\Module\MemberUserDataModule';
+$GLOBALS['FE_MOD']['examia']['examRegistration'] = 'Baul\ExamiaBundle\Module\ExamRegistrationModule';
 
 // Backend modules
 $GLOBALS['BE_MOD']['examia']['exams'] = [
@@ -23,6 +24,9 @@ $GLOBALS['BE_MOD']['examia']['supervisors_exams'] = [
 // Models
 use Baul\ExamiaBundle\Model\MemberModel;
 $GLOBALS['TL_MODELS']['tl_member'] = MemberModel::class;
+
+use Baul\ExamiaBundle\Model\ExamsModel;
+$GLOBALS['TL_MODELS']['tl_exams'] = ExamsModel::class;
 
 ?>
 

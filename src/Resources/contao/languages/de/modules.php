@@ -3,6 +3,7 @@
 // Frontend modules
 $GLOBALS['TL_LANG']['FMD']['memberGreeting'] = ['Begrüßung der Mitglieder', 'Gibt eine Willkommens-Nachricht an das Mitglied aus'];
 $GLOBALS['TL_LANG']['FMD']['memberUserData'] = ['Stammdaten des Mitglieds', 'Gibt die Stammdaten des Mitglieds aus'];
+$GLOBALS['TL_LANG']['FMD']['examRegistration'] = ['Klausuranmeldung', 'Formular zur Klausuranmeldung'];
 
 // Backend Modules
 $GLOBALS['TL_LANG']['MOD']['examia'] = ['Klausurverwaltung', ''];

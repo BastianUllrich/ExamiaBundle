@@ -4,6 +4,8 @@ $GLOBALS['FE_MOD']['examia']['memberGreeting'] = 'Baul\ExamiaBundle\Module\Membe
 $GLOBALS['FE_MOD']['examia']['memberUserData'] = 'Baul\ExamiaBundle\Module\MemberUserDataModule';
 $GLOBALS['FE_MOD']['examia']['examRegistration'] = 'Baul\ExamiaBundle\Module\ExamRegistrationModule';
 $GLOBALS['FE_MOD']['examia']['examRegisteredExamsMember'] = 'Baul\ExamiaBundle\Module\ExamRegisteredExamsMemberModule';
+$GLOBALS['FE_MOD']['examia']['ExamUnsuscribe'] = 'Baul\ExamiaBundle\Module\ExamUnsuscribeModule';
+
 
 // Backend modules
 $GLOBALS['BE_MOD']['examia']['exams'] = [

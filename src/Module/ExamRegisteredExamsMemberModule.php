@@ -52,12 +52,13 @@ class ExamRegisteredExamsMemberModule extends \Module
         $this->import('Database');
         $examParticipationList = array();
         $i = 0;
+        $currentTime = time();
         $result = Database::getInstance()->prepare(
             "SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_prename, tl_exams.lecturer_lastname, tl_attendees_exams.status 
              FROM tl_exams, tl_attendees_exams 
              WHERE tl_exams.id=tl_attendees_exams.exam_id 
              AND tl_attendees_exams.attendee_id=$userID
-             AND tl_exams.date >= NOW()
+             AND tl_exams.date >= $currentTime
              ORDER BY tl_exams.date
             ")->query();
         while ($result->next()) {

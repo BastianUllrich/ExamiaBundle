@@ -5,6 +5,8 @@
 <!-- Formular nur ausgeben, wenn es nicht abgesandt wurde -->
 <?php if ($this->formIsSubmitted === false) { ?>
 
+    <h2><?= $this->examRegistration; ?></h2>
+    <p><?= $this->examRegistrationExplanation; ?></p>
     <form action="" id="<?= $this->formId ?>" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="examRegistration">

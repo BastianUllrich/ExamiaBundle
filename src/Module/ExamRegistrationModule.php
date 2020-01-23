@@ -65,7 +65,8 @@ class ExamRegistrationModule extends \Module
         // Sprach-Variablen setzen
 
         $this->Template->mandatory = $GLOBALS['TL_LANG']['miscellaneous']['mandatory'];
-        $this->Template->headline = "Klausuranmeldung";
+        $this->Template->examRegistration = $GLOBALS['TL_LANG']['miscellaneous']['examRegistration'];
+        $this->Template->examRegistrationExplanation = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationExplanation'];
         $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
         $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
         $this->Template->lecturer_title_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];

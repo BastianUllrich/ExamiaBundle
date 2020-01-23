@@ -3,6 +3,9 @@
  * Sprachdatei für verschiedene Ausgaben
  */
 
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistration'] = "Klausuranmeldung";
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationExplanation'] = "Mit diesem Formular können Sie sich für Klausuren mit Nachteilsausgleich im BliZ anmelden";
+
 $GLOBALS['TL_LANG']['miscellaneous']['mandatory'] = "Pflichtfeld ";
 
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'] = "

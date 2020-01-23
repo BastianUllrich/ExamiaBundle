@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <?php foreach($this->examParticipationList as $examParticipation): ?>
-            <tr class="row_<?php echo $i; ?> <?php if ($i=0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first"><?= $i+1; ?></td>
                 <td class="body col_1"><?= $examParticipation['date']; ?></td>
                 <td class="body col_2"><?= $examParticipation['time']; ?></td>

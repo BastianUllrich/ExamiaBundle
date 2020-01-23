@@ -2,11 +2,11 @@
 
 <?php $this->block('content'); ?>
 
-<!-- Formular nur ausgeben, wenn es nicht abgesandt wurde -->
 <?php if ($this->formIsSubmitted === false) { ?>
-
-    <h2><?= $this->examRegistration; ?></h2>
-    <p><?= $this->examRegistrationExplanation; ?></p>
+    <div class="ce_text first last  block">
+        <h2><?= $this->examRegistration; ?></h2>
+        <p><?= $this->examRegistrationExplanation; ?></p>
+    </div>
     <form action="" id="<?= $this->formId ?>" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
@@ -109,10 +109,6 @@
     </form>
 <?php
 }
-else {
-    ?>
-    <!-- Erfolgsmeldung ausgeben, wenn Formular abgesandt wurde -->
-    <?= $this->submittedMessage; ?>
-<?php } ?>
+else echo $this->submittedMessage;
 
-<?php $this->endblock(); ?>
+$this->endblock(); ?>

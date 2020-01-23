@@ -1,0 +1,38 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<?php
+    if(count($this->examParticipationList) > 0) {
+    $i = 0;
+?>
+<table class="all_records">
+    <thead>
+    <tr>
+        <th class="head col_first">#</th>
+        <th class="head col_last">Datum</th>
+        <th class="head col_last">Uhrzeit</th>
+        <th class="head col_last">Titel</th>
+        <th class="head col_last">Dozent</th>
+        <th class="head col_last">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->examParticipationList as $examParticipation): ?>
+    <tr class="row_<?php echo $i; ?> <?php if ($i=0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+        <td class="body col_0 col_first"><?php echo $i+1; ?></td>
+        <td class="body col_1"><?php echo $examParticipation->tl_exams.date; ?></td>
+        <td class="body col_2"><?php echo $examParticipation->tl_exams.begin; ?></td>
+        <td class="body col_3"><?php echo $examParticipation->tl_exams.title; ?></td>
+        <td class="body col_4"><?php sprintf($examParticipation->tl_exams.lecturer_title . $examParticipation->tl_exams.lecturer_prename . $examParticipation->tl_exams.lecturer_lastname ; ?></td>
+        <td class="body col_5 col_last"><?php echo $examParticipation->tl_attendees_exams.status; ?></td>
+    </tr>
+    <?php
+    $i++;
+    endforeach;
+    ?>
+    </tbody>
+</table>
+<?php } ?>
+
+<?php $this->endblock(); ?>

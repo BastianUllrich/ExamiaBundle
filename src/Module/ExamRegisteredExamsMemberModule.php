@@ -74,7 +74,7 @@ class ExamRegisteredExamsMemberModule extends \Module
         }
 
         $this->Template->examParticipationList = $examParticipationList;
-        $this->Template->numberOfEntries = $i+1;
+        $this->Template->numberOfEntries = $i;
 
     }
 }

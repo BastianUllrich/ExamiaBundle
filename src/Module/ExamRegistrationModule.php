@@ -114,6 +114,7 @@ class ExamRegistrationModule extends \Module
         $lecturer_mobile = \Input::post('lecturer_mobile');
         $department = \Input::post('department');
         $exam_date = \Input::post('exam_date');
+        $exam_date = strtotime($exam_date);
         $exam_begin = \Input::post('exam_begin');
         $exam_duration = \Input::post('exam_duration');
         $tools = \Input::post('tools');

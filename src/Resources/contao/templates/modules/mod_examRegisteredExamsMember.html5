@@ -3,7 +3,7 @@
 <?php $this->block('content'); ?>
 
 <?php
-    if(count($this->examParticipationList) > 0) {
+    if (($this->numberOfEntries) > 0) {
     $i = 0;
 ?>
 <table class="all_records">
@@ -20,12 +20,12 @@
     <tbody>
     <?php foreach($this->examParticipationList as $examParticipation): ?>
     <tr class="row_<?php echo $i; ?> <?php if ($i=0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
-        <td class="body col_0 col_first"><?php echo $i+1; ?></td>
-        <td class="body col_1"><?php echo $examParticipation->date; ?></td>
-        <td class="body col_2"><?php echo $examParticipation->begin; ?></td>
-        <td class="body col_3"><?php echo $examParticipation->title; ?></td>
-        <td class="body col_4"><?php sprintf($examParticipation->lecturer_title . ' ' . $examParticipation->lecturer_prename . ' ' . $examParticipation->lecturer_lastname); ?></td>
-        <td class="body col_5 col_last"><?php echo $examParticipation->status; ?></td>
+        <td class="body col_0 col_first"><?= $examParticipation[$i]['number']; ?></td>
+        <td class="body col_1"><?= $examParticipation[$i]['date']; ?></td>
+        <td class="body col_2"><?= $examParticipation[$i]['begin']; ?></td>
+        <td class="body col_3"><?= $examParticipation[$i]['title']; ?></td>
+        <td class="body col_4"><?= $examParticipation[$i]['lecturer_name']; ?></td>
+        <td class="body col_5 col_last"><?= $examParticipation[$i]['status']; ?></td>
     </tr>
     <?php
     $i++;

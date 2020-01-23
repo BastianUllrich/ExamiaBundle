@@ -5,8 +5,8 @@
 <?php
     if (sizeof($this->examParticipationList) > 0) {
         $i = 0;
-        <p><?= $this->registeredExamsExplanation; ?></p>
         ?>
+        <p><?= $this->registeredExamsExplanation; ?></p>
         <table class="all_records">
             <thead>
             <tr>

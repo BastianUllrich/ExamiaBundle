@@ -1,10 +1,11 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-
+<h2><?= $this->registeredExams; ?></h2>
 <?php
     if (sizeof($this->examParticipationList) > 0) {
         $i = 0;
+        <p><?= $this->registeredExamsExplanation; ?></p>
         ?>
         <table class="all_records">
             <thead>
@@ -33,6 +34,11 @@
             ?>
             </tbody>
         </table>
-<?php } ?>
-
-<?php $this->endblock(); ?>
+    <?php }
+    else {
+        ?>
+        <p><?= $this->registeredExamsNone; ?></p>
+        <?php
+    }
+$this->endblock();
+?>

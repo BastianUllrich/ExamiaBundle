@@ -13,3 +13,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'] = "
 <p>Ihre Klausuranmeldung wurde erfolgreich übermittelt. <br />
 Den aktuellen Status Ihrer Anmeldung können Sie unter dem Punkt \"Angemeldete Klausuren\" einsehen.</p>
 ";
+
+$GLOBALS['TL_LANG']['miscellaneous']['registeredExams'] = 'Angemeldete Klausuren';
+$GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'] = 'Sie haben sich für folgende Klausuren im BliZ angemeldet:';
+$GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'] = 'Sie haben sich für keine Klausuren im BliZ angemeldet';

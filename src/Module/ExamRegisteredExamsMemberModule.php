@@ -42,6 +42,7 @@ class ExamRegisteredExamsMemberModule extends \Module
     {
         // Sprachdatei einbinden
         $this->loadLanguageFile('tl_attendees_exams');
+        $this->loadLanguageFile('miscellaneous');
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -56,6 +57,7 @@ class ExamRegisteredExamsMemberModule extends \Module
              FROM tl_exams, tl_attendees_exams 
              WHERE tl_exams.id=tl_attendees_exams.exam_id 
              AND tl_attendees_exams.attendee_id=$userID
+             AND tl_exams.date >= NOW()
              ORDER BY tl_exams.date
             ")->query();
         while ($result->next()) {
@@ -74,6 +76,9 @@ class ExamRegisteredExamsMemberModule extends \Module
         }
 
         $this->Template->examParticipationList = $examParticipationList;
+        $this->Template->registeredExams = $GLOBALS['TL_LANG']['miscellaneous']['registeredExams'];
+        $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
+        $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
     }
 }

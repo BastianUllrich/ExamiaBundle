@@ -20,12 +20,12 @@
     <tbody>
     <?php foreach($this->examParticipationList as $examParticipation): ?>
     <tr class="row_<?php echo $i; ?> <?php if ($i=0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
-        <td class="body col_0 col_first"><?= $examParticipation[$i]['number']; ?></td>
-        <td class="body col_1"><?= $examParticipation[$i]['date']; ?></td>
-        <td class="body col_2"><?= $examParticipation[$i]['begin']; ?></td>
-        <td class="body col_3"><?= $examParticipation[$i]['title']; ?></td>
-        <td class="body col_4"><?= $examParticipation[$i]['lecturer_name']; ?></td>
-        <td class="body col_5 col_last"><?= $examParticipation[$i]['status']; ?></td>
+        <td class="body col_0 col_first"><?= $examParticipation['number']; ?></td>
+        <td class="body col_1"><?= $examParticipation['date']; ?></td>
+        <td class="body col_2"><?= $examParticipation['time']; ?></td>
+        <td class="body col_3"><?= $examParticipation['title']; ?></td>
+        <td class="body col_4"><?= $examParticipation['lecturer_name']; ?></td>
+        <td class="body col_5 col_last"><?= $examParticipation['status']; ?></td>
     </tr>
     <?php
     $i++;

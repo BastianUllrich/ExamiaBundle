@@ -6,7 +6,7 @@ use Contao\Module;
 use Contao\FrontendUser;
 
 
-class ExamRegisteredExamsMember extends \Module
+class ExamRegisteredExamsMemberModule extends \Module
 {
     /**
      * @var string

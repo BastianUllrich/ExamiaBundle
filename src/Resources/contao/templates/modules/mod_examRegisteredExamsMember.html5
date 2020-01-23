@@ -21,11 +21,11 @@
     <?php foreach($this->examParticipationList as $examParticipation): ?>
     <tr class="row_<?php echo $i; ?> <?php if ($i=0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
         <td class="body col_0 col_first"><?php echo $i+1; ?></td>
-        <td class="body col_1"><?php echo $examParticipation->tl_exams.date; ?></td>
-        <td class="body col_2"><?php echo $examParticipation->tl_exams.begin; ?></td>
-        <td class="body col_3"><?php echo $examParticipation->tl_exams.title; ?></td>
-        <td class="body col_4"><?php sprintf($examParticipation->tl_exams.lecturer_title . $examParticipation->tl_exams.lecturer_prename . $examParticipation->tl_exams.lecturer_lastname); ?></td>
-        <td class="body col_5 col_last"><?php echo $examParticipation->tl_attendees_exams.status; ?></td>
+        <td class="body col_1"><?php echo $examParticipation->date; ?></td>
+        <td class="body col_2"><?php echo $examParticipation->begin; ?></td>
+        <td class="body col_3"><?php echo $examParticipation->title; ?></td>
+        <td class="body col_4"><?php sprintf($examParticipation->lecturer_title . ' ' . $examParticipation->lecturer_prename . ' ' . $examParticipation->lecturer_lastname); ?></td>
+        <td class="body col_5 col_last"><?php echo $examParticipation->status; ?></td>
     </tr>
     <?php
     $i++;

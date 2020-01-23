@@ -50,15 +50,15 @@ class ExamRegisteredExamsMemberModule extends \Module
 
         $this->import('Database');
         $examParticipationList = array();
-        $i = 0;
+
         $result = Database::getInstance()->prepare(
             "SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_prename, tl_exams.lecturer_lastname, tl_attendees_exams.status 
              FROM tl_exams, tl_attendees_exams 
              WHERE tl_exams.id=tl_attendees_exams.exam_id 
              AND tl_attendees_exams.attendee_id=$userID
+             ORDER BY tl_exams.date
             ")->query();
         while ($result->next()) {
-            $examParticipationList[$i]['number'] = $i+1;
             $examParticipationList[$i]['date'] = date("d.m.Y", $result->date);
             $examParticipationList[$i]['time'] = $result->begin;
             $examParticipationList[$i]['title'] = $result->title;
@@ -70,11 +70,9 @@ class ExamRegisteredExamsMemberModule extends \Module
             $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_lastname;
 
             $examParticipationList[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
-            $i++;
         }
 
         $this->Template->examParticipationList = $examParticipationList;
-        $this->Template->numberOfEntries = $i;
 
     }
 }

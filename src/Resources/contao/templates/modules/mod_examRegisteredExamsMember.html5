@@ -24,7 +24,7 @@
         <td class="body col_1"><?php echo $examParticipation->tl_exams.date; ?></td>
         <td class="body col_2"><?php echo $examParticipation->tl_exams.begin; ?></td>
         <td class="body col_3"><?php echo $examParticipation->tl_exams.title; ?></td>
-        <td class="body col_4"><?php sprintf($examParticipation->tl_exams.lecturer_title . $examParticipation->tl_exams.lecturer_prename . $examParticipation->tl_exams.lecturer_lastname ; ?></td>
+        <td class="body col_4"><?php sprintf($examParticipation->tl_exams.lecturer_title . $examParticipation->tl_exams.lecturer_prename . $examParticipation->tl_exams.lecturer_lastname); ?></td>
         <td class="body col_5 col_last"><?php echo $examParticipation->tl_attendees_exams.status; ?></td>
     </tr>
     <?php

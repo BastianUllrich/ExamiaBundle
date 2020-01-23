@@ -12,7 +12,7 @@
         <fieldset>
             <div class="widget widget-text mandatory">
                 <label for="exam_title" class="mandatory">
-                    <span class="invisible">Pflichtfeld </span><?= $this->title_label; ?><span class="mandatory">*</span>
+                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->title_label; ?><span class="mandatory">*</span>
                 </label>
                 <input type="text" name="exam_title" id="exam_title" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
             </div>
@@ -28,19 +28,19 @@
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="lecturer_firstname" class="mandatory">
-                        <span class="invisible">Pflichtfeld </span><?= $this->lecturer_firstname_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lecturer_firstname_label; ?><span class="mandatory">*</span>
                     </label>
                     <input type="text" name="lecturer_firstname" id="lecturer_firstname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="lecturer_lastname" class="mandatory">
-                        <span class="invisible">Pflichtfeld </span><?= $this->lecturer_lastname_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lecturer_lastname_label; ?><span class="mandatory">*</span>
                     </label>
                     <input type="text" name="lecturer_lastname" id="lecturer_lastname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="lecturer_email" class="mandatory">
-                        <span class="invisible">Pflichtfeld </span><?= $this->lecturer_email_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lecturer_email_label; ?><span class="mandatory">*</span>
                     </label>
                     <input type="email" name="lecturer_email" id="lecturer_email" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
                 </div>
@@ -54,7 +54,7 @@
 
             <div class="widget widget-select select mandatory">
                 <label for="department" class="select mandatory">
-                    <span class="invisible">Pflichtfeld </span><?= $this->department_label; ?><span class="mandatory">*</span>
+                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->department_label; ?><span class="mandatory">*</span>
                 </label>
                 <select name="department" id="department" class="select mandatory" required="">
                     <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
@@ -75,19 +75,19 @@
             </div>
             <div class="widget widget-text mandatory">
                 <label for="exam_date" class="mandatory">
-                    <span class="invisible">Pflichtfeld </span><?= $this->exam_date_label; ?><span class="mandatory">*</span>
+                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->exam_date_label; ?><span class="mandatory">*</span>
                 </label>
                 <input type="date" name="exam_date" id="exam_date" class="text mandatory" value="<?php echo date('Y-m-d'); ?>" required="" maxlength="10" autocomplete="on">
             </div>
             <div class="widget widget-text mandatory">
                 <label for="exam_begin" class="mandatory">
-                    <span class="invisible">Pflichtfeld </span><?= $this->exam_begin_label; ?><span class="mandatory">*</span>
+                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->exam_begin_label; ?><span class="mandatory">*</span>
                 </label>
                 <input type="text" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
             </div>
             <div class="widget widget-text mandatory">
                 <label for="exam_duration" class="mandatory">
-                    <span class="invisible">Pflichtfeld </span><?= $this->exam_duration_label; ?><span class="mandatory">*</span>
+                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->exam_duration_label; ?><span class="mandatory">*</span>
                 </label>
                 <input type="text" name="exam_duration" id="exam_duration" class="text mandatory" value="" required="" maxlength="3" autocomplete="on">
             </div>

@@ -59,17 +59,17 @@ class ExamRegisteredExamsMemberModule extends \Module
             ")->query();
         while ($result->next()) {
             $examParticipationList[$i]['number'] = $i+1;
-            $examParticipationList[$i]['date'] = $result['date'];
-            $examParticipationList[$i]['time'] = $result['begin'];
-            $examParticipationList[$i]['title'] = $result['title'];
+            $examParticipationList[$i]['date'] = $result->date;
+            $examParticipationList[$i]['time'] = $result->begin;
+            $examParticipationList[$i]['title'] = $result->title;
 
-            $examParticipationList[$i]['lecturer_name'] = $result['lecturer_title'];
+            $examParticipationList[$i]['lecturer_name'] = $result->lecturer_title;
             $examParticipationList[$i]['lecturer_name'] .= ' ';
-            $examParticipationList[$i]['lecturer_name'] .= $result['lecturer_prename'];
+            $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_prename;
             $examParticipationList[$i]['lecturer_name'] .= ' ';
-            $examParticipationList[$i]['lecturer_name'] .= $result['lecturer_lastname'];
+            $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_lastname;
 
-            $examParticipationList[$i]['status'] = $result['status'];
+            $examParticipationList[$i]['status'] = $result->status;
             $i++;
         }
 

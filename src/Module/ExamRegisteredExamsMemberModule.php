@@ -59,7 +59,7 @@ class ExamRegisteredExamsMemberModule extends \Module
             ")->query();
         while ($result->next()) {
             $examParticipationList[$i]['number'] = $i+1;
-            $examParticipationList[$i]['date'] = $result->date;
+            $examParticipationList[$i]['date'] = date("d.m.Y", $result->date);
             $examParticipationList[$i]['time'] = $result->begin;
             $examParticipationList[$i]['title'] = $result->title;
 

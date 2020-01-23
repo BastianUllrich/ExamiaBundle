@@ -45,6 +45,7 @@ class ExamRegistrationModule extends \Module
         // Sprachdateien einbinden
         $this->loadLanguageFile('tl_member');
         $this->loadLanguageFile('tl_exams');
+        $this->loadLanguageFile('miscellaneous');
 
 
         // FrontendUser Variablen laden
@@ -54,7 +55,14 @@ class ExamRegistrationModule extends \Module
         // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);
 
-        // Variablen für das Template setzen
+        /**
+        * Variablen für das Template setzen *
+        */
+
+        // Formular nur angezeigen, wenn es nicht abgesandt wurde
+        $this->Template->formIsSubmitted = false;
+
+        // Sprach-Variablen setzen
         $this->Template->headline = "Klausuranmeldung";
         $this->Template->title_label = $GLOBALS['TL_LANG']['tl_exams']['title'][0];
         $this->Template->lecturer_legend = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
@@ -87,12 +95,14 @@ class ExamRegistrationModule extends \Module
 
         // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
-
+            // Funktion zum Eintrag in die Datenbank aufrufen, mit Entitäten des Mitglieds für die Tabelle "tl_attendees_exams" (Zuweisung Klausur - Mitglied)
             $this->registerExam($userID, $userdata->rehab_devices, $userdata->rehab_devices_others, $userdata->extra_time, $userdata->extra_time_minutes_percent);
         }
     }
 
     public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_minutes_percent) {
+
+        // Felder aus Formular auslesen
         $exam_title = \Input::post('exam_title');
         $lecturer_title = \Input::post('lecturer_title');
         $lecturer_firstname = \Input::post('lecturer_firstname');
@@ -105,27 +115,34 @@ class ExamRegistrationModule extends \Module
         $exam_duration = \Input::post('exam_duration');
         $tools = \Input::post('tools');
         $remarks = \Input::post('remarks');
+
+        //Status der Anmeldung auf "status1" (Noch nicht angefordert) setzen
         $status = 'status1';
 
+        // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
         $this->import('Database');
-
         $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
                     'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_date, 'begin' => $exam_begin,
                     'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
+        // Eintrag in Tabelle "tl_exams" vornehmen
         if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
-
-            $this->Template->erfolg = "Absenden erfolgreich, neue ID: ";
-            $this->Template->erfolg .= $objInsert->insertId;
-
             if (empty($extra_time)) $extra_time = 0;
 
+            // Insertions für Tabelle "tl_attendees_exams" definieren
             $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
                             'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+
+            // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend die Funktion submitSuccess() aufrufen
             if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
-                $this->Template->erfolg .= ", weitere ID: ";
-                $this->Template->erfolg .= $newObjInsert->insertId;
+                $this->submitSuccess();
             }
         }
+    }
+
+    // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
+    public function submitSuccess() {
+        $this->Template->formIsSubmitted = true;
+        $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
     }
 }

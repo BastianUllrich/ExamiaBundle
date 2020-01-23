@@ -69,7 +69,7 @@ class ExamRegisteredExamsMemberModule extends \Module
             $examParticipationList[$i]['lecturer_name'] .= ' ';
             $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_lastname;
 
-            $examParticipationList[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
+            $examParticipationList[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
             $i++;
         }
 

@@ -11,7 +11,7 @@ class ExamRegisteredExamsMemberModule extends \Module
     /**
      * @var string
      */
-    protected $strTemplate = 'examRegisteredExamsMember';
+    protected $strTemplate = 'mod_examRegisteredExamsMember';
 
     /**
      * Displays a wildcard in the back end.

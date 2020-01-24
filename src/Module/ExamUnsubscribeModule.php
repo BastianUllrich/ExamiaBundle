@@ -86,7 +86,7 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
         // Von Klausur abmelden
-        if (($_GET["do"] == "unsubscribe")) {
+        if ($_GET["do"] == "unsubscribe") {
             $exam_id = $_GET["exam"];
 
             $this->Template->showConfirmationQuestion = true;
@@ -99,7 +99,7 @@ class ExamUnsubscribeModule extends \Module
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsuscribe=success');
                 }
             }
-            else {
+            elseif ($_GET["confirmed"] == "no") {
                 \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
             }
         }

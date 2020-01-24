@@ -45,15 +45,16 @@ class MemberAdministrationModule extends \Module
         $this->loadLanguageFile('tl_member');
 
         // Daten des Mitglieds aus der Datenbank laden
-        $allMembers = MemberModel::findAll();
-
+        $this->import('Database');
+        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member")->query();
         $i = 0;
         $memberData = array();
-        // Variablen für das Template setzen
+
         while ($allMembers->next()) {
+
+            // Variablen für das Template setzen
             $memberData[$i]['firstname'] = $allMembers->firstname;
             $memberData[$i]['lastname'] = $allMembers->lastname;
-            $memberData[$i]['email'] = $allMembers->email;
             $memberData[$i]['username'] = $allMembers->username;
             $memberData[$i]['type'] = $allMembers->type;
             $memberData[$i]['id'] = $allMembers->id;

@@ -87,7 +87,7 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
         if ($_GET["unsubscribe"] == "success") {
-            $this->Template->unsubscribtionSuccessfull = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+            $this->Template->unsubscribtionSuccessful = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
         }
 
         // Von Klausur abmelden

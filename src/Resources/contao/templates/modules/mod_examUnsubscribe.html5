@@ -4,7 +4,7 @@
 <div class="ce_text first last  block">
 <h2><?= $this->examsUnsubscribe; ?></h2>
 </div>
-<p><?= $this->unsubscribtionSuccessful; ?></p>
+<p><em><?= $this->unsubscribtionSuccessful; ?></em></p>
 <?php
 if ($this->showConfirmationQuestion === false) {
 

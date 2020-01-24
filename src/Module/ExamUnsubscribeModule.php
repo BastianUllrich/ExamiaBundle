@@ -96,7 +96,7 @@ class ExamUnsubscribeModule extends \Module
 
             $examData = ExamsModel::findBy('id', $exam_id);
             $examDescription = $examData->title;
-            $examDescription .= ' '. $GLOBALS['TL_LANG']['miscellaneous']['dateAt'] . '';
+            $examDescription .= ' '. $GLOBALS['TL_LANG']['miscellaneous']['dateAt'] . ' ';
             $examDescription .= date("d.m.Y", $examData->date);
             $examDescription .= ' ' . $GLOBALS['TL_LANG']['miscellaneous']['timeAt'] . ' ';
             $examDescription .= $examData->begin;

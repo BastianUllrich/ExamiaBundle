@@ -59,5 +59,6 @@ class MemberAdministrationModule extends \Module
             $i++;
         }
         $this->Template->memberDataList = $memberData;
+        $this->Template->gude = 'Gude';
     }
 }

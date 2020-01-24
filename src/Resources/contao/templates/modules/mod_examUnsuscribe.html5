@@ -2,7 +2,8 @@
 
 <?php $this->block('content'); ?>
 <div class="ce_text first last  block">
-<h2><?= $this->registeredExams; ?></h2>
+<h2><?= $this->examsUnsuscribe; ?></h2>
+    <?= $this->getRegistriert; ?>
 </div>
 <?php
     if (sizeof($this->examParticipationList) > 0) {

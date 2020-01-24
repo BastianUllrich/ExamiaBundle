@@ -78,9 +78,11 @@ class ExamUnsuscribeModule extends \Module
 
         $this->Template->unsuscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribe'];
         $this->Template->examParticipationList = $examParticipationList;
-        $this->Template->registeredExams = $GLOBALS['TL_LANG']['miscellaneous']['registeredExams'];
+        $this->Template->examsUnsuscribe = $GLOBALS['TL_LANG']['miscellaneous']['examsUnsuscribe'];
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
+
+        $this->Template->getRegistriert = $_GET["do"];
 
     }
 }

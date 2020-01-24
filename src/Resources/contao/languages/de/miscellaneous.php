@@ -19,3 +19,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'] = 'Sie haben 
 $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'] = 'Sie haben sich für keine Klausuren im BliZ angemeldet';
 
 $GLOBALS['TL_LANG']['miscellaneous']['unsuscribe'] = 'Abmelden';
+$GLOBALS['TL_LANG']['miscellaneous']['examsUnsuscribe'] = 'Von einer Klausur abmelden';
+

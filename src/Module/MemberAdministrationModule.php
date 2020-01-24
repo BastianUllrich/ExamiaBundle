@@ -55,6 +55,7 @@ class MemberAdministrationModule extends \Module
             $memberData[$i]['lastname'] = $allMembers->lastname;
             $memberData[$i]['username'] = $allMembers->username;
             $memberData[$i]['usertype'] = $allMembers->usertype;
+            $memberData[$i]['disable'] = $allMembers->disable;
             $memberData[$i]['id'] = $allMembers->id;
             $i++;
         }

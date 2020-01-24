@@ -1,7 +1,6 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
-use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -51,7 +50,6 @@ class MemberAdministrationModule extends \Module
         $memberData = array();
 
         while ($allMembers->next()) {
-
             // Variablen für das Template setzen
             $memberData[$i]['firstname'] = $allMembers->firstname;
             $memberData[$i]['lastname'] = $allMembers->lastname;

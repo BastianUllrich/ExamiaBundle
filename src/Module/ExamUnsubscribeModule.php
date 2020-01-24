@@ -6,7 +6,7 @@ use Contao\Module;
 use Contao\FrontendUser;
 
 
-class ExamUnsuscribeModule extends \Module
+class ExamUnsubscribeModule extends \Module
 {
     /**
      * @var string
@@ -23,7 +23,7 @@ class ExamUnsuscribeModule extends \Module
         if (TL_MODE == 'BE') {
             $template = new \BackendTemplate('be_wildcard');
 
-            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['examUnsuscribe'][0]) . ' ###';
+            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['examUnsubscribe'][0]) . ' ###';
             $template->title = $this->headline;
             $template->id = $this->id;
             $template->link = $this->name;
@@ -76,19 +76,20 @@ class ExamUnsuscribeModule extends \Module
             $i++;
         }
 
-        $this->Template->unsuscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribe'];
+        $this->Template->unsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'];
         $this->Template->examParticipationList = $examParticipationList;
-        $this->Template->examsUnsuscribe = $GLOBALS['TL_LANG']['miscellaneous']['examsUnsuscribe'];
+        $this->Template->examsUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['examsUnsubscribe'];
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
         // Von Klausur abmelden
-        if (($_GET["do"] == "unsuscribe")) {
+        if (($_GET["do"] == "unsubscribe")) {
             $exam_id = $_GET["exam"];
             $this->import('Database');
             if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
-                $this->Template->unsubscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccess'];
+
                 \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
+                $this->Template->unsubscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccess'];
             }
         }
 

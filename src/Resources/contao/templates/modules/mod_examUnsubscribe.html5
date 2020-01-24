@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 <div class="ce_text first last  block">
-<h2><?= $this->examsUnsuscribe; ?></h2>
+<h2><?= $this->examsUnsubscribe; ?></h2>
     <p><strong><?= $this->unsubscribtionSuccess; ?></strong></p>
 </div>
 <?php
@@ -29,7 +29,7 @@
                 <td class="body col_2"><?= $examParticipation['time']; ?></td>
                 <td class="body col_3"><?= $examParticipation['title']; ?></td>
                 <td class="body col_4"><?= $examParticipation['lecturer_name']; ?></td>
-                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsuscribe&exam=<?= $examParticipation['examsID']; ?>" title="Von Klausur abmelden"><?= $this->unsuscribe; ?></a></td>
+                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsubscribe&exam=<?= $examParticipation['examsID']; ?>" title="Von Klausur abmelden"><?= $this->unsuscribe; ?></a></td>
             </tr>
             <?php
             $i++;

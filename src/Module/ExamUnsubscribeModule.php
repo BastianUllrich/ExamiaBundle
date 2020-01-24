@@ -86,17 +86,21 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
+        if ($_GET["unsubscribe"] == "success") {
+            $this->Template->unsubscribtionSuccessfull = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+        }
+
         // Von Klausur abmelden
         if ($_GET["do"] == "unsubscribe") {
             $exam_id = $_GET["exam"];
 
             $examData = ExamsModel::findBy('id', $exam_id);
             $examDescription = $examData->title;
-            $examDescription .= ' am ';
+            $examDescription .= ' '. $GLOBALS['TL_LANG']['miscellaneous']['dateAt'] . '';
             $examDescription .= date("d.m.Y", $examData->date);
-            $examDescription .= ' um ';
+            $examDescription .= ' ' . $GLOBALS['TL_LANG']['miscellaneous']['timeAt'] . ' ';
             $examDescription .= $examData->begin;
-            $examDescription .= ' Uhr bei ';
+            $examDescription .= ' ' . $GLOBALS['TL_LANG']['miscellaneous']['timeHour'] . ' ' . $GLOBALS['TL_LANG']['miscellaneous']['lecturerAt'];
             $examDescription .= $examData->lecturer_title;
             $examDescription .= ' ';
             $examDescription .= $examData->lecturer_prename;
@@ -111,7 +115,7 @@ class ExamUnsubscribeModule extends \Module
 
             if (($_GET["confirmed"] == "yes")) {
                 if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
-                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsuscribe=success');
+                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsubscribe=success');
                 }
             }
             elseif ($_GET["confirmed"] == "no") {

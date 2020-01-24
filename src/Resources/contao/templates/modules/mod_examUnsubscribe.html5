@@ -55,5 +55,5 @@ else {
 ?>
 </div>
 <?php
-$this->endblock():
+$this->endblock();
 ?>

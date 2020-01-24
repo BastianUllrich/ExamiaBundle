@@ -54,11 +54,10 @@ class MemberAdministrationModule extends \Module
             $memberData[$i]['firstname'] = $allMembers->firstname;
             $memberData[$i]['lastname'] = $allMembers->lastname;
             $memberData[$i]['username'] = $allMembers->username;
-            $memberData[$i]['type'] = $allMembers->type;
+            $memberData[$i]['usertype'] = $allMembers->usertype;
             $memberData[$i]['id'] = $allMembers->id;
             $i++;
         }
         $this->Template->memberDataList = $memberData;
-        $this->Template->gude = 'Gude';
     }
 }

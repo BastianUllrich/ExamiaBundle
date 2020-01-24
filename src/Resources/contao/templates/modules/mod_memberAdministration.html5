@@ -23,7 +23,7 @@
                 <td class="body col_0 col_first"><?= $memberData['firstname']; ?></td>
                 <td class="body col_1"><?= $memberData['lastname']; ?></td>
                 <td class="body col_2"><?= $memberData['username']; ?></td>
-                <td class="body col_3"><?= $memberData['type']; ?></td>
+                <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
                     <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="aktivieren">Aktivieren</a>
                     <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="dektivieren">Deaktivieren</a>

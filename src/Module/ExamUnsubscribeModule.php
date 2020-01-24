@@ -124,7 +124,7 @@ class ExamUnsubscribeModule extends \Module
                         $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
                     }
 
-                    $dataX=sizeof($resultX);
+                    $dataX=$resultX->attendee_id;
 
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsubscribe=success&result='.$dataX);
                 }

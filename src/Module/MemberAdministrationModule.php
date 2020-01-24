@@ -45,7 +45,7 @@ class MemberAdministrationModule extends \Module
 
         // Daten des Mitglieds aus der Datenbank laden
         $this->import('Database');
-        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY usertype")->query();
+        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable")->query();
         $i = 0;
         $memberData = array();
 
@@ -60,5 +60,19 @@ class MemberAdministrationModule extends \Module
             $i++;
         }
         $this->Template->memberDataList = $memberData;
+
+        // Mitglied aktivieren / deaktivieren
+        if ($_GET["do"] == "activate") {
+            $member = $_GET["member"];
+            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable='' WHERE id=$member")->execute()->affectedRows) {
+                \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
+            }
+        }
+        if ($_GET["do"] == "deactivate") {
+            $member = $_GET["member"];
+            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable='1' WHERE id=$member")->execute()->affectedRows) {
+                \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@
                 <td class="body col_2"><?= $examParticipation['time']; ?></td>
                 <td class="body col_3"><?= $examParticipation['title']; ?></td>
                 <td class="body col_4"><?= $examParticipation['lecturer_name']; ?></td>
-                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsubscribe&exam=<?= $examParticipation['examsID']; ?>" title="Von Klausur abmelden"><?= $this->unsuscribe; ?></a></td>
+                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsubscribe&exam=<?= $examParticipation['examsID']; ?>" title="Von Klausur abmelden"><?= $this->unsubscribe; ?></a></td>
             </tr>
             <?php
             $i++;

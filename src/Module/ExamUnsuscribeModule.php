@@ -82,7 +82,14 @@ class ExamUnsuscribeModule extends \Module
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
-        $this->Template->getRegistriert = $_GET["do"];
+        // Von Klausur abmelden
+        if (($_GET["do"] == "unsuscribe")) {
+            $exam_id = $_GET["exam"];
+            if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=%s AND attendee_id=%s")->set($exam_id, $userID)->execute()) {
+                $this->Template->unsuscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribtionSuccess'];
+                \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
+            }
+        }
 
     }
 }

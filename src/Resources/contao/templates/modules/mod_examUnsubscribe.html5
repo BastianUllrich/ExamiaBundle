@@ -1,9 +1,9 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<p class="ce_text first last  block">
+<div class="ce_text first last  block">
 <h2><?= $this->examsUnsubscribe; ?></h2>
-
+</div>
 <?php
 if ($this->showConfirmationQuestion === false) {
 
@@ -53,7 +53,7 @@ else {
     <?php
 }
 ?>
-</div>
+
 <?php
 $this->endblock();
 ?>

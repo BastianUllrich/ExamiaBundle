@@ -117,10 +117,10 @@ class ExamUnsubscribeModule extends \Module
                 if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
                     // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
-                    $result = Database::getInstance()->prepare("SELECT COUNT(*) FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
+                    $result = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
 
                     // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
-                    if ($result == 0) {
+                    if (sizeof($result) == 0) {
                         $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
                     }
 

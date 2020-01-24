@@ -48,7 +48,10 @@ class ExamUnsubscribeModule extends \Module
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
+        $showConfirmationQuestion = false;
 
+        // Auflistung der angemeldeten Klausuren
+        // Aktueller Timestamp muss via PHP geholt werden, da SQL nur Datumformat "2020-02-02" erstellen kann
         $this->import('Database');
         $examParticipationList = array();
         $i = 0;
@@ -85,11 +88,19 @@ class ExamUnsubscribeModule extends \Module
         // Von Klausur abmelden
         if (($_GET["do"] == "unsubscribe")) {
             $exam_id = $_GET["exam"];
-            $this->import('Database');
-            if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
+            $showConfirmationQuestion = true;
+            $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['confirmationQuestion'];
+            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['confirmationYes'];
+            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['confirmationNo'];
+
+            if (($_GET["confirmed"] == "yes")) {
+                if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
+                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsuscribe=success');
+                }
+            }
+            else {
                 \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
-                $this->Template->unsubscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccess'];
             }
         }
 

@@ -20,4 +20,6 @@ $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'] = 'Sie haben sich f√
 
 $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'] = 'Abmelden';
 $GLOBALS['TL_LANG']['miscellaneous']['examsUnsubscribe'] = 'Von einer Klausur abmelden';
-$GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccess'] = 'Die Abmeldung von der Klausur war erfolgreich.';
+$GLOBALS['TL_LANG']['miscellaneous']['confirmationQuestion'] = 'Wollen Sie sich wirklich von folgender Klausur abmelden?';
+$GLOBALS['TL_LANG']['miscellaneous']['confirmationYes'] = 'Ja, von der Klausur abmelden';
+$GLOBALS['TL_LANG']['miscellaneous']['confirmationNo'] = 'Nein, nicht abmelden';

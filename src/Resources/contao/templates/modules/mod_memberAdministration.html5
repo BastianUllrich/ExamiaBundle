@@ -1,0 +1,41 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+<div class="ce_text first last  block">
+<h2><?= $this->registeredExams; ?></h2>
+</div>
+<?php
+        $i = 0;
+        ?>
+        <p><?= $this->registeredExamsExplanation; ?></p>
+        <table class="all_records">
+            <thead>
+            <tr>
+                <th class="head col_last">Vorname</th>
+                <th class="head col_last">Nachname</th>
+                <th class="head col_last">Benutzername</th>
+                <th class="head col_last">Typ</th>
+                <th class="head col_last">Aktion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->memberDataList as $memberData): ?>
+            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+                <td class="body col_0 col_first"><?= $memberData['firstname']; ?></td>
+                <td class="body col_1"><?= $memberData['lastname']; ?></td>
+                <td class="body col_2"><?= $memberData['username']; ?></td>
+                <td class="body col_3"><?= $memberData['type']; ?></td>
+                <td class="body col_4 col_last">
+                    <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="aktivieren">Aktivieren</a>
+                    <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="dektivieren">Deaktivieren</a>
+                </td>
+            </tr>
+            <?php
+            $i++;
+            endforeach;
+            ?>
+            </tbody>
+        </table>
+
+$this->endblock();
+?>

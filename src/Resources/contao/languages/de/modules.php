@@ -6,6 +6,7 @@ $GLOBALS['TL_LANG']['FMD']['memberUserData'] = ['Stammdaten des Mitglieds', 'Gib
 $GLOBALS['TL_LANG']['FMD']['examRegistration'] = ['Klausuranmeldung', 'Formular zur Klausuranmeldung'];
 $GLOBALS['TL_LANG']['FMD']['examRegisteredExamsMember'] = ['Angemeldete Klausuren', 'Übersicht über angemeldete Klausuren für das Mitglied'];
 $GLOBALS['TL_LANG']['FMD']['examUnsubscribe'] = ['Von Klausur abmelden', 'Das Mitglied kann sich hiermit von einer Klausur abmelden'];
+$GLOBALS['TL_LANG']['FMD']['memberAdministration'] = ['Mitglieder verwalten', 'Der Admin kann hiermit die Mitglieder verwalten'];
 
 // Backend Modules
 $GLOBALS['TL_LANG']['MOD']['examia'] = ['Klausurverwaltung', ''];

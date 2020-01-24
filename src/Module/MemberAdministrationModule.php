@@ -45,7 +45,7 @@ class MemberAdministrationModule extends \Module
 
         // Daten des Mitglieds aus der Datenbank laden
         $this->import('Database');
-        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member")->query();
+        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY usertype")->query();
         $i = 0;
         $memberData = array();
 

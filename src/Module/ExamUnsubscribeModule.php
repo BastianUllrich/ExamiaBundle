@@ -121,7 +121,7 @@ class ExamUnsubscribeModule extends \Module
 
                     // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                     if ($result == 0) {
-                        $this->Database->prepare("DELETE FROM tl_exams WHERE exam_id=$exam_id")->execute()->affectedRows;
+                        $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
                     }
 
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsubscribe=success');

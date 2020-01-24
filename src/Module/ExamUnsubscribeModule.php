@@ -48,7 +48,7 @@ class ExamUnsubscribeModule extends \Module
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
-        $showConfirmationQuestion = false;
+        $this->Template->showConfirmationQuestion = false;
 
         // Auflistung der angemeldeten Klausuren
         // Aktueller Timestamp muss via PHP geholt werden, da SQL nur Datumformat "2020-02-02" erstellen kann
@@ -89,7 +89,7 @@ class ExamUnsubscribeModule extends \Module
         if (($_GET["do"] == "unsubscribe")) {
             $exam_id = $_GET["exam"];
 
-            $showConfirmationQuestion = true;
+            $this->Template->showConfirmationQuestion = true;
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['confirmationQuestion'];
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['confirmationYes'];
             $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['confirmationNo'];

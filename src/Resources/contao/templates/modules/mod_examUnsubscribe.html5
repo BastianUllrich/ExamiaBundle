@@ -5,7 +5,7 @@
 <h2><?= $this->examsUnsubscribe; ?></h2>
 
 <?php
-if ($showConfirmationQuestion == false) {
+if ($this->$showConfirmationQuestion === false) {
 
     if (sizeof($this->examParticipationList) > 0) {
         $i = 0;

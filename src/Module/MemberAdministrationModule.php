@@ -4,6 +4,7 @@ namespace Baul\ExamiaBundle\Module;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
+use Baul\ExamiaBundle\Model\MemberModel;
 
 
 class MemberAdministrationModule extends \Module
@@ -43,9 +44,10 @@ class MemberAdministrationModule extends \Module
         // Sprachdatei einbinden
         $this->loadLanguageFile('tl_member');
 
-        // Daten des Mitglieds aus der Datenbank laden
+        // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
         $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC")->query();
+
         $i = 0;
         $memberData = array();
 

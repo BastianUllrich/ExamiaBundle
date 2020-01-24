@@ -1,7 +1,6 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
-use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
 use Contao\Module;

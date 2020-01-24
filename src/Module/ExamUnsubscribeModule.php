@@ -4,6 +4,7 @@ namespace Baul\ExamiaBundle\Module;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
+use Baul\ExamiaBundle\Model\ExamsModel;
 
 
 class ExamUnsubscribeModule extends \Module
@@ -89,8 +90,22 @@ class ExamUnsubscribeModule extends \Module
         if ($_GET["do"] == "unsubscribe") {
             $exam_id = $_GET["exam"];
 
+            $examData = ExamsModel::findBy('id', $exam_id);
+            $examDescription = $examData->title;
+            $examDescription .= ' am ';
+            $examDescription .= date("d.m.Y", $examData->date);
+            $examDescription .= ' um ';
+            $examDescription .= $examData->begin;
+            $examDescription .= ' Uhr bei ';
+            $examDescription .= $examData->lecturer_title;
+            $examDescription .= ' ';
+            $examDescription .= $examData->lecturer_prename;
+            $examDescription .= ' ';
+            $examDescription .= $examData->lecturer_lastname;
+
             $this->Template->showConfirmationQuestion = true;
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['confirmationQuestion'];
+            $this->Template->examDescription = $examDescription;
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['confirmationYes'];
             $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['confirmationNo'];
 

@@ -11,7 +11,7 @@ class ExamUnsubscribeModule extends \Module
     /**
      * @var string
      */
-    protected $strTemplate = 'mod_examUnsuscribe';
+    protected $strTemplate = 'mod_examUnsubscribe';
 
     /**
      * Displays a wildcard in the back end.

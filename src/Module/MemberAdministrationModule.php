@@ -70,7 +70,7 @@ class MemberAdministrationModule extends \Module
         }
         if ($_GET["do"] == "deactivate") {
             $member = $_GET["member"];
-            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable='1' WHERE id=$member")->execute()->affectedRows) {
+            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows) {
                 \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
             }
         }

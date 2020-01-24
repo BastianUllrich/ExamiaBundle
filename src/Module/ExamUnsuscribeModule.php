@@ -87,7 +87,7 @@ class ExamUnsuscribeModule extends \Module
             $exam_id = $_GET["exam"];
             $this->import('Database');
             if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
-                $this->Template->unsuscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribtionSuccess'];
+                $this->Template->unsubscribtionSuccess = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccess'];
                 \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
             }
         }

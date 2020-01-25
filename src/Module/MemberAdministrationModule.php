@@ -73,15 +73,17 @@ class MemberAdministrationModule extends \Module
         // Mitglied aktivieren / deaktivieren
         if ($_GET["do"] == "activate") {
             $member = $_GET["member"];
-            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable='' WHERE id=$member")->execute()->affectedRows) {
-                \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
+            if ($member != $objUser->id) {
+                $this->Database->prepare("UPDATE tl_member SET disable='' WHERE id=$member")->execute()->affectedRows;
             }
+            \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
         if ($_GET["do"] == "deactivate") {
             $member = $_GET["member"];
-            if ($activateMember = $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows) {
-                \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
+            if ($member != $objUser->id) {
+                $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows;
             }
+            \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
 
         // Mitglied löschen

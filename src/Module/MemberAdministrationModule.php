@@ -47,6 +47,10 @@ class MemberAdministrationModule extends \Module
 
         $this->Template->showConfirmationQuestion = false;
 
+        // FrontendUser Variablen laden
+        $objUser = FrontendUser::getInstance();
+        $this->Template->userID = $objUser->id;
+
         // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
         $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC, usertype ASC")->query();

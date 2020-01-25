@@ -26,15 +26,20 @@ if ($this->showConfirmationQuestion === false) {
                 <td class="body col_2"><?= $memberData['username']; ?></td>
                 <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
-                    <?php if ($memberData['disable'] == 1) { ?>
-                        <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="Mitglied aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
-                    <?php } else { ?>
-                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="Mitglied deaktivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
-                    <?php }
-                    if ($memberData['usertype'] != 'Administrator') {
-                        ?>
-                        <a href="{{env::request}}?do=delete&member=<?= $memberData['id']; ?>" title="Mitglied löschen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Mitglied löschen"></a>
-                    <?php } ?>
+                    <?php
+                    // Verhindern, dass der User sich selbst deaktiviert
+                    if ($memberData['id'] != $this->userID) {
+                        if ($memberData['disable'] == 1) { ?>
+                            <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="Mitglied aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
+                        <?php } else { ?>
+                            <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="Mitglied deaktivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
+                        <?php }
+                        if ($memberData['usertype'] != 'Administrator') {
+                            ?>
+                            <a href="{{env::request}}?do=delete&member=<?= $memberData['id']; ?>" title="Mitglied löschen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Mitglied löschen"></a>
+                        <?php }
+                    }
+                ?>
                 </td>
             </tr>
             <?php

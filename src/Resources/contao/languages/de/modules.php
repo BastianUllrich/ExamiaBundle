@@ -10,8 +10,6 @@ $GLOBALS['TL_LANG']['FMD']['memberAdministration'] = ['Mitglieder verwalten', 'D
 
 // Backend Modules
 $GLOBALS['TL_LANG']['MOD']['examia'] = ['Klausurverwaltung', ''];
-
-$GLOBALS['TL_LANG']['MOD']['member'] = ['Mitglieder', 'Verwalte Mitglieder'];
 $GLOBALS['TL_LANG']['MOD']['exams'] = ['Klausuren', 'Verwalte Klausuren'];
 $GLOBALS['TL_LANG']['MOD']['attendees_exams'] = ['Klausurteilnahme', 'Verwalte Klausurteilnahme'];
 $GLOBALS['TL_LANG']['MOD']['supervisors_exams'] = ['Aufsichtsverwaltung', 'Verwalte Aufsichten'];

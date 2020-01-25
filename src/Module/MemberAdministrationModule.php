@@ -47,11 +47,6 @@ class MemberAdministrationModule extends \Module
 
         $this->Template->showConfirmationQuestion = false;
 
-        if ($_GET["deletion"] == "success") {
-            $this->Template->deletionSuccessful = $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'];
-        }
-
-
         // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
         $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC, usertype ASC")->query();
@@ -133,7 +128,7 @@ class MemberAdministrationModule extends \Module
 
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
                     if ($deleteMember = $this->Database->prepare("DELETE FROM tl_member WHERE id=$member")->execute()->affectedRows) {
-                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?deletion=success');
+                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                     }
                 }
                 elseif ($_GET["confirmed"] == "no") {

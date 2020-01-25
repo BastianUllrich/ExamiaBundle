@@ -4,7 +4,6 @@
 <div class="ce_text first last  block">
 <h2>Mitglieder verwalten</h2>
 </div>
-<p><em><?= $this->deletionSuccessful; ?></em></p>
 <?php
 if ($this->showConfirmationQuestion === false) {
     $i = 0;
@@ -30,7 +29,7 @@ if ($this->showConfirmationQuestion === false) {
                     <?php if ($memberData['disable'] == 1) { ?>
                         <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="Mitglied aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
                     <?php } else { ?>
-                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="Mitglied dektivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
+                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="Mitglied deaktivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
                     <?php }
                     if ($memberData['usertype'] != 'Administrator') {
                         ?>

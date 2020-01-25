@@ -86,10 +86,6 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
-        if ($_GET["unsubscribe"] == "success") {
-            $this->Template->unsubscribtionSuccessful = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
-        }
-
         // Von Klausur abmelden
         if ($_GET["do"] == "unsubscribe") {
             $exam_id = $_GET["exam"];
@@ -124,7 +120,7 @@ class ExamUnsubscribeModule extends \Module
                         $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
                     }
 
-                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html?unsubscribe=success');
+                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
                 }
             }
             elseif ($_GET["confirmed"] == "no") {

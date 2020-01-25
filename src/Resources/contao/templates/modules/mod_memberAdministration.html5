@@ -146,7 +146,7 @@ elseif ($this->showDetails === true) {
 
         </tbody>
     </table>
-    <p><a href="{{link::back}}" title="zurück">Zurrück zur Übersicht</a></p>
+    <p>{{link::back}}</p>
     <?php
 }
 $this->endblock();

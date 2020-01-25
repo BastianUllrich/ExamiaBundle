@@ -26,7 +26,7 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false) {
                 <td class="body col_2"><?= $memberData['username']; ?></td>
                 <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
-                    <a href="{{env::request}}?do=viewDetails&member=<?= $memberData['id']; ?>" title="Mitglied aktivieren"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Mitgliedsdetails"></a>
+                    <a href="{{env::request}}?do=viewDetails&member=<?= $memberData['id']; ?>" title="Mitgliedsdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Mitgliedsdetails"></a>
                     <?php
                     // Verhindern, dass der User sich selbst deaktiviert
                     if ($memberData['id'] != $this->userID) {
@@ -61,6 +61,7 @@ elseif ($this->showConfirmationQuestion === true) {
 elseif ($this->showDetails === true) {
     // Details von alle Mitgliedertypen
     ?>
+    <p><strong>Mitgliedsdetails</strong></p>
     <table class="single_record">
         <tbody>
         <tr class="row_0 row_first even">

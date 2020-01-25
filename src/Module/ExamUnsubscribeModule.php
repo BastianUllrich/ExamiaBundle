@@ -121,6 +121,29 @@ class ExamUnsubscribeModule extends \Module
                         $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE exam_id=$exam_id")->execute()->affectedRows;
                     }
 
+                    // E-Mail versenden
+                    // wir instanziieren ein neues Objekt der Klasse Email
+                    $objMailUnsuscribe = new Email();
+
+                    // wir setzen den Namen des Absenders
+                    $objMailUnsuscribe->fromName = 'BliZ Intranet';
+
+                    // wir setzen die E-Mail Adresse des Administrators
+                    $objMailUnsuscribe->from = 'bastian.ullrich@gmail.com';
+
+                    // wir setzen einen Betreff
+                    $objMailUnsuscribe->subject = 'Abmeldung von Klausur im BliZ';
+
+                    // wir fügen einen E-Mail-Text hinzu
+                    $objMailUnsuscribe->text = 'Eine Abmeldung von Klausur im BliZ ist erfolgt';
+
+                    // wir setzen den Empfänger und schicken das E-Mail ab
+                    $objMailUnsuscribe->sendTo('bastiullrich@gmail.com');
+
+                    // wir räumen im Speicher vom Server auf und löschen die Ressource
+                    // ist nicht zwingend nötig, zeugt aber von einem guten Programmierstil
+                    unset($objMailUnsuscribe);
+
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
                 }
             }

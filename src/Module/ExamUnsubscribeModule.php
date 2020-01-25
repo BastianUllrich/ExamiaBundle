@@ -108,10 +108,10 @@ class ExamUnsubscribeModule extends \Module
             $examDescription .= $examData->lecturer_lastname;
 
             $this->Template->showConfirmationQuestion = true;
-            $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['confirmationQuestion'];
+            $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'];
             $this->Template->examDescription = $examDescription;
-            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['confirmationYes'];
-            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['confirmationNo'];
+            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
+            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'];
 
             if (($_GET["confirmed"] == "yes")) {
                 if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {

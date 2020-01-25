@@ -32,5 +32,8 @@ $GLOBALS['TL_MODELS']['tl_member'] = MemberModel::class;
 use Baul\ExamiaBundle\Model\ExamsModel;
 $GLOBALS['TL_MODELS']['tl_exams'] = ExamsModel::class;
 
+use Baul\ExamiaBundle\Model\AttendeesExamsModel;
+$GLOBALS['TL_MODELS']['tl_attendees_exams'] = AttendeesExamsModel::class;
+
 ?>
 

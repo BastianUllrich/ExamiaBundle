@@ -4,21 +4,23 @@
 <div class="ce_text first last  block">
 <h2>Mitglieder verwalten</h2>
 </div>
+<p><em><?= $this->deletionSuccessful; ?></em></p>
 <?php
-        $i = 0;
-        ?>
-        <table class="all_records">
-            <thead>
-            <tr>
-                <th class="head col_last">Vorname</th>
-                <th class="head col_last">Nachname</th>
-                <th class="head col_last">Benutzername</th>
-                <th class="head col_last">Typ</th>
-                <th class="head col_last">Aktion</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach($this->memberDataList as $memberData): ?>
+if ($this->showConfirmationQuestion === false) {
+    $i = 0;
+    ?>
+    <table class="all_records">
+        <thead>
+        <tr>
+            <th class="head col_last">Vorname</th>
+            <th class="head col_last">Nachname</th>
+            <th class="head col_last">Benutzername</th>
+            <th class="head col_last">Typ</th>
+            <th class="head col_last">Aktion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($this->memberDataList as $memberData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first"><?= $memberData['firstname']; ?></td>
                 <td class="body col_1"><?= $memberData['lastname']; ?></td>
@@ -26,18 +28,31 @@
                 <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
                     <?php if ($memberData['disable'] == 1) { ?>
-                        <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
+                        <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="Mitglied aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
                     <?php } else { ?>
-                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="dektivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
+                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="Mitglied dektivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
+                    <?php }
+                    if ($memberData['usertype'] != 'Administrator') {
+                        ?>
+                        <a href="{{env::request}}?do=delete&member=<?= $memberData['id']; ?>" title="Mitglied löschen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Mitglied löschen"></a>
                     <?php } ?>
                 </td>
             </tr>
             <?php
             $i++;
-            endforeach;
-            ?>
-            </tbody>
-        </table>
+        endforeach;
+        ?>
+        </tbody>
+    </table>
 <?php
+}
+else {
+    ?>
+    <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
+    <p><?= $this->member; ?> <?= $memberData['id']; ?></p>
+    <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
+    <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+    <?php
+}
 $this->endblock();
 ?>

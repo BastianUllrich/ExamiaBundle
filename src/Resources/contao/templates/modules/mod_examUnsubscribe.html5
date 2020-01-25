@@ -54,8 +54,5 @@ else {
     <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
     <?php
 }
-?>
-
-<?php
 $this->endblock();
 ?>

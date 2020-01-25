@@ -115,9 +115,10 @@ class ExamUnsubscribeModule extends \Module
                     // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
                     $getExamRegistration = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
 
-                    // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
+                    // Klausur und Aufsichtszuweisung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                     if (empty($getExamRegistration->attendee_id)) {
                         $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
+                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE exam_id=$exam_id")->execute()->affectedRows;
                     }
 
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');

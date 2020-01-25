@@ -26,9 +26,9 @@
                 <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
                     <?php if ($memberData['disable'] == 1) { ?>
-                        <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="aktivieren">Aktivieren</a>
+                        <a href="{{env::request}}?do=activate&member=<?= $memberData['id']; ?>" title="aktivieren"><img src="system/themes/flexible/icons/visible.svg" width="16" height="16" alt="Mitglied aktivieren"></a>
                     <?php } else { ?>
-                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="dektivieren">Deaktivieren</a>
+                        <a href="{{env::request}}?do=deactivate&member=<?= $memberData['id']; ?>" title="dektivieren"><img src="system/themes/flexible/icons/invisible.svg" width="16" height="16" alt="Mitglied deaktivieren"></a>
                     <?php } ?>
                 </td>
             </tr>

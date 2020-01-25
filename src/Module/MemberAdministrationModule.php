@@ -88,7 +88,7 @@ class MemberAdministrationModule extends \Module
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
 
-        if ($_GET["do"] == "viewdetails") {
+        if ($_GET["do"] == "viewDetails") {
             $member = $_GET["member"];
             $memberDetailsData = MemberModel::findBy('id', $member);
             $this->Template->showDetails = true;

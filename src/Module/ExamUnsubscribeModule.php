@@ -123,7 +123,7 @@ class ExamUnsubscribeModule extends \Module
 
                     // E-Mail versenden
                     // wir instanziieren ein neues Objekt der Klasse Email
-                    $objMailUnsuscribe = new Email();
+                    $objMailUnsuscribe = new \Email();
 
                     // wir setzen den Namen des Absenders
                     $objMailUnsuscribe->fromName = 'BliZ Intranet';

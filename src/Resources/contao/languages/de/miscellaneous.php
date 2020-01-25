@@ -30,7 +30,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['timeAt'] = 'um';
 $GLOBALS['TL_LANG']['miscellaneous']['timeHour'] = 'Uhr';
 $GLOBALS['TL_LANG']['miscellaneous']['lecturerAt'] = 'bei';
 
-$GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'] = 'Wollen Sie sich das Mitglied wirklich löschen?';
+$GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'] = 'Wollen Sie das Mitglied wirklich löschen?';
 $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'] = 'Ja, Mitglied löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'] = 'Nein, nicht löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied wurde erfolgreich gelöscht.';

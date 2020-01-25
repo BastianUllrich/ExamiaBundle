@@ -90,7 +90,6 @@ class MemberAdministrationModule extends \Module
             $member = $_GET["member"];
             $this->Template->showConfirmationQuestion = true;
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'];
-            $this->Template->member = $GLOBALS['TL_LANG']['miscellaneous']['member'];
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'];
             $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'];
 
@@ -109,21 +108,23 @@ class MemberAdministrationModule extends \Module
                     $i = 0;
                     $examIDs = array();
                     $attendeesExams = AttendeesExamsModel::findBy('attendee_id', $member);
-                    while ($attendeesExams->next()) {
-                        $examIDs[$i]['exam_id'] = $attendeesExams->exam_id;
-                        $i++;
-                    }
+                    if (!is_null($attendeesExams)) {
+                        while ($attendeesExams->next()) {
+                            $examIDs[$i]['exam_id'] = $attendeesExams->exam_id;
+                            $i++;
+                        }
 
-                    // Klausurteilnahmen des Mitglieds aus Datenbank löschen
-                    $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$member")->execute()->affectedRows;
+                        // Klausurteilnahmen des Mitglieds aus Datenbank löschen
+                        $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$member")->execute()->affectedRows;
 
-                    // Klausuren aus Datenbank löschen, falls sie keinen Teilnehmer mehr haben
-                    foreach ($examIDs as $exam_id) {
-                        $exID = $exam_id['exam_id'];
-                        $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
-                        // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
-                        if (empty($getAttendeesExam->exam_id)) {
-                            $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
+                        // Klausuren aus Datenbank löschen, falls sie keinen Teilnehmer mehr haben
+                        foreach ($examIDs as $exam_id) {
+                            $exID = $exam_id['exam_id'];
+                            $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
+                            // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
+                            if (empty($getAttendeesExam->exam_id)) {
+                                $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
+                            }
                         }
                     }
 

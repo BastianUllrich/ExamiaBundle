@@ -5,7 +5,7 @@
 <h2>Mitglieder verwalten</h2>
 </div>
 <?php
-if ($this->showConfirmationQuestion === false) {
+if ($this->showConfirmationQuestion === false && $this->showDetails === false) {
     $i = 0;
     ?>
     <table class="all_records">
@@ -50,11 +50,102 @@ if ($this->showConfirmationQuestion === false) {
     </table>
 <?php
 }
-else {
+elseif ($this->showConfirmationQuestion === true) {
     ?>
     <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
     <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
     <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+    <?php
+}
+elseif ($this->showDetails === true) {
+    // Details von alle Mitgliedertypen
+    ?>
+    <table class="single_record">
+        <tbody>
+        <tr class="row_0 row_first even">
+            <td class="label">Vorname</td>
+            <td class="value"><?= $this->detailFirstname; ?></td>
+        </tr>
+        <tr class="row_1 odd">
+            <td class="label">Nachname</td>
+            <td class="value"><?= $this->detailLastname; ?></td>
+        </tr>
+        <tr class="row_2 even">
+            <td class="label">Benutzername</td>
+            <td class="value"><?= $this->detailUsername; ?></td>
+        </tr>
+        <tr class="row_3 odd">
+            <td class="label">E-Mail-Adresse</td>
+            <td class="value"><?= $this->detailEmail; ?></td>
+        </tr>
+        <?php
+        // Extra-Details von Aufsichten und Studenten
+        if ($this->memberType != "Administrator") {
+            ?>
+            <tr class="row_4 even">
+                <td class="label">Handynummer</td>
+                <td class="value"><?= $this->detailMobile; ?></td>
+            </tr>
+            <?php
+        }
+        // Extra-Details von Studenten
+        if ($this->memberType == "Student") {
+            ?>
+            <tr class="row_5 odd">
+                <td class="label">Telefonnummer</td>
+                <td class="value"><?= $this->detailPhone; ?></td>
+            </tr>
+            <tr class="row_6 even">
+                <td class="label">Geschlecht</td>
+                <td class="value"><?= $this->detailGender; ?></td>
+            </tr>
+            <tr class="row_7 odd">
+                <td class="label">Geburtsdatum</td>
+                <td class="value"><?= $this->detailDateOfBirth; ?></td>
+            </tr>
+            <tr class="row_8 even">
+                <td class="label">Studiengang</td>
+                <td class="value"><?= $this->detailCourse; ?></td>
+            </tr>
+            <tr class="row_9 odd">
+                <td class="label">Hochschule | Fachbereich</td>
+                <td class="value"><?= $this->detailDepartment; ?></td>
+            </tr>
+            <tr class="row_10 even">
+                <td class="label">Chipkarten-Nr</td>
+                <td class="value"><?= $this->detailChipcardNr; ?></td>
+            </tr>
+            <tr class="row_11 odd">
+                <td class="label">Ansprechpartner</td>
+                <td class="value"><?= $this->detailContactPerson; ?></td>
+            </tr>
+            <tr class="row_12 even">
+                <td class="label">Behinderungen</td>
+                <td class="value"><?= $this->detailHandicaps; ?></td>
+            </tr>
+            <tr class="row_13 odd">
+                <td class="label">Sonstige Behinderungen</td>
+                <td class="value"><?= $this->detailHandicapsOthers; ?></td>
+            </tr>
+            <tr class="row_14 even">
+                <td class="label">Benötigte Hilfsmittel</td>
+                <td class="value"><?= $this->detailRehabDevices; ?></td>
+            </tr>
+            <tr class="row_15 odd">
+                <td class="label">Sonstige benötigte Hilfsmittel</td>
+                <td class="value"><?= $this->detailRehabDevicesOthers; ?></td>
+            </tr>
+            <tr class="row_16 even">
+                <td class="label">Zeitverlängerung</td>
+                <td class="value"><?= $this->detailExtraTime; ?> <?= $this->detailExtraTimeUnit; ?></td>
+            </tr>
+            <?php
+        }
+        ?>
+
+        </tbody>
+    </table>
+    <p><a href="{{link::back}}" title="zurück">Zurrück zur Übersicht</a></p>
     <?php
 }
 $this->endblock();

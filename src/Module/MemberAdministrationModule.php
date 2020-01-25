@@ -42,10 +42,12 @@ class MemberAdministrationModule extends \Module
      */
     protected function compile()
     {
-        // Sprachdatei einbinden
+        // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
+        $this->loadLanguageFile('tl_member');
 
         $this->Template->showConfirmationQuestion = false;
+        $this->Template->showDetails = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -84,6 +86,32 @@ class MemberAdministrationModule extends \Module
                 $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows;
             }
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
+        }
+
+        if ($_GET["do"] == "viewdetails") {
+            $member = $_GET["member"];
+            $memberDetailsData = MemberModel::findBy('id', $member);
+            $this->Template->showDetails = true;
+
+            $this->Template->memberType = $memberDetailsData->usertype;
+            $this->Template->detailFirstname = $memberDetailsData->firstname;
+            $this->Template->detailLastname = $memberDetailsData->lastname;
+            $this->Template->detailUsername = $memberDetailsData->username;
+            $this->Template->detailEmail = $memberDetailsData->email;
+            $this->Template->detailDateOfBirth = date("d.m.Y", $memberDetailsData->dateOfBirth);
+            $this->Template->detailGender = $memberDetailsData->gender;
+            $this->Template->detailPhone = $memberDetailsData->phone;
+            $this->Template->detailMobile = $memberDetailsData->mobile;
+            $this->Template->detailCourse = $memberDetailsData->study_course;
+            $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->department];
+            $this->Template->detailChipcardNr = $memberDetailsData->chipcard_nr;
+            $this->Template->detailContactPerson = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->contact_person];
+            $this->Template->detailHandicaps = $memberDetailsData->handicaps;
+            $this->Template->detailHandicapsOthers = $memberDetailsData->handicaps_others;
+            $this->Template->detailRehabDevices = $memberDetailsData->rehab_devices;
+            $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;
+            $this->Template->detailExtraTime = $memberDetailsData->extra_time;
+            $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_minutes_percent];
         }
 
         // Mitglied löschen

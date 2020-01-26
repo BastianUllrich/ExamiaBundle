@@ -5,7 +5,7 @@
 <h2>Mitglieder verwalten</h2>
 </div>
 <?php
-if ($this->showConfirmationQuestion === false && $this->showDetails === false) {
+if ($this->showConfirmationQuestion === false && $this->showDetails === false && $this->showEditForm === false) {
     $i = 0;
     ?>
     <table class="all_records">
@@ -27,6 +27,7 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false) {
                 <td class="body col_3"><?= $memberData['usertype']; ?></td>
                 <td class="body col_4 col_last">
                     <a href="{{env::request}}?do=viewDetails&member=<?= $memberData['id']; ?>" title="Mitgliedsdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Mitgliedsdetails"></a>
+                    <a href="{{env::request}}?do=editDetails&member=<?= $memberData['id']; ?>" title="Mitglied bearbeiten"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Mitglied bearbeiten"></a>
                     <?php
                     // Verhindern, dass der User sich selbst deaktiviert
                     if ($memberData['id'] != $this->userID) {
@@ -149,6 +150,13 @@ elseif ($this->showDetails === true) {
     </table>
     <p>{{link::back}}</p>
     <?php
+}
+// Mitglied bearbeiten
+elseif ($this->showEditForm === true) {
+?>
+<p>echo "ok";</p>
+<p>{{link::back}}</p>
+<?php
 }
 $this->endblock();
 ?>

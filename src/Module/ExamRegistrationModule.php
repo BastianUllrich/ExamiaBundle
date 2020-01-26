@@ -136,8 +136,9 @@ class ExamRegistrationModule extends \Module
             $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
                             'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
 
-            // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend die Funktion submitSuccess() aufrufen
+            // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
             if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+                $this->sendMail();
                 $this->submitSuccess();
             }
         }
@@ -147,5 +148,16 @@ class ExamRegistrationModule extends \Module
     public function submitSuccess() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
+    }
+
+    // Mailversand
+    public function sendMail() {
+        $objMailUnsuscribe = new \Email();
+        $objMailUnsuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
+        $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
+        $objMailUnsuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
+        $objMailUnsuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
+        $objMailUnsuscribe->sendTo('bastiullrich@gmail.com');
+        unset($objMailUnsuscribe);
     }
 }

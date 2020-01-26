@@ -153,6 +153,7 @@ elseif ($this->showDetails === true) {
 }
 // Mitglied bearbeiten
 elseif ($this->showEditForm === true) {
+echo $this->memberData;
 ?>
 <form action="" id="<?= $this->formId; ?>" method="post">
         <div class="formbody">

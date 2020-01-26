@@ -182,6 +182,7 @@ class MemberAdministrationModule extends \Module
     }
 
     public function setMemberValuesEdit($memberData) {
+        $this->Template->memberData = $memberData->id;
         $this->Template->usr_department = $memberData->department;
         $this->Template->contact_person = $memberData->contact_person;
         $this->Template->extra_time_minutes_percent = $memberData->extra_time_minutes_percent;

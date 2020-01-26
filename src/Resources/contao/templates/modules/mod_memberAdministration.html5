@@ -223,7 +223,7 @@ elseif ($this->showEditForm === true) {
                         </label>
                         <label id="lbl_handicaps_7" for="opt_handicaps_7">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness">
-                            <span><?= $this->acute_illness; ?></span>
+                            <span>aktute Erkrankung</span>
                         </label>
                         <label id="lbl_handicaps_8" for="opt_handicaps_8">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different">

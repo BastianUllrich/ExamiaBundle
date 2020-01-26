@@ -154,7 +154,7 @@ elseif ($this->showDetails === true) {
 // Mitglied bearbeiten
 elseif ($this->showEditForm === true) {
 ?>
-<form action="" id="<?= $this->formId ?>" method="post">
+<form action="" id="<?= $this->formId; ?>" method="post">
         <div class="formbody">
             <input type="hidden" name="FORM_SUBMIT" value="editMember">
             <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
@@ -167,7 +167,7 @@ elseif ($this->showEditForm === true) {
                     <input type="text" name="firstname" id="firstname" class="text mandatory" value="<?= $this->firstname; ?>" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
-                    <label for="firstname" class="mandatory">
+                    <label for="lastname" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lastname_label; ?><span class="mandatory">*</span>
                     </label>
                     <input type="text" name="lastname" id="lastname" class="text mandatory" value="<?= $this->lastname; ?>" required="" maxlength="255" autocomplete="on">

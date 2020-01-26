@@ -179,6 +179,10 @@ class MemberAdministrationModule extends \Module
             $this->setLangValuesEdit();
             $this->setMemberValuesEdit($memberData);
         }
+
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editDetails') {
+            $this->Template->tmpMeldung = "Absenden registriert";
+        }
     }
 
     public function setMemberValuesEdit($memberData) {

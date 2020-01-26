@@ -180,6 +180,8 @@ class MemberAdministrationModule extends \Module
             $this->setMemberValuesEdit($memberData);
         }
 
+        $this->Template->tmpMeldung = \Contao\Input::post('FORM_SUBMIT');
+        
         if (\Contao\Input::post('FORM_SUBMIT') == 'editDetails') {
             $this->Template->tmpMeldung = "Absenden registriert";
         }

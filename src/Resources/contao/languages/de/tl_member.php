@@ -141,17 +141,5 @@ $GLOBALS['TL_LANG']['tl_member']['comments'] = array
                 'Bitte geben Sie weitere Anmerkungen ein'
         );
 
-$GLOBALS['TL_LANG']['tl_member']['personalData'] = "Personendaten";
-$GLOBALS['TL_LANG']['tl_member']['firstname'] = 'Vorname';
-$GLOBALS['TL_LANG']['tl_member']['lastname'] = 'Nachname';
-$GLOBALS['TL_LANG']['tl_member']['dateOfBirth'] = 'Geburtsdatum';
-$GLOBALS['TL_LANG']['tl_member']['gender'] = "Geschlecht";
-$GLOBALS['TL_LANG']['tl_member']['male'] = 'männlich';
-$GLOBALS['TL_LANG']['tl_member']['female'] = 'weiblich';
+
 $GLOBALS['TL_LANG']['tl_member']['divers'] = 'divers';
-$GLOBALS['TL_LANG']['tl_member']['contactData'] = "Kontaktdaten";
-$GLOBALS['TL_LANG']['tl_member']['phone'] = "Telefonnummer";
-$GLOBALS['TL_LANG']['tl_member']['mobile'] = "Handynummer";
-$GLOBALS['TL_LANG']['tl_member']['email'] = "E-Mail-Adresse";
-$GLOBALS['TL_LANG']['tl_member']['loginData'] = "Zugangsdaten";
-$GLOBALS['TL_LANG']['tl_member']['username'] = "Benutzername";

@@ -319,8 +319,8 @@ elseif ($this->showEditForm === true) {
                 <legend><?= $this->exam_legend ?></legend>
                 <div class="widget widget-checkbox">
                     <fieldset id="rehab_devices" class="checkbox_container">
-                        <legend><?= $this->handicaps_label; ?></legend>
-                        <input type="hidden" name="handicaps" value="">
+                        <legend><?= $this->rehab_devices_label; ?></legend>
+                        <input type="hidden" name="rehab_devices" value="">
 
                         <label id="pc" for="pc">
                             <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc">
@@ -406,7 +406,8 @@ elseif ($this->showEditForm === true) {
         <button type="submit" class="submit">Änderungen speichern</button>
     </div>
 </form>
-<p class="right">{{link::back}}</p>
+<p>&nbsp;</p>
+<p>{{link::back}}</p>
 <?php
 }
 $this->endblock();

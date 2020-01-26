@@ -126,10 +126,10 @@ class ExamUnsubscribeModule extends \Module
                     $objMailUnsuscribe = new \Email();
 
                     // wir setzen den Namen des Absenders
-                    $objMailUnsuscribe->fromName = 'BliZ Intranet';
+                    $objMailUnsuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
 
                     // wir setzen die E-Mail Adresse des Administrators
-                    $objMailUnsuscribe->from = 'bastian.ullrich@gmail.com';
+                    $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
 
                     // wir setzen einen Betreff
                     $objMailUnsuscribe->subject = 'Abmeldung von Klausur im BliZ';

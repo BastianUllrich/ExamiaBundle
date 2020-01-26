@@ -176,7 +176,7 @@ class MemberAdministrationModule extends \Module
             $this->Template->showEditForm = true;
             $member = $_GET["member"];
             $memberData = MemberModel::findBy('id', $member);
-            //$this->setLangValuesEdit();
+            $this->setLangValuesEdit();
             $this->setMemberValuesEdit($memberData);
         }
     }
@@ -192,7 +192,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->mandatory = $GLOBALS['TL_LANG']['miscellaneous']['mandatory'];
 
         // Legends & Labels setzen
-        $this->Template->personalData_legend = $GLOBALS['TL_LANG']['miscellaneous']['personalData'];
+        $this->Template->personalData_legend = $GLOBALS['TL_LANG']['tl_member']['personalData'];
         $this->Template->firstname_label = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->lastname_label = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->dateOfBirth_label = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][0];

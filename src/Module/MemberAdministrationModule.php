@@ -175,9 +175,9 @@ class MemberAdministrationModule extends \Module
         if ($_GET["do"] == "editDetails") {
             $this->Template->showEditForm = true;
             $member = $_GET["member"];
-            //$memberData = MemberModel::findBy('id', $member);
+            $memberData = MemberModel::findBy('id', $member);
             //$this->setLangValuesEdit();
-            //$this->setMemberValuesEdit($memberData);
+            $this->setMemberValuesEdit($memberData);
         }
     }
 
@@ -200,9 +200,9 @@ class MemberAdministrationModule extends \Module
         $this->Template->handicaps_others_label = $GLOBALS['TL_LANG']['tl_member']['handicaps_others'][0];
 
         $this->Template->contactData_legend = $GLOBALS['TL_LANG']['tl_member']['contactData'];
-        $this->Template->phone_label =  $GLOBALS['TL_LANG']['tl_member']['phone'][0];
-        $this->Template->mobile_label =  $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
-        $this->Template->email_label =  $GLOBALS['TL_LANG']['tl_member']['email'][0];
+        $this->Template->phone_label = $GLOBALS['TL_LANG']['tl_member']['phone'][0];
+        $this->Template->mobile_label = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
+        $this->Template->email_label = $GLOBALS['TL_LANG']['tl_member']['email'][0];
 
         $this->Template->loginData_legend = $GLOBALS['TL_LANG']['tl_member']['loginData'];
         $this->Template->username_label = $GLOBALS['TL_LANG']['tl_member']['username'][0];

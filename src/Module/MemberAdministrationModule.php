@@ -175,10 +175,9 @@ class MemberAdministrationModule extends \Module
         if ($_GET["do"] == "editDetails") {
             $this->Template->showEditForm = true;
             $member = $_GET["member"];
-            $memberData = MemberModel::findBy('id', $member);
-            $this->setLangValuesEdit();
-            $this->setMemberValuesEdit($memberData);
-
+            //$memberData = MemberModel::findBy('id', $member);
+            //$this->setLangValuesEdit();
+            //$this->setMemberValuesEdit($memberData);
         }
     }
 

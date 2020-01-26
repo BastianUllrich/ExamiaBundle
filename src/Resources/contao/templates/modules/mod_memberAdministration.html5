@@ -185,7 +185,7 @@ elseif ($this->showEditForm === true) {
                     <select name="gender" id="gender" class="select">
                         <option value="-" <?php if (empty($this->gender)) echo "selected"; ?>>-</option>
                         <option value="male" <?php if ($this->gender == "male") echo "selected"; ?>><?= $this->male; ?></option>
-                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>><?= $this->fermale; ?></option>
+                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>><?= $this->female; ?></option>
                         <option value="divers" <?php if ($this->gender == "divers") echo "selected"; ?>><?= $this->divers; ?></option>
                     </select>
                 </div>

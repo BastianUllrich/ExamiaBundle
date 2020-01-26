@@ -182,10 +182,31 @@ class MemberAdministrationModule extends \Module
     }
 
     public function setMemberValuesEdit($memberData) {
-        $this->Template->memberData = $memberData->id;
+        $this->Template->firstname = $memberData->firstname;
+        $this->Template->lastname = $memberData->lastname;
+        $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);
+        $this->Template->gender = $memberData->gender;
+
+        // Behinderungen
+        $this->Template->handicaps = $memberData->handicaps;
+
+        $this->Template->handicaps_others = $memberData->handicaps_others;
+        $this->Template->phone = $memberData->phone;
+        $this->Template->mobile = $memberData->mobile;
+        $this->Template->email = $memberData->email;
+        $this->Template->username = $memberData->username;
+        $this->Template->study_course = $memberData->study_course;
+        $this->Template->chipcard_nr = $memberData->chipcard_nr;
         $this->Template->usr_department = $memberData->department;
         $this->Template->contact_person = $memberData->contact_person;
+
+        // Hilfsmittel
+        $this->Template->rehab_devices = $memberData->rehab_devices;
+
+        $this->Template->rehab_devices_others = $memberData->rehab_devices_others;
+        $this->Template->extra_time = $memberData->extra_time;
         $this->Template->extra_time_minutes_percent = $memberData->extra_time_minutes_percent;
+        $this->Template->comments = $memberData->comments;
     }
 
     public function setLangValuesEdit() {

@@ -159,7 +159,7 @@ elseif ($this->showEditForm === true) {
             <input type="hidden" name="FORM_SUBMIT" value="editMember">
             <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
             <fieldset>
-                <legend><?= $this->personalData_legend ?></legend>
+                <legend><?= $this->personalData_legend; ?></legend>
                 <div class="widget widget-text mandatory">
                     <label for="firstname" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?></span><?= $this->firstname_label; ?><span class="mandatory">*</span>
@@ -240,7 +240,7 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->contactData_legend ?></legend>
+                <legend><?= $this->contactData_legend; ?></legend>
                 <div class="widget widget-text">
                     <label for="phone">
                         <?= $this->phone_label; ?>
@@ -261,7 +261,7 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->loginData_legend ?></legend>
+                <legend><?= $this->loginData_legend; ?></legend>
                 <div class="widget widget-text">
                     <label for="username" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?> </span><?= $this->username_label; ?><span class="mandatory">*</span>
@@ -316,7 +316,7 @@ elseif ($this->showEditForm === true) {
             </fieldset>
 
             <fieldset>
-                <legend><?= $this->exam_legend ?></legend>
+                <legend><?= $this->exam_legend; ?></legend>
                 <div class="widget widget-checkbox">
                     <fieldset id="rehab_devices" class="checkbox_container">
                         <legend><?= $this->rehab_devices_label; ?></legend>

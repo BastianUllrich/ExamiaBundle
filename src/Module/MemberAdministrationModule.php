@@ -48,6 +48,7 @@ class MemberAdministrationModule extends \Module
 
         $this->Template->showConfirmationQuestion = false;
         $this->Template->showDetails = false;
+        $this->Template->showEditForm = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -169,6 +170,10 @@ class MemberAdministrationModule extends \Module
                     \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                 }
             }
+        }
+
+        if ($_GET["do"] == "editDetails") {
+            $this->Template->showEditForm = true;
         }
     }
 }

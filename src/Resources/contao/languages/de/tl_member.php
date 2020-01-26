@@ -107,6 +107,7 @@ $GLOBALS['TL_LANG']['tl_member']['obscuration'] = 'Verdunkelung';
 $GLOBALS['TL_LANG']['tl_member']['writing assistance'] = 'Schreibassistenz';
 $GLOBALS['TL_LANG']['tl_member']['high table'] = 'Hochtisch';
 $GLOBALS['TL_LANG']['tl_member']['near door'] = 'Arbeitsplatz nahe Tür';
+$GLOBALS['TL_LANG']['tl_member']['own room'] = 'Eigener Raum';
 $GLOBALS['TL_LANG']['tl_member']['different'] = 'Sonstige';
 
 $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'] = array

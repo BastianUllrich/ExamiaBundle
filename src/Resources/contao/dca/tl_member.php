@@ -95,6 +95,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['handicaps'] = array
 						'mental disorder',
 						'chronic disorder',
 						'acute illness',
+						'own room',
 						'different'
 					),
 			'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],

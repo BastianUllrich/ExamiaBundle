@@ -178,7 +178,7 @@ elseif ($this->showEditForm === true) {
                     </label>
                     <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="<?= $this->dateOfBirth; ?>" required="" maxlength="10" autocomplete="on">
                 </div>
-                <div class="widget widget-text">
+                <div class="widget widget-select">
                     <label for="gender">
                         <?= $this->gender_label; ?>
                     </label>

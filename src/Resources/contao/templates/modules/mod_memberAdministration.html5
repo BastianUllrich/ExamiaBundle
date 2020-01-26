@@ -406,7 +406,6 @@ elseif ($this->showEditForm === true) {
         <button type="submit" class="submit">Änderungen speichern</button>
     </div>
 </form>
-<p>&nbsp;</p>
 <p>{{link::back}}</p>
 <?php
 }

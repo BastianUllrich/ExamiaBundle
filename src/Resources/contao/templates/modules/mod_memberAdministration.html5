@@ -176,7 +176,7 @@ elseif ($this->showEditForm === true) {
                     <label for="dateOfBirth">
                         Geburtstag
                     </label>
-                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="" required="" maxlength="10" autocomplete="on">
+                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="" maxlength="10" autocomplete="on">
                 </div>
                 <div class="widget widget-select">
                     <label for="gender">

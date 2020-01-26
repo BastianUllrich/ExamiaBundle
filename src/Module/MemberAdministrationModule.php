@@ -193,20 +193,20 @@ class MemberAdministrationModule extends \Module
 
         // Legends & Labels setzen
         $this->Template->personalData_legend = $GLOBALS['TL_LANG']['miscellaneous']['personalData'];
-        $this->Template->firstname_label = $GLOBALS['TL_LANG']['tl_member']['firstname'];
-        $this->Template->lastname_label = $GLOBALS['TL_LANG']['tl_member']['lastname'];
-        $this->Template->dateOfBirth_label = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'];
-        $this->Template->gender_label = $GLOBALS['TL_LANG']['tl_member']['gender'];
+        $this->Template->firstname_label = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
+        $this->Template->lastname_label = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
+        $this->Template->dateOfBirth_label = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][0];
+        $this->Template->gender_label = $GLOBALS['TL_LANG']['tl_member']['gender'][0];
         $this->Template->handicaps_label = $GLOBALS['TL_LANG']['tl_member']['handicaps'][0];
         $this->Template->handicaps_others_label = $GLOBALS['TL_LANG']['tl_member']['handicaps_others'][0];
 
         $this->Template->contactData_legend = $GLOBALS['TL_LANG']['tl_member']['contactData'];
-        $this->Template->phone_label =  $GLOBALS['TL_LANG']['tl_member']['phone'];
-        $this->Template->mobile_label =  $GLOBALS['TL_LANG']['tl_member']['mobile'];
-        $this->Template->email_label =  $GLOBALS['TL_LANG']['tl_member']['email'];
+        $this->Template->phone_label =  $GLOBALS['TL_LANG']['tl_member']['phone'][0];
+        $this->Template->mobile_label =  $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
+        $this->Template->email_label =  $GLOBALS['TL_LANG']['tl_member']['email'][0];
 
         $this->Template->loginData_legend = $GLOBALS['TL_LANG']['tl_member']['loginData'];
-        $this->Template->username_label = $GLOBALS['TL_LANG']['tl_member']['username'];
+        $this->Template->username_label = $GLOBALS['TL_LANG']['tl_member']['username'][0];
 
         $this->Template->study_legend = $GLOBALS['TL_LANG']['tl_member']['studyDetails'];
         $this->Template->study_course_label = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];

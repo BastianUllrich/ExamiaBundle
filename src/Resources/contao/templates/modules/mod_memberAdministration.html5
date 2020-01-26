@@ -270,7 +270,7 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->study_legend ?></legend>
+                <legend><?= $this->study_legend; ?></legend>
                 <div class="widget widget-text">
                     <label for="study_course" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?> </span><?= $this->study_course_label; ?><span class="mandatory">*</span>

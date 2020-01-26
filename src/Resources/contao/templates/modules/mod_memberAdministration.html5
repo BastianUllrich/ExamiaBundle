@@ -160,68 +160,67 @@ echo $this->usr_department;
             <input type="hidden" name="FORM_SUBMIT" value="editMember">
             <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
             <fieldset>
-                <legend><?= $this->personalData_legend; ?></legend>
+                <legend>Personendaten</legend>
                 <div class="widget widget-text mandatory">
                     <label for="firstname" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->firstname_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>Vorname<span class="mandatory">*</span>
                     </label>
                     <input type="text" name="firstname" id="firstname" class="text mandatory" value="<?= $this->firstname; ?>" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="lastname" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lastname_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>Nachname<span class="mandatory">*</span>
                     </label>
                     <input type="text" name="lastname" id="lastname" class="text mandatory" value="<?= $this->lastname; ?>" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="dateOfBirth">
-                        <?= $this->dateOfBirth_label; ?>
+                        Geburtstag
                     </label>
-                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="<?= $this->dateOfBirth; ?>" required="" maxlength="10" autocomplete="on">
+                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="" required="" maxlength="10" autocomplete="on">
                 </div>
                 <div class="widget widget-select">
                     <label for="gender">
-                        <?= $this->gender_label; ?>
+                        Geschlecht
                     </label>
                     <select name="gender" id="gender" class="select">
-                        <option value="-" <?php if (empty($this->gender)) echo "selected"; ?>>-</option>
-                        <option value="male" <?php if ($this->gender == "male") echo "selected"; ?>><?= $this->male; ?></option>
-                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>><?= $this->female; ?></option>
-                        <option value="divers" <?php if ($this->gender == "divers") echo "selected"; ?>><?= $this->divers; ?></option>
+                        <option value="-" <?php if ($this->gender =="") echo "selected"; ?>> - </option>
+                        <option value="male" <?php if ($this->gender == "male") echo "selected"; ?>>männlich</option>
+                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>>weiblich</option>
+                        <option value="divers" <?php if ($this->gender == "divers") echo "selected"; ?>>divers</option>
                     </select>
                 </div>
                 <div class="widget widget-checkbox">
                     <fieldset id="handicaps" class="checkbox_container">
-                        <legend><?= $this->handicaps_label; ?></legend>
-                        <input type="hidden" name="handicaps" value="">
+                        <legend>Behinderungen</legend>
 
                         <label id="lbl_handicaps_0" for="opt_handicaps_0">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_0" class="checkbox" value="blind">
-                            <span><?= $this->blind; ?></span>
+                            <span>blind</span>
                         </label>
                         <label id="lbl_handicaps_1" for="opt_handicaps_1">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_1" class="checkbox" value="visually impaired">
-                            <span><?= $this->visually_impaired; ?></span>
+                            <span>sehbehindert</span>
                         </label>
                         <label id="lbl_handicaps_2" for="opt_handicaps_2">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_2" class="checkbox" value="deaf">
-                            <span><?= $this->deaf; ?></span>
+                            <span>taub</span>
                         </label>
                         <label id="lbl_handicaps_3" for="opt_handicaps_3">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_3" class="checkbox" value="motorically restricted">
-                            <span><?= $this->motorically_restricted; ?></span>
+                            <span>motorisch eingeschränkt</span>
                         </label>
                         <label id="lbl_handicaps_4" for="opt_handicaps_4">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_4" class="checkbox" value="autism">
-                            <span><?= $this->autism; ?></span>
+                            <span>Autismus</span>
                         </label>
                         <label id="lbl_handicaps_5" for="opt_handicaps_5">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_5" class="checkbox" value="mental disorder">
-                            <span><?= $this->mental_disorder; ?></span>
+                            <span>psychische Erkrankung</span>
                         </label>
                         <label id="lbl_handicaps_6" for="opt_handicaps_6">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_6" class="checkbox" value="chronic disorder">
-                            <span><?= $this->chronic_disorder; ?></span>
+                            <span>chronische Erkrankung</span>
                         </label>
                         <label id="lbl_handicaps_7" for="opt_handicaps_7">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness">
@@ -229,175 +228,173 @@ echo $this->usr_department;
                         </label>
                         <label id="lbl_handicaps_8" for="opt_handicaps_8">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different">
-                            <span><?= $this->different; ?></span>
+                            <span>Sonstige</span>
                         </label>
                     </fieldset>
                 </div>
                 <div class="widget widget-text">
                     <label for="handicaps_others">
-                        <?= $this->handicaps_others_label; ?>
+                        Sonstge Behinderung
                     </label>
                     <input type="text" name="handicaps_others" id="handicaps_others" class="text" value="<?= $this->handicaps_others; ?>" maxlength="64" autocomplete="on">
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->contactData_legend; ?></legend>
+                <legend>Kontaktdaten</legend>
                 <div class="widget widget-text">
                     <label for="phone">
-                        <?= $this->phone_label; ?>
+                        Telefonnummer
                     </label>
                     <input type="text" name="phone" id="phone" class="text" value="<?= $this->phone; ?>" maxlength="64" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
-                    <label for="mobile">
-                        <?= $this->mobile_label; ?>
+                    <label for="mobile">Handynummer<?= $this->mobile_label; ?>
                     </label>
                     <input type="text" name="mobile" id="mobile" class="text" value="<?= $this->mobile; ?>" maxlength="64" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="email" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span><?= $this->email_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>E-Mail-Adresse<span class="mandatory">*</span>
                     </label>
                     <input type="email" name="email" id="email" class="text mandatory" value="<?= $this->email; ?>" required="" maxlength="255" autocomplete="on">
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->loginData_legend; ?></legend>
+                <legend>Zugangsdaten</legend>
                 <div class="widget widget-text">
                     <label for="username" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span><?= $this->username_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>Benutzername<span class="mandatory">*</span>
                     </label>
                     <input type="text" name="username" id="username" class="text mandatory" value="<?= $this->username; ?>" required="" maxlength="64" autocomplete="on">
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->study_legend; ?></legend>
+                <legend>Angaben zum Studium</legend>
                 <div class="widget widget-text">
                     <label for="study_course" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span><?= $this->study_course_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>Studiengang<span class="mandatory">*</span>
                     </label>
                     <input type="text" name="study_course" id="study_course" class="text mandatory" value="<?= $this->study_course; ?>" required="" maxlength="30" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="chipcard_nr">
-                        <?= $this->chipcard_nr_label; ?>
+                        Chipkarten-Nr
                     </label>
                     <input type="text" name="chipcard_nr" id="chipcard_nr" class="text" value="<?= $this->chipcard_nr; ?>" maxlength="20" autocomplete="on">
                 </div>
                 <div class="widget widget-select select mandatory">
                     <label for="department" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->department_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>Fachbereich<span class="mandatory">*</span>
                     </label>
                     <select name="department" id="department" class="select mandatory" required="">
-                        <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->department1; ?></option>
-                        <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->department2; ?></option>
-                        <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>><?= $this->department3; ?></option>
-                        <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>><?= $this->department4; ?></option>
-                        <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>><?= $this->department5; ?></option>
-                        <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>><?= $this->department6; ?></option>
-                        <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>><?= $this->department7; ?></option>
-                        <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>><?= $this->department8; ?></option>
-                        <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>><?= $this->department9; ?></option>
-                        <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>><?= $this->department10; ?></option>
-                        <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>><?= $this->department11; ?></option>
-                        <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>><?= $this->department12; ?></option>
-                        <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>><?= $this->department13; ?></option>
-                        <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>><?= $this->department14; ?></option>
+                        <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>>1</option>
+                        <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>>2</option>
+                        <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>>3</option>
+                        <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>>4</option>
+                        <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>>5</option>
+                        <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>>6</option>
+                        <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>>7</option>
+                        <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>>8</option>
+                        <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>>9</option>
+                        <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>>10</option>
+                        <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>>11</option>
+                        <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>>12</option>
+                        <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>>13</option>
+                        <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>>14</option>
                     </select>
                 </div>
                 <div class="widget widget-select select mandatory">
                     <label for="contact_person" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->contact_person_label; ?><span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>Kontaktperson<span class="mandatory">*</span>
                     </label>
                     <select name="contact_person" id="contact_person" class="select mandatory" required="">
-                        <option value="contact1" <?php if ($this->contact_person == "contact1") echo "selected"; ?>><?= $this->contact1; ?></option>
-                        <option value="contact2" <?php if ($this->contact_person == "contact2") echo "selected"; ?>><?= $this->contact2; ?></option>
+                        <option value="contact1" <?php if ($this->contact_person == "contact1") echo "selected"; ?>>Zeki Öztürk</option>
+                        <option value="contact2" <?php if ($this->contact_person == "contact2") echo "selected"; ?>>David Smida</option>
                     </select>
                 </div>
             </fieldset>
 
             <fieldset>
-                <legend><?= $this->exam_legend; ?></legend>
+                <legend>Klausurinfos</legend>
                 <div class="widget widget-checkbox">
                     <fieldset id="rehab_devices" class="checkbox_container">
-                        <legend><?= $this->rehab_devices_label; ?></legend>
-                        <input type="hidden" name="rehab_devices" value="">
+                        <legend>REHA-Hilsmittel</legend>
 
                         <label id="pc" for="pc">
                             <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc">
-                            <span><?= $this->pc; ?></span>
+                            <span>PC</span>
                         </label>
                         <label id="blind_workspace" for="blind_workspace">
                             <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind_workspace">
-                            <span><?= $this->blind_workspace; ?></span>
+                            <span>Blindenarbeitsplatz</span>
                         </label>
                         <label id="zoomtext" for="zoomtext">
                             <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="zoomtext">
-                            <span><?= $this->zoomtext; ?></span>
+                            <span>ZoomText</span>
                         </label>
                         <label id="screen_magnifier" for="screen_magnifier">
                             <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen_magnifier">
-                            <span><?= $this->screen_magnifier; ?></span>
+                            <span>Bildschirmlupe</span>
                         </label>
                         <label id="screen_reader" for="screen_reader">
                             <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen_reader">
-                            <span><?= $this->screen_reader; ?></span>
+                            <span>Bildschirmlesegerät</span>
                         </label>
                         <label id="a3_print" for="a3_print">
                             <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3_print">
-                            <span><?= $this->a3_print; ?></span>
+                            <span>A3 Druck</span>
                         </label>
                         <label id="obscuration" for="obscuration">
                             <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration">
-                            <span><?= $this->obscuration; ?></span>
+                            <span>Verdunkelung</span>
                         </label>
                         <label id="writing_assistance" for="writing_assistance">
                             <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing_assistance">
-                            <span><?= $this->writing_assistance; ?></span>
+                            <span>Schreibassistenz</span>
                         </label>
                         <label id="high_table" for="high_table">
                             <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high_table">
-                            <span><?= $this->high_table; ?></span>
+                            <span>Hochtisch</span>
                         </label>
                         <label id="near_door" for="near_door">
                             <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near_door">
-                            <span><?= $this->near_door; ?></span>
+                            <span>Platz nahe Tür</span>
                         </label>
                         <label id="own_room" for="own_room">
                             <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own_room">
-                            <span><?= $this->own_room; ?></span>
+                            <span>Eigener Raum</span>
                         </label>
                         <label id="different" for="different">
                             <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different">
-                            <span><?= $this->different; ?></span>
+                            <span>Sonstiges</span>
                         </label>
                     </fieldset>
                 </div>
                 <div class="widget widget-text">
                     <label for="rehab_devices_others">
-                        <?= $this->rehab_devices_others_label; ?>
+                        Sonstige Hilfsmittel
                     </label>
                     <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehab_devices_others; ?>" maxlength="30" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="extra_time">
-                        <?= $this->extra_time_label; ?>
+                        Zeitverlängerung
                     </label>
                     <input type="text" name="extra_time" id="extra_time" class="text" value="<?= $this->extra_time; ?>" maxlength="3" autocomplete="on">
                 </div>
                 <div class="widget widget-select">
                     <label for="extra_time_minutes_percent">
-                        <?= $this->extra_time_minutes_percent_label; ?>
+                        Einheit Zeitverlängerung
                     </label>
                     <select name="extra_time_minutes_percent" id="extra_time_minutes_percent" class="select mandatory" required="">
-                        <option value="-" <?php if ($this->extra_time_minutes_percent == "") echo "selected"; ?>>-</option>
-                        <option value="minutes" <?php if ($this->extra_time_minutes_percent == "minutes") echo "selected"; ?>><?= $this->minutes; ?></option>
-                        <option value="percent" <?php if ($this->extra_time_minutes_percent == "percent") echo "selected"; ?>><?= $this->percent; ?></option>
+                        <option value="-" <?php if ($this->extra_time_minutes_percent == "") echo "selected"; ?>> - </option>
+                        <option value="minutes" <?php if ($this->extra_time_minutes_percent == "minutes") echo "selected"; ?>>Minuten</option>
+                        <option value="percent" <?php if ($this->extra_time_minutes_percent == "percent") echo "selected"; ?>>Prozent</option>
                     </select>
                 </div>
                 <div class="widget widget-textarea">
                     <label for="comments" class="">
-                        <?= $this->comments_label; ?>
+                        Kommentare
                     </label>
                     <textarea name="comments" id="comments" class="textarea" rows="12" cols="80" maxlength="80"><?= $this->comments; ?></textarea>
                 </div>

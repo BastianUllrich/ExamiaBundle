@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied
 
 $GLOBALS['TL_LANG']['miscellaneous']['member'] = "Mitglied";
 
+$GLOBALS['TL_LANG']['miscellaneous']['editMember'] = "Mitgliedsdetails bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";
 $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'] = "Die Änderungen wurden gespeichert";
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'] = "Zurück zur Mitgliederverwaltung";

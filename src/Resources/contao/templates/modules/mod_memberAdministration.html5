@@ -173,6 +173,7 @@ elseif ($this->showEditForm === true) {
     }
     else {
         ?>
+        <p><strong><?= $this->editMember; ?></strong></p>
         <form action="" id="<?= $this->formId; ?>" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="editMember">

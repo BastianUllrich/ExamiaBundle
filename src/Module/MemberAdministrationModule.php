@@ -203,7 +203,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->contact_person = $memberData->contact_person;
 
         // Hilfsmittel
-        $this->Template->rehab_devices = $memberData->rehab_devices;
+        $this->Template->rehab_devices = unserialize($memberData->rehab_devices);
 
         $this->Template->rehab_devices_others = $memberData->rehab_devices_others;
         $this->Template->extra_time = $memberData->extra_time;

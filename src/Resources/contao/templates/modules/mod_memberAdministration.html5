@@ -388,51 +388,123 @@ elseif ($this->showEditForm === true) {
                     <fieldset id="rehab_devices" class="checkbox_container">
                         <legend><?= $this->langRehabDevices; ?></legend>
                         <label id="lbl_pc" for="pc">
-                            <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc">
+                            <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "pc") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langPC; ?></span>
                         </label>
                         <label id="lbl_blind_workspace" for="blind_workspace">
-                            <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind_workspace">
+                            <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind workspace"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "blind workspace") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langBlindWorkspace; ?></span>
                         </label>
                         <label id="lbl_zoomtext" for="zoomtext">
-                            <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="zoomtext">
+                            <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="Zoomtext"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "Zoomtext") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langZoomtext; ?></span>
                         </label>
                         <label id="lbl_screen_magnifier" for="screen_magnifier">
-                            <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen_magnifier">
+                            <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen magnifier"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "screen magnifier") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langScreenMagnifier; ?></span>
                         </label>
                         <label id="lbl_screen_reader" for="screen_reader">
-                            <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen_reader">
+                            <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen reader"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "screen reader") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langScreenReader; ?></span>
                         </label>
                         <label id="lbl_a3_print" for="a3_print">
-                            <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3_print">
+                            <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3 print"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "a3 print") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langA3Print; ?></span>
                         </label>
                         <label id="lbl_obscuration" for="obscuration">
-                            <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration">
+                            <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "obscuration") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langObscuration; ?></span>
                         </label>
                         <label id="lbl_writing_assistance" for="writing_assistance">
-                            <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing_assistance">
+                            <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing assistance"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "writing assistance") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langWritingAssistance; ?></span>
                         </label>
                         <label id="lbl_high_table" for="high_table">
-                            <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high_table">
+                            <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high table"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "high table") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langHighTable; ?></span>
                         </label>
                         <label id="lbl_near_door" for="near_door">
-                            <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near_door">
+                            <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near door"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "near door") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langNearDoor; ?></span>
                         </label>
                         <label id="lbl_own_room" for="own_room">
-                            <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own_room">
+                            <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own room"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "own room") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langOwnRoom; ?></span>
                         </label>
                         <label id="lbl_different" for="different">
-                            <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different">
+                            <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                if ($this->rehab_devices[$i] == "different") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langRDDifferent; ?></span>
                         </label>
                     </fieldset>

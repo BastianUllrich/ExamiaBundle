@@ -202,7 +202,7 @@ class MemberAdministrationModule extends \Module
             // Die jeweilige Bezeichnung steht an den Stellen 5, 8, 11, ...
             for ($i = 0; $i < $handicapsArraySize; $i++) {
                 // Inhalt lesbar trennen
-                $handicaps[$i] = substr(explode("\"\"", $handicapsArray[5+$i]), 1, -3);
+                $handicaps[$i] = explode("\"\"", $handicapsArray[5+$i]);
             }
             $this->Template->handicaps = $handicaps;
         }

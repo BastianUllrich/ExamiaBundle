@@ -124,7 +124,13 @@ elseif ($this->showDetails === true) {
             </tr>
             <tr class="row_12 even">
                 <td class="label">Behinderungen</td>
-                <td class="value"><?= $this->detailHandicaps; ?></td>
+                <td class="value">
+                    <?php
+                    for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
+                        echo ($this->detailHandicaps[$i]."; ");
+                    }
+                    ?>
+                </td>
             </tr>
             <tr class="row_13 odd">
                 <td class="label">Sonstige Behinderungen</td>
@@ -132,7 +138,13 @@ elseif ($this->showDetails === true) {
             </tr>
             <tr class="row_14 even">
                 <td class="label">Benötigte Hilfsmittel</td>
-                <td class="value"><?= $this->detailRehabDevices; ?></td>
+                <td class="value">
+                    <?php
+                    for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
+                        echo ($this->detailRehabDevices[$i]."; ");
+                    }
+                    ?>
+                </td>
             </tr>
             <tr class="row_15 odd">
                 <td class="label">Sonstige benötigte Hilfsmittel</td>

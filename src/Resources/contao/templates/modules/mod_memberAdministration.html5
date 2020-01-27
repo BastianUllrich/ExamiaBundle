@@ -203,6 +203,7 @@ elseif ($this->showEditForm === true) {
                             for ($i = 0; $i < sizeof($this->handicaps); $i++) {
                                 if ($this->handicaps[$i] == "blind") echo "checked";
                             }
+                            ?>
                             >
                             <span><?= $this->langBlind; ?></span>
                         </label>

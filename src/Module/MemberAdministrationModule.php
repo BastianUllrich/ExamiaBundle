@@ -315,13 +315,13 @@ class MemberAdministrationModule extends \Module
             $dateOfBirth = \Input::post('dateOfBirth');
             $dateOfBirth = strtotime($dateOfBirth);
             $gender = \Input::post('gender');
-            $handicaps = serialize(\Input::post('handicaps[]'));
+            $handicaps = serialize(\Input::post('handicaps'));
             $handicaps_others = \Input::post('handicaps_others');
             $study_course = \Input::post('study_course');
             $chipcard_nr = \Input::post('chipcard_nr');
             $department = \Input::post('department');
             $contact_person = \Input::post('contact_person');
-            $rehab_devices = serialize(\Input::post('rehab_devices[]'));
+            $rehab_devices = serialize(\Input::post('rehab_devices'));
             $rehab_devices_others = \Input::post('rehab_devices_others');
             $extra_time = \Input::post('extra_time');
             $extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');

@@ -204,7 +204,7 @@ class MemberAdministrationModule extends \Module
                 // Inhalt lesbar trennen
                 $handicaps[$i] = explode("\"\"", $handicapsArray[5+$i]);
             }
-            $this->Template->handicaps = $handicaps;
+            $this->Template->handicaps = $handicaps[0][3];
         }
 
         $this->Template->handicaps_others = $memberData->handicaps_others;

@@ -107,9 +107,9 @@ class MemberAdministrationModule extends \Module
             $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->department];
             $this->Template->detailChipcardNr = $memberDetailsData->chipcard_nr;
             $this->Template->detailContactPerson = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->contact_person];
-            $this->Template->detailHandicaps = $memberDetailsData->handicaps;
+            $this->Template->detailHandicaps = unserialize($memberDetailsData->handicaps);
             $this->Template->detailHandicapsOthers = $memberDetailsData->handicaps_others;
-            $this->Template->detailRehabDevices = $memberDetailsData->rehab_devices;
+            $this->Template->detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
             $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;
             $this->Template->detailExtraTime = $memberDetailsData->extra_time;
             $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_minutes_percent];

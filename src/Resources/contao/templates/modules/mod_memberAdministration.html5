@@ -580,7 +580,9 @@ elseif ($this->showEditForm === true) {
 
 <?php
 if ($this->changesSaved === true) {
-    <p><em>$this->changesSavedMessage</em></p>
+?>
+    <p><em><?= $this->changesSavedMessage; ?></em></p>
+<?php
 }
 ?>
     <p class="right">{{link::back}}</p>

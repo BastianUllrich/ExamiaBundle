@@ -178,66 +178,66 @@ elseif ($this->showEditForm === true) {
                 </div>
                 <div class="widget widget-text">
                     <label for="dateOfBirth">
-                        Geburtstag
+                        <?= $this->langDateOfBirth; ?>
                     </label>
                     <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="" maxlength="10" autocomplete="on">
                 </div>
                 <div class="widget widget-select">
                     <label for="gender">
-                        Geschlecht
+                        <?= $this->langGender; ?>
                     </label>
                     <select name="gender" id="gender" class="select">
                         <option value="-" <?php if ($this->gender =="") echo "selected"; ?>> - </option>
-                        <option value="male" <?php if ($this->gender == "male") echo "selected"; ?>>männlich</option>
-                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>>weiblich</option>
-                        <option value="divers" <?php if ($this->gender == "divers") echo "selected"; ?>>divers</option>
+                        <option value="male" <?php if ($this->gender == "male") echo "selected"; ?>><?= $this->langGenderMale; ?></option>
+                        <option value="female" <?php if ($this->gender == "female") echo "selected"; ?>><?= $this->langGenderFemale; ?></option>
+                        <option value="divers" <?php if ($this->gender == "divers") echo "selected"; ?>><?= $this->langGenderDivers; ?></option>
                     </select>
                 </div>
                 <div class="widget widget-checkbox">
                     <fieldset id="handicaps" class="checkbox_container">
-                        <legend>Behinderungen</legend>
+                        <legend><?= $this->langHandicaps; ?></legend>
 
                         <label id="lbl_handicaps_0" for="opt_handicaps_0">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_0" class="checkbox" value="blind">
-                            <span>blind</span>
+                            <span><?= $this->langBlind; ?></span>
                         </label>
                         <label id="lbl_handicaps_1" for="opt_handicaps_1">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_1" class="checkbox" value="visually impaired">
-                            <span>sehbehindert</span>
+                            <span><?= $this->langVisuallyImpaired; ?></span>
                         </label>
                         <label id="lbl_handicaps_2" for="opt_handicaps_2">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_2" class="checkbox" value="deaf">
-                            <span>taub</span>
+                            <span><?= $this->langDeaf; ?></span>
                         </label>
                         <label id="lbl_handicaps_3" for="opt_handicaps_3">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_3" class="checkbox" value="motorically restricted">
-                            <span>motorisch eingeschränkt</span>
+                            <span><?= $this->langMotoricallyRestricted; ?></span>
                         </label>
                         <label id="lbl_handicaps_4" for="opt_handicaps_4">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_4" class="checkbox" value="autism">
-                            <span>Autismus</span>
+                            <span><?= $this->langAutism; ?></span>
                         </label>
                         <label id="lbl_handicaps_5" for="opt_handicaps_5">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_5" class="checkbox" value="mental disorder">
-                            <span>psychische Erkrankung</span>
+                            <span><?= $this->langMentalDisorder; ?></span>
                         </label>
                         <label id="lbl_handicaps_6" for="opt_handicaps_6">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_6" class="checkbox" value="chronic disorder">
-                            <span>chronische Erkrankung</span>
+                            <span><?= $this->langChronicDisorder; ?></span>
                         </label>
                         <label id="lbl_handicaps_7" for="opt_handicaps_7">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness">
-                            <span>aktute Erkrankung</span>
+                            <span><?= $this->langAcuteIllness; ?></span>
                         </label>
                         <label id="lbl_handicaps_8" for="opt_handicaps_8">
                             <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different">
-                            <span>Sonstige</span>
+                            <span><?= $this->langHandicapDifferent; ?></span>
                         </label>
                     </fieldset>
                 </div>
                 <div class="widget widget-text">
                     <label for="handicaps_others">
-                        Sonstge Behinderung
+                        <?= $this->langHandicapsOthers; ?>
                     </label>
                     <input type="text" name="handicaps_others" id="handicaps_others" class="text" value="<?= $this->handicaps_others; ?>" maxlength="64" autocomplete="on">
                 </div>

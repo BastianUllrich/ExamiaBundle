@@ -207,15 +207,6 @@ class MemberAdministrationModule extends \Module
             $this->Template->handicaps = $handicaps;
         }
 
-
-        echo "<p>".$handicaps[5]."</p>";
-
-
-        $this->Template->handicaps = $memberData->handicaps;
-
-
-        array(12) { [0]=> string(1) "a" [1]=> string(1) "3" [2]=> string(2) "{i" [3]=> string(3) "0;s" [4]=> string(1) "5" [5]=> string(9) ""blind";i" [6]=> string(3) "1;s" [7]=> string(1) "8" [8]=> string(12) ""own room";i" [9]=> string(3) "2;s" [10]=> string(1) "9" [11]=> string(13) ""different";}" }
-
         $this->Template->handicaps_others = $memberData->handicaps_others;
         $this->Template->phone = $memberData->phone;
         $this->Template->mobile = $memberData->mobile;

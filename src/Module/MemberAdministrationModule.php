@@ -215,5 +215,10 @@ class MemberAdministrationModule extends \Module
 
     public function setLangValuesEdit() {
         $this->Template->mandatory = $GLOBALS['TL_LANG']['miscellaneous']['mandatory'];
+
+        $this->Template->langPersonalData = $GLOBALS['TL_LANG']['tl_member']['personal_legend'];
+        $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
+        $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
+
     }
 }

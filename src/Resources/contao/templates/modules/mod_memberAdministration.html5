@@ -159,16 +159,20 @@ elseif ($this->showEditForm === true) {
             <input type="hidden" name="FORM_SUBMIT" value="editMember">
             <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
             <fieldset>
-                <legend>Personendaten</legend>
+                <legend><?= $this->langPersonalData; ?></legend>
                 <div class="widget widget-text mandatory">
                     <label for="firstname" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>Vorname<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>
+                        <?= $this->langFirstname; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="firstname" id="firstname" class="text mandatory" value="<?= $this->firstname; ?>" required="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="lastname" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>Nachname<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>
+                        <?= $this->langLastname; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="lastname" id="lastname" class="text mandatory" value="<?= $this->lastname; ?>" required="" maxlength="255" autocomplete="on">
                 </div>

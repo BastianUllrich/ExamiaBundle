@@ -186,6 +186,8 @@ class MemberAdministrationModule extends \Module
     }
 
     public function setMemberValuesEdit($memberData) {
+        $this->Template->memberType = $memberData->usertype;
+        
         $this->Template->firstname = $memberData->firstname;
         $this->Template->lastname = $memberData->lastname;
         $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);

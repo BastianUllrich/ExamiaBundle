@@ -190,22 +190,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->lastname = $memberData->lastname;
         $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);
         $this->Template->gender = $memberData->gender;
-
-        // Behinderungen -> werden als String gespeichert, müssen erst auseinandergenommen werden -> extra Funktion
-
-        // String Variable Handicaps in Array umwandeln
-        $handicapsArray = explode(":",$memberData->handicaps);
-        // Größe des Arrays berechnen, Anzahl der Behinderungen = (Größe : 3)-1, Überprüfung auf min. 1 Behinderung: Größe mod 3 == 0
-        $handicapsArraySize = sizeof($handicapsArray);
-        if ($handicapsArraySize % 3 == 0) {
-            $numberOfHandicaps = ($handicapsArraySize/3)-1;
-            // Die jeweilige Bezeichnung steht an den Stellen 5, 8, 11, ...
-            for ($i = 0; $i < $handicapsArraySize; $i++) {
-                // Inhalt lesbar trennen
-                $handicaps[$i] = explode("\"\"", $handicapsArray[5+$i]);
-            }
-            $this->Template->handicaps = $handicaps[0][3];
-        }
+        $this->Template->handicaps = unserialize($memberData->handicaps);
 
         $this->Template->handicaps_others = $memberData->handicaps_others;
         $this->Template->phone = $memberData->phone;

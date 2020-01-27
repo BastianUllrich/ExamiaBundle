@@ -268,5 +268,30 @@ class MemberAdministrationModule extends \Module
         $this->Template->langContact1 = $GLOBALS['TL_LANG']['tl_member']['contact1'];
         $this->Template->langContact2 = $GLOBALS['TL_LANG']['tl_member']['contact2'];
 
+        $this->Template->langExamData = $GLOBALS['TL_LANG']['tl_member']['exam_legend'];
+        $this->Template->langRehabDevices = $GLOBALS['TL_LANG']['tl_member']['rehab_devices'][0];
+        $this->Template->langPC = $GLOBALS['TL_LANG']['tl_member']['pc'];
+        $this->Template->langBlindWorkspace = $GLOBALS['TL_LANG']['tl_member']['blind workspace'];
+        $this->Template->langZoomtext = $GLOBALS['TL_LANG']['tl_member']['Zoomtext'];
+        $this->Template->langScreenMagnifier = $GLOBALS['TL_LANG']['tl_member']['screen magnifier'];
+        $this->Template->langScreenReader = $GLOBALS['TL_LANG']['tl_member']['screen reader'];
+        $this->Template->langA3Print = $GLOBALS['TL_LANG']['tl_member']['a3 print'];
+        $this->Template->langObscuration = $GLOBALS['TL_LANG']['tl_member']['obscuration'];
+        $this->Template->langWritingAssistance = $GLOBALS['TL_LANG']['tl_member']['writing assistance'];
+        $this->Template->langHighTable = $GLOBALS['TL_LANG']['tl_member']['high table'];
+        $this->Template->langNearDoor = $GLOBALS['TL_LANG']['tl_member']['near door'];
+        $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
+        $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
+        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'][0];
+
+        $this->Template->langComments = $GLOBALS['TL_LANG']['tl_member']['comments'][0];
+
+        $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
+        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];
+        $this->Template->langExtraTimeMinutes = $GLOBALS['TL_LANG']['tl_member']['minutes'];
+        $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
+
+        $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
+
     }
 }

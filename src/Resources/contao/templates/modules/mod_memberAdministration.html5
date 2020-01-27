@@ -329,95 +329,94 @@ elseif ($this->showEditForm === true) {
             </fieldset>
 
             <fieldset>
-                <legend>Klausurinfos</legend>
+                <legend><?= $this->langExamData; ?></legend>
                 <div class="widget widget-checkbox">
                     <fieldset id="rehab_devices" class="checkbox_container">
-                        <legend>REHA-Hilsmittel</legend>
+                        <legend><?= $this->langRehabDevices; ?></legend>
                         <label id="lbl_pc" for="pc">
                             <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc">
-                            <span>PC</span>
+                            <span><?= $this->langPC; ?></span>
                         </label>
                         <label id="lbl_blind_workspace" for="blind_workspace">
                             <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind_workspace">
-                            <span>Blindenarbeitsplatz</span>
+                            <span><?= $this->langBlindWorkspace; ?></span>
                         </label>
                         <label id="lbl_zoomtext" for="zoomtext">
                             <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="zoomtext">
-                            <span>ZoomText</span>
+                            <span><?= $this->langZoomtext; ?></span>
                         </label>
                         <label id="lbl_screen_magnifier" for="screen_magnifier">
                             <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen_magnifier">
-                            <span>Bildschirmlupe</span>
+                            <span><?= $this->langScreenMagnifier; ?></span>
                         </label>
                         <label id="lbl_screen_reader" for="screen_reader">
                             <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen_reader">
-                            <span>Bildschirmlesegerät</span>
+                            <span><?= $this->langScreenReader; ?></span>
                         </label>
                         <label id="lbl_a3_print" for="a3_print">
                             <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3_print">
-                            <span>A3 Druck</span>
+                            <span><?= $this->langA3Print; ?></span>
                         </label>
                         <label id="lbl_obscuration" for="obscuration">
                             <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration">
-                            <span>Verdunkelung</span>
+                            <span><?= $this->langObscuration; ?></span>
                         </label>
                         <label id="lbl_writing_assistance" for="writing_assistance">
                             <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing_assistance">
-                            <span>Schreibassistenz</span>
+                            <span><?= $this->langWritingAssistance; ?></span>
                         </label>
                         <label id="lbl_high_table" for="high_table">
                             <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high_table">
-                            <span>Hochtisch</span>
+                            <span><?= $this->langHighTable; ?></span>
                         </label>
                         <label id="lbl_near_door" for="near_door">
                             <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near_door">
-                            <span>Platz nahe Tür</span>
+                            <span><?= $this->langNearDoor; ?></span>
                         </label>
                         <label id="lbl_own_room" for="own_room">
                             <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own_room">
-                            <span>Eigener Raum</span>
+                            <span><?= $this->langOwnRoom; ?></span>
                         </label>
                         <label id="lbl_different" for="different">
                             <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different">
-                            <span>Sonstiges</span>
+                            <span><?= $this->langRDDifferent; ?></span>
                         </label>
                     </fieldset>
                 </div>
                 <div class="widget widget-text">
                     <label for="rehab_devices_others">
-                        Sonstige Hilfsmittel
+                        <?= $this->langRehabDevicesOthers; ?>
                     </label>
                     <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehab_devices_others; ?>" maxlength="30" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="extra_time">
-                        Zeitverlängerung
+                        <?= $this->langExtraTime; ?>
                     </label>
                     <input type="text" name="extra_time" id="extra_time" class="text" value="<?= $this->extra_time; ?>" maxlength="3" autocomplete="on">
                 </div>
                 <div class="widget widget-select">
                     <label for="extra_time_minutes_percent">
-                        Einheit Zeitverlängerung
+                        <?= $this->langExtraTimeUnit; ?>
                     </label>
                     <select name="extra_time_minutes_percent" id="extra_time_minutes_percent" class="select mandatory" required="">
                         <option value="-" <?php if ($this->extra_time_minutes_percent == "") echo "selected"; ?>> - </option>
-                        <option value="minutes" <?php if ($this->extra_time_minutes_percent == "minutes") echo "selected"; ?>>Minuten</option>
-                        <option value="percent" <?php if ($this->extra_time_minutes_percent == "percent") echo "selected"; ?>>Prozent</option>
+                        <option value="minutes" <?php if ($this->extra_time_minutes_percent == "minutes") echo "selected"; ?>><?= $this->langExtraTimeMinutes; ?></option>
+                        <option value="percent" <?php if ($this->extra_time_minutes_percent == "percent") echo "selected"; ?>><?= $this->langExtraTimePercent; ?></option>
                     </select>
                 </div>
                 <div class="widget widget-textarea">
                     <label for="comments" class="">
-                        Kommentare
+                       <?= $this->Template->langComments; ?>
                     </label>
                     <textarea name="comments" id="comments" class="textarea" rows="12" cols="80" maxlength="80"><?= $this->comments; ?></textarea>
                 </div>
             </fieldset>
         </div>
     <div class="widget widget-submit">
-        <button type="submit" class="submit">Änderungen speichern</button>
+        <button type="submit" class="submit"><?= $this->Template->langSaveChanges; ?></button>
     </div>
 </form>
-<p><?= $this->tmpMeldung; ?></p>
 <p>{{link::back}}</p>
 <?php
 }

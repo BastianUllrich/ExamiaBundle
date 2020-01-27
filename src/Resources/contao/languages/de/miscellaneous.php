@@ -36,3 +36,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'] = 'Nein, nich
 $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied wurde erfolgreich gelöscht.';
 
 $GLOBALS['TL_LANG']['miscellaneous']['member'] = "Mitglied";
+
+$GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";

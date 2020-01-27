@@ -193,9 +193,28 @@ class MemberAdministrationModule extends \Module
 
         // Behinderungen -> werden als String gespeichert, müssen erst auseinandergenommen werden -> extra Funktion
 
+        // String Variable Handicaps in Array umwandeln
+        $handicapsArray = explode(":",$memberData->handicaps);
+        // Größe des Arrays berechnen, Anzahl der Behinderungen = (Größe : 3)-1, Überprüfung auf min. 1 Behinderung: Größe mod 3 == 0
+        $handicapsArraySize = sizeof($handicapsArray);
+        if ($handicapsArraySize % 3 == 0) {
+            $numberOfHandicaps = ($handicapsArraySize/3)-1;
+            // Die jeweilige Bezeichnung steht an den Stellen 5, 8, 11, ...
+            for ($i = 0; $i < $handicapsArraySize; $i++) {
+                // Inhalt lesbar trennen
+                $handicaps[$i] = explode("\"\"", $handicapsArray[5+$i]);
+            }
+            $this->Template->handicaps = $handicaps;
+        }
 
-        //list($a, $b, $c, $d, $e, $value) = explode(":", $memberData->handicaps);
+
+        echo "<p>".$handicaps[5]."</p>";
+
+
         $this->Template->handicaps = $memberData->handicaps;
+
+
+        array(12) { [0]=> string(1) "a" [1]=> string(1) "3" [2]=> string(2) "{i" [3]=> string(3) "0;s" [4]=> string(1) "5" [5]=> string(9) ""blind";i" [6]=> string(3) "1;s" [7]=> string(1) "8" [8]=> string(12) ""own room";i" [9]=> string(3) "2;s" [10]=> string(1) "9" [11]=> string(13) ""different";}" }
 
         $this->Template->handicaps_others = $memberData->handicaps_others;
         $this->Template->phone = $memberData->phone;

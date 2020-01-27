@@ -198,39 +198,92 @@ elseif ($this->showEditForm === true) {
                         <legend><?= $this->langHandicaps; ?></legend>
 
                         <label id="lbl_handicaps_0" for="opt_handicaps_0">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_0" class="checkbox" value="blind">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_0" class="checkbox" value="blind"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "blind") echo "checked";
+                            }
+                            >
                             <span><?= $this->langBlind; ?></span>
                         </label>
                         <label id="lbl_handicaps_1" for="opt_handicaps_1">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_1" class="checkbox" value="visually impaired">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_1" class="checkbox" value="visually impaired"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "visually impaired") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langVisuallyImpaired; ?></span>
                         </label>
                         <label id="lbl_handicaps_2" for="opt_handicaps_2">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_2" class="checkbox" value="deaf">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_2" class="checkbox" value="deaf"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "deaf") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langDeaf; ?></span>
                         </label>
                         <label id="lbl_handicaps_3" for="opt_handicaps_3">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_3" class="checkbox" value="motorically restricted">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_3" class="checkbox" value="motorically restricted"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "motorically restricted") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langMotoricallyRestricted; ?></span>
                         </label>
                         <label id="lbl_handicaps_4" for="opt_handicaps_4">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_4" class="checkbox" value="autism">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_4" class="checkbox" value="autism"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "autism") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langAutism; ?></span>
                         </label>
                         <label id="lbl_handicaps_5" for="opt_handicaps_5">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_5" class="checkbox" value="mental disorder">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_5" class="checkbox" value="mental disorder"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "mental disorder") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langMentalDisorder; ?></span>
                         </label>
                         <label id="lbl_handicaps_6" for="opt_handicaps_6">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_6" class="checkbox" value="chronic disorder">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_6" class="checkbox" value="chronic disorder"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "chronic disorder") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langChronicDisorder; ?></span>
                         </label>
                         <label id="lbl_handicaps_7" for="opt_handicaps_7">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "acute illness") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langAcuteIllness; ?></span>
                         </label>
                         <label id="lbl_handicaps_8" for="opt_handicaps_8">
-                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different">
+                            <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different"
+                            <?php
+                            for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                                if ($this->handicaps[$i] == "different") echo "checked";
+                            }
+                            ?>
+                            >
                             <span><?= $this->langHandicapDifferent; ?></span>
                         </label>
                     </fieldset>

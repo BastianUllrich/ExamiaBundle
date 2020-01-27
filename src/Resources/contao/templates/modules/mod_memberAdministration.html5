@@ -243,21 +243,24 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Kontaktdaten</legend>
+                <legend><?= $this->langContactData; ?></legend>
                 <div class="widget widget-text">
                     <label for="phone">
-                        Telefonnummer
+                        <?= $this->langPhone; ?>
                     </label>
                     <input type="text" name="phone" id="phone" class="text" value="<?= $this->phone; ?>" maxlength="64" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
-                    <label for="mobile">Handynummer<?= $this->mobile_label; ?>
+                    <label for="mobile">
+                        <?= $this->langMobile; ?>
                     </label>
                     <input type="text" name="mobile" id="mobile" class="text" value="<?= $this->mobile; ?>" maxlength="64" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="email" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span>E-Mail-Adresse<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>
+                            <?= $this->langEmail; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <input type="email" name="email" id="email" class="text mandatory" value="<?= $this->email; ?>" required="" maxlength="255" autocomplete="on">
                 </div>

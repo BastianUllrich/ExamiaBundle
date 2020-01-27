@@ -219,7 +219,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->langPersonalData = $GLOBALS['TL_LANG']['tl_member']['personal_legend'];
         $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
-        $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][1];
+        $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][0];
 
         $this->Template->langGender = $GLOBALS['TL_LANG']['tl_member']['gender'][0];
         $this->Template->langGenderMale = $GLOBALS['TL_LANG']['tl_member']['male'];
@@ -237,6 +237,11 @@ class MemberAdministrationModule extends \Module
         $this->Template->langAcuteIllness = $GLOBALS['TL_LANG']['tl_member']['acute illness'];
         $this->Template->langHandicapDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
         $this->Template->langHandicapsOthers = $GLOBALS['TL_LANG']['tl_member']['handicaps_others'][0];
+
+        $this->Template->langContactData = $GLOBALS['TL_LANG']['tl_member']['contact_legend'];
+        $this->Template->langPhone = $GLOBALS['TL_LANG']['tl_member']['phone'][0];
+        $this->Template->langMobile = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
+        $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];
 
     }
 }

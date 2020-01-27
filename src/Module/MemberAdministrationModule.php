@@ -340,6 +340,7 @@ class MemberAdministrationModule extends \Module
         }
 
         if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+            \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?do=editDetails&member=$member');
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
         }

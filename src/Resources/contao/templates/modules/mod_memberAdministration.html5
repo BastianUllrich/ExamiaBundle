@@ -577,7 +577,13 @@ elseif ($this->showEditForm === true) {
         <button type="submit" class="submit"><?= $this->Template->langSaveChanges; ?></button>
     </div>
 </form>
-<p>{{link::back}}</p>
+
+<?php
+if ($this->changesSaved === true) {
+    <p><em>$this->changesSavedMessage</em></p>
+}
+?>
+    <p class="right">{{link::back}}</p>
 <?php
 }
 $this->endblock();

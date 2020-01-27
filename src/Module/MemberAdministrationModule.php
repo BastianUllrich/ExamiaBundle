@@ -49,6 +49,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->showConfirmationQuestion = false;
         $this->Template->showDetails = false;
         $this->Template->showEditForm = false;
+        $this->Template->changesSaved = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -181,13 +182,13 @@ class MemberAdministrationModule extends \Module
         }
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editMember') {
-            $this->Template->tmpMeldung = "Absenden registriert";
+            $this->saveChanges($memberData->usertype, $member);
         }
     }
 
     public function setMemberValuesEdit($memberData) {
         $this->Template->memberType = $memberData->usertype;
-        
+
         $this->Template->firstname = $memberData->firstname;
         $this->Template->lastname = $memberData->lastname;
         $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);
@@ -292,6 +293,55 @@ class MemberAdministrationModule extends \Module
         $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
 
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
+    }
 
+    public function saveChanges($usertype, $member)
+    {
+        // Felder auslesen
+        // Allgemeine Felder für alle Mitgliedstypen
+
+        $firstname = \Input::post('firstname');
+        $lastname = \Input::post('lastname');
+        $email = \Input::post('email');
+        $username = \Input::post('username');
+
+        // Felder für Mitgliedstypen Student und Aufsicht
+        if ($usertype != "Administrator") {
+            $mobile = \Input::post('mobile');
+        }
+
+        // Felder für Mitgliedstyp Student
+        if ($usertype == "Student") {
+            $dateOfBirth = \Input::post('dateOfBirth');
+            $dateOfBirth = strtotime($dateOfBirth);
+            $gender = \Input::post('gender');
+            $handicaps = serialize(\Input::post('handicaps[]'));
+            $handicaps_others = \Input::post('handicaps_others');
+            $study_course = \Input::post('study_course');
+            $chipcard_nr = \Input::post('chipcard_nr');
+            $department = \Input::post('department');
+            $contact_person = \Input::post('contact_person');
+            $rehab_devices = serialize(\Input::post('rehab_devices[]'));
+            $rehab_devices_others = \Input::post('rehab_devices_others');
+            $extra_time = \Input::post('extra_time');
+            $extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');
+            $comments = \Input::post('comments');
+        }
+
+        // Verschiedene Abfragen erstellen
+        switch ($usertype) {
+            case "Administrator" : $set = array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username); break;
+            case "Aufsicht" : $set =    array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
+            case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'dateOfBirth'=>$dateOfBirth,
+                                                'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
+                                                'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
+                                                'extra_time'=>$extra_time, 'extra_time_minutes_percent'=>$extra_time_minutes_percent, 'comments'=>$comments); break;
+            default: break;
+        }
+
+        if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+            $this->Template->changesSaved = true;
+            $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
+        }
     }
 }

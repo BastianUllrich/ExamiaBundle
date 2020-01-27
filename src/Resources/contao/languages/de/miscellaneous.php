@@ -38,3 +38,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied
 $GLOBALS['TL_LANG']['miscellaneous']['member'] = "Mitglied";
 
 $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";
+$GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'] = "Die Änderungen wurden gespeichert";

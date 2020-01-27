@@ -266,56 +266,64 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Zugangsdaten</legend>
+                <legend><?= $this->langLoginData; ?</legend>
                 <div class="widget widget-text">
                     <label for="username" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span>Benutzername<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>
+                        <?= $this->langUsername; ?
+                        <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="username" id="username" class="text mandatory" value="<?= $this->username; ?>" required="" maxlength="64" autocomplete="on">
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Angaben zum Studium</legend>
+                <legend><?= $this->langStudyData; ?></legend>
                 <div class="widget widget-text">
                     <label for="study_course" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?> </span>Studiengang<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?> </span>
+                            <?= $this->langStudyCourse; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="study_course" id="study_course" class="text mandatory" value="<?= $this->study_course; ?>" required="" maxlength="30" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="chipcard_nr">
-                        Chipkarten-Nr
+                        <?= $this->langChipcardNr; ?>
                     </label>
                     <input type="text" name="chipcard_nr" id="chipcard_nr" class="text" value="<?= $this->chipcard_nr; ?>" maxlength="20" autocomplete="on">
                 </div>
                 <div class="widget widget-select select mandatory">
                     <label for="department" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>Fachbereich<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langDepartment; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <select name="department" id="department" class="select mandatory" required="">
-                        <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>>1</option>
-                        <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>>2</option>
-                        <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>>3</option>
-                        <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>>4</option>
-                        <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>>5</option>
-                        <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>>6</option>
-                        <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>>7</option>
-                        <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>>8</option>
-                        <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>>9</option>
-                        <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>>10</option>
-                        <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>>11</option>
-                        <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>>12</option>
-                        <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>>13</option>
-                        <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>>14</option>
+                        <option value="department1" <?php if ($this->usr_department == "department1") echo "selected"; ?>><?= $this->langDepartment1; ?></option>
+                        <option value="department2" <?php if ($this->usr_department == "department2") echo "selected"; ?>><?= $this->langDepartment2; ?></option>
+                        <option value="department3" <?php if ($this->usr_department == "department3") echo "selected"; ?>><?= $this->langDepartment3; ?></option>
+                        <option value="department4" <?php if ($this->usr_department == "department4") echo "selected"; ?>><?= $this->langDepartment4; ?></option>
+                        <option value="department5" <?php if ($this->usr_department == "department5") echo "selected"; ?>><?= $this->langDepartment5; ?></option>
+                        <option value="department6" <?php if ($this->usr_department == "department6") echo "selected"; ?>><?= $this->langDepartment6; ?></option>
+                        <option value="department7" <?php if ($this->usr_department == "department7") echo "selected"; ?>><?= $this->langDepartment7; ?></option>
+                        <option value="department8" <?php if ($this->usr_department == "department8") echo "selected"; ?>><?= $this->langDepartment8; ?></option>
+                        <option value="department9" <?php if ($this->usr_department == "department9") echo "selected"; ?>><?= $this->langDepartment9; ?></option>
+                        <option value="department10" <?php if ($this->usr_department == "department10") echo "selected"; ?>><?= $this->langDepartment10; ?></option>
+                        <option value="department11" <?php if ($this->usr_department == "department11") echo "selected"; ?>><?= $this->langDepartment11; ?></option>
+                        <option value="department12" <?php if ($this->usr_department == "department12") echo "selected"; ?>><?= $this->langDepartment12; ?></option>
+                        <option value="department13" <?php if ($this->usr_department == "department13") echo "selected"; ?>><?= $this->langDepartment13; ?></option>
+                        <option value="department14" <?php if ($this->usr_department == "department14") echo "selected"; ?>><?= $this->langDepartment14; ?></option>
                     </select>
                 </div>
                 <div class="widget widget-select select mandatory">
                     <label for="contact_person" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>Kontaktperson<span class="mandatory">*</span>
+                        <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langContactPerson; ?>
+                        <span class="mandatory">*</span>
                     </label>
                     <select name="contact_person" id="contact_person" class="select mandatory" required="">
-                        <option value="contact1" <?php if ($this->contact_person == "contact1") echo "selected"; ?>>Zeki Öztürk</option>
-                        <option value="contact2" <?php if ($this->contact_person == "contact2") echo "selected"; ?>>David Smida</option>
+                        <option value="contact1" <?php if ($this->contact_person == "contact1") echo "selected"; ?>><?= $this->langContact1; ?></option>
+                        <option value="contact2" <?php if ($this->contact_person == "contact2") echo "selected"; ?>><?= $this->langContact2; ?></option>
                     </select>
                 </div>
             </fieldset>

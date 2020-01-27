@@ -243,5 +243,30 @@ class MemberAdministrationModule extends \Module
         $this->Template->langMobile = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
         $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];
 
+        $this->Template->langLoginData = $GLOBALS['TL_LANG']['tl_member']['login_legend'];
+        $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
+
+        $this->Template->langStudyData = $GLOBALS['TL_LANG']['tl_member']['study_legend'];
+        $this->Template->langStudyCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
+        $this->Template->langChipcardNr = $GLOBALS['TL_LANG']['tl_member']['chipcard_nr'][0];
+        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
+        $this->Template->langDepartment1 = $GLOBALS['TL_LANG']['tl_member']['department1'];
+        $this->Template->langDepartment2 = $GLOBALS['TL_LANG']['tl_member']['department2'];
+        $this->Template->langDepartment3 = $GLOBALS['TL_LANG']['tl_member']['department3'];
+        $this->Template->langDepartment4 = $GLOBALS['TL_LANG']['tl_member']['department4'];
+        $this->Template->langDepartment5 = $GLOBALS['TL_LANG']['tl_member']['department5'];
+        $this->Template->langDepartment6 = $GLOBALS['TL_LANG']['tl_member']['department6'];
+        $this->Template->langDepartment7 = $GLOBALS['TL_LANG']['tl_member']['department7'];
+        $this->Template->langDepartment8 = $GLOBALS['TL_LANG']['tl_member']['department8'];
+        $this->Template->langDepartment9 = $GLOBALS['TL_LANG']['tl_member']['department9'];
+        $this->Template->langDepartment10 = $GLOBALS['TL_LANG']['tl_member']['department10'];
+        $this->Template->langDepartment11 = $GLOBALS['TL_LANG']['tl_member']['department11'];
+        $this->Template->langDepartment12 = $GLOBALS['TL_LANG']['tl_member']['department12'];
+        $this->Template->langDepartment13 = $GLOBALS['TL_LANG']['tl_member']['department13'];
+        $this->Template->langDepartment14 = $GLOBALS['TL_LANG']['tl_member']['department14'];
+        $this->Template->langContactPerson = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
+        $this->Template->langContact1 = $GLOBALS['TL_LANG']['tl_member']['contact1'];
+        $this->Template->langContact2 = $GLOBALS['TL_LANG']['tl_member']['contact2'];
+
     }
 }

@@ -165,6 +165,11 @@ elseif ($this->showDetails === true) {
 }
 // Mitglied bearbeiten
 elseif ($this->showEditForm === true) {
+if ($this->changesSaved === true) {
+    ?>
+    <p><em><?= $this->changesSavedMessage; ?></em></p>
+    <?php
+}
 ?>
 <form action="" id="<?= $this->formId; ?>" method="post">
         <div class="formbody">
@@ -195,7 +200,7 @@ elseif ($this->showEditForm === true) {
                         <label for="dateOfBirth">
                             <?= $this->langDateOfBirth; ?>
                         </label>
-                        <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="" maxlength="10" autocomplete="on">
+                        <input type="date" name="dateOfBirth" id="dateOfBirth" class="text" value="<?= $this->dateOfBirth; ?>" maxlength="10" autocomplete="on">
                     </div>
                     <div class="widget widget-select">
                         <label for="gender">
@@ -578,14 +583,7 @@ elseif ($this->showEditForm === true) {
     </div>
 </form>
 
-<?php
-if ($this->changesSaved === true) {
-?>
-    <p><em><?= $this->changesSavedMessage; ?></em></p>
-<?php
-}
-?>
-    <p class="right">{{link::back}}</p>
+<p class="right">{{link::back}}</p>
 <?php
 }
 $this->endblock();

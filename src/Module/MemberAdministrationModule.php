@@ -191,8 +191,11 @@ class MemberAdministrationModule extends \Module
         $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);
         $this->Template->gender = $memberData->gender;
 
-        // Behinderungen
-        $this->Template->handicaps = $memberData->handicaps;
+        // Behinderungen -> werden als String gespeichert, müssen erst auseinandergenommen werden -> extra Funktion
+
+
+        list($a, $b, $c, $d, $value) = explode(":", $memberData->handicaps);
+        $this->Template->handicaps = $value;
 
         $this->Template->handicaps_others = $memberData->handicaps_others;
         $this->Template->phone = $memberData->phone;

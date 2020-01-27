@@ -194,8 +194,8 @@ class MemberAdministrationModule extends \Module
         // Behinderungen -> werden als String gespeichert, müssen erst auseinandergenommen werden -> extra Funktion
 
 
-        list($a, $b, $c, $d, $e, $value) = explode(":", $memberData->handicaps);
-        $this->Template->handicaps = $value;
+        //list($a, $b, $c, $d, $e, $value) = explode(":", $memberData->handicaps);
+        $this->Template->handicaps = $memberData->handicaps;
 
         $this->Template->handicaps_others = $memberData->handicaps_others;
         $this->Template->phone = $memberData->phone;

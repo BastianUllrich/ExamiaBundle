@@ -312,6 +312,7 @@ class MemberAdministrationModule extends \Module
 
         // Felder für Mitgliedstyp Student
         if ($usertype == "Student") {
+            $phone = \Input::post('phone');
             $dateOfBirth = \Input::post('dateOfBirth');
             $dateOfBirth = strtotime($dateOfBirth);
             $gender = \Input::post('gender');
@@ -332,7 +333,7 @@ class MemberAdministrationModule extends \Module
         switch ($usertype) {
             case "Administrator" : $set = array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username); break;
             case "Aufsicht" : $set =    array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
-            case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'dateOfBirth'=>$dateOfBirth,
+            case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
                                                 'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
                                                 'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
                                                 'extra_time'=>$extra_time, 'extra_time_minutes_percent'=>$extra_time_minutes_percent, 'comments'=>$comments); break;
@@ -342,7 +343,6 @@ class MemberAdministrationModule extends \Module
         if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
-            \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?do=editDetails&member='.$member);
         }
     }
 }

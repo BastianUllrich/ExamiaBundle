@@ -266,11 +266,11 @@ elseif ($this->showEditForm === true) {
                 </div>
             </fieldset>
             <fieldset>
-                <legend><?= $this->langLoginData; ?</legend>
+                <legend><?= $this->langLoginData; ?></legend>
                 <div class="widget widget-text">
                     <label for="username" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?> </span>
-                        <?= $this->langUsername; ?
+                        <?= $this->langUsername; ?>
                         <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="username" id="username" class="text mandatory" value="<?= $this->username; ?>" required="" maxlength="64" autocomplete="on">

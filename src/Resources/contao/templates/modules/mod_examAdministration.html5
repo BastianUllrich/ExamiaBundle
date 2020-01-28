@@ -24,7 +24,8 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
                 <td class="body col_0 col_first"><?= $examData['date']; ?></td>
                 <td class="body col_1"><?= $examData['begin']; ?></td>
                 <td class="body col_2"><?= $examData['title']; ?></td>
-                <td class="body col_3 col_last">
+                <td class="body col_3"><?= $examData['department']; ?></td>
+                <td class="body col_4 col_last">
                     <a href="{{env::request}}?do=viewDetails&exam=<?= $examData['id']; ?>" title="Klausurdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Klausurdetails"></a>
                     <a href="{{env::request}}?do=editDetails&exam=<?= $examData['id']; ?>" title="Klausur bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Klausur bearbeiten"></a>
                     <a href="{{env::request}}?do=editAttendees&exam=<?= $examData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/user.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>

@@ -93,17 +93,18 @@ elseif ($this->showDetails === true) {
             <td class="label"><?= $this->langSupervisors; ?></td>
             <td class="value">
                 <?php foreach($this->supervisorsDataList as $supervisorsData):
-                    echo $supervisorsData->firstname;
+                    echo $supervisorsData['firstname'];
                     echo " ";
-                    echo $supervisorsData->lastname;
+                    echo $supervisorsData['lastname'];
                     echo " (";
-                    echo $supervisorsData->task;
+                    echo $supervisorsData['task'];
                     echo ", ";
-                    echo $supervisorsData->time_from;
+                    echo $supervisorsData['time_from'];
                     echo " - ";
-                    echo $supervisorsData->time_until;
+                    echo $supervisorsData['time_until'];
+                    echo " ";
                     echo $this->langHour;
-                    echo "<br>";
+                    echo ")<br>";
                 endforeach;
                 ?>
             </td>

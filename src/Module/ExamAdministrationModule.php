@@ -172,7 +172,8 @@ class ExamAdministrationModule extends \Module
 
     public function setExamValuesViewDetails($examDetails) {
         $this->Template->detailExamTitel = $examDetails->title;
-        $this->Template->detailDate = date("d.m.Y", $examDetails->date);
+        $detailDate = date("d.m.Y", $examDetails->date);
+        $this->Template->detailDate = $detailDate;
         $this->Template->detailTimeStart = $examDetails->begin;
 
         // Reguläre Dauer zusammensetzen
@@ -222,10 +223,18 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
         // Aufsichten / Schreibassistenten heraussuchen
+        // Tag der Klausur in timestamp umwandeln
+
+        $dayExamMidnight = $detailDate;
+        $dayExamMidnight .= " 00:00:00";
+        $dayExamMidnightTimeStamp = strtotime($dayExamMidnight);
+        $dayExamLastSecond = $dayExamMidnightTimeStamp + 3600;
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_member, tl_supervisors_exams
-                                                    WHERE tl_supervisors_exams.date=$examDetails->date
-                                                    AND tl_supervisors_exams.supervisor_id=tl_member.id
+                                                    WHERE tl_supervisors_exams.supervisor_id=tl_member.id
+                                                    AND tl_supervisors_exams.date
+                                                    BETWEEN $dayExamMidnightTimeStamp
+                                                    AND $dayExamLastSecond
                                                     ")->query();
         $i=0;
         $supervisorsData = array();

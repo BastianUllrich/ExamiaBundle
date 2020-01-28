@@ -29,7 +29,6 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
                     <a href="{{env::request}}?do=viewDetails&exam=<?= $examData['id']; ?>" title="Klausurdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Klausurdetails"></a>
                     <a href="{{env::request}}?do=editDetails&exam=<?= $examData['id']; ?>" title="Klausur bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Klausur bearbeiten"></a>
                     <a href="{{env::request}}?do=editAttendees&exam=<?= $examData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/user.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>
-                    <a href="{{env::request}}?do=editSupervisors&exam=<?= $examData['id']; ?>" title="Aufsichten bearbeiten"><img src="system/themes/flexible/icons/member.svg" width="16" height="16" alt="Aufsichten bearbeiten"></a>
                     <a href="{{env::request}}?do=combine&exam=<?= $examData['id']; ?>" title="Klausuren zusammenlegen"><img src="system/themes/flexible/icons/sync.svg" width="16" height="16" alt="Klausuren zusammenlegen"></a>
                     <a href="{{env::request}}?do=delete&exam=<?= $examData['id']; ?>" title="Klausur löschen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Klausur löschen"></a>
                 </td>

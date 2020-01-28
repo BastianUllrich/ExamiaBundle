@@ -131,9 +131,6 @@ elseif ($this->showDetails === true) {
         </tr>
         </tbody>
     </table>
-
-    <p><?= $this->dayExamMidnightTimeStamp; ?></p>
-    <p><?= $this->dayExamLastSecond; ?></p>
     <p>{{link::back}}</p>
     <?php
 }

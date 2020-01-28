@@ -223,13 +223,10 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
         // Aufsichten / Schreibassistenten heraussuchen
-        // Tag der Klausur in timestamp umwandeln
-
+        // Tag der Klausur in timestamp umwandeln (0:00 Uhr und 23:59:59)
         $dayExamMidnightTimeStamp = strtotime($detailDate);
-        $this->Template->dayExamMidnightTimeStamp = $dayExamMidnightTimeStamp;
-        $dayExamLastSecond = $dayExamMidnightTimeStamp + 3600;
+        $dayExamLastSecond = $dayExamMidnightTimeStamp + 86400;
 
-        $this->Template->dayExamLastSecond = $dayExamLastSecond;
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_member, tl_supervisors_exams
                                                     WHERE tl_supervisors_exams.supervisor_id=tl_member.id

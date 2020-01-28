@@ -9,7 +9,9 @@ $GLOBALS['TL_LANG']['tl_exams']['title_short'] = 'Titel';
 $GLOBALS['TL_LANG']['tl_exams']['title'] = ['Titel der Lehrveranstaltung', 'Bitte genaue Bezeichnung'];
 $GLOBALS['TL_LANG']['tl_exams']['date'] = ['Datum', 'Bitte Datum wählen'];
 $GLOBALS['TL_LANG']['tl_exams']['time_begin'] = ['Beginn (Uhrzeit)', 'Uhrzeit im Format 12:00'];
+$GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'] = 'Reguläre Dauer';
 $GLOBALS['TL_LANG']['tl_exams']['exam_duration'] = ['Dauer (in <em>Minuten</em>)', 'Bitte reguläre Dauer angeben'];
+$GLOBALS['TL_LANG']['tl_exams']['max_ending'] = 'Späteste Endzeit';
 $GLOBALS['TL_LANG']['tl_exams']['tools'] = ['Zugelassene Hilfsmittel', 'Bitte nur die vom Dozenten mitgeteilten'];
 $GLOBALS['TL_LANG']['tl_exams']['status'] = ['Status', 'Status der Klausuranforderung'];
 $GLOBALS['TL_LANG']['tl_exams']['status1'] = 'Noch nicht angefordert';
@@ -19,6 +21,8 @@ $GLOBALS['TL_LANG']['tl_exams']['status4'] = 'Klausur an Dozenten verschickt';
 $GLOBALS['TL_LANG']['tl_exams']['status5'] = 'Erhalt vom Dozenten bestätigt';
 $GLOBALS['TL_LANG']['tl_exams']['status6'] = 'Sonstiges';
 $GLOBALS['TL_LANG']['tl_exams']['remarks'] = ['Anmerkungen', 'Anmerkungen zur Klausur'];
+$GLOBALS['TL_LANG']['tl_exams']['attendees'] = 'Teilnehmer';
+$GLOBALS['TL_LANG']['tl_exams']['supervisors'] = 'Aufsichten';
 
 $GLOBALS['TL_LANG']['tl_exams']['department_short'] = 'Fachbereich';
 $GLOBALS['TL_LANG']['tl_exams']['department'] = ['Hochschule | Fachbereich', 'Bitte wählen Sie den Fachbereich aus, in dem die Klausur geschrieben wird'];
@@ -38,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_exams']['department12'] = 'FB 21 - MuK - Management und 
 $GLOBALS['TL_LANG']['tl_exams']['department13'] = 'ZDH - Wissenschaftliches Zentrum Duales Hochschulstudium, StudiumPlus (Wz)';
 $GLOBALS['TL_LANG']['tl_exams']['department14'] = 'JLU';
 
+$GLOBALS['TL_LANG']['tl_exams']['lecturer'] = 'Dozent';
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'] = ['Titel', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'] = ['Vorname', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'] = ['Nachname', ''];

@@ -4,6 +4,7 @@ namespace Baul\ExamiaBundle\Module;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
+use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 
@@ -90,43 +91,12 @@ class ExamAdministrationModule extends \Module
         $this->Template->examDataList = $examData;
 
         if ($_GET["do"] == "viewDetails") {
-            $member = $_GET["member"];
-            $memberDetailsData = MemberModel::findBy('id', $member);
             $this->Template->showDetails = true;
-
-            $this->Template->memberType = $memberDetailsData->usertype;
-            $this->Template->detailFirstname = $memberDetailsData->firstname;
-            $this->Template->detailLastname = $memberDetailsData->lastname;
-            $this->Template->detailUsername = $memberDetailsData->username;
-            $this->Template->detailEmail = $memberDetailsData->email;
-            $this->Template->detailDateOfBirth = date("d.m.Y", $memberDetailsData->dateOfBirth);
-            $this->Template->detailGender = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->gender];
-            $this->Template->detailPhone = $memberDetailsData->phone;
-            $this->Template->detailMobile = $memberDetailsData->mobile;
-            $this->Template->detailCourse = $memberDetailsData->study_course;
-            $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->department];
-            $this->Template->detailChipcardNr = $memberDetailsData->chipcard_nr;
-            $this->Template->detailContactPerson = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->contact_person];
-
-            // Sprachvariablen in Array "Behinderungen" einsetzen
-            $detailHandicaps = unserialize($memberDetailsData->handicaps);
-            for ($i=0; $i < sizeof($detailHandicaps); $i++) {
-                $detailHandicaps[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailHandicaps[$i]];
-            }
-            $this->Template->detailHandicaps = $detailHandicaps;
-
-            $this->Template->detailHandicapsOthers = $memberDetailsData->handicaps_others;
-
-            // Sprachvariablen in Array "REHA-Tools" einsetzen
-            $detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
-            for ($i=0; $i < sizeof($detailRehabDevices); $i++) {
-                $detailRehabDevices[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailRehabDevices[$i]];
-            }
-            $this->Template->detailRehabDevices = $detailRehabDevices;
-
-            $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;
-            $this->Template->detailExtraTime = $memberDetailsData->extra_time;
-            $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_minutes_percent];
+            $exam = $_GET["exam"];
+            $examDetails = ExamsModel::findBy('id', $exam);
+            
+            $this->setLangValuesViewDetails();
+            $this->setExamValuesViewDetails($examDetails);
         }
 
         // Mitglied löschen
@@ -197,6 +167,60 @@ class ExamAdministrationModule extends \Module
         if (\Contao\Input::post('FORM_SUBMIT') == 'editMember') {
             $this->saveChanges($memberData->usertype, $member);
         }
+    }
+
+    public function setExamValuesViewDetails($examDetails) {
+        $this->Template->detailExamTitel = $examDetails->title;
+        $this->Template->detailDate = date("d.m.Y", $examDetails->date);
+        $this->Template->detailTimeStart = $examDetails->begin;
+
+        // Reguläre Dauer zusammensetzen
+        $this->Template->detailRegularDuration = $examDetails->duration;
+        $this->Template->detailRegularDuration .= " ";
+        $this->Template->detailRegularDuration .= $GLOBALS['TL_LANG']['tl_attendees_exams']['minutes'];
+
+        // To-Do
+        $this->Template->detailMaxEndtime = "";
+
+        // Dozent zusammensetzen
+        $this->Template->detailLecturer = $examDetails->lecturer_title;
+        $this->Template->detailLecturer .= " ";
+        $this->Template->detailLecturer .= $examDetails->lecturer_prename;
+        $this->Template->detailLecturer .= " ";
+        $this->Template->detailLecturer .= $examDetails->lecturer_lastname;
+        $this->Template->detailLecturer .= " (";
+        $this->Template->detailLecturer .= $examDetails->lecturer_email;
+        if (!empty($examDetails->lecturer_mobile)) {
+            $this->Template->detailLecturer .= ", ";
+            $this->Template->detailLecturer .= $examDetails->lecturer_mobile;
+        }
+        $this->Template->detailLecturer .= ")";
+
+        $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->department];
+        $this->Template->detailTools = $examDetails->tools;
+        $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
+
+        // To-Do
+        $this->Template->detailSupervisors = "";
+        $this->Template->detailAttendees = "";
+
+        $this->Template->detailRemarks = $examDetails->remarks;
+    }
+
+    public function setLangValuesViewDetails() {
+        $this->Template->langExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['examDetails'];
+        $this->Template->langExamTitel = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
+        $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
+        $this->Template->langTimeStart = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->langRegularDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
+        $this->Template->langMaxEndtime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
+        $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
+        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
+        $this->Template->langTools = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
+        $this->Template->langStatus = $GLOBALS['TL_LANG']['tl_exams']['status'][0];
+        $this->Template->langSupervisors = $GLOBALS['TL_LANG']['tl_exams']['supervisors'];
+        $this->Template->langAttendees = $GLOBALS['TL_LANG']['tl_exams']['attendees'];
+        $this->Template->langRemarks = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
     }
 
     public function setMemberValuesEdit($memberData) {

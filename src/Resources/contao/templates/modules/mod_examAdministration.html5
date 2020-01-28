@@ -92,7 +92,6 @@ elseif ($this->showDetails === true) {
         <tr class="row_9 odd">
             <td class="label"><?= $this->langSupervisors; ?></td>
             <td class="value">
-                <?php
                 <?php foreach($this->supervisorsDataList as $supervisorsData):
                     echo $supervisorsData->firstname;
                     echo " ";

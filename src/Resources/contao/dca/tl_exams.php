@@ -61,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'search' => true,
             'inputType' => 'text',
 	    'flag' => 5,
-            'eval' => ['maxlength' => 10, 'mandatory' => true, 'datepicker'=>$this->getDatePickerString(), 'rgxp' => 'date'],
+            'eval' => ['maxlength' => 10, 'mandatory' => true, 'datepicker'=>true, 'rgxp' => 'datim'],
             'sql' => ['type' => 'string', 'length' => 10, 'default' => '']
         ],
         'begin' => [

@@ -103,6 +103,7 @@ elseif ($this->showDetails === true) {
                     echo " - ";
                     echo $supervisorsData->time_until;
                     echo $this->langHour;
+                    echo "<br>";
                 endforeach;
                 ?>
             </td>

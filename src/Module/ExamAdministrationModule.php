@@ -82,7 +82,8 @@ class ExamAdministrationModule extends \Module
             $examData[$i]['date'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['title'] = $result->title;
-            $examData[$i]['department'] = $GLOBALS['TL_LANG']['tl_exams'][$result->department];
+            // Verkürzte Schreibweise für den Fachbereich
+            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department],0,5)));
             $examData[$i]['id'] = $result->id;
             $i++;
         }

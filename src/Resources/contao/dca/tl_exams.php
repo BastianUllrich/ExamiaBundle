@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['status'],
             'inputType' => 'select',
             'options' => ['status1', 'status2', 'status3', 'status4', 'status5', 'status6'],
-	    'reference'	=> &$GLOBALS['TL_LANG']['tl_exams'],
+	        'reference'	=> &$GLOBALS['TL_LANG']['tl_exams'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'string', 'length' => 80, 'default' => '']
         ],

@@ -47,6 +47,7 @@ class ExamAdministrationModule extends \Module
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_member');
         $this->loadLanguageFile('tl_exams');
+        $this->loadLanguageFile('tl_attendees_exams');
 
         $this->Template->showConfirmationQuestion = false;
         $this->Template->showDetails = false;
@@ -94,7 +95,7 @@ class ExamAdministrationModule extends \Module
             $this->Template->showDetails = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
-            
+
             $this->setLangValuesViewDetails();
             $this->setExamValuesViewDetails($examDetails);
         }
@@ -179,8 +180,26 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRegularDuration .= " ";
         $this->Template->detailRegularDuration .= $GLOBALS['TL_LANG']['tl_attendees_exams']['minutes'];
 
-        // To-Do
-        $this->Template->detailMaxEndtime = "";
+        // Späteste Endzeit berechnen
+
+        // Maximale Dauer in Minuten berechnen
+        $result = Database::getInstance()->prepare("SELECT extra_time, extra_time_minutes_percent FROM tl_attendees_exams WHERE exam_id=$examDetails->id")->query();
+        $i = 0;
+        $maxDuration = $examDetails->duration;
+        while ($result->next()) {
+            if ($result->extra_time_minutes_percent == "percent") {
+                $multiplicator = 1+($result->extra_time/100);
+                $duration = ($examDetails->duration)*$multiplicator;
+            }
+            elseif ($result->extra_time_minutes_percent == "minutes") {
+                $duration = ($examDetails->duration)+$result->extra_time;
+            }
+            if ($duration > $maxDuration) {
+                $maxDuration = $duration;
+            }
+        }
+        // Späteste Endzeit = Startzeit + Maximale Dauer über date()- und time()-Funktion
+        $this->Template->detailMaxEndtime = date("H:i", (time($examDetails->begin+($maxDuration*60))));
 
         // Dozent zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;

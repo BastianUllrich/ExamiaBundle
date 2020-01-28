@@ -112,7 +112,17 @@ elseif ($this->showDetails === true) {
         <tr class="row_10 even">
             <td class="label"><?= $this->langAttendees; ?></td>
             <td class="value">
-                <?= $this->detailAttendees; ?>
+                <?php foreach($this->attendeesDataList as $attendeesData):
+                    echo $attendeesData['firstname'];
+                    echo " ";
+                    echo $attendeesData['lastname'];
+                    echo " (";
+                    echo $attendeesData['extra_time'];
+                    echo " ";
+                    echo $attendeesData['extra_time_minutes_percent'];
+                    echo ")<br>";
+                    endforeach;
+                ?>
             </td>
         </tr>
         <tr class="row_11 odd">

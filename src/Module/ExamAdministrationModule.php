@@ -221,7 +221,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailTools = $examDetails->tools;
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
-        // To-Do
+        // Aufsichten / Schreibassistenten heraussuchen
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_member, tl_supervisors_exams
                                                     WHERE tl_supervisors_exams.exam_id=$examDetails->id
@@ -240,7 +240,23 @@ class ExamAdministrationModule extends \Module
         }
         $this->Template->supervisorsDataList = $supervisorsData;
 
-        $this->Template->detailAttendees = "";
+        // Teilnehmer heraussuchen
+        $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_member.id, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent
+                                                    FROM tl_member, tl_attendees_exams
+                                                    WHERE tl_attendees_exams.exam_id=$examDetails->id
+                                                    AND tl_attendees_exams.attendee_id=tl_member.id
+                                                    ")->query();
+        $i=0;
+        $attendeesData = array();
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $attendeesData[$i]['firstname'] = $result->firstname;
+            $attendeesData[$i]['lastname'] = $result->lastname;
+            $attendeesData[$i]['extra_time'] = $result->extra_time;
+            $attendeesData[$i]['extra_time_minutes_percent'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            $i++;
+        }
+        $this->Template->attendeesDataList = $attendeesData;
 
         $this->Template->detailRemarks = $examDetails->remarks;
     }

@@ -113,11 +113,16 @@ class ExamRegistrationModule extends \Module
         $lecturer_mobile = \Input::post('lecturer_mobile');
         $department = \Input::post('department');
         $exam_date = \Input::post('exam_date');
-        $exam_date = strtotime($exam_date);
         $exam_begin = \Input::post('exam_begin');
         $exam_duration = \Input::post('exam_duration');
         $tools = \Input::post('tools');
         $remarks = \Input::post('remarks');
+
+        // Datum um Beginn verknüpfen und in Variable für Datenbank schreiben
+        $exam_datetime = $exam_date;
+        $exam_datetime .= " ";
+        $exam_datetime .= $exam_begin;
+        $exam_datetime = strtotime($exam_datetime);
 
         //Status der Anmeldung auf "status1" (Noch nicht angefordert) setzen
         $status = 'status1';
@@ -125,7 +130,7 @@ class ExamRegistrationModule extends \Module
         // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
         $this->import('Database');
         $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
-                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_date, 'begin' => $exam_begin,
+                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
                     'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
         // Eintrag in Tabelle "tl_exams" vornehmen

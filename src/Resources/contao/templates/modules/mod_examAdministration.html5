@@ -92,7 +92,20 @@ elseif ($this->showDetails === true) {
         <tr class="row_9 odd">
             <td class="label"><?= $this->langSupervisors; ?></td>
             <td class="value">
-                <?= $this->detailSupervisors; ?>
+                <?php
+                <?php foreach($this->supervisorsDataList as $supervisorsData):
+                    echo $supervisorsData->firstname;
+                    echo " ";
+                    echo $supervisorsData->lastname;
+                    echo " (";
+                    echo $supervisorsData->task;
+                    echo ", ";
+                    echo $supervisorsData->time_from;
+                    echo " - ";
+                    echo $supervisorsData->time_until;
+                    echo $this->langHour;
+                endforeach;
+                ?>
             </td>
         </tr>
         <tr class="row_10 even">

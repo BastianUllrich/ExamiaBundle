@@ -198,13 +198,12 @@ class ExamAdministrationModule extends \Module
                 $maxDuration = $duration;
             }
         }
-        // Späteste Endzeit = Startzeit + Maximale Dauer über date()- und time()-Funktion
+        // Späteste Endzeit berechnen
         $maxEndTime = ($examDetails->date) + ($maxDuration*60);
         $maxEndTimeReadable = date("H:i", $maxEndTime);
-        //$this->Template->detailMaxEndtime = date("H:i", (time(($examDetails->date+($maxDuration*60)))));
         $this->Template->detailMaxEndtime = $maxEndTimeReadable;
 
-        // Dozent zusammensetzen
+        // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_prename;
@@ -223,7 +222,24 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
         // To-Do
-        $this->Template->detailSupervisors = "";
+        $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.firstname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
+                                                    FROM tl_member, tl_supervisors_exams
+                                                    WHERE tl_supervisors_exams.exam_id=$examDetails->id
+                                                    AND tl_supervisors_exams.supervisor_id=tl_member.id
+                                                    ")->query();
+        $i = 0;
+        $supervisorsData = array();
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $supervisorsData[$i]['firstname'] = $result->firstname;
+            $supervisorsData[$i]['lastname'] = $result->lastname;
+            $supervisorsData[$i]['time_from'] = $result->time_from;
+            $supervisorsData[$i]['time_until'] = $result->time_until;
+            $supervisorsData[$i]['task'] = $result->task;
+            $i++;
+        }
+        $this->Template->supervisorsDataList = $supervisorsData;
+
         $this->Template->detailAttendees = "";
 
         $this->Template->detailRemarks = $examDetails->remarks;
@@ -243,6 +259,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langSupervisors = $GLOBALS['TL_LANG']['tl_exams']['supervisors'];
         $this->Template->langAttendees = $GLOBALS['TL_LANG']['tl_exams']['attendees'];
         $this->Template->langRemarks = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
+        $this->Template->langHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
     }
 
     public function setMemberValuesEdit($memberData) {

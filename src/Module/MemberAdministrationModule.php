@@ -108,7 +108,14 @@ class MemberAdministrationModule extends \Module
             $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->department];
             $this->Template->detailChipcardNr = $memberDetailsData->chipcard_nr;
             $this->Template->detailContactPerson = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->contact_person];
-            $this->Template->detailHandicaps = unserialize($memberDetailsData->handicaps);
+
+            // Sprachvariablen in Array "Behinderungen" einsetzen
+            $detailHandicaps = unserialize($memberDetailsData->handicaps);
+            for ($i=1; $i < sizeof($detailHandicaps); $i++) {
+                $detailHandicaps[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailHandicaps[$i]];
+            }
+            $this->Template->detailHandicaps = $detailHandicaps;
+
             $this->Template->detailHandicapsOthers = $memberDetailsData->handicaps_others;
             $this->Template->detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
             $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;

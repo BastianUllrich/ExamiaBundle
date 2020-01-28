@@ -5,7 +5,7 @@ $GLOBALS['TL_LANG']['tl_exams']['edit'] = ['Klausur bearbeiten', 'Klausur bearbe
 $GLOBALS['TL_LANG']['tl_exams']['delete'] = ['Klausur löschen', 'Klausur löschen'];
 $GLOBALS['TL_LANG']['tl_exams']['show'] = ['Details anzeigen', 'Details anzeigen'];
 
-
+$GLOBALS['TL_LANG']['tl_exams']['title_short'] = 'Titel';
 $GLOBALS['TL_LANG']['tl_exams']['title'] = ['Titel der Lehrveranstaltung', 'Bitte genaue Bezeichnung'];
 $GLOBALS['TL_LANG']['tl_exams']['date'] = ['Datum', 'Bitte Datum wählen'];
 $GLOBALS['TL_LANG']['tl_exams']['time_begin'] = ['Beginn (Uhrzeit)', 'Uhrzeit im Format 12:00'];
@@ -20,7 +20,7 @@ $GLOBALS['TL_LANG']['tl_exams']['status5'] = 'Erhalt vom Dozenten bestätigt';
 $GLOBALS['TL_LANG']['tl_exams']['status6'] = 'Sonstiges';
 $GLOBALS['TL_LANG']['tl_exams']['remarks'] = ['Anmerkungen', 'Anmerkungen zur Klausur'];
 
-
+$GLOBALS['TL_LANG']['tl_exams']['department_short'] = 'Fachbereich';
 $GLOBALS['TL_LANG']['tl_exams']['department'] = ['Hochschule | Fachbereich', 'Bitte wählen Sie den Fachbereich aus, in dem die Klausur geschrieben wird'];
 
 $GLOBALS['TL_LANG']['tl_exams']['department1'] = 'FB 01 - BAU - Bauwesen (Gi)';
@@ -37,9 +37,6 @@ $GLOBALS['TL_LANG']['tl_exams']['department11'] = 'FB 14 - WI - Wirtschaftsingen
 $GLOBALS['TL_LANG']['tl_exams']['department12'] = 'FB 21 - MuK - Management und Kommunikation (Gi, Fb)';
 $GLOBALS['TL_LANG']['tl_exams']['department13'] = 'ZDH - Wissenschaftliches Zentrum Duales Hochschulstudium, StudiumPlus (Wz)';
 $GLOBALS['TL_LANG']['tl_exams']['department14'] = 'JLU';
-
-
-
 
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'] = ['Titel', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'] = ['Vorname', ''];

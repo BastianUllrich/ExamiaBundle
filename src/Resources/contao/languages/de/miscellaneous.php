@@ -35,9 +35,10 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'] = 'Ja, Mitgl
 $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'] = 'Nein, nicht löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied wurde erfolgreich gelöscht.';
 
-$GLOBALS['TL_LANG']['miscellaneous']['member'] = "Mitglied";
-
 $GLOBALS['TL_LANG']['miscellaneous']['editMember'] = "Mitgliedsdetails bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";
 $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'] = "Die Änderungen wurden gespeichert";
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'] = "Zurück zur Mitgliederverwaltung";
+
+$GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
+$GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";

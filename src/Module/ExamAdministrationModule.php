@@ -226,7 +226,6 @@ class ExamAdministrationModule extends \Module
         // Tag der Klausur in timestamp umwandeln
 
         $dayExamMidnight = $detailDate;
-        $dayExamMidnight .= " 00:00:00";
         $dayExamMidnightTimeStamp = strtotime($dayExamMidnight);
         $dayExamLastSecond = $dayExamMidnightTimeStamp + 3600;
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task

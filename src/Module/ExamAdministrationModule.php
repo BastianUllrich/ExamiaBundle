@@ -227,14 +227,16 @@ class ExamAdministrationModule extends \Module
                                                     WHERE tl_supervisors_exams.exam_id=$examDetails->id
                                                     AND tl_supervisors_exams.supervisor_id=tl_member.id
                                                     ")->query();
+        $i=0;
         $supervisorsData = array();
         while ($result->next()) {
             // Variablen für das Template setzen
-            $supervisorsData['firstname'] = $result->firstname;
-            $supervisorsData['lastname'] = $result->lastname;
-            $supervisorsData['time_from'] = $result->time_from;
-            $supervisorsData['time_until'] = $result->time_until;
-            $supervisorsData['task'] = $result->task;
+            $supervisorsData[$i]['firstname'] = $result->firstname;
+            $supervisorsData[$i]['lastname'] = $result->lastname;
+            $supervisorsData[$i]['time_from'] = $result->time_from;
+            $supervisorsData[$i]['time_until'] = $result->time_until;
+            $supervisorsData[$i]['task'] = $result->task;
+            $i++;
         }
         $this->Template->supervisorsDataList = $supervisorsData;
 

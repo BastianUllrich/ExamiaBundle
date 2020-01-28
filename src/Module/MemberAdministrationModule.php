@@ -101,7 +101,7 @@ class MemberAdministrationModule extends \Module
             $this->Template->detailUsername = $memberDetailsData->username;
             $this->Template->detailEmail = $memberDetailsData->email;
             $this->Template->detailDateOfBirth = date("d.m.Y", $memberDetailsData->dateOfBirth);
-            $this->Template->detailGender = $memberDetailsData->gender;
+            $this->Template->detailGender = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->gender];
             $this->Template->detailPhone = $memberDetailsData->phone;
             $this->Template->detailMobile = $memberDetailsData->mobile;
             $this->Template->detailCourse = $memberDetailsData->study_course;
@@ -117,7 +117,14 @@ class MemberAdministrationModule extends \Module
             $this->Template->detailHandicaps = $detailHandicaps;
 
             $this->Template->detailHandicapsOthers = $memberDetailsData->handicaps_others;
-            $this->Template->detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
+
+            // Sprachvariablen in Array "REHA-Tools" einsetzen
+            $detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
+            for ($i=1; $i < sizeof($detailRehabDevices); $i++) {
+                $detailRehabDevices[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailRehabDevices[$i]];
+            }
+            $this->Template->detailRehabDevices = $detailRehabDevices;
+
             $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;
             $this->Template->detailExtraTime = $memberDetailsData->extra_time;
             $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_minutes_percent];

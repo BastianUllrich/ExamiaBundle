@@ -139,6 +139,7 @@ $GLOBALS['TL_LANG']['tl_member']['comments'] = array
                 'Weitere Anmerkungen',
                 'Bitte geben Sie weitere Anmerkungen ein'
         );
+
 $GLOBALS['TL_LANG']['tl_member']['male'] = 'männlich';
 $GLOBALS['TL_LANG']['tl_member']['female'] = 'weiblich';
 $GLOBALS['TL_LANG']['tl_member']['divers'] = 'divers';

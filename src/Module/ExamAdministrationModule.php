@@ -201,7 +201,7 @@ class ExamAdministrationModule extends \Module
         // Späteste Endzeit = Startzeit + Maximale Dauer über date()- und time()-Funktion
         //$this->Template->detailMaxEndtime = date("H:i", (time(($examDetails->date+($maxDuration*60)))));
         $this->Template->detailMaxEndtime = $maxDuration;
-        $this->Template->detailMaxEndtime .= "Minuten";
+        $this->Template->detailMaxEndtime .= " Minuten";
 
         // Dozent zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;

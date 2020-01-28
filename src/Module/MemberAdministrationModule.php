@@ -111,7 +111,7 @@ class MemberAdministrationModule extends \Module
 
             // Sprachvariablen in Array "Behinderungen" einsetzen
             $detailHandicaps = unserialize($memberDetailsData->handicaps);
-            for ($i=1; $i < sizeof($detailHandicaps); $i++) {
+            for ($i=0; $i < sizeof($detailHandicaps); $i++) {
                 $detailHandicaps[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailHandicaps[$i]];
             }
             $this->Template->detailHandicaps = $detailHandicaps;
@@ -120,7 +120,7 @@ class MemberAdministrationModule extends \Module
 
             // Sprachvariablen in Array "REHA-Tools" einsetzen
             $detailRehabDevices = unserialize($memberDetailsData->rehab_devices);
-            for ($i=1; $i < sizeof($detailRehabDevices); $i++) {
+            for ($i=0; $i < sizeof($detailRehabDevices); $i++) {
                 $detailRehabDevices[$i] = $GLOBALS['TL_LANG']['tl_member'][$detailRehabDevices[$i]];
             }
             $this->Template->detailRehabDevices = $detailRehabDevices;

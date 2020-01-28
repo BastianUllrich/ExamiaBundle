@@ -225,9 +225,11 @@ class ExamAdministrationModule extends \Module
         // Aufsichten / Schreibassistenten heraussuchen
         // Tag der Klausur in timestamp umwandeln
 
-        $dayExamMidnight = $detailDate;
-        $dayExamMidnightTimeStamp = strtotime($dayExamMidnight);
+        $dayExamMidnightTimeStamp = strtotime($detailDate);
+        $this->Template->dayExamMidnightTimeStamp = $dayExamMidnightTimeStamp;
         $dayExamLastSecond = $dayExamMidnightTimeStamp + 3600;
+
+        $this->Template->dayExamLastSecond = $dayExamLastSecond;
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_member, tl_supervisors_exams
                                                     WHERE tl_supervisors_exams.supervisor_id=tl_member.id

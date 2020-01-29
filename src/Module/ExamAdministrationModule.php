@@ -486,7 +486,7 @@ class ExamAdministrationModule extends \Module
     public function saveAttendeeChanges($examID, $attendeeID) {
 
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
-        $id = $exam->id;
+        $id = $attendeeExam->id;
         $this->Template->showEditAttendeeForm = false;
 
         $attendeeExam->seat = \Input::post('seat');

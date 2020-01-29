@@ -156,7 +156,6 @@ class ExamAdministrationModule extends \Module
                 $rehab_devices = unserialize($result->rehab_devices);
                 for ($j = 0; $j < sizeof($rehab_devices); $j++) {
                     if ($rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
-                    else $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
                 }
                 $i++;
             }

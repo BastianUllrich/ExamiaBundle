@@ -114,7 +114,7 @@ class ExamAdministrationModule extends \Module
         }
 
         if ($_GET["do"] == "editDetails") {
-            $this->Template->editDetails = true;
+            $this->Template->showEditForm = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
             $this->setLangValuesViewEditDetails();
@@ -127,6 +127,7 @@ class ExamAdministrationModule extends \Module
 
         if ($_GET["do"] == "editAttendees") {
             $this->Template->editAttendees = true;
+            $this->Template->showEditAttendeeForm = false;
             $exam = $_GET["exam"];
             $result = Database::getInstance()->prepare("SELECT 
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,

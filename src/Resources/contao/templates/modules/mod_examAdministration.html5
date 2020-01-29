@@ -320,9 +320,11 @@ elseif ($this->editAttendees === true) {
                 $i++;
             endforeach;
             if (sizeof($this->attendeeDataList) == 0) {
-            <tr class="row_0 even">
-                <td class="body col_0" colspan="6"><?= $this->noAttendeeExam; ?></td>
-            </tr>
+                ?>
+                <tr class="row_0 even">
+                    <td class="body col_0" colspan="6"><?= $this->noAttendeeExam; ?></td>
+                </tr>
+                <?php
             }
             ?>
             </tbody>

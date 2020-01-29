@@ -21,9 +21,17 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
         <tbody>
         <?php foreach($this->examDataList as $examData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
-                <td class="body col_0 col_first"><?= $examData['date']; ?></td>
+                <td class="body col_0 col_first">
+                    <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'dateDESC'; else echo 'dateASC';" title="<?= $this->orderByDateText; ?>">
+                        <?= $examData['date']; ?>
+                    </a>
+                </td>
                 <td class="body col_1"><?= $examData['begin']; ?></td>
-                <td class="body col_2"><?= $examData['title']; ?></td>
+                <td class="body col_2">
+                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'titleASC') echo 'titleDESC'; else echo 'titleASC';" title="<?= $this->orderByTitleText; ?>">
+                    <?= $examData['title']; ?>
+                </a>
+                </td>
                 <td class="body col_3"><?= $examData['department']; ?></td>
                 <td class="body col_4 col_last">
                     <a href="{{env::request}}?do=viewDetails&exam=<?= $examData['id']; ?>" title="Klausurdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Klausurdetails"></a>

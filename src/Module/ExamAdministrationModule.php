@@ -67,15 +67,36 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
 
+        /* Deaktiviert -> alle Klausuren anzeigen, auch vergangene!
         // Heute 0 Uhr festlegen -> wichtig für Datenbankabfrage
         $today_midnight = date("d.m.Y");
         $today_midnight .= " ";
         $today_midnight .= "00:00:00";
         $today_midnight_time = strtotime($today_midnight);
+        */
 
-        // Daten der Klausuren aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
+        // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
-        $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams WHERE date >= $today_midnight_time ORDER BY date")->query();
+        if (!$_GET["orderBy"] || $_GET["orderBy"] == "dateASC") {
+            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
+            $this->Template->isOrderedBy = "dateASC";
+            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
+        }
+        elseif ($_GET["orderBy"] == "dateDESC") {
+            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
+            $this->Template->isOrderedBy = "dateDESC";
+            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
+        }
+        elseif ($_GET["orderBy"] == "titleASC") {
+            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title ASC")->query();
+            $this->Template->isOrderedBy = "titleASC";
+            $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleDESC'];
+        }
+        elseif ($_GET["orderBy"] == "titleDESC") {
+            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title DESC")->query();
+            $this->Template->isOrderedBy = "titleDESC";
+            $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleASC'];
+        }
 
         $i = 0;
         $examData = array();

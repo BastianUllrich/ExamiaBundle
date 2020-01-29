@@ -135,10 +135,10 @@ class ExamAdministrationModule extends \Module
             if (array_key_exists('deleteAttendee', $_GET)) {
                 $this->deleteAttendee($exam);
             }
-            /*
-            elseif (array_key_exists('editAttendee', $_GET)) {
 
-            }*/
+            elseif (array_key_exists('editAttendee', $_GET)) {
+                $this->editAttendee($exam);
+            }
             else {
                 $this->showAttendeeList($exam);
             }
@@ -258,7 +258,7 @@ class ExamAdministrationModule extends \Module
         /* Aufsichten / Schreibassistenten heraussuchen */
         // Tag der Klausur in timestamp umwandeln (0:00 Uhr und 23:59:59)
         $dayExamMidnightTimeStamp = strtotime($detailDate);
-        $dayExamLastSecond = $dayExamMidnightTimeStamp + 86400;
+        $dayExamLastSecond = $dayExamMidnightTimeStamp + 86399;
 
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_member, tl_supervisors_exams
@@ -467,6 +467,101 @@ class ExamAdministrationModule extends \Module
             \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam='.$examID);
         }
     }
+
+    // Teilnehmer bearbeiten
+    public function editAttendee($exam) {
+        $this->Template->editAttendees = true;
+        $this->Template->attendeeChangesSaved=false;
+        $examID = $exam;
+        $attendeeID = $_GET['editAttendee'];
+
+        $this->setEditAttendeeLangValues();
+        $this->setEditAttendeeValues($examID, $attendeeID);
+
+    }
+
+    public function setEditAttendeeValues($examID, $attendeeID) {
+
+        $result = Database::getInstance()->prepare("SELECT 
+                                                    tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
+                                                    tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, 
+                                                    tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others, tl_attendees_exams.status
+                                                    FROM tl_member, tl_attendees_exams
+                                                    WHERE tl_member.id=$attendeeID
+                                                    AND tl_attendees_exams.exam_id = $examID
+                                                    AND tl_attendees_exams.attendee_id=$attendeeID
+                                                    ")->query();
+
+        $examData = ExamsModel::findBy('id', $examID);
+        $this->Template->examTitle = $examData->title;
+        $this->Template->examID = $examID;
+        $this->Template->username = $result->username;
+        $this->Template->firstname = $result->firstname;
+        $this->Template->lastname = $result->lastname;
+        $this->Template->contactPerson = $GLOBALS['TL_LANG']['tl_member'][$result->contact_person];
+        $this->Template->seat = "noseat";
+        if (!empty($result->seat)) {
+            $this->Template->seat = $result->seat;
+        }
+        $this->Template->rehab_devices = unserialize($result->rehab_devices);
+        $this->Template->rehabDevicesOthers = $result->rehab_devices_others;
+        $this->Template->extraTime = $result->extra_time;
+        $this->Template->extraTimeUnit = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+        $this->Template->status = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
+    }
+
+    public function setEditAttendeeLangValues() {
+        $this->Template->langEditAttendee = $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'];
+        $this->Template->langExam = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+
+        $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
+        $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
+        $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
+        $this->Template->langContactPerson = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
+
+        $this->Template->langSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
+        $this->Template->langNoSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['no_seat'];
+        $this->Template->langSeat1 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat1'];
+        $this->Template->langSeat2 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat2'];
+        $this->Template->langSeat3 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat3'];
+        $this->Template->langSeat4 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat4'];
+        $this->Template->langSeat5 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat5'];
+        $this->Template->langSeat6 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat6'];
+        $this->Template->langSeat7 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat7'];
+        $this->Template->langSeat8 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat8'];
+        $this->Template->langSeat9 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat9'];
+        $this->Template->langSeat10 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat10'];
+        $this->Template->langSeat11 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat11'];
+
+
+        $this->Template->langRehabDevices = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'][0];
+        $this->Template->langPC = $GLOBALS['TL_LANG']['tl_member']['pc'];
+        $this->Template->langBlindWorkspace = $GLOBALS['TL_LANG']['tl_member']['blind workspace'];
+        $this->Template->langZoomtext = $GLOBALS['TL_LANG']['tl_member']['Zoomtext'];
+        $this->Template->langScreenMagnifier = $GLOBALS['TL_LANG']['tl_member']['screen magnifier'];
+        $this->Template->langScreenReader = $GLOBALS['TL_LANG']['tl_member']['screen reader'];
+        $this->Template->langA3Print = $GLOBALS['TL_LANG']['tl_member']['a3 print'];
+        $this->Template->langObscuration = $GLOBALS['TL_LANG']['tl_member']['obscuration'];
+        $this->Template->langWritingAssistance = $GLOBALS['TL_LANG']['tl_member']['writing assistance'];
+        $this->Template->langHighTable = $GLOBALS['TL_LANG']['tl_member']['high table'];
+        $this->Template->langNearDoor = $GLOBALS['TL_LANG']['tl_member']['near door'];
+        $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
+        $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
+
+        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
+
+        $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
+        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];
+        $this->Template->langExtraTimeMinutes = $GLOBALS['TL_LANG']['tl_member']['minutes'];
+        $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
+
+        $this->Template->langStatus = $GLOBALS['TL_LANG']['tl_attendees_exams']['status'][0];
+        $this->Template->langStatusInProgress = $GLOBALS['TL_LANG']['tl_attendees_exams']['in_progress'][0];
+        $this->Template->langStatusConfirmed = $GLOBALS['TL_LANG']['tl_attendees_exams']['confirmed'][0];
+
+        $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
+    }
+
 
 
 

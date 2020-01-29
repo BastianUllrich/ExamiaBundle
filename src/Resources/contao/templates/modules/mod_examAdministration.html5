@@ -339,6 +339,235 @@ elseif ($this->editAttendees === true) {
             <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
         <?php
     }
+    if ($this->showEditAttendeeForm === true) {
+        if ($this->attendeeChangesSaved === true) {
+            ?>
+            <p><em><?= $this->changesSavedMessage; ?></em></p>
+            <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
+            <?php
+        }
+        else {
+            ?>
+            <p><strong><?= $this->langEditAttendee; ?></strong></p>
+            <form action="" id="<?= $this->formId; ?>" method="post">
+                <div class="formbody">
+                    <input type="hidden" name="FORM_SUBMIT" value="editExam">
+                    <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+                    <div class="widget widget-text">
+                        <label for="username">
+                            <?= $this->langUsername; ?>
+                        </label>
+                        <input type="text" name="username" id="username" class="text" value="<?= $this->username; ?>" disable>
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="firstname">
+                            <?= $this->langFirstname; ?>
+                        </label>
+                        <input type="text" name="firstname" id="firstname" class="text" value="<?= $this->firstname; ?>" disable>
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="lastname">
+                            <?= $this->langLastname; ?>
+                        </label>
+                        <input type="text" name="lastname" id="lastname" class="text" value="<?= $this->lastname; ?>" disable>
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="contactPerson">
+                            <?= $this->langContactPerson; ?>
+                        </label>
+                        <input type="text" name="contactPerson" id="contactPerson" class="text" value="<?= $this->contactPerson; ?>" disable>
+                    </div>
+                    <div class="widget widget-select select mandatory">
+                        <label for="seat" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langSeat; ?>
+                            <span class="mandatory">*</span>
+                        </label>
+                        <select name="seat" id="seat" class="select mandatory" required="">
+                            <option value="noseat" <?php if ($this->seat == "noseat") echo "selected"; ?>><?= $this->langNoSeat; ?></option>
+                            <option value="seat1" <?php if ($this->seat == "seat1") echo "selected"; ?>><?= $this->langSeat1; ?></option>
+                            <option value="seat2" <?php if ($this->seat == "seat2") echo "selected"; ?>><?= $this->langSeat2; ?></option>
+                            <option value="seat3" <?php if ($this->seat == "seat3") echo "selected"; ?>><?= $this->langSeat3; ?></option>
+                            <option value="seat4" <?php if ($this->seat == "seat4") echo "selected"; ?>><?= $this->langSeat4; ?></option>
+                            <option value="seat5" <?php if ($this->seat == "seat5") echo "selected"; ?>><?= $this->langSeat5; ?></option>
+                            <option value="seat6" <?php if ($this->seat == "seat6") echo "selected"; ?>><?= $this->langSeat6; ?></option>
+                            <option value="seat7" <?php if ($this->seat == "seat7") echo "selected"; ?>><?= $this->langSeat7; ?></option>
+                            <option value="seat8" <?php if ($this->seat == "seat8") echo "selected"; ?>><?= $this->langSeat8; ?></option>
+                            <option value="seat9" <?php if ($this->seat == "seat9") echo "selected"; ?>><?= $this->langSeat9; ?></option>
+                            <option value="seat10" <?php if ($this->seat == "seat10") echo "selected"; ?>><?= $this->langSeat10; ?></option>
+                            <option value="seat11" <?php if ($this->seat == "seat11") echo "selected"; ?>><?= $this->langSeat11; ?></option>
+                        </select>
+                    </div>
+
+                    <div class="widget widget-checkbox">
+                        <fieldset id="rehab_devices" class="checkbox_container">
+                            <legend><?= $this->langRehabDevices; ?></legend>
+                            <label id="lbl_pc" for="pc">
+                                <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "pc") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langPC; ?></span>
+                            </label>
+                            <label id="lbl_blind_workspace" for="blind_workspace">
+                                <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind workspace"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "blind workspace") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langBlindWorkspace; ?></span>
+                            </label>
+                            <label id="lbl_zoomtext" for="zoomtext">
+                                <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="Zoomtext"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "Zoomtext") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langZoomtext; ?></span>
+                            </label>
+                            <label id="lbl_screen_magnifier" for="screen_magnifier">
+                                <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen magnifier"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "screen magnifier") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langScreenMagnifier; ?></span>
+                            </label>
+                            <label id="lbl_screen_reader" for="screen_reader">
+                                <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen reader"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "screen reader") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langScreenReader; ?></span>
+                            </label>
+                            <label id="lbl_a3_print" for="a3_print">
+                                <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3 print"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "a3 print") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langA3Print; ?></span>
+                            </label>
+                            <label id="lbl_obscuration" for="obscuration">
+                                <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "obscuration") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langObscuration; ?></span>
+                            </label>
+                            <label id="lbl_writing_assistance" for="writing_assistance">
+                                <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing assistance"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "writing assistance") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langWritingAssistance; ?></span>
+                            </label>
+                            <label id="lbl_high_table" for="high_table">
+                                <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high table"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "high table") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langHighTable; ?></span>
+                            </label>
+                            <label id="lbl_near_door" for="near_door">
+                                <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near door"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "near door") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langNearDoor; ?></span>
+                            </label>
+                            <label id="lbl_own_room" for="own_room">
+                                <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own room"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "own room") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langOwnRoom; ?></span>
+                            </label>
+                            <label id="lbl_different" for="different">
+                                <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different"
+                                <?php
+                                for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                                    if ($this->rehab_devices[$i] == "different") echo "checked";
+                                }
+                                ?>
+                                >
+                                <span><?= $this->langRDDifferent; ?></span>
+                            </label>
+                        </fieldset>
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="rehab_devices_others">
+                            <?= $this->langRehabDevicesOthers; ?>
+                        </label>
+                        <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehab_devices_others; ?>" maxlength="30" autocomplete="on">
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="extraTime">
+                            <?= $this->langExtraTime; ?>
+                        </label>
+                        <input type="text" name="extraTime" id="extraTime" class="text" value="<?= $this->extraTime; ?>">
+                    </div>
+                    <div class="widget widget-select select">
+                        <label for="extraTimeUnit" class="select">
+                            <?= $this->langExtraTimeUnit; ?>
+                        </label>
+                        <select name="extraTimeUnit" id="extraTimeUnit" class="select">
+                            <option value="minutes" <?php if ($this->extraTimeUnit == "minutes") echo "selected"; ?>><?= $this->langExtraTimeMinutes; ?></option>
+                            <option value="percent" <?php if ($this->extraTimeUnit == "percent") echo "selected"; ?>><?= $this->langExtraTimePercent; ?></option>
+                        </select>
+                    </div>
+
+                    <div class="widget widget-select select mandatory">
+                        <label for="status" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langStatus; ?>
+                            <span class="mandatory">*</span>
+                        </label>
+                        <select name="status" id="status" class="select mandatory" required="">
+                            <option value="in_progress" <?php if ($this->status == "in_progress") echo "selected"; ?>><?= $this->langStatusInProgress; ?></option>
+                            <option value="confirmed" <?php if ($this->status == "confirmed") echo "selected"; ?>><?= $this->langStatusConfirmed; ?></option>
+                        </select>
+                    </div>
+
+                    <div class="widget widget-submit">
+                        <button type="submit" class="submit"><?= $this->langSaveChanges; ?></button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="right">{{link::back}}</p>
+            <?php
+        }
+    }
 }
 $this->endblock();
 ?>

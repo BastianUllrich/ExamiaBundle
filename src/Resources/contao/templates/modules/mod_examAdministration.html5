@@ -332,10 +332,12 @@ elseif ($this->editAttendees === true) {
         <p>{{link::back}}</p>
         <?php
     }
-    if ($this->showDeleteAttendeeConfirmation = true) {
+    if ($this->showDeleteAttendeeConfirmation === true) {
+        ?>
         <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
         <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
         <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+        <?php
     }
 }
 $this->endblock();

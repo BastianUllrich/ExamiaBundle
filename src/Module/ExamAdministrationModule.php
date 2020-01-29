@@ -385,6 +385,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
         $this->Template->headerExtraTime = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
+        $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] ;
     }
 
     public function setExamValuesEdit($examData) {

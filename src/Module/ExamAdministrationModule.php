@@ -154,11 +154,11 @@ class ExamAdministrationModule extends \Module
                 $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
                 // Überprüfen, ob eine Schreibassistenz benötigt wird
                 $rehab_devices = unserialize($result->rehab_devices);
-                for ($j = 0; $j < sizeof($this->$rehab_devices); $j++) {
+                for ($j = 0; $j < sizeof($rehab_devices); $j++) {
                     if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
                     else $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
                 }
-
+                $attendeeData[$i]['writingAssistance'] .= sizeof($rehab_devices);
                 $i++;
             }
             $this->Template->attendeeDataList = $attendeeData;

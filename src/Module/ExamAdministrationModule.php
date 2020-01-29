@@ -471,6 +471,7 @@ class ExamAdministrationModule extends \Module
     // Teilnehmer bearbeiten
     public function editAttendee($exam) {
         $this->Template->editAttendees = true;
+        $this->Template->showEditAttendeeForm = true;
         $this->Template->attendeeChangesSaved=false;
         $examID = $exam;
         $attendeeID = $_GET['editAttendee'];

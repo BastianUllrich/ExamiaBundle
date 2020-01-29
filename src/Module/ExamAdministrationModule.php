@@ -276,11 +276,11 @@ class ExamAdministrationModule extends \Module
         $this->Template->langRegularDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langMaxEndtime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
-        $this->Template->langLecturerTitle = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'];
-        $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'];
-        $this->Template->langLecturerLastname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'];
-        $this->Template->langLecturerEmail = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'];
-        $this->Template->langLecturerMobile = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'];
+        $this->Template->langLecturerTitle = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
+        $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'][0];
+        $this->Template->langLecturerLastname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];
+        $this->Template->langLecturerEmail = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'][0];
+        $this->Template->langLecturerMobile = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'][0];
         $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->langDepartmentLong = $GLOBALS['TL_LANG']['tl_exams']['department'];
         $this->Template->langDepartment1 = $GLOBALS['TL_LANG']['tl_exams']['department1'];

@@ -152,7 +152,7 @@ elseif ($this->showEditForm === true) {
                 <div class="widget widget-text mandatory">
                     <label for="title" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?></span>
-                        <?= $this->langTitle; ?>
+                        <?= $this->langExamTitel; ?>
                         <span class="mandatory">*</span>
                     </label>
                     <input type="text" name="title" id="title" class="text mandatory" value="<?= $this->title; ?>" required="" maxlength="255" autocomplete="on">

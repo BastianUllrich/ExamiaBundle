@@ -329,6 +329,7 @@ elseif ($this->editAttendees === true) {
             ?>
             </tbody>
         </table>
+        <p class="right">{{link::back}}</p>
         <?php
     }
 }

@@ -347,6 +347,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->langHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
 
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
+
+        $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
 
     public function setLangValuesEditAttendees() {

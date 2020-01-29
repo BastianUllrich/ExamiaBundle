@@ -135,7 +135,7 @@ elseif ($this->showDetails === true) {
         </tr>
         </tbody>
     </table>
-    <p>{{link::back}}</p>
+<p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
     <?php
 }
 // Klausur bearbeiten

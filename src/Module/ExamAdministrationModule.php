@@ -129,47 +129,16 @@ class ExamAdministrationModule extends \Module
         if ($_GET["do"] == "editAttendees") {
             $this->Template->editAttendees = true;
             $this->Template->showEditAttendeeForm = false;
+            $this->Template->showDeleteAttendeeConfirmation = false;
             $exam = $_GET["exam"];
-            $examData = ExamsModel::findBy('id', $exam);
-            $this->Template->examTitle = $examData->title;
-            $this->Template->examID = $exam;
-            $result = Database::getInstance()->prepare("SELECT 
-                                                        tl_member.firstname, tl_member.lastname, tl_member.id,
-                                                        tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
-                                                        FROM tl_member, tl_exams, tl_attendees_exams
-                                                        WHERE tl_member.id=tl_attendees_exams.attendee_id
-                                                        AND tl_attendees_exams.exam_id = tl_exams.id
-                                                        AND tl_exams.id = $exam
-                                                        ")->query();
-            $i = 0;
-            $attendeeData = array();
-            while ($result->next()) {
-                // Variablen für das Template setzen
-                $attendeeData[$i]['id'] = $result->id;
-                $attendeeData[$i]['firstname'] = $result->firstname;
-                $attendeeData[$i]['lastname'] = $result->lastname;
-                // Sitzplatz ausgeben  -> Default: Kein Sitzplatz
-                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['no_seat'];
-                if (!empty($result->seat)) {
-                    $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
-                }
 
-                // Zeitverlängerung zusammensetzen
-                $attendeeData[$i]['extraTime'] = $result->extra_time;
-                $attendeeData[$i]['extraTime'] .= " ";
-                $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
-
-                // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
-                $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
-                $rehab_devices = unserialize($result->rehab_devices);
-                for ($j = 0; $j < sizeof($rehab_devices); $j++) {
-                    if ($rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
-                }
-                $i++;
+            if (!$_GET("editAttendee") && !$_GET("deleteAttendee")) {
+                $this->showAttendeeList($exam);
             }
-            $this->Template->attendeeDataList = $attendeeData;
 
-            $this->setLangValuesEditAttendees();
+            if (!$_GET("editAttendee") && $_GET("deleteAttendee")) {
+                $this->deleteAttendee($exam);
+            }
         }
 
         // Mitglied löschen
@@ -433,6 +402,67 @@ class ExamAdministrationModule extends \Module
         }
     }
 
+    // Teilnehmer anzeigen
+    public function showAttendeeList($exam) {
+        $examData = ExamsModel::findBy('id', $exam);
+        $this->Template->examTitle = $examData->title;
+        $this->Template->examID = $exam;
+        $result = Database::getInstance()->prepare("SELECT 
+                                                        tl_member.firstname, tl_member.lastname, tl_member.id,
+                                                        tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
+                                                        FROM tl_member, tl_exams, tl_attendees_exams
+                                                        WHERE tl_member.id=tl_attendees_exams.attendee_id
+                                                        AND tl_attendees_exams.exam_id = tl_exams.id
+                                                        AND tl_exams.id = $exam
+                                                        ")->query();
+        $i = 0;
+        $attendeeData = array();
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $attendeeData[$i]['id'] = $result->id;
+            $attendeeData[$i]['firstname'] = $result->firstname;
+            $attendeeData[$i]['lastname'] = $result->lastname;
+            // Sitzplatz ausgeben  -> Default: Kein Sitzplatz
+            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['no_seat'];
+            if (!empty($result->seat)) {
+                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+            }
+
+            // Zeitverlängerung zusammensetzen
+            $attendeeData[$i]['extraTime'] = $result->extra_time;
+            $attendeeData[$i]['extraTime'] .= " ";
+            $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+
+            // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
+            $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
+            $rehab_devices = unserialize($result->rehab_devices);
+            for ($j = 0; $j < sizeof($rehab_devices); $j++) {
+                if ($rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
+            }
+            $i++;
+        }
+        $this->Template->attendeeDataList = $attendeeData;
+        $this->setLangValuesEditAttendees();
+    }
+
+    // Teilnehmer löschen
+    public function deleteAttendee($exam) {
+        $this->Template->showDeleteAttendeeConfirmation = true;
+        $examID = $exam;
+        $attendeeID = $_GET['deleteAttendee'];
+        $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationQuestion'];
+        $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'];
+        $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'];
+
+        if ($_GET['confirmed'] == "yes") {
+            if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$examID AND attendee_id=$attendeeID")->execute()->affectedRows) {
+                \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam='.$examID);
+            }
+        }
+        elseif ($_GET["confirmed"] == "no") {
+            \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam='.$examID);
+        }
+    }
 
 
 

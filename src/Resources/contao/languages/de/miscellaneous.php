@@ -57,4 +57,8 @@ $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'] = 'nicht be
 
 $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] = "Keine Teilnehmer vorhanden";
 
+$GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationQuestion'] = 'Wollen Sie den Teilnehmer wirklich löschen?';
+$GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'] = 'Ja, Teilnehmer löschen';
+$GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'] = 'Nein, nicht löschen';
+
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";

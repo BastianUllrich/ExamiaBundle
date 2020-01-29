@@ -45,6 +45,9 @@ $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'] = "Zur
 $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['examDetails'] = "Klausurdetails";
 
+$GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] = "Teilnehmer anzeigen";
+$GLOBALS['TL_LANG']['miscellaneous']['exam'] = "Klausur";
+
 $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'] = "Sortieren";
 $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'] = "Nach Datum absteigend sortieren";
 $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'] = "Nach Datum aufsteigend sortieren";

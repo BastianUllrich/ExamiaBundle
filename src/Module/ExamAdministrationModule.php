@@ -130,6 +130,9 @@ class ExamAdministrationModule extends \Module
             $this->Template->editAttendees = true;
             $this->Template->showEditAttendeeForm = false;
             $exam = $_GET["exam"];
+            $examData = ExamsModel::findBy('id', $exam);
+            $this->Template->examTitle = $examData->title;
+            $this->Template->examID = $exam;
             $result = Database::getInstance()->prepare("SELECT 
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
                                                         tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
@@ -369,6 +372,8 @@ class ExamAdministrationModule extends \Module
     }
 
     public function setLangValuesEditAttendees() {
+        $this->Template->langShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] ;
+        $this->Template->langExam = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $this->Template->headerFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->headerLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->headerSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];

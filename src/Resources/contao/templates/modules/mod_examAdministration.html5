@@ -290,7 +290,7 @@ elseif ($this->showEditForm === true) {
 elseif ($this->editAttendees === true) {
     if ($this->showEditAttendeeForm === false) {
         ?>
-        <p><strong><?= $this->langShowAttendees; ?> - <?= $this->attendeeFullName; ?></strong></p>
+        <p><strong><?= $this->langShowAttendees; ?></strong></p>
         <p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
         <table class="all_records">
             <thead>

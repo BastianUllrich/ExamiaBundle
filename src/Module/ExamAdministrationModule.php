@@ -356,7 +356,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->headerSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
-        $this->Template->headerExtraTime = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
+        $this->Template->headerStatus = $GLOBALS['TL_LANG']['tl_attendees_exams']['status'][0];
         $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] ;
         $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
@@ -413,7 +413,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->examID = $exam;
         $result = Database::getInstance()->prepare("SELECT 
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
-                                                        tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
+                                                        tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices
                                                         FROM tl_member, tl_exams, tl_attendees_exams
                                                         WHERE tl_member.id=tl_attendees_exams.attendee_id
                                                         AND tl_attendees_exams.exam_id = tl_exams.id
@@ -432,10 +432,7 @@ class ExamAdministrationModule extends \Module
                 $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
             }
 
-            // Zeitverlängerung zusammensetzen
-            $attendeeData[$i]['extraTime'] = $result->extra_time;
-            $attendeeData[$i]['extraTime'] .= " ";
-            $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            $attendeeData[$i]['status'] = $result->status;
 
             // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];

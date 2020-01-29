@@ -299,7 +299,7 @@ elseif ($this->editAttendees === true) {
                 <th class="head"><?= $this->headerLastname; ?></th>
                 <th class="head"><?= $this->headerSeat; ?></th>
                 <th class="head"><?= $this->headerWritingAssistance; ?></th>
-                <th class="head"><?= $this->headerExtraTime; ?></th>
+                <th class="head"><?= $this->headerStatus; ?></th>
                 <th class="head col_last"><?= $this->headerAction; ?></th>
             </tr>
             </thead>
@@ -310,7 +310,7 @@ elseif ($this->editAttendees === true) {
                     <td class="body col_1"><?= $attendeeData['lastname']; ?></td>
                     <td class="body col_2"><?= $attendeeData['seat']; ?></td>
                     <td class="body col_3"><?= $attendeeData['writingAssistance']; ?></td>
-                    <td class="body col_4"><?= $attendeeData['extraTime']; ?></td>
+                    <td class="body col_4"><?= $attendeeData['status']; ?></td>
                     <td class="body col_5 col_last">
                         <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&editAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>
                         <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer entfernen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Teilnehmer entfernen"></a>
@@ -355,7 +355,9 @@ elseif ($this->editAttendees === true) {
                     <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
                     <div class="widget widget-text">
                         <span>
-                            <?= $this->langUsername; ?>
+                            <strong>
+                            <?= $this->langUsername; ?>:
+                            </strong>
                         </span>
                         <span>
                             <?= $this->username; ?>
@@ -363,15 +365,21 @@ elseif ($this->editAttendees === true) {
                     </div>
                     <div class="widget widget-text">
                         <span>
-                            <?= $this->langFirstname; ?>
+                            <strong>
+                            <?= $this->langFirstname; ?>:
+                            </strong>
                         </span>
                         <span>
-                            <?= $this->firstname; ?>
+                            <strong>
+                            <?= $this->firstname; ?>:
+                            </strong>
                         </span>
                     </div>
                     <div class="widget widget-text">
                         <span>
-                            <?= $this->langLastname; ?>
+                            <strong>
+                            <?= $this->langLastname; ?>:
+                            </strong>
                         </span>
                         <span>
                             <?= $this->lastname; ?>

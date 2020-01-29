@@ -344,6 +344,7 @@ class ExamAdministrationModule extends \Module
         $exam->department = \Input::post('department');
         $exam->status = \Input::post('status');
         $exam->tools = \Input::post('tools');
+        $exam->remarks = \Input::post('remarks');
         $exam->lecturer_title = \Input::post('lecturerTitle');
         $exam->lecturer_prename = \Input::post('lecturerFirstname');
         $exam->lecturer_lastname = \Input::post('lecturerLastname');

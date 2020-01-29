@@ -12,16 +12,16 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
         <thead>
         <tr>
             <th class="head col_last">
+                <?= $this->headerDate; ?>
                 <a href="klausurverwaltung/klausurverwaltung.html?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByDateText; ?>">
-                    <?= $this->headerDate; ?>
-                    <img src="system/themes/flexible/icons/<?= $this->orderImage; ?>" alt="<?= $this->orderAltText; ?>">
+                    <img src="system/themes/flexible/icons/<?= $this->orderImage; ?>" alt="<?= $this->orderAltText; ?>" class="orderImg">
                 </a>
             </th>
             <th class="head col_last"><?= $this->headerBegin; ?></th>
             <th class="head col_last">
                 <?= $this->headerExamTitle; ?>
                 <a href="klausurverwaltung/klausurverwaltung.html?orderBy=title<?php if ($this->isOrderedBy == 'titleASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByTitleText; ?>">
-                    <img src="system/themes/flexible/icons/<?= $this->orderImage; ?>" alt="<?= $this->orderAltText; ?>">
+                    <img src="system/themes/flexible/icons/<?= $this->orderImage; ?>" alt="<?= $this->orderAltText; ?>" class="orderImg">
                 </a>
             </th>
             <th class="head col_last"><?= $this->headerDepartment; ?></th>

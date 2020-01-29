@@ -155,8 +155,8 @@ class ExamAdministrationModule extends \Module
                 // Überprüfen, ob eine Schreibassistenz benötigt wird
                 $rehab_devices = unserialize($result->rehab_devices);
                 for ($j = 0; $j < sizeof($this->$rehab_devices); $j++) {
-                    if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][0];
-                    else $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][1];
+                    if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
+                    else $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
                 }
 
                 $i++;

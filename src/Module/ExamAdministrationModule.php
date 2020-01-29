@@ -432,7 +432,7 @@ class ExamAdministrationModule extends \Module
                 $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
             }
 
-            $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
+            $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
 
             // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];

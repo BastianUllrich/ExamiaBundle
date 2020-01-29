@@ -165,7 +165,7 @@ class ExamAdministrationModule extends \Module
         }
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
-            $this->saveChanges($examData->usertype, $member);
+            $this->saveChanges($examID);
         }
     }
 
@@ -276,6 +276,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langRegularDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langMaxEndtime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
+        $this->Template->langLecturerLong = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'][0];
         $this->Template->langLecturerTitle = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
         $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'][0];
         $this->Template->langLecturerLastname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];
@@ -329,55 +330,31 @@ class ExamAdministrationModule extends \Module
         $this->Template->lecturerMobile = $examData->lecturer_mobile;
     }
 
-    public function saveChanges($usertype, $member)
+    public function saveChanges($examID)
     {
-        // Felder auslesen
-        // Allgemeine Felder für alle Mitgliedstypen
+        // Wird über Model gelöst
+        $exam = ExamsModel::findBy('id', $examID);
+        $id = $exam->id;
+        // set the values
+        $exam->title = \Input::post('title');
+        $date = \Input::post('date');
+        $exam->date = strtotime($date);
+        $exam->begin = \Input::post('begin');
+        $exam->duration = \Input::post('regularDuration');
+        $exam->department = \Input::post('department');
+        $exam->status = \Input::post('status');
+        $exam->tools = \Input::post('tools');
+        $exam->lecturer_title = \Input::post('lecturerTitle');
+        $exam->lecturer_prename = \Input::post('lecturerFirstname');
+        $exam->lecturer_lastname = \Input::post('lecturerLastname');
+        $exam->lecturer_email = \Input::post('lecturerEmail');
+        $exam->lecturer_mobile = \Input::post('lecturerMobile');
 
-        $firstname = \Input::post('firstname');
-        $lastname = \Input::post('lastname');
-        $email = \Input::post('email');
-        $username = \Input::post('username');
-
-        // Felder für Mitgliedstypen Student und Aufsicht
-        if ($usertype != "Administrator") {
-            $mobile = \Input::post('mobile');
-        }
-
-        // Felder für Mitgliedstyp Student
-        if ($usertype == "Student") {
-            $phone = \Input::post('phone');
-            $dateOfBirth = \Input::post('dateOfBirth');
-            $dateOfBirth = strtotime($dateOfBirth);
-            $gender = \Input::post('gender');
-            $handicaps = serialize(\Input::post('handicaps'));
-            $handicaps_others = \Input::post('handicaps_others');
-            $study_course = \Input::post('study_course');
-            $chipcard_nr = \Input::post('chipcard_nr');
-            $department = \Input::post('department');
-            $contact_person = \Input::post('contact_person');
-            $rehab_devices = serialize(\Input::post('rehab_devices'));
-            $rehab_devices_others = \Input::post('rehab_devices_others');
-            $extra_time = \Input::post('extra_time');
-            $extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');
-            $comments = \Input::post('comments');
-        }
-
-        // Verschiedene Abfragen erstellen
-        switch ($usertype) {
-            case "Administrator" : $set = array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username); break;
-            case "Aufsicht" : $set =    array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
-            case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
-                                                'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
-                                                'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
-                                                'extra_time'=>$extra_time, 'extra_time_minutes_percent'=>$extra_time_minutes_percent, 'comments'=>$comments); break;
-            default: break;
-        }
-
-        if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+        // update the record in the database
+        if($exam->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
-            $this->Template->linktextBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'];
+            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         }
     }
 }

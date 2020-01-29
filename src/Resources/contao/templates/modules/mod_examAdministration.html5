@@ -233,7 +233,7 @@ elseif ($this->showEditForm === true) {
 
 
                 <fieldset>
-                    <legend><?= $this->langLecturer; ?></legend>
+                    <legend><?= $this->langLecturerLong; ?></legend>
                     <div class="widget widget-text">
                         <label for="lecturerTitle">
                             <?= $this->langLecturerTitle; ?>

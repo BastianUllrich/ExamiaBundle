@@ -12,13 +12,13 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
         <thead>
         <tr>
             <th class="head col_last">
-                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'dateDESC'; else echo 'dateASC'; ?>" title="<?= $this->orderByDateText; ?>">
+                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByDateText; ?>">
                     <?= $this->headerDate; ?>
                 </a>
             </th>
             <th class="head col_last"><?= $this->headerBegin; ?></th>
             <th class="head col_last">
-                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'titleASC') echo 'titleDESC'; else echo 'titleASC'; ?>" title="<?= $this->orderByTitleText; ?>">
+                <a href="{{env::request}}?orderBy=title<?php if ($this->isOrderedBy == 'titleASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByTitleText; ?>">
                     <?= $this->headerExamTitle; ?>
                 </a>
             </th>

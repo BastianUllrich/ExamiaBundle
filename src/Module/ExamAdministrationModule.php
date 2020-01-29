@@ -77,12 +77,8 @@ class ExamAdministrationModule extends \Module
 
         // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
-        if (!$_GET["orderBy"] || $_GET["orderBy"] == "dateASC") {
-            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
-            $this->Template->isOrderedBy = "dateASC";
-            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
-        }
-        elseif ($_GET["orderBy"] == "dateDESC") {
+
+        if ($_GET["orderBy"] == "dateDESC") {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
@@ -96,6 +92,11 @@ class ExamAdministrationModule extends \Module
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title DESC")->query();
             $this->Template->isOrderedBy = "titleDESC";
             $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleASC'];
+        }
+        else {
+            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
+            $this->Template->isOrderedBy = "dateASC";
+            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
         }
 
         $i = 0;

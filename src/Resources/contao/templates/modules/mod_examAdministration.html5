@@ -354,28 +354,36 @@ elseif ($this->editAttendees === true) {
                     <input type="hidden" name="FORM_SUBMIT" value="editExam">
                     <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
                     <div class="widget widget-text">
-                        <label for="username">
+                        <span>
                             <?= $this->langUsername; ?>
-                        </label>
-                        <input type="text" name="username" id="username" class="text" value="<?= $this->username; ?>" readonly="readonly">
+                        </span>
+                        <span>
+                            <?= $this->username; ?>
+                        </span>
                     </div>
                     <div class="widget widget-text">
-                        <label for="firstname">
+                        <span>
                             <?= $this->langFirstname; ?>
-                        </label>
-                        <input type="text" name="firstname" id="firstname" class="text" value="<?= $this->firstname; ?>" readonly="readonly">
+                        </span>
+                        <span>
+                            <?= $this->firstname; ?>
+                        </span>
                     </div>
                     <div class="widget widget-text">
-                        <label for="lastname">
+                        <span>
                             <?= $this->langLastname; ?>
-                        </label>
-                        <input type="text" name="lastname" id="lastname" class="text" value="<?= $this->lastname; ?>" readonly="readonly">
+                        </span>
+                        <span>
+                            <?= $this->lastname; ?>
+                        </span>
                     </div>
                     <div class="widget widget-text">
-                        <label for="contactPerson">
+                        <span>
                             <?= $this->langContactPerson; ?>
-                        </label>
-                        <input type="text" name="contactPerson" id="contactPerson" class="text" value="<?= $this->contactPerson; ?>" readonly="readonly">
+                        </span>
+                        <span>
+                            <?= $this->contactPerson; ?>
+                        </span>
                     </div>
                     <div class="widget widget-select select mandatory">
                         <label for="seat" class="select mandatory">

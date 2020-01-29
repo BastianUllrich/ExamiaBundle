@@ -114,11 +114,11 @@ class ExamAdministrationModule extends \Module
         }
 
         if ($_GET["do"] == "editDetails") {
-            $this->Template->showDetails = true;
+            $this->Template->editDetails = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
             $this->setLangValuesViewEditDetails();
-            $this->setExamValuesViewDetails($examDetails);
+            $this->setExamValuesEdit($examDetails);
         }
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
@@ -156,7 +156,7 @@ class ExamAdministrationModule extends \Module
 
                 $i++;
             }
-            $this->Template->examDataList = $examData;
+            $this->Template->attendeeDataList = $attendeeData;
 
             $this->setLangValuesEditAttendees();
         }

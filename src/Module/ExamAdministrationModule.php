@@ -95,8 +95,7 @@ class ExamAdministrationModule extends \Module
             $this->Template->showDetails = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
-
-            $this->setLangValuesViewDetails();
+            $this->setLangValuesViewEditDetails();
             $this->setExamValuesViewDetails($examDetails);
         }
 
@@ -159,14 +158,14 @@ class ExamAdministrationModule extends \Module
 
         if ($_GET["do"] == "editDetails") {
             $this->Template->showEditForm = true;
-            $member = $_GET["member"];
-            $memberData = MemberModel::findBy('id', $member);
-            $this->setLangValuesEdit();
-            $this->setMemberValuesEdit($memberData);
+            $examID = $_GET["exam"];
+            $examData = ExamsModel::findBy('id', $examID);
+            $this->setLangValuesViewEditDetails();
+            $this->setExamValuesEdit($examData);
         }
 
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editMember') {
-            $this->saveChanges($memberData->usertype, $member);
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
+            $this->saveChanges($examData->usertype, $member);
         }
     }
 
@@ -268,132 +267,66 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRemarks = $examDetails->remarks;
     }
 
-    public function setLangValuesViewDetails() {
+    public function setLangValuesViewEditDetails() {
         $this->Template->langExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['examDetails'];
+        $this->Template->langEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['editExamDetails'];
         $this->Template->langExamTitel = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
         $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
         $this->Template->langTimeStart = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->langRegularDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langMaxEndtime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
+        $this->Template->langLecturerTitle = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'];
+        $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'];
+        $this->Template->langLecturerLastname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'];
+        $this->Template->langLecturerEmail = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'];
+        $this->Template->langLecturerMobile = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'];
         $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
+        $this->Template->langDepartmentLong = $GLOBALS['TL_LANG']['tl_exams']['department'];
+        $this->Template->langDepartment1 = $GLOBALS['TL_LANG']['tl_exams']['department1'];
+        $this->Template->langDepartment2 = $GLOBALS['TL_LANG']['tl_exams']['department2'];
+        $this->Template->langDepartment3 = $GLOBALS['TL_LANG']['tl_exams']['department3'];
+        $this->Template->langDepartment4 = $GLOBALS['TL_LANG']['tl_exams']['department4'];
+        $this->Template->langDepartment5 = $GLOBALS['TL_LANG']['tl_exams']['department5'];
+        $this->Template->langDepartment6 = $GLOBALS['TL_LANG']['tl_exams']['department6'];
+        $this->Template->langDepartment7 = $GLOBALS['TL_LANG']['tl_exams']['department7'];
+        $this->Template->langDepartment8 = $GLOBALS['TL_LANG']['tl_exams']['department8'];
+        $this->Template->langDepartment9 = $GLOBALS['TL_LANG']['tl_exams']['department9'];
+        $this->Template->langDepartment10 = $GLOBALS['TL_LANG']['tl_exams']['department10'];
+        $this->Template->langDepartment11 = $GLOBALS['TL_LANG']['tl_exams']['department11'];
+        $this->Template->langDepartment12 = $GLOBALS['TL_LANG']['tl_exams']['department12'];
+        $this->Template->langDepartment13 = $GLOBALS['TL_LANG']['tl_exams']['department13'];
+        $this->Template->langDepartment14 = $GLOBALS['TL_LANG']['tl_exams']['department14'];
         $this->Template->langTools = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->langStatus = $GLOBALS['TL_LANG']['tl_exams']['status'][0];
+        $this->Template->langStatus1 = $GLOBALS['TL_LANG']['tl_exams']['status1'];
+        $this->Template->langStatus2 = $GLOBALS['TL_LANG']['tl_exams']['status2'];
+        $this->Template->langStatus3 = $GLOBALS['TL_LANG']['tl_exams']['status3'];
+        $this->Template->langStatus4 = $GLOBALS['TL_LANG']['tl_exams']['status4'];
+        $this->Template->langStatus5 = $GLOBALS['TL_LANG']['tl_exams']['status5'];
+        $this->Template->langStatus6 = $GLOBALS['TL_LANG']['tl_exams']['status6'];
         $this->Template->langSupervisors = $GLOBALS['TL_LANG']['tl_exams']['supervisors'];
         $this->Template->langAttendees = $GLOBALS['TL_LANG']['tl_exams']['attendees'];
         $this->Template->langRemarks = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
         $this->Template->langHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
-    }
-
-    public function setMemberValuesEdit($memberData) {
-        $this->Template->memberType = $memberData->usertype;
-
-        $this->Template->firstname = $memberData->firstname;
-        $this->Template->lastname = $memberData->lastname;
-        $this->Template->dateOfBirth = date("Y-m-d", $memberData->dateOfBirth);
-        $this->Template->gender = $memberData->gender;
-        $this->Template->handicaps = unserialize($memberData->handicaps);
-
-        $this->Template->handicaps_others = $memberData->handicaps_others;
-        $this->Template->phone = $memberData->phone;
-        $this->Template->mobile = $memberData->mobile;
-        $this->Template->email = $memberData->email;
-        $this->Template->username = $memberData->username;
-        $this->Template->study_course = $memberData->study_course;
-        $this->Template->chipcard_nr = $memberData->chipcard_nr;
-        $this->Template->usr_department = $memberData->department;
-        $this->Template->contact_person = $memberData->contact_person;
-
-        // Hilfsmittel
-        $this->Template->rehab_devices = unserialize($memberData->rehab_devices);
-
-        $this->Template->rehab_devices_others = $memberData->rehab_devices_others;
-        $this->Template->extra_time = $memberData->extra_time;
-        $this->Template->extra_time_minutes_percent = $memberData->extra_time_minutes_percent;
-        $this->Template->comments = $memberData->comments;
-    }
-
-    public function setLangValuesEdit() {
-        $this->Template->editMember = $GLOBALS['TL_LANG']['miscellaneous']['editMember'];
-
-        $this->Template->mandatory = $GLOBALS['TL_LANG']['miscellaneous']['mandatory'];
-
-        $this->Template->langPersonalData = $GLOBALS['TL_LANG']['tl_member']['personal_legend'];
-        $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
-        $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
-        $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][0];
-
-        $this->Template->langGender = $GLOBALS['TL_LANG']['tl_member']['gender'][0];
-        $this->Template->langGenderMale = $GLOBALS['TL_LANG']['tl_member']['male'];
-        $this->Template->langGenderFemale = $GLOBALS['TL_LANG']['tl_member']['female'];
-        $this->Template->langGenderDivers = $GLOBALS['TL_LANG']['tl_member']['divers'];
-
-        $this->Template->langHandicaps = $GLOBALS['TL_LANG']['tl_member']['handicaps'][0];
-        $this->Template->langBlind = $GLOBALS['TL_LANG']['tl_member']['blind'];
-        $this->Template->langVisuallyImpaired = $GLOBALS['TL_LANG']['tl_member']['visually impaired'];
-        $this->Template->langDeaf = $GLOBALS['TL_LANG']['tl_member']['deaf'];
-        $this->Template->langMotoricallyRestricted = $GLOBALS['TL_LANG']['tl_member']['motorically restricted'];
-        $this->Template->langAutism = $GLOBALS['TL_LANG']['tl_member']['autism'];
-        $this->Template->langMentalDisorder = $GLOBALS['TL_LANG']['tl_member']['mental disorder'];
-        $this->Template->langChronicDisorder = $GLOBALS['TL_LANG']['tl_member']['chronic disorder'];
-        $this->Template->langAcuteIllness = $GLOBALS['TL_LANG']['tl_member']['acute illness'];
-        $this->Template->langHandicapDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
-        $this->Template->langHandicapsOthers = $GLOBALS['TL_LANG']['tl_member']['handicaps_others'][0];
-
-        $this->Template->langContactData = $GLOBALS['TL_LANG']['tl_member']['contact_legend'];
-        $this->Template->langPhone = $GLOBALS['TL_LANG']['tl_member']['phone'][0];
-        $this->Template->langMobile = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
-        $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];
-
-        $this->Template->langLoginData = $GLOBALS['TL_LANG']['tl_member']['login_legend'];
-        $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
-
-        $this->Template->langStudyData = $GLOBALS['TL_LANG']['tl_member']['study_legend'];
-        $this->Template->langStudyCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
-        $this->Template->langChipcardNr = $GLOBALS['TL_LANG']['tl_member']['chipcard_nr'][0];
-        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
-        $this->Template->langDepartment1 = $GLOBALS['TL_LANG']['tl_member']['department1'];
-        $this->Template->langDepartment2 = $GLOBALS['TL_LANG']['tl_member']['department2'];
-        $this->Template->langDepartment3 = $GLOBALS['TL_LANG']['tl_member']['department3'];
-        $this->Template->langDepartment4 = $GLOBALS['TL_LANG']['tl_member']['department4'];
-        $this->Template->langDepartment5 = $GLOBALS['TL_LANG']['tl_member']['department5'];
-        $this->Template->langDepartment6 = $GLOBALS['TL_LANG']['tl_member']['department6'];
-        $this->Template->langDepartment7 = $GLOBALS['TL_LANG']['tl_member']['department7'];
-        $this->Template->langDepartment8 = $GLOBALS['TL_LANG']['tl_member']['department8'];
-        $this->Template->langDepartment9 = $GLOBALS['TL_LANG']['tl_member']['department9'];
-        $this->Template->langDepartment10 = $GLOBALS['TL_LANG']['tl_member']['department10'];
-        $this->Template->langDepartment11 = $GLOBALS['TL_LANG']['tl_member']['department11'];
-        $this->Template->langDepartment12 = $GLOBALS['TL_LANG']['tl_member']['department12'];
-        $this->Template->langDepartment13 = $GLOBALS['TL_LANG']['tl_member']['department13'];
-        $this->Template->langDepartment14 = $GLOBALS['TL_LANG']['tl_member']['department14'];
-        $this->Template->langContactPerson = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
-        $this->Template->langContact1 = $GLOBALS['TL_LANG']['tl_member']['contact1'];
-        $this->Template->langContact2 = $GLOBALS['TL_LANG']['tl_member']['contact2'];
-
-        $this->Template->langExamData = $GLOBALS['TL_LANG']['tl_member']['exam_legend'];
-        $this->Template->langRehabDevices = $GLOBALS['TL_LANG']['tl_member']['rehab_devices'][0];
-        $this->Template->langPC = $GLOBALS['TL_LANG']['tl_member']['pc'];
-        $this->Template->langBlindWorkspace = $GLOBALS['TL_LANG']['tl_member']['blind workspace'];
-        $this->Template->langZoomtext = $GLOBALS['TL_LANG']['tl_member']['Zoomtext'];
-        $this->Template->langScreenMagnifier = $GLOBALS['TL_LANG']['tl_member']['screen magnifier'];
-        $this->Template->langScreenReader = $GLOBALS['TL_LANG']['tl_member']['screen reader'];
-        $this->Template->langA3Print = $GLOBALS['TL_LANG']['tl_member']['a3 print'];
-        $this->Template->langObscuration = $GLOBALS['TL_LANG']['tl_member']['obscuration'];
-        $this->Template->langWritingAssistance = $GLOBALS['TL_LANG']['tl_member']['writing assistance'];
-        $this->Template->langHighTable = $GLOBALS['TL_LANG']['tl_member']['high table'];
-        $this->Template->langNearDoor = $GLOBALS['TL_LANG']['tl_member']['near door'];
-        $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
-        $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
-        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'][0];
-
-        $this->Template->langComments = $GLOBALS['TL_LANG']['tl_member']['comments'][0];
-
-        $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
-        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];
-        $this->Template->langExtraTimeMinutes = $GLOBALS['TL_LANG']['tl_member']['minutes'];
-        $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
 
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
+    }
+
+    public function setExamValuesEdit($examData) {
+        $this->Template->title = $examData->title;
+        $this->Template->date = date("Y-m-d", $examData->date);
+        $this->Template->begin = $examData->begin;
+        $this->Template->regularDuration = $examData->duration;
+        $this->Template->examDepartment = $examData->department;
+        $this->Template->status = $examData->status;
+        $this->Template->tools = $examData->tools;
+        $this->Template->remarks = $examData->remarks;
+        $this->Template->lecturerTitle = $examData->lecturer_title;
+        $this->Template->lecturerFirstname = $examData->lecturer_prename;
+        $this->Template->lecturerLastname = $examData->lecturer_lastname;
+        $this->Template->lecturerEmail = $examData->lecturer_email;
+        $this->Template->lecturerMobile = $examData->lecturer_mobile;
     }
 
     public function saveChanges($usertype, $member)

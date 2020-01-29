@@ -60,7 +60,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['date'],
             'search' => true,
             'inputType' => 'text',
-	    'flag' => 5,
+	        'flag' => 5,
             'eval' => ['maxlength' => 10, 'mandatory' => true, 'datepicker'=>true, 'rgxp' => 'datim'],
             'sql' => ['type' => 'string', 'length' => 10, 'default' => '']
         ],

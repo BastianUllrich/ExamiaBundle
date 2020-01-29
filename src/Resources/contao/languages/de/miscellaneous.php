@@ -43,3 +43,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'] = "Zu
 $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";
 $GLOBALS['TL_LANG']['miscellaneous']['examDetails'] = "Klausurdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['editExamDetails'] = "Klausur bearbeiten";

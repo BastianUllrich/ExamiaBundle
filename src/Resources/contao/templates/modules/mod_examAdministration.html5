@@ -304,7 +304,7 @@ elseif ($this->editAttendees === true) {
             </tr>
             </thead>
             <tbody>
-            <?php foreach($this->attendeeList as $attendeeData): ?>
+            <?php foreach($this->attendeeDataList as $attendeeData): ?>
                 <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                     <td class="body col_0 col_first"><?= $attendeeData['firstname']; ?></td>
                     <td class="body col_1"><?= $attendeeData['lastname']; ?></td>

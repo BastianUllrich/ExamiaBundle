@@ -134,6 +134,7 @@ class ExamAdministrationModule extends \Module
                                                         FROM tl_member, tl_exams, tl_attendees_exams
                                                         WHERE tl_member.id=tl_attendees_exams.attendee_id
                                                         AND tl_attendees_exams.exam_id = tl_exams.id
+                                                        AND tl_exams.id = $exam
                                                         ")->query();
             $i = 0;
             $attendeeData = array();

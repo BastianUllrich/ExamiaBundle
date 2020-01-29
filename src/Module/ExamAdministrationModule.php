@@ -53,6 +53,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->showDetails = false;
         $this->Template->showEditForm = false;
         $this->Template->changesSaved = false;
+        $this->Template->editAttendees = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();

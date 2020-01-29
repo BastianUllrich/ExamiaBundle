@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['seat8'] = 'Platz 8 (Raum A10.1.31)';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['seat9'] = 'Platz 9 (Raum A10.1.31)';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['seat10'] = 'Platz 10 (Raum A10.1.30)';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['seat11'] = 'Platz 11 (Raum A10.1.30)';
+$GLOBALS['TL_LANG']['tl_attendees_exams']['no_seat'] = 'ohne';
 
 //Hochschule | Fachbereich
 $GLOBALS['TL_LANG']['tl_attendees_exams']['department'] = ['Hochschule | Fachbereich', 'Bitte wählen Sie den Fachbereich aus, in dem die Klausur geschrieben wird'];

@@ -148,11 +148,17 @@ class ExamAdministrationModule extends \Module
                 $attendeeData[$i]['id'] = $result->id;
                 $attendeeData[$i]['firstname'] = $result->firstname;
                 $attendeeData[$i]['lastname'] = $result->lastname;
-                $attendeeData[$i]['seat'] = $result->seat;
+                // Sitzplatz ausgeben  -> Default: Kein Sitzplatz
+                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['no_seat'];
+                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+
+                // Zeitverlängerung zusammensetzen
                 $attendeeData[$i]['extraTime'] = $result->extra_time;
                 $attendeeData[$i]['extraTime'] .= " ";
                 $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
-                // Überprüfen, ob eine Schreibassistenz benötigt wird
+                
+                // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
+                $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
                 $rehab_devices = unserialize($result->rehab_devices);
                 for ($j = 0; $j < sizeof($rehab_devices); $j++) {
                     if ($rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];

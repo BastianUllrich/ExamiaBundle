@@ -129,7 +129,7 @@ class ExamAdministrationModule extends \Module
             $this->Template->editAttendees = true;
             $exam = $_GET["exam"];
             $result = Database::getInstance()->prepare("SELECT 
-                                                        tl_member.firstname, tl_member.lastname, tl_member.id
+                                                        tl_member.firstname, tl_member.lastname, tl_member.id,
                                                         tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
                                                         FROM tl_member, tl_exams, tl_attendees_exams
                                                         WHERE tl_member.id=tl_attendees_exams.attendee_id

@@ -146,14 +146,14 @@ class ExamAdministrationModule extends \Module
                 $attendeeData[$i]['firstname'] = $result->firstname;
                 $attendeeData[$i]['lastname'] = $result->lastname;
                 $attendeeData[$i]['seat'] = $result->seat;
-                $attendeeData[$i]['extra_time'] = $result->extra_time;
-                $attendeeData[$i]['extra_time'] .= " ";
-                $attendeeData[$i]['extra_time'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+                $attendeeData[$i]['extraTime'] = $result->extra_time;
+                $attendeeData[$i]['extraTime'] .= " ";
+                $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
                 // Überprüfen, ob eine Schreibassistenz benötigt wird
                 $rehab_devices = unserialize($result->rehab_devices);
                 for ($j = 0; $j < sizeof($this->$rehab_devices); $j++) {
-                    if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writing_assistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][0];
-                    else $attendeeData[$i]['writing_assistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][1];
+                    if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][0];
+                    else $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][1];
                 }
 
                 $i++;

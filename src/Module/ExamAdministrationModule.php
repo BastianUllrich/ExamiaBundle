@@ -132,12 +132,15 @@ class ExamAdministrationModule extends \Module
             $this->Template->showDeleteAttendeeConfirmation = false;
             $exam = $_GET["exam"];
 
-            if (!$_GET("editAttendee") && !$_GET("deleteAttendee")) {
-                $this->showAttendeeList($exam);
-            }
-
-            if (!$_GET("editAttendee") && $_GET("deleteAttendee")) {
+            if (array_key_exists('deleteAttendee', $_GET)) {
                 $this->deleteAttendee($exam);
+            }
+            /*
+            elseif (array_key_exists('editAttendee', $_GET)) {
+
+            }*/
+            else {
+                $this->showAttendeeList($exam);
             }
         }
 

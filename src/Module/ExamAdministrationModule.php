@@ -112,6 +112,53 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesViewDetails($examDetails);
         }
 
+        if ($_GET["do"] == "editDetails") {
+            $this->Template->showDetails = true;
+            $exam = $_GET["exam"];
+            $examDetails = ExamsModel::findBy('id', $exam);
+            $this->setLangValuesViewEditDetails();
+            $this->setExamValuesViewDetails($examDetails);
+        }
+
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
+            $this->saveExamChanges($examID);
+        }
+
+        if ($_GET["do"] == "editAttendees") {
+            $this->Template->editAttendees = true;
+            $exam = $_GET["exam"];
+            $result = Database::getInstance()->prepare("SELECT 
+                                                        tl_member.firstname, tl_member.lastname, tl_member.id
+                                                        tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, tl_attendees_exams.rehab_devices
+                                                        FROM tl_member, tl_exams, tl_attendees_exams
+                                                        WHERE tl_member.id=tl_attendees_exams.attendee_id
+                                                        AND tl_attendees_exams.exam_id = tl_exams.id
+                                                        ")->query();
+            $i = 0;
+            $attendeeData = array();
+            while ($result->next()) {
+                // Variablen für das Template setzen
+                $attendeeData[$i]['id'] = $result->id;
+                $attendeeData[$i]['firstname'] = $result->firstname;
+                $attendeeData[$i]['lastname'] = $result->lastname;
+                $attendeeData[$i]['seat'] = $result->seat;
+                $attendeeData[$i]['extra_time'] = $result->extra_time;
+                $attendeeData[$i]['extra_time'] .= " ";
+                $attendeeData[$i]['extra_time'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+                // Überprüfen, ob eine Schreibassistenz benötigt wird
+                $rehab_devices = unserialize($result->rehab_devices);
+                for ($j = 0; $j < sizeof($this->$rehab_devices); $j++) {
+                    if ($this->$rehab_devices[$j] == "own room") $attendeeData[$i]['writing_assistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][0];
+                    else $attendeeData[$i]['writing_assistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'][1];
+                }
+
+                $i++;
+            }
+            $this->Template->examDataList = $examData;
+
+            $this->setLangValuesEditAttendees();
+        }
+
         // Mitglied löschen
         if ($_GET["do"] == "delete") {
             $member = $_GET["member"];
@@ -169,17 +216,6 @@ class ExamAdministrationModule extends \Module
             }
         }
 
-        if ($_GET["do"] == "editDetails") {
-            $this->Template->showEditForm = true;
-            $examID = $_GET["exam"];
-            $examData = ExamsModel::findBy('id', $examID);
-            $this->setLangValuesViewEditDetails();
-            $this->setExamValuesEdit($examData);
-        }
-
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
-            $this->saveChanges($examID);
-        }
     }
 
     public function setExamValuesViewDetails($examDetails) {
@@ -193,7 +229,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRegularDuration .= " ";
         $this->Template->detailRegularDuration .= $GLOBALS['TL_LANG']['tl_attendees_exams']['minutes'];
 
-        // Späteste Endzeit berechnen
+        /* Späteste Endzeit berechnen */
 
         // Maximale Dauer in Minuten berechnen
         $result = Database::getInstance()->prepare("SELECT extra_time, extra_time_minutes_percent FROM tl_attendees_exams WHERE exam_id=$examDetails->id")->query();
@@ -234,7 +270,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailTools = $examDetails->tools;
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
-        // Aufsichten / Schreibassistenten heraussuchen
+        /* Aufsichten / Schreibassistenten heraussuchen */
         // Tag der Klausur in timestamp umwandeln (0:00 Uhr und 23:59:59)
         $dayExamMidnightTimeStamp = strtotime($detailDate);
         $dayExamLastSecond = $dayExamMidnightTimeStamp + 86400;
@@ -328,6 +364,14 @@ class ExamAdministrationModule extends \Module
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
 
+    public function setLangValuesEditAttendees() {
+        $this->Template->headerFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
+        $this->Template->headerLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
+        $this->Template->headerSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
+        $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
+        $this->Template->headerExtraTime = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
+    }
+
     public function setExamValuesEdit($examData) {
         $this->Template->title = $examData->title;
         $this->Template->date = date("Y-m-d", $examData->date);
@@ -344,7 +388,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->lecturerMobile = $examData->lecturer_mobile;
     }
 
-    public function saveChanges($examID)
+    public function saveExamChanges($examID)
     {
         // Wird über Model gelöst
         $exam = ExamsModel::findBy('id', $examID);
@@ -372,4 +416,8 @@ class ExamAdministrationModule extends \Module
             $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         }
     }
+
+
+
+
 }

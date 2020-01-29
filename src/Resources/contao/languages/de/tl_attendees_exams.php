@@ -31,6 +31,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['obscuration'] = 'Verdunkelung';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['writing assistance'] = 'Schreibassistenz';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['high table'] = 'Hochtisch';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['near door'] = 'Arbeitsplatz nahe Tür';
+$GLOBALS['TL_LANG']['tl_attendees_exams']['own room'] = 'Eigener Raum';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['different'] = 'Sonstige';
 
 //Andere Hilfsmittel
@@ -38,6 +39,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'] = ['Sonstigte 
 
 //Schreibassistenz
 $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant_id'] = ['Schreibassistenz', 'Bitte geben Sie die Schreibassistenz an'];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'] = 'Schreibassistenz';
 
 //Zeitverlängerung
 $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'] = ['Zeitverlängerung', 'Bitte geben Sie die Zeitverlängerung in Minuten oder Prozent an'];

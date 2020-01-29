@@ -49,4 +49,6 @@ $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'] = "Sortieren";
 $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'] = "Nach Datum absteigend sortieren";
 $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'] = "Nach Datum aufsteigend sortieren";
 
+$GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'] = ['benötigt', '-'];
+
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";

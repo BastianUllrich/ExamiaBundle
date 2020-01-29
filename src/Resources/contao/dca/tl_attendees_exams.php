@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
         'rehab_devices' => [
             'label' => &$GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'],
             'inputType' => 'checkbox',
-            'options' => ['pc', 'blind workspace', 'Zoomtext', 'screen magnifier', 'screen reader', 'a3 print', 'obscuration', 'writing assistance', 'high table', 'near door', 'different'],
+            'options' => ['pc', 'blind workspace', 'Zoomtext', 'screen magnifier', 'screen reader', 'a3 print', 'obscuration', 'writing assistance', 'high table', 'near door', 'own room', 'different'],
             'reference' => &$GLOBALS['TL_LANG']['tl_attendees_exams'],
             'eval' => ['mandatory' => false, 'multiple' => true],
             'sql' => ['type' => 'blob', 'notnull' => false, 'default' => '']

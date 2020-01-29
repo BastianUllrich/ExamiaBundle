@@ -84,16 +84,6 @@ class ExamAdministrationModule extends \Module
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
         }
-        elseif ($_GET["orderBy"] == "titleASC") {
-            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title ASC")->query();
-            $this->Template->isOrderedBy = "titleASC";
-            $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleDESC'];
-        }
-        elseif ($_GET["orderBy"] == "titleDESC") {
-            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title DESC")->query();
-            $this->Template->isOrderedBy = "titleDESC";
-            $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleASC'];
-        }
         else {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
             $this->Template->isOrderedBy = "dateASC";

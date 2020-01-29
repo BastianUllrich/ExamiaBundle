@@ -17,11 +17,7 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
                 </a>
             </th>
             <th class="head col_last"><?= $this->headerBegin; ?></th>
-            <th class="head col_last">
-                <a href="klausurverwaltung/klausurverwaltung.html?orderBy=title<?php if ($this->isOrderedBy == 'titleASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByTitleText; ?>">
-                    <?= $this->headerExamTitle; ?>
-                </a>
-            </th>
+            <th class="head col_last"><?= $this->headerExamTitle; ?></th>
             <th class="head col_last"><?= $this->headerDepartment; ?></th>
             <th class="head col_last"><?= $this->headerAction; ?></th>
         </tr>

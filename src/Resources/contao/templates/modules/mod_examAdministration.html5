@@ -22,13 +22,13 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
         <?php foreach($this->examDataList as $examData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first">
-                    <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'dateDESC'; else echo 'dateASC';" title="<?= $this->orderByDateText; ?>">
+                    <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'dateDESC'; else echo 'dateASC'; ?>" title="<?= $this->orderByDateText; ?>">
                         <?= $examData['date']; ?>
                     </a>
                 </td>
                 <td class="body col_1"><?= $examData['begin']; ?></td>
                 <td class="body col_2">
-                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'titleASC') echo 'titleDESC'; else echo 'titleASC';" title="<?= $this->orderByTitleText; ?>">
+                <a href="{{env::request}}?orderBy=date<?php if ($this->isOrderedBy == 'titleASC') echo 'titleDESC'; else echo 'titleASC'; ?>" title="<?= $this->orderByTitleText; ?>">
                     <?= $examData['title']; ?>
                 </a>
                 </td>

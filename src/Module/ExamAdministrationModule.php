@@ -66,6 +66,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
         $this->Template->headerDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
+        $this->Template->orderAltText =  $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
 
         /* Deaktiviert -> alle Klausuren anzeigen, auch vergangene!
         // Heute 0 Uhr festlegen -> wichtig für Datenbankabfrage
@@ -82,21 +83,25 @@ class ExamAdministrationModule extends \Module
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
+            $this->Template->orderImage = "up.svg";
         }
         elseif ($_GET["orderBy"] == "titleASC") {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title ASC")->query();
             $this->Template->isOrderedBy = "titleASC";
             $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleDESC'];
+            $this->Template->orderImage = "down.svg";
         }
         elseif ($_GET["orderBy"] == "titleDESC") {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY title DESC")->query();
             $this->Template->isOrderedBy = "titleDESC";
             $this->Template->orderByTitleText = $GLOBALS['TL_LANG']['miscellaneous']['orderByTitleASC'];
+            $this->Template->orderImage = "up.svg";
         }
         else {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
             $this->Template->isOrderedBy = "dateASC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
+            $this->Template->orderImage = "down.svg";
         }
 
         $i = 0;

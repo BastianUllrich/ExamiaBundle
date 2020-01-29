@@ -122,6 +122,7 @@ class ExamAdministrationModule extends \Module
         }
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
+            $examID = $_GET["exam"];
             $this->saveExamChanges($examID);
         }
 

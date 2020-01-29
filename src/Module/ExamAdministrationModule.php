@@ -347,8 +347,6 @@ class ExamAdministrationModule extends \Module
         $this->Template->langHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
 
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
-
-        $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
 
     public function setLangValuesEditAttendees() {
@@ -360,6 +358,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
         $this->Template->headerExtraTime = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
         $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] ;
+        $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
 
     public function setExamValuesEdit($examData) {

@@ -135,7 +135,7 @@ elseif ($this->showDetails === true) {
         </tr>
         </tbody>
     </table>
-<p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
+    <p>{{link::back}}</p>
     <?php
 }
 // Klausur bearbeiten
@@ -329,14 +329,14 @@ elseif ($this->editAttendees === true) {
             ?>
             </tbody>
         </table>
-        <p>{{link::back}}</p>
+        <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
         <?php
     }
     if ($this->showDeleteAttendeeConfirmation === true) {
         ?>
-        <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
-        <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
-        <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+            <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
+            <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
+            <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
         <?php
     }
 }

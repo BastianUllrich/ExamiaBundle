@@ -274,6 +274,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
         $this->Template->langTimeStart = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->langRegularDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
+        $this->Template->langRegularDurationLong = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration_long'];
         $this->Template->langMaxEndtime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
         $this->Template->langLecturerLong = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];

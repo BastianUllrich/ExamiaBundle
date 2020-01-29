@@ -357,25 +357,25 @@ elseif ($this->editAttendees === true) {
                         <label for="username">
                             <?= $this->langUsername; ?>
                         </label>
-                        <input type="text" name="username" id="username" class="text" value="<?= $this->username; ?>" disable>
+                        <input type="text" name="username" id="username" class="text" value="<?= $this->username; ?>" readonly="readonly">
                     </div>
                     <div class="widget widget-text">
                         <label for="firstname">
                             <?= $this->langFirstname; ?>
                         </label>
-                        <input type="text" name="firstname" id="firstname" class="text" value="<?= $this->firstname; ?>" disable>
+                        <input type="text" name="firstname" id="firstname" class="text" value="<?= $this->firstname; ?>" readonly="readonly">
                     </div>
                     <div class="widget widget-text">
                         <label for="lastname">
                             <?= $this->langLastname; ?>
                         </label>
-                        <input type="text" name="lastname" id="lastname" class="text" value="<?= $this->lastname; ?>" disable>
+                        <input type="text" name="lastname" id="lastname" class="text" value="<?= $this->lastname; ?>" readonly="readonly">
                     </div>
                     <div class="widget widget-text">
                         <label for="contactPerson">
                             <?= $this->langContactPerson; ?>
                         </label>
-                        <input type="text" name="contactPerson" id="contactPerson" class="text" value="<?= $this->contactPerson; ?>" disable>
+                        <input type="text" name="contactPerson" id="contactPerson" class="text" value="<?= $this->contactPerson; ?>" readonly="readonly">
                     </div>
                     <div class="widget widget-select select mandatory">
                         <label for="seat" class="select mandatory">

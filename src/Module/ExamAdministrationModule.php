@@ -488,7 +488,7 @@ class ExamAdministrationModule extends \Module
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
         $id = $exam->id;
         $this->Template->showEditAttendeeForm = false;
-        
+
         $attendeeExam->seat = \Input::post('seat');
         $rehab_devices = \Input::post('rehab_devices');
         $attendeeExam->rehab_devices = serialize($rehab_devices);
@@ -498,7 +498,7 @@ class ExamAdministrationModule extends \Module
         $attendeeExam->status = \Input::post('status');
 
         // update the record in the database
-        if ($exam->save()) {
+        if ($attendeeExam->save()) {
             $this->Template->attendeeChangesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
             $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];

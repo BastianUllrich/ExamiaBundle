@@ -370,9 +370,7 @@ elseif ($this->editAttendees === true) {
                             </strong>
                         </span>
                         <span>
-                            <strong>
                             <?= $this->firstname; ?>:
-                            </strong>
                         </span>
                     </div>
                     <div class="widget widget-text">
@@ -387,7 +385,9 @@ elseif ($this->editAttendees === true) {
                     </div>
                     <div class="widget widget-text">
                         <span>
+                            <strong>
                             <?= $this->langContactPerson; ?>
+                            </strong>
                         </span>
                         <span>
                             <?= $this->contactPerson; ?>

@@ -349,7 +349,7 @@ elseif ($this->editAttendees === true) {
         else {
             ?>
             <p><strong><?= $this->langEditAttendee; ?></strong></p>
-            <form action="" id="<?= $this->formId; ?>" method="post">
+            <form action="" id="editAttendee" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="editExam">
                     <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">

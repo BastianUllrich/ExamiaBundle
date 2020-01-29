@@ -67,7 +67,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
         $this->Template->headerDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
-        $this->Template->orderAltText =  $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
+        $this->Template->orderAltText = $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
 
         /* Deaktiviert -> alle Klausuren anzeigen, auch vergangene!
         // Heute 0 Uhr festlegen -> wichtig für Datenbankabfrage
@@ -84,8 +84,7 @@ class ExamAdministrationModule extends \Module
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
-        }
-        else {
+        } else {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
             $this->Template->isOrderedBy = "dateASC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
@@ -99,7 +98,7 @@ class ExamAdministrationModule extends \Module
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['title'] = $result->title;
             // Verkürzte Schreibweise für den Fachbereich
-            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department],0,5)));
+            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
             $examData[$i]['id'] = $result->id;
             $i++;
         }
@@ -134,14 +133,17 @@ class ExamAdministrationModule extends \Module
 
             if (array_key_exists('deleteAttendee', $_GET)) {
                 $this->deleteAttendee($exam);
-            }
-
-            elseif (array_key_exists('editAttendee', $_GET)) {
+            } elseif (array_key_exists('editAttendee', $_GET)) {
                 $this->editAttendee($exam);
-            }
-            else {
+            } else {
                 $this->showAttendeeList($exam);
             }
+        }
+
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editAttendee') {
+            $examID = $_GET["exam"];
+            $attendeeID = $_GET["editAttendee"];
+            $this->saveAttendeeChanges($examID, $attendeeID);
         }
 
         // Mitglied löschen
@@ -156,8 +158,7 @@ class ExamAdministrationModule extends \Module
             $memberDeleteData = MemberModel::findBy('id', $member);
             if ($memberDeleteData->usertype == "Administrator") {
                 \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
-            }
-            else {
+            } else {
                 // Mitglied erst nach Bestätigung löschen
                 if (($_GET["confirmed"] == "yes")) {
 
@@ -194,8 +195,7 @@ class ExamAdministrationModule extends \Module
                     if ($deleteMember = $this->Database->prepare("DELETE FROM tl_member WHERE id=$member")->execute()->affectedRows) {
                         \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                     }
-                }
-                elseif ($_GET["confirmed"] == "no") {
+                } elseif ($_GET["confirmed"] == "no") {
                     \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                 }
             }
@@ -203,7 +203,8 @@ class ExamAdministrationModule extends \Module
 
     }
 
-    public function setExamValuesViewDetails($examDetails) {
+    public function setExamValuesViewDetails($examDetails)
+    {
         $this->Template->detailExamTitel = $examDetails->title;
         $detailDate = date("d.m.Y", $examDetails->date);
         $this->Template->detailDate = $detailDate;
@@ -222,18 +223,17 @@ class ExamAdministrationModule extends \Module
         $maxDuration = $examDetails->duration;
         while ($result->next()) {
             if ($result->extra_time_minutes_percent == "percent") {
-                $multiplicator = 1+($result->extra_time/100);
-                $duration = ($examDetails->duration)*$multiplicator;
-            }
-            elseif ($result->extra_time_minutes_percent == "minutes") {
-                $duration = ($examDetails->duration)+$result->extra_time;
+                $multiplicator = 1 + ($result->extra_time / 100);
+                $duration = ($examDetails->duration) * $multiplicator;
+            } elseif ($result->extra_time_minutes_percent == "minutes") {
+                $duration = ($examDetails->duration) + $result->extra_time;
             }
             if ($duration > $maxDuration) {
                 $maxDuration = $duration;
             }
         }
         // Späteste Endzeit berechnen
-        $maxEndTime = ($examDetails->date) + ($maxDuration*60);
+        $maxEndTime = ($examDetails->date) + ($maxDuration * 60);
         $maxEndTimeReadable = date("H:i", $maxEndTime);
         $this->Template->detailMaxEndtime = $maxEndTimeReadable;
 
@@ -267,7 +267,7 @@ class ExamAdministrationModule extends \Module
                                                     BETWEEN $dayExamMidnightTimeStamp
                                                     AND $dayExamLastSecond
                                                     ")->query();
-        $i=0;
+        $i = 0;
         $supervisorsData = array();
         while ($result->next()) {
             // Variablen für das Template setzen
@@ -286,7 +286,7 @@ class ExamAdministrationModule extends \Module
                                                     WHERE tl_attendees_exams.exam_id=$examDetails->id
                                                     AND tl_attendees_exams.attendee_id=tl_member.id
                                                     ")->query();
-        $i=0;
+        $i = 0;
         $attendeesData = array();
         while ($result->next()) {
             // Variablen für das Template setzen
@@ -301,7 +301,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRemarks = $examDetails->remarks;
     }
 
-    public function setLangValuesViewEditDetails() {
+    public function setLangValuesViewEditDetails()
+    {
         $this->Template->langExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['examDetails'];
         $this->Template->langEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['editExamDetails'];
         $this->Template->langExamTitel = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
@@ -349,19 +350,21 @@ class ExamAdministrationModule extends \Module
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
 
-    public function setLangValuesEditAttendees() {
-        $this->Template->langShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] ;
+    public function setLangValuesEditAttendees()
+    {
+        $this->Template->langShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'];
         $this->Template->langExam = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $this->Template->headerFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->headerLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->headerSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
         $this->Template->headerStatus = $GLOBALS['TL_LANG']['tl_attendees_exams']['status'][0];
-        $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] ;
+        $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'];
         $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
 
-    public function setExamValuesEdit($examData) {
+    public function setExamValuesEdit($examData)
+    {
         $this->Template->title = $examData->title;
         $this->Template->date = date("Y-m-d", $examData->date);
         $this->Template->begin = $examData->begin;
@@ -399,7 +402,7 @@ class ExamAdministrationModule extends \Module
         $exam->lecturer_mobile = \Input::post('lecturerMobile');
 
         // update the record in the database
-        if($exam->save()) {
+        if ($exam->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
             $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
@@ -407,7 +410,8 @@ class ExamAdministrationModule extends \Module
     }
 
     // Teilnehmer anzeigen
-    public function showAttendeeList($exam) {
+    public function showAttendeeList($exam)
+    {
         $examData = ExamsModel::findBy('id', $exam);
         $this->Template->examTitle = $examData->title;
         $this->Template->examID = $exam;
@@ -447,7 +451,8 @@ class ExamAdministrationModule extends \Module
     }
 
     // Teilnehmer löschen
-    public function deleteAttendee($exam) {
+    public function deleteAttendee($exam)
+    {
         $this->Template->showDeleteAttendeeConfirmation = true;
         $examID = $exam;
         $attendeeID = $_GET['deleteAttendee'];
@@ -457,25 +462,47 @@ class ExamAdministrationModule extends \Module
 
         if ($_GET['confirmed'] == "yes") {
             if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$examID AND attendee_id=$attendeeID")->execute()->affectedRows) {
-                \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam='.$examID);
+                \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
             }
-        }
-        elseif ($_GET["confirmed"] == "no") {
-            \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam='.$examID);
+        } elseif ($_GET["confirmed"] == "no") {
+            \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
         }
     }
 
     // Teilnehmer bearbeiten
-    public function editAttendee($exam) {
+    public function editAttendee($exam)
+    {
         $this->Template->editAttendees = true;
         $this->Template->showEditAttendeeForm = true;
-        $this->Template->attendeeChangesSaved=false;
+        $this->Template->attendeeChangesSaved = false;
         $examID = $exam;
         $attendeeID = $_GET['editAttendee'];
 
         $this->setEditAttendeeLangValues();
         $this->setEditAttendeeValues($examID, $attendeeID);
 
+    }
+
+    public function saveAttendeeChanges($examID, $attendeeID) {
+
+        $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
+        $id = $exam->id;
+        $this->Template->showEditAttendeeForm = false;
+        
+        $attendeeExam->seat = \Input::post('seat');
+        $rehab_devices = \Input::post('rehab_devices');
+        $attendeeExam->rehab_devices = serialize($rehab_devices);
+        $attendeeExam->rehab_devices_others = \Input::post('rehab_devices_others');
+        $attendeeExam->extra_time = \Input::post('extra_time');
+        $attendeeExam->extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');
+        $attendeeExam->status = \Input::post('status');
+
+        // update the record in the database
+        if ($exam->save()) {
+            $this->Template->attendeeChangesSaved = true;
+            $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
+            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
+        }
     }
 
     public function setEditAttendeeValues($examID, $attendeeID) {

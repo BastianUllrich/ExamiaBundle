@@ -62,7 +62,7 @@ class SupervisorAdministrationModule extends \Module
         $i=0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $supervisorData[$i]['date'] = $result->date;
+            $supervisorData[$i]['date'] = date("d.m.Y", $result->date);
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;

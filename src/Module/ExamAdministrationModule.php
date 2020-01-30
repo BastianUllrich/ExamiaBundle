@@ -56,6 +56,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->attendeeChangesSaved = false;
         $this->Template->editAttendees = false;
         $this->Template->showAttendeeDetails = false;
+        $this->Template->showCombineForm = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -108,6 +109,7 @@ class ExamAdministrationModule extends \Module
         }
         $this->Template->examDataList = $examData;
 
+        // Klausurdetails anzeigen
         if ($_GET["do"] == "viewDetails") {
             $this->Template->showDetails = true;
             $exam = $_GET["exam"];
@@ -116,6 +118,7 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesViewDetails($examDetails);
         }
 
+        // Klausurdetails bearbeiten
         if ($_GET["do"] == "editDetails") {
             $this->Template->showEditForm = true;
             $exam = $_GET["exam"];
@@ -136,8 +139,12 @@ class ExamAdministrationModule extends \Module
             elseif ($formIdentity == "editAttendeeData") {
                 $this->saveAttendeeChanges($examID, $attendeeID);
             }
+            elseif ($formIdentity == "combineExams") {
+                $this->saveCombineChanges($examID);
+            }
         }
 
+        // Teilnehmer bearbeiten
         if ($_GET["do"] == "editAttendees") {
             $this->Template->editAttendees = true;
             $this->Template->showAttendeeDetails = false;
@@ -145,15 +152,31 @@ class ExamAdministrationModule extends \Module
             $this->Template->showDeleteAttendeeConfirmation = false;
             $exam = $_GET["exam"];
 
+            // Teilnehmer löschen
             if (array_key_exists('deleteAttendee', $_GET)) {
                 $this->deleteAttendee($exam);
-            } elseif (array_key_exists('editAttendee', $_GET)) {
+            }
+            // Teilnehmerdaten bearbeiten
+            elseif (array_key_exists('editAttendee', $_GET)) {
                 $this->editAttendee($exam);
-            } elseif (array_key_exists('showAttendee', $_GET)) {
+            }
+            // Teilnehmerdaten anzeigen
+            elseif (array_key_exists('showAttendee', $_GET)) {
                 $this->showAttendee($exam);
-            } else {
+            }
+            // Alle Teilnehmer anzeigen
+            else {
                 $this->showAttendeeList($exam);
             }
+        }
+
+        // Klausuren zusammenlegen
+        if ($_GET["do"] == "combine") {
+            $exam = $_GET["exam"];
+            $this->Template->showCombineForm = true;
+            $examDetails = ExamsModel::findBy('id', $exam);
+            $this->setLangValuesCombineExams();
+            $this->setValuesCombineExams($examDetails);
         }
 
         // Klausur löschen
@@ -179,6 +202,43 @@ class ExamAdministrationModule extends \Module
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
             }
         }
+    }
+
+    public function setLangValuesCombineExams() {
+        $this->Template->langCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['combineExams'];
+        $this->Template->langCombineExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['combineExamsExplanation'];
+        $this->Template->langCombineExamsTo = $GLOBALS['TL_LANG']['miscellaneous']['combineExamsTo'];
+        $this->Template->langCombineExamsFrom = $GLOBALS['TL_LANG']['miscellaneous']['combineExamsFrom'];
+        $this->Template->langCombineDoCombine = $GLOBALS['TL_LANG']['miscellaneous']['combineDoCombine'];
+        $this->Template->langExam = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $this->Template->langExamTimeAt = $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
+        $this->Template->langExamTimeHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
+    }
+
+    public function setValuesCombineExams($examDetails) {
+        $this->Template->examToId = $examDetails->id;
+        $this->Template->examToTitle = $examDetails->title;
+        $this->Template->examToDate = date("d.m.Y", $examDetails->date);
+        $this->Template->examToTime = $examDetails->begin;
+        // Verkürzte Schreibweise für den Fachbereich
+        $this->Template->examToDepartment = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$examDetails->department], 0, 5)));
+
+
+        // Andere Klausuren aus Datenbank holen (nur aktuelle)
+        $timeNow = time();
+        $result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $examDetails->id AND date > $timeNow");
+        $i = 0;
+        $examFromData = array();
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $examFromData[$i]['id'] = $result->id;
+            $examFromData[$i]['title'] = $result->title;
+            $examFromData[$i]['date'] = date("d.m.Y", $result->date);
+            $examFromData[$i]['time'] = $result->time;
+            $examFromData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            $i++;
+        }
+        $this->Template->examFromDataList = $examFromData;
     }
 
     public function setExamValuesViewDetails($examDetails)
@@ -393,7 +453,7 @@ class ExamAdministrationModule extends \Module
         $examData = ExamsModel::findBy('id', $exam);
         $this->Template->examTitle = $examData->title;
         $this->Template->examID = $exam;
-        $result = Database::getInstance()->prepare("SELECT 
+        $result = Database::getInstance()->prepare("SELECT
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
                                                         tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices
                                                         FROM tl_member, tl_exams, tl_attendees_exams
@@ -491,9 +551,9 @@ class ExamAdministrationModule extends \Module
 
     public function setShowEditAttendeeValues($examID, $attendeeID) {
 
-        $result = Database::getInstance()->prepare("SELECT 
+        $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
-                                                    tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent, 
+                                                    tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent,
                                                     tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others, tl_attendees_exams.status
                                                     FROM tl_member, tl_attendees_exams
                                                     WHERE tl_member.id=$attendeeID

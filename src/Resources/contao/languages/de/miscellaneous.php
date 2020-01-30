@@ -69,6 +69,12 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationQuestion'] = 'Wo
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'] = 'Ja, Teilnehmer löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'] = 'Nein, nicht löschen';
 
+$GLOBALS['TL_LANG']['miscellaneous']['combineExams'] = "Klausuren zusammenlegen";
+$GLOBALS['TL_LANG']['miscellaneous']['combineExamsExplanation'] = "Wählen Sie aus, mit welcher Klausur die angegebene Klausur zusammengelegt werden soll. Die Teilnehmer der unten ausgewählten Klausur werden der angegebenen zugewiesen, anschließend wird die ausgewählte Klausur gelöscht.";
+$GLOBALS['TL_LANG']['miscellaneous']['combineExamsTo'] = "Die Teilnehmer werden in folgende Klausur übertragen: ";
+$GLOBALS['TL_LANG']['miscellaneous']['combineExamsFrom'] = "Wählen Sie aus, von welcher Klausur die Teilnehmer übertragen werden sollen: ";
+$GLOBALS['TL_LANG']['miscellaneous']['combineDoCombine'] = "Zusammenlegen";
+
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";
 
 $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'] = "Raumplan anzeigen";

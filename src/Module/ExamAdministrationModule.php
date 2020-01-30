@@ -300,11 +300,13 @@ class ExamAdministrationModule extends \Module
             }
         }
         // Späteste Endzeit berechnen
+        /*
         $maxEndTime = ($examDetails->date) + ($maxDuration * 60);
         $maxEndTimeReadable = date("H:i", $maxEndTime);
-        $this->Template->detailMaxEndtime = $maxEndTimeReadable;
+        $this->Template->detailMaxEndtime = $maxEndTimeReadable;*/
+        $this->Template->detailMaxEndtime = $maxDuration;
 
-        // Dozentendaten zusammensetzen
+            // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_prename;

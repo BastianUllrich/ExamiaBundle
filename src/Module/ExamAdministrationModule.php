@@ -122,7 +122,10 @@ class ExamAdministrationModule extends \Module
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
             $examID = $_GET["exam"];
-            $this->saveExamChanges($examID);
+
+            $this->Template->tmp = \Contao\Input::post('FORM_SUBMIT');
+
+            // $this->saveExamChanges($examID);
         }
 
         if ($_GET["do"] == "editAttendees") {
@@ -141,9 +144,11 @@ class ExamAdministrationModule extends \Module
         }
 
         if (\Contao\Input::post('FORM_SUBMIT') == 'editAttendee') {
+
+            $this->Template->tmp = \Contao\Input::post('FORM_SUBMIT');
             $examID = $_GET["exam"];
             $attendeeID = $_GET["editAttendee"];
-            $this->saveAttendeeChanges($examID, $attendeeID);
+            //$this->saveAttendeeChanges($examID, $attendeeID);
         }
 
         // Mitglied löschen

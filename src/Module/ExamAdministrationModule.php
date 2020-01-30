@@ -53,6 +53,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->showDetails = false;
         $this->Template->showEditForm = false;
         $this->Template->changesSaved = false;
+        $this->Template->attendeeChangesSaved = false;
         $this->Template->editAttendees = false;
 
         // FrontendUser Variablen laden
@@ -112,7 +113,7 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesViewDetails($examDetails);
         }
 
-        if ($_GET["do"] == "editDetails" && $this->Template->changesSaved === false) {
+        if ($_GET["do"] == "editDetails") {
             $this->Template->showEditForm = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
@@ -477,7 +478,6 @@ class ExamAdministrationModule extends \Module
     {
         $this->Template->editAttendees = true;
         $this->Template->showEditAttendeeForm = true;
-        $this->Template->attendeeChangesSaved = "false";
         $examID = $exam;
         $attendeeID = $_GET['editAttendee'];
         $this->setEditAttendeeLangValues();
@@ -498,7 +498,7 @@ class ExamAdministrationModule extends \Module
 
         // update the record in the database
         if ($attendeeExam->save()) {
-            $this->Template->attendeeChangesSaved = "true";
+            $this->Template->attendeeChangesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
             $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         }

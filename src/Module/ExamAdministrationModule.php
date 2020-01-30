@@ -304,7 +304,7 @@ class ExamAdministrationModule extends \Module
         $maxEndTime = ($examDetails->date) + ($maxDuration * 60);
         $maxEndTimeReadable = date("H:i", $maxEndTime);
         $this->Template->detailMaxEndtime = $maxEndTimeReadable;*/
-        $this->Template->detailMaxEndtime = $maxDuration;
+        $this->Template->detailMaxEndtime = date("d.m.Y H:i", $examDetails->date);
 
             // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;

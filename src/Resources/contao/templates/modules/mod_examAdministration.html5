@@ -546,7 +546,7 @@ elseif ($this->editAttendees === true) {
                         <label for="rehab_devices_others">
                             <?= $this->langRehabDevicesOthers; ?>
                         </label>
-                        <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehab_devices_others; ?>" maxlength="30" autocomplete="on">
+                        <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehabDevicesOthers; ?>" maxlength="30" autocomplete="on">
                     </div>
                     <div class="widget widget-text">
                         <label for="extra_time">

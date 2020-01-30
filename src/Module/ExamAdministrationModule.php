@@ -480,7 +480,6 @@ class ExamAdministrationModule extends \Module
         $this->Template->attendeeChangesSaved = false;
         $examID = $exam;
         $attendeeID = $_GET['editAttendee'];
-
         $this->setEditAttendeeLangValues();
         $this->setEditAttendeeValues($examID, $attendeeID);
 

@@ -563,7 +563,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailExtraTime .=  $GLOBALS['TL_LANG']['tl_member'][$result->extra_time_minutes_percent];
 
         $this->Template->status = $result->status;
-        $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
+        $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
     }
 
     public function setShowEditAttendeeLangValues() {

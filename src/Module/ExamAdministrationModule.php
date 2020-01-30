@@ -534,8 +534,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->rehab_devices = unserialize($result->rehab_devices);
         $this->Template->rehabDevicesOthers = $result->rehab_devices_others;
         $this->Template->extraTime = $result->extra_time;
-        $this->Template->extraTimeUnit = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
-        $this->Template->status = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
+        $this->Template->extraTimeUnit = $result->extra_time_minutes_percent;
+        $this->Template->status = $result->status;
     }
 
     public function setEditAttendeeLangValues() {

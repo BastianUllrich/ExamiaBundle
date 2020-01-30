@@ -344,7 +344,7 @@ elseif ($this->editAttendees === true) {
 ?>
 <p><?= $this->attendeeChangesSaved; ?></p>
 <?php
-        if ($this->attendeeChangesSaved === true) {
+        if ($this->attendeeChangesSaved == "true") {
             ?>
             <p><em><?= $this->changesSavedMessage; ?></em></p>
             <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>

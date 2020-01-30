@@ -454,8 +454,10 @@ class ExamAdministrationModule extends \Module
         $id = $exam->id;
         // set the values
         $exam->title = \Input::post('title');
-        $date = \Input::post('date');
-        $exam->date = strtotime($date);
+        $dateTime = \Input::post('date');
+        $dateTime = " ";
+        $dateTime .= \Input::post('begin');
+        $exam->date = strtotime($dateTime);
         $exam->begin = \Input::post('begin');
         $exam->duration = \Input::post('regularDuration');
         $exam->department = \Input::post('department');

@@ -18,7 +18,7 @@
         <?php foreach($this->supervisorDataList as $supervisorData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first"><?= $supervisorData['date']; ?></td>
-                <td class="body col_1 "><?= $this->langShowDetails; ?></td>
+                <td class="body col_1 "><a href="{{env::request}}?date=<?= $supervisorData['todayMidnight']; ?" title="<?= $this->langShowDetails; ?>"><?= $this->langShowDetails; ?></a></td>
             </tr>
             <?php
             $i++;

@@ -63,9 +63,11 @@ class SupervisorAdministrationModule extends \Module
         while ($result->next()) {
             // Variablen für das Template setzen
             $supervisorData[$i]['date'] = date("d.m.Y", $result->date);
+            $supervisorData[$i]['todayMidnight'] = $todayMidnight;
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;
+
 
         $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
         $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];

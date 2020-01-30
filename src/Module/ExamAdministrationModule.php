@@ -112,7 +112,7 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesViewDetails($examDetails);
         }
 
-        if ($_GET["do"] == "editDetails") {
+        if ($_GET["do"] == "editDetails" && $this->Template->changesSaved === false) {
             $this->Template->showEditForm = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);

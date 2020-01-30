@@ -226,7 +226,8 @@ class ExamAdministrationModule extends \Module
 
         // Andere Klausuren aus Datenbank holen (nur aktuelle)
         $timeNow = time();
-        $result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $examDetails->id AND date > $timeNow");
+        $id = $examDetails->id;
+        $result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $id AND date > $timeNow");
         $i = 0;
         $examFromData = array();
         while ($result->next()) {

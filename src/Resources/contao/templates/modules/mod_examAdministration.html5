@@ -3,7 +3,6 @@
 <?php $this->block('content'); ?>
 <div class="ce_text first last  block">
 <h2><?= $this->manage_exams; ?></h2>
-    <p><?= $this->tmp; ?></p>
 </div>
 <?php
 if ($this->showConfirmationQuestion === false && $this->showDetails === false && $this->showEditForm === false && $this->editAttendees === false ) {
@@ -150,10 +149,11 @@ elseif ($this->showEditForm === true) {
     else {
         ?>
         <p><strong><?= $this->langEditExamDetails; ?></strong></p>
-        <form action="" id="editExam" method="post">
+        <form action="" id="<?= $this->formId; ?>" method="post">
             <div class="formbody">
                 <input type="hidden" name="FORM_SUBMIT" value="editExam">
                 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+                <input type="hidden" name="formIdentity" value="editExamData">
                 <div class="widget widget-text mandatory">
                     <label for="title" class="mandatory">
                         <span class="invisible"><?= $this->mandatory; ?></span>
@@ -350,10 +350,11 @@ elseif ($this->editAttendees === true) {
         else {
             ?>
             <p><strong><?= $this->langEditAttendee; ?></strong></p>
-            <form action="" id="editAttendee" method="post">
+            <form action="" id="<?= $this->formId; ?" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="editExam">
                     <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+                    <input type="hidden" name="formIdentity" value="editAttendeeData">
                     <div class="widget widget-text">
                         <span>
                             <strong>

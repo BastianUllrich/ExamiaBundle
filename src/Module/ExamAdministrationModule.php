@@ -120,12 +120,18 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesEdit($examDetails);
         }
 
+        // Formular wurde abgesendet -> Zur Unterscheidung, welches Formular abgesendet wurde, wird das hidden-Feld "formIdentity" ausgelesen
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
             $examID = $_GET["exam"];
+            $attendeeID = $_GET["editAttendee"];
+            $formIdentity = \Input::post('formIdentity');
 
-            $this->Template->tmp = \Contao\Input::post('FORM_SUBMIT');
-
-            // $this->saveExamChanges($examID);
+            if ($formIdentity == "editExamData") {
+                $this->saveExamChanges($examID);
+            }
+            elseif ($formIdentity == "editAttendeeData") {
+                $this->saveAttendeeChanges($examID, $attendeeID);
+            }
         }
 
         if ($_GET["do"] == "editAttendees") {
@@ -141,14 +147,6 @@ class ExamAdministrationModule extends \Module
             } else {
                 $this->showAttendeeList($exam);
             }
-        }
-
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editAttendee') {
-
-            $this->Template->tmp = \Contao\Input::post('FORM_SUBMIT');
-            $examID = $_GET["exam"];
-            $attendeeID = $_GET["editAttendee"];
-            //$this->saveAttendeeChanges($examID, $attendeeID);
         }
 
         // Mitglied löschen

@@ -656,14 +656,14 @@ elseif ($this->showCombineForm === true) {
             <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
             <input type="hidden" name="formIdentity" value="combineExams">
             <div class="widget widget-select select mandatory">
-                <label for="seat" class="select mandatory">
+                <label for="examTo" class="select mandatory">
                     <span class="invisible"><?= $this->mandatory; ?></span>
-                    <?= $this->langSeat; ?>
+                    <?= $this->langCombineExamsFrom; ?>
                     <span class="mandatory">*</span>
                 </label>
-                <select name="seat" id="seat" class="select mandatory" required="">
-                    <?php foreach($this->examFromDataList as examFromData): ?>
-                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - ><?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo $examFromData['date']; echo $this->langExamTimeAt; echo $examFromData['time']; echo $this->langExamTimeHour; ?>)</option>
+                <select name="examTo" id="examTo" class="select mandatory" required="">
+                    <?php foreach($this->examFromDataList as $examFromData): ?>
+                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo $examFromData['date']; echo $this->langExamTimeAt; echo $examFromData['time']; echo $this->langExamTimeHour; ?>)</option>
                     <?php endforeach; ?>
                 </select>
             </div>

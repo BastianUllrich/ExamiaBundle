@@ -74,6 +74,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['combineExamsExplanation'] = "Wählen Sie a
 $GLOBALS['TL_LANG']['miscellaneous']['combineExamsTo'] = "Die Teilnehmer werden in folgende Klausur übertragen: ";
 $GLOBALS['TL_LANG']['miscellaneous']['combineExamsFrom'] = "Wählen Sie aus, von welcher Klausur die Teilnehmer übertragen werden sollen: ";
 $GLOBALS['TL_LANG']['miscellaneous']['combineDoCombine'] = "Zusammenlegen";
+$GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'] = "Die Teilnehmer wurden erfolgreich übertragen.";
 
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";
 

@@ -57,6 +57,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->editAttendees = false;
         $this->Template->showAttendeeDetails = false;
         $this->Template->showCombineForm = false;
+        $this->Template->combinationSaved = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -223,7 +224,6 @@ class ExamAdministrationModule extends \Module
         // Verkürzte Schreibweise für den Fachbereich
         $this->Template->examToDepartment = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$examDetails->department], 0, 5)));
 
-
         // Andere Klausuren aus Datenbank holen (nur aktuelle)
         $timeNow = time();
         $id = $examDetails->id;
@@ -240,6 +240,19 @@ class ExamAdministrationModule extends \Module
             $i++;
         }
         $this->Template->examFromDataList = $examFromData;
+    }
+
+    public function saveCombineChanges($examID) {
+        $combineToId = $examID;
+        $combineFromId = \Input::post('examFrom');
+
+        if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->set()->execute()) {
+            $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
+            $this->Template->combinationSaved = true;
+            $this->Template->combinationSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'];
+            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
+        }
+
     }
 
     public function setExamValuesViewDetails($examDetails)

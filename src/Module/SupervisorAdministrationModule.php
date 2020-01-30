@@ -54,7 +54,7 @@ class SupervisorAdministrationModule extends \Module
         $todayMidnight = strtotime(date("d.m.Y"));
         $result = Database::getInstance()->prepare("SELECT * 
                                                     FROM tl_exams 
-                                                    WHERE time > $todayMidnight
+                                                    WHERE date > $todayMidnight
                                                     GROUP BY date
                                                     ORDER BY date ASC
                                                     ")->query();

@@ -549,16 +549,16 @@ elseif ($this->editAttendees === true) {
                         <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehab_devices_others; ?>" maxlength="30" autocomplete="on">
                     </div>
                     <div class="widget widget-text">
-                        <label for="extraTime">
+                        <label for="extra_time">
                             <?= $this->langExtraTime; ?>
                         </label>
-                        <input type="text" name="extraTime" id="extraTime" class="text" value="<?= $this->extraTime; ?>">
+                        <input type="text" name="extra_time" id="extra_time" class="text" value="<?= $this->extraTime; ?>">
                     </div>
                     <div class="widget widget-select select">
-                        <label for="extraTimeUnit" class="select">
+                        <label for="extra_time_minutes_percent" class="select">
                             <?= $this->langExtraTimeUnit; ?>
                         </label>
-                        <select name="extraTimeUnit" id="extraTimeUnit" class="select">
+                        <select name="extra_time_minutes_percent" id="extra_time_minutes_percent" class="select">
                             <option value="minutes" <?php if ($this->extraTimeUnit == "minutes") echo "selected"; ?>><?= $this->langExtraTimeMinutes; ?></option>
                             <option value="percent" <?php if ($this->extraTimeUnit == "percent") echo "selected"; ?>><?= $this->langExtraTimePercent; ?></option>
                         </select>

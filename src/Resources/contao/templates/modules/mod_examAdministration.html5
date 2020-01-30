@@ -559,7 +559,7 @@ elseif ($this->editAttendees === true) {
                         <label for="extra_time_minutes_percent">
                             <?= $this->langExtraTimeUnit; ?>
                         </label>
-                        <select name="seat" id="extra_time_minutes_percent">
+                        <select name="extra_time_minutes_percent" id="extra_time_minutes_percent">
                             <option value="-">-</option>
                             <option value="minutes" <?php if ($this->extraTimeUnit == "minutes") echo "selected"; ?>><?= $this->langExtraTimeMinutes; ?></option>
                             <option value="percent" <?php if ($this->extraTimeUnit == "percent") echo "selected"; ?>><?= $this->langExtraTimePercent; ?></option>

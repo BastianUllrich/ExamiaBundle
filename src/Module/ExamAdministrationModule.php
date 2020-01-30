@@ -55,6 +55,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->changesSaved = false;
         $this->Template->attendeeChangesSaved = false;
         $this->Template->editAttendees = false;
+        $this->Template->showAttendeeDetails = false;
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -137,6 +138,7 @@ class ExamAdministrationModule extends \Module
 
         if ($_GET["do"] == "editAttendees") {
             $this->Template->editAttendees = true;
+            $this->Template->showAttendeeDetails = false;
             $this->Template->showEditAttendeeForm = false;
             $this->Template->showDeleteAttendeeConfirmation = false;
             $exam = $_GET["exam"];
@@ -145,6 +147,8 @@ class ExamAdministrationModule extends \Module
                 $this->deleteAttendee($exam);
             } elseif (array_key_exists('editAttendee', $_GET)) {
                 $this->editAttendee($exam);
+            } elseif (array_key_exists('showAttendee', $_GET)) {
+                $this->showAttendee($exam);
             } else {
                 $this->showAttendeeList($exam);
             }
@@ -454,6 +458,16 @@ class ExamAdministrationModule extends \Module
         $this->setLangValuesEditAttendees();
     }
 
+    // Teilnehmerdetails anzeigen
+    public function showAttendee($exam)
+    {
+        $this->Template->showAttendeeDetails = true;
+        $examID = $exam;
+        $attendeeID = $_GET['showAttendee'];
+        $this->setShowEditAttendeeLangValues();
+        $this->setShowEditAttendeeValues($examID, $attendeeID);
+    }
+
     // Teilnehmer löschen
     public function deleteAttendee($exam)
     {
@@ -480,8 +494,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->showEditAttendeeForm = true;
         $examID = $exam;
         $attendeeID = $_GET['editAttendee'];
-        $this->setEditAttendeeLangValues();
-        $this->setEditAttendeeValues($examID, $attendeeID);
+        $this->setShowEditAttendeeLangValues();
+        $this->setShowEditAttendeeValues($examID, $attendeeID);
 
     }
 
@@ -505,7 +519,7 @@ class ExamAdministrationModule extends \Module
         }
     }
 
-    public function setEditAttendeeValues($examID, $attendeeID) {
+    public function setShowEditAttendeeValues($examID, $attendeeID) {
 
         $result = Database::getInstance()->prepare("SELECT 
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
@@ -528,15 +542,29 @@ class ExamAdministrationModule extends \Module
         if (!empty($result->seat)) {
             $this->Template->seat = $result->seat;
         }
-        $this->Template->rehab_devices = unserialize($result->rehab_devices);
+        $rehab_devices = unserialize($result->rehab_devices);
+        $this->Template->rehab_devices = $rehab_devices;
+
+        // Sprachvariablen in Array "REHA-Tools" einsetzen
+        for ($i=0; $i < sizeof($rehab_devices); $i++) {
+            $rehab_devices[$i] = $GLOBALS['TL_LANG']['tl_member'][$rehab_devices[$i]];
+        }
+        $this->Template->detailRehabDevices = $rehab_devices;
+
         $this->Template->rehabDevicesOthers = $result->rehab_devices_others;
         $this->Template->extraTime = $result->extra_time;
         $this->Template->extraTimeUnit = $result->extra_time_minutes_percent;
+
+        $this->Template->detailExtraTime =  $result->extra_time;
+        $this->Template->detailExtraTime .=  " ";
+        $this->Template->detailExtraTime .=  $GLOBALS['TL_LANG']['tl_member'][$result->extra_time_minutes_percent];
+
         $this->Template->status = $result->status;
     }
 
-    public function setEditAttendeeLangValues() {
+    public function setShowEditAttendeeLangValues() {
         $this->Template->langEditAttendee = $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'];
+        $this->Template->langAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'];
         $this->Template->langExam = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
 
         $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
@@ -573,7 +601,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
         $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
 
-        $this->Template->langRehabDevicesOthersSupervisor = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_supervisor'];
+        $this->Template->langRehabDevicesOthersAssistant = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_assistant'];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
         $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];

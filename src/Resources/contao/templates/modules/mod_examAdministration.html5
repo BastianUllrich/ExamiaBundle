@@ -289,7 +289,7 @@ elseif ($this->showEditForm === true) {
 }
 // Teilnehmer anzeigen und bearbeiten
 elseif ($this->editAttendees === true) {
-    if ($this->showEditAttendeeForm === false && $this->showDeleteAttendeeConfirmation === false) {
+    if ($this->showAttendeeDetails === false && $this->showEditAttendeeForm === false && $this->showDeleteAttendeeConfirmation === false) {
         ?>
         <p><strong><?= $this->langShowAttendees; ?></strong></p>
         <p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
@@ -313,6 +313,7 @@ elseif ($this->editAttendees === true) {
                     <td class="body col_3"><?= $attendeeData['writingAssistance']; ?></td>
                     <td class="body col_4"><?= $attendeeData['status']; ?></td>
                     <td class="body col_5 col_last">
+                        <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&showAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmerdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Teilnehmerdetails anzeigen"></a>
                         <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&editAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>
                         <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer entfernen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Teilnehmer entfernen"></a>
                     </td>
@@ -331,6 +332,59 @@ elseif ($this->editAttendees === true) {
             </tbody>
         </table>
         <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
+        <?php
+    }
+    if ($this->showAttendeeDetails === true) {
+        ?>
+        <p><strong><?= $this->langAttendeeDetails; ?></strong></p>
+        <p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
+        <table class="single_record">
+            <tbody>
+            <tr class="row_0 row_first even">
+                <td class="label"><?= $this->langUsername; ?></td>
+                <td class="value"><?= $this->username;; ?></td>
+            </tr>
+            <tr class="row_1 odd">
+                <td class="label"><?= $this->langFirstname; ?></td>
+                <td class="value"><?= $this->firstname; ?></td>
+            </tr>
+            <tr class="row_2 even">
+                <td class="label"><?= $this->langLastname; ?></td>
+                <td class="value"><?= $this->lastname; ?></td>
+            </tr>
+            <tr class="row_3 odd">
+                <td class="label"><?= $this->langContactPerson; ?></td>
+                <td class="value"><?= $this->contactPerson; ?></td>
+            </tr>
+            <tr class="row_4 even">
+                <td class="label"><?= $this->langSeat; ?></td>
+                <td class="value"><?= $this->seat; ?></td>
+            </tr>
+            <tr class="row_5 odd">
+                <td class="label"><?= $this->langRehabDevices; ?></td>
+                <td class="value">
+                    <?php
+                    for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
+                        echo ($this->detailRehabDevices[$i]."; ");
+                    }
+                    ?>
+                </td>
+            </tr>
+            <tr class="row_6 even">
+                <td class="label"><?= $this->langRehabDevicesOthersAssistant; ?></td>
+                <td class="value"><?= $this->rehabDevicesOthers; ?></td>
+            </tr>
+            <tr class="row_7 odd">
+                <td class="label"><?= $this->langExtraTime; ?></td>
+                <td class="value"><?= $this->detailExtraTime; ?></td>
+            </tr>
+            <tr class="row_8 even">
+                <td class="label"><?= $this->langStatus; ?></td>
+                <td class="value"><?= $this->status; ?></td>
+            </tr>
+            </tbody>
+        </table>
+        <p><a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>" title="<?= $this->linktextBackToAttendeeAdministration; ?>"><?= $this->linktextBackToAttendeeAdministration; ?></a></p>
         <?php
     }
     if ($this->showDeleteAttendeeConfirmation === true) {
@@ -545,7 +599,7 @@ elseif ($this->editAttendees === true) {
                     </div>
                     <div class="widget widget-text">
                         <label for="rehab_devices_others">
-                            <?= $this->langRehabDevicesOthersSupervisor; ?>
+                            <?= $this->langRehabDevicesOthersAssistant; ?>
                         </label>
                         <input type="text" name="rehab_devices_others" id="rehab_devices_others" class="text" value="<?= $this->rehabDevicesOthers; ?>" maxlength="30" autocomplete="on">
                     </div>

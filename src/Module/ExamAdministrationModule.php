@@ -454,11 +454,17 @@ class ExamAdministrationModule extends \Module
         $id = $exam->id;
         // set the values
         $exam->title = \Input::post('title');
-        $dateTime = \Input::post('date');
-        $dateTime = " ";
-        $dateTime .= \Input::post('begin');
-        $exam->date = strtotime($dateTime);
-        $exam->begin = \Input::post('begin');
+
+        $exam_date = \Input::post('date');
+        $exam_begin = \Input::post('begin');
+        // Datum um Beginn verknüpfen und in Variable für Datenbank schreiben
+        $exam_datetime = $exam_date;
+        $exam_datetime .= " ";
+        $exam_datetime .= $exam_begin;
+        $exam_datetime = strtotime($exam_datetime);
+        $exam->date = $exam_datetime;
+
+        $exam->begin = $exam_begin;
         $exam->duration = \Input::post('regularDuration');
         $exam->department = \Input::post('department');
         $exam->status = \Input::post('status');

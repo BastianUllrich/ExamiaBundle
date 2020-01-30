@@ -25,6 +25,12 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
                     </label>
                     <input type="date" name="filterDateUntil" id="filterDateUntil" class="text mandatory" maxlength="255" autocomplete="on">
                 </div>
+                <div class="widget widget-submit">
+                    <button type="submit" class="submit" name="doFilter">Filter anwenden</button>
+                </div>
+                <div class="widget widget-submit">
+                    <button type="submit" class="submit" name="doReset">Filter zurücksetzen</button>
+                </div>
             </div>
         </form>
     <table class="all_records">

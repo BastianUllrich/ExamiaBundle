@@ -41,6 +41,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";
 $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'] = "Die Änderungen wurden gespeichert";
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'] = "Zurück zur Mitgliederverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'] = "Zurück zur Klausurverwaltung";
+$GLOBALS['TL_LANG']['miscellaneous']['linktextBackToAttendeeAdministration'] = "Zurück zur Teilnehmerverwaltung";
 
 $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['examDetails'] = "Klausurdetails";

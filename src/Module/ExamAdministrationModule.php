@@ -499,8 +499,9 @@ class ExamAdministrationModule extends \Module
         // update the record in the database
         if ($attendeeExam->save()) {
             $this->Template->attendeeChangesSaved = true;
+            $this->Template->examID = $examID;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
-            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
+            $this->Template->linktextBackToAttendeeAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToAttendeeAdministration'];
         }
     }
 

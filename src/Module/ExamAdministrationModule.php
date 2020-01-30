@@ -542,6 +542,9 @@ class ExamAdministrationModule extends \Module
         if (!empty($result->seat)) {
             $this->Template->seat = $result->seat;
         }
+
+        $this->Template->detailSeat = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+
         $rehab_devices = unserialize($result->rehab_devices);
         $this->Template->rehab_devices = $rehab_devices;
 
@@ -560,6 +563,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailExtraTime .=  $GLOBALS['TL_LANG']['tl_member'][$result->extra_time_minutes_percent];
 
         $this->Template->status = $result->status;
+        $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status];
     }
 
     public function setShowEditAttendeeLangValues() {

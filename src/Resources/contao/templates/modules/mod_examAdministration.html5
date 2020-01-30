@@ -8,31 +8,6 @@
 if ($this->showConfirmationQuestion === false && $this->showDetails === false && $this->showEditForm === false && $this->editAttendees === false && $this->showCombineForm === false && $this->combinationSaved === false) {
     $i = 0;
     ?>
-    <p><strong>Nach Datum Filtern:</strong></p>
-        <form action="" id="<?= $this->formId; ?>" method="post">
-            <div class="formbody">
-                <input type="hidden" name="FORM_SUBMIT" value="editExam">
-                <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-                <input type="hidden" name="formIdentity" value="filter">
-                <div class="widget widget-text mandatory">
-                    <label for="filterDateFrom" class="mandatory">
-                        Von (Datum):
-                    </label>
-                    <input type="date" name="filterDateFrom" id="filterDateFrom" class="text mandatory w50" maxlength="255" autocomplete="on">
-
-                    <label for="filterDateUntil" class="mandatory">
-                        Bis (Datum):
-                    </label>
-                    <input type="date" name="filterDateUntil" id="filterDateUntil" class="text mandatory w50" maxlength="255" autocomplete="on">
-                </div>
-                <div class="widget widget-submit">
-                    <button type="submit" class="submit" name="doFilter">Filter anwenden</button>
-                </div>
-                <div class="widget widget-submit">
-                    <button type="submit" class="submit" name="doReset">Filter zurücksetzen</button>
-                </div>
-            </div>
-        </form>
     <table class="all_records">
         <thead>
         <tr>

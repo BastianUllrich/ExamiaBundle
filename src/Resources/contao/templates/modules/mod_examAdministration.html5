@@ -350,6 +350,7 @@ elseif ($this->editAttendees === true) {
         else {
             ?>
             <p><strong><?= $this->langEditAttendee; ?></strong></p>
+            <p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
             <form action="" id="<?= $this->formId; ?>" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="editExam">

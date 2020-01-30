@@ -35,6 +35,11 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'] = 'Ja, Mitgl
 $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'] = 'Nein, nicht löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deletionMemberSuccessful'] = 'Das Mitglied wurde erfolgreich gelöscht.';
 
+$GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationQuestion'] = 'Wollen Sie die Klausur wirklich löschen?';
+$GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationYes'] = 'Ja, Klausur löschen';
+$GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationNo'] = 'Nein, nicht löschen';
+$GLOBALS['TL_LANG']['miscellaneous']['deletionExamSuccessful'] = 'Die Klausur wurde erfolgreich gelöscht.';
+
 $GLOBALS['TL_LANG']['miscellaneous']['editMember'] = "Mitgliedsdetails bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['editExamDetails'] = "Klausur bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";

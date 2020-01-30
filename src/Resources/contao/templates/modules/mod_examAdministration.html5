@@ -649,7 +649,7 @@ elseif ($this->showCombineForm === true) {
     ?>
     <h3><?= $this->langCombineExams; ?></h3>
     <p><strong><?= $this->langCombineExamsExplanation; ?></strong></p>
-    <p><?= $this->langCombineExamsTo; ?> <?= $this->examToTitle; ?> - <?= $this->examToDepartment; ?> (<? echo $this->examToDate; echo $this->langExamTimeAt; echo $this->examToTime; echo $this->langExamTimeHour; ?>)</p>
+    <p><?= $this->langCombineExamsTo; ?> <?= $this->examToTitle; ?> - <?= $this->examToDepartment; ?> (<?= $this->examToDate; ?> <?= $this->langExamTimeAt; ?> <?= $this->examToTime; ?> <?= $this->langExamTimeHour; ?>)</p>
     <form action="" id="<?= $this->formId; ?>" method="post">
         <div class="formbody">
             <input type="hidden" name="FORM_SUBMIT" value="editExam">
@@ -663,7 +663,7 @@ elseif ($this->showCombineForm === true) {
                 </label>
                 <select name="examTo" id="examTo" class="select mandatory" required="">
                     <?php foreach($this->examFromDataList as $examFromData): ?>
-                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo $examFromData['date']; echo $this->langExamTimeAt; echo $examFromData['time']; echo $this->langExamTimeHour; ?>)</option>
+                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo ($examFromData['date'] . " " . $this->langExamTimeAt . " " . $examFromData['begin'] . " " . $this->langExamTimeHour; ?>)</option>
                     <?php endforeach; ?>
                 </select>
             </div>

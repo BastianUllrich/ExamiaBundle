@@ -235,7 +235,7 @@ class ExamAdministrationModule extends \Module
             $examFromData[$i]['id'] = $result->id;
             $examFromData[$i]['title'] = $result->title;
             $examFromData[$i]['date'] = date("d.m.Y", $result->date);
-            $examFromData[$i]['time'] = $result->time;
+            $examFromData[$i]['begin'] = $result->begin;
             $examFromData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
             $i++;
         }

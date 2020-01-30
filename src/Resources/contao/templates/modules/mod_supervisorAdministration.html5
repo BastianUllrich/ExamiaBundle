@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 <div class="ce_text first last  block">
-<h2><?= $this->langSupervisorAdministration ></h2>
+<h2><?= $this->langSupervisorAdministration; ?></h2>
 </div>
 <?php
     $i = 0;

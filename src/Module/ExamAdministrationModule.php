@@ -246,6 +246,21 @@ class ExamAdministrationModule extends \Module
         $combineToId = $examID;
         $combineFromId = \Input::post('examFrom');
 
+        /* Verhindern, dass ein Teilnehmer doppelt eingetragen wird */
+        // Alle Teilnehmer der "alten" Klausur heraussuchen
+        $getAttendeeFromExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineFromId")->query();
+        while ($getAttendeeFromExam->next()) {
+            $attendeeIdFromExam = $getAttendeeFromExam->attendee_id;
+            // Ist dieser Teilnehmer in der "neuen" Klausur vorhanden?
+            $getAttendeesToExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineToId AND attendee_id=$attendeeIdFromExam")->query();
+            $attendeeIdToExam = $getAttendeesToExam->attendee_id;
+            // Wenn der Teilnehmer schon vorhanden ist, wird er aus der "alten" Klausur gelöscht
+            if (!empty($attendeeIdToExam)) {
+                $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$attendeeIdToExam AND exam_id=$combineFromId")->execute()->affectedRows;
+            }
+        }
+
+        // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
         if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->execute()) {
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;

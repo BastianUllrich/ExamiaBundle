@@ -341,7 +341,9 @@ elseif ($this->editAttendees === true) {
         <?php
     }
     if ($this->showEditAttendeeForm === true) {
+?>
 <p><?= $this->attendeeChangesSaved; ?></p>
+<?php
         if ($this->attendeeChangesSaved === true) {
             ?>
             <p><em><?= $this->changesSavedMessage; ?></em></p>

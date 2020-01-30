@@ -663,7 +663,7 @@ elseif ($this->showCombineForm === true) {
                 </label>
                 <select name="examTo" id="examTo" class="select mandatory" required="">
                     <?php foreach($this->examFromDataList as $examFromData): ?>
-                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo ($examFromData['date'] . " " . $this->langExamTimeAt . " " . $examFromData['begin'] . " " . $this->langExamTimeHour; ?>)</option>
+                        <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>, <?php echo ($examFromData['date'] . " " . $this->langExamTimeAt . " " . $examFromData['begin'] . " " . $this->langExamTimeHour ); ?>)</option>
                     <?php endforeach; ?>
                 </select>
             </div>

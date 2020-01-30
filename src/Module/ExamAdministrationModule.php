@@ -246,7 +246,7 @@ class ExamAdministrationModule extends \Module
         $combineToId = $examID;
         $combineFromId = \Input::post('examFrom');
 
-        if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->set()->execute()) {
+        if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->execute()) {
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;
             $this->Template->combinationSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'];

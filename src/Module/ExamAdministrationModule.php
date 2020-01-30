@@ -572,7 +572,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
         $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
 
-        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
+        $this->Template->langRehabDevicesOthersSupervisor = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_supervisor'];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
         $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];

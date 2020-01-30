@@ -36,6 +36,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['different'] = 'Sonstige';
 
 //Andere Hilfsmittel
 $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'] = ['Sonstigte Hilfsmittel', 'Bitte geben Sie an, welche sonstigen Hilfsmittel für die Klausur benötigt werden'];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_supervisor'] = 'Sonstige Hilfsmittel / Schreibassistenz';
 
 //Schreibassistenz
 $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant_id'] = ['Schreibassistenz', 'Bitte geben Sie die Schreibassistenz an'];

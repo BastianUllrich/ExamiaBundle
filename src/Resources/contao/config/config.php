@@ -7,7 +7,7 @@ $GLOBALS['FE_MOD']['examia']['examRegisteredExamsMember'] = 'Baul\ExamiaBundle\M
 $GLOBALS['FE_MOD']['examia']['examUnsubscribe'] = 'Baul\ExamiaBundle\Module\ExamUnsubscribeModule';
 $GLOBALS['FE_MOD']['examia']['memberAdministration'] = 'Baul\ExamiaBundle\Module\MemberAdministrationModule';
 $GLOBALS['FE_MOD']['examia']['examAdministration'] = 'Baul\ExamiaBundle\Module\ExamAdministrationModule';
-
+$GLOBALS['FE_MOD']['examia']['supervisorAdministration'] = 'Baul\ExamiaBundle\Module\SupervisorAdministrationModule';
 
 // Backend modules
 $GLOBALS['BE_MOD']['examia']['exams'] = [
@@ -35,6 +35,9 @@ $GLOBALS['TL_MODELS']['tl_exams'] = ExamsModel::class;
 
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 $GLOBALS['TL_MODELS']['tl_attendees_exams'] = AttendeesExamsModel::class;
+
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
+$GLOBALS['TL_MODELS']['tl_supervisors_exams'] = SupervisorsExamsModel::class;
 
 ?>
 

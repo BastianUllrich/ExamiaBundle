@@ -1,0 +1,31 @@
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+<div class="ce_text first last  block">
+<h2><?= $this->langSupervisorAdministration ></h2>
+</div>
+<?php
+    $i = 0;
+    ?>
+    <table class="all_records">
+        <thead>
+        <tr>
+            <th class="head col_last"><?= $this->langDate; ?></th>
+            <th class="head col_last"><?= $this->langDetails; ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($this->supervisorDataList as $supervisorData): ?>
+            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+                <td class="body col_0 col_first"><?= $supervisorData['date']; ?></td>
+                <td class="body col_1 "><?= $this->langShowDetails; ?></td>
+            </tr>
+            <?php
+            $i++;
+        endforeach;
+        ?>
+        </tbody>
+    </table>
+<?php
+$this->endblock();
+?>

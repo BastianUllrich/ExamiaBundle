@@ -168,7 +168,7 @@ elseif ($this->showEditForm === true) {
                         <?= $this->langDate; ?>
                         <span class="mandatory">*</span>
                     </label>
-                    <input type="date" name="date" id="date" class="text mandatory" value="<?= $this->date; ?>" required="" maxlength="10" autocomplete="on">
+                    <input type="date" name="date" id="date" class="text mandatory" value="<?= $this->date; ?>" required="" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="begin" class="mandatory">

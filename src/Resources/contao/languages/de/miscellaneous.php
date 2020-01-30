@@ -65,3 +65,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'] = 'Ja, Tei
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'] = 'Nein, nicht löschen';
 
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";
+
+$GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'] = "Raumplan anzeigen";

@@ -71,6 +71,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
         $this->Template->orderAltText = $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
 
+        $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
+
         /* Deaktiviert -> alle Klausuren anzeigen, auch vergangene!
         // Heute 0 Uhr festlegen -> wichtig für Datenbankabfrage
         $today_midnight = date("d.m.Y");
@@ -618,8 +620,4 @@ class ExamAdministrationModule extends \Module
 
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
-
-
-
-
 }

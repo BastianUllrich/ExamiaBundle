@@ -358,7 +358,7 @@ elseif ($this->editAttendees === true) {
             </tr>
             <tr class="row_4 even">
                 <td class="label"><?= $this->langSeat; ?></td>
-                <td class="value"><?= $this->detailSeat; ?></td>
+                <td class="value"><?= $this->detailSeat; ?> <a href="klausurverwaltung/raumplan-des-bliz.html" title="<?= $this->showRoomPlan; ?>"><?= $this->showRoomPlan; ?></a></td>
             </tr>
             <tr class="row_5 odd">
                 <td class="label"><?= $this->langRehabDevices; ?></td>

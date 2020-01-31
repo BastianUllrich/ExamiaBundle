@@ -193,7 +193,7 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;
             $attendeeData[$i]['extraTime'] .= " ";
-            $attendeeData[$i]['extraTime'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
 
             if ($result->extra_time_minutes_percent == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);

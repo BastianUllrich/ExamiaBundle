@@ -165,9 +165,7 @@ class SupervisorAdministrationModule extends \Module
     public function addSupervisor($date) {
         $supervisorId = \Input::post('supervisorId');
         $timeFrom = \Input::post('timeFrom');
-        //$timeFrom = str_replace(":", "", $timeFrom);
         $timeUntil = \Input::post('timeUntil');
-        //$timeUntil = str_replace(":", "", $timeUntil);
         $task = \Input::post('personTask');
         if ($task == "supervisor") {
             $task = "Aufsicht";

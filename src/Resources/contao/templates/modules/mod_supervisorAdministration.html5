@@ -34,7 +34,6 @@ elseif ($this->showDetails === true) {
     if ($this->deletePerson === false) {
         $i = 0;
         ?>
-<p><?= $this->formName; ?></p>
         <p><strong><?= $this->langCurrentSupervisors; ?> - <?= $this->dateReadable; ?></strong></p>
         <table class="all_records">
             <thead>
@@ -75,12 +74,12 @@ elseif ($this->showDetails === true) {
                 <fieldset>
                     <legend><strong><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></strong></legend>
                     <div class="widget widget-select select mandatory">
-                        <label for="supervisorName" class="select mandatory">
+                        <label for="supervisorId" class="select mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
                             <?= $this->langSupervisorName; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <select name="supervisorName" id="supervisorName" class="select mandatory" required="">
+                        <select name="supervisorId" id="supervisorId" class="select mandatory" required="">
                             <?php foreach($this->supervisorUserList as $supervisorUser): ?>
                             <option value="<?= $supervisorUser['id']; ?>"><?= $supervisorUser['firstname']; ?> <?= $supervisorUser['lastname']; ?></option>
                             <?php endforeach; ?>

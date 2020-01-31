@@ -4,10 +4,6 @@ namespace Baul\ExamiaBundle\Module;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
-use Baul\ExamiaBundle\Model\MemberModel;
-use Baul\ExamiaBundle\Model\AttendeesExamsModel;
-use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
-
 
 class SupervisorAdministrationModule extends \Module
 {
@@ -47,10 +43,6 @@ class SupervisorAdministrationModule extends \Module
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_supervisors_exams');
 
-        // FrontendUser Variablen laden
-        $objUser = FrontendUser::getInstance();
-        $this->Template->userID = $objUser->id;
-
         $this->Template->showDetails = false;
         $this->Template->deletePerson = false;
 
@@ -86,19 +78,11 @@ class SupervisorAdministrationModule extends \Module
             $this->deleteSupervisor($id, $date);
         }
 
-        // Formular wurde abgesendet -> Zur Unterscheidung, welches Formular abgesendet wurde, wird das hidden-Feld "formIdentity" ausgelesen
-        $this->Template->formName = \Contao\Input::post('FORM_SUBMIT');
-       /*
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
-
-            $examID = $_GET["exam"];
-            $attendeeID = $_GET["editAttendee"];
-            $formIdentity = \Input::post('formIdentity');
-
-            if ($formIdentity == "editExamData") {
-                $this->saveExamChanges($examID);
-            }
-        }*/
+        // Formular wurde abgesendet
+        if (\Contao\Input::post('FORM_SUBMIT') == 'addSupervisor') {
+            $date = $_GET["date"];
+            $this->addSupervisor($date);
+        }
     }
 
     public function showDetails() {
@@ -167,9 +151,22 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->supervisorUserList = $supervisorUser;
     }
 
+    // Aufsicht löschen
     public function deleteSupervisor($id, $date) {
         $this->Template->deletePerson = true;
         if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
+            \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
+        }
+    }
+
+    // Aufsicht hinzufügen
+    public function addSupervisor($date) {
+        $supervisorId = \Input::post('supervisorId');
+        $timeFrom = \Input::post('timeFrom');
+        $timeUntil = \Input::post('timeUntil');
+        $task = \Input::post('task');
+        $timeNow = time();
+        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams VALUES(0, $timeNow, $supervisorId, $date, $timeFrom, $timeUntil, $task)")->execute()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

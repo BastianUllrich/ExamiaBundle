@@ -69,9 +69,8 @@ elseif ($this->showDetails === true) {
         <p>
         <form action="" id="<?= $this->formId; ?>" method="post">
             <div class="formbody">
-                <input type="hidden" name="FORM_SUBMIT" value="editExam">
+                <input type="hidden" name="FORM_SUBMIT" value="addSupervisor">
                 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-                <input type="hidden" name="formIdentity" value="addSupervisor">
                 <input type="hidden" name="date" value="$date">
                 <fieldset>
                     <legend><strong><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></strong></legend>

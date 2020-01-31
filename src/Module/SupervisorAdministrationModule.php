@@ -95,8 +95,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
         $this->Template->langCurrentSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'];
         $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];
-        $this->Template->langTimeFrom = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'];
-        $this->Template->langTimeUntil = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'];
+        $this->Template->langTimeFrom = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'][0];
+        $this->Template->langTimeUntil = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'][0];
         $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
@@ -104,6 +104,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
         $this->Template->langNoSupervisorsAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'];
         $this->Template->langAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'];
+        $this->Template->langSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['supervisor'];
+        $this->Template->langAssistant = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'];
         $this->Template->langDoAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'];
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
 

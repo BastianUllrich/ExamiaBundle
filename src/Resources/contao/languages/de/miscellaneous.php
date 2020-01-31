@@ -96,3 +96,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'] = "Keine Aufsicht
 $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'] = "Aufsicht hinzufügen";
 $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'] = "Ausgewählte Aufsicht hinzufügen";
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'] = "Zurück zur Aufsichtsverwaltung";
+$GLOBALS['TL_LANG']['miscellaneous']['supervisor'] = "Aufsicht";
+$GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'] = "Schreibassistent";

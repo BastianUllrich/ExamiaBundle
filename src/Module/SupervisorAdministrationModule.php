@@ -167,7 +167,7 @@ class SupervisorAdministrationModule extends \Module
         $timeUntil = \Input::post('timeUntil');
         $task = \Input::post('task');
         $timeNow = time();
-        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams VALUES(0, $timeNow, $supervisorId, $date, $timeFrom, $timeUntil, $task)")->execute()) {
+        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams VALUES(0, $timeNow, $supervisorId, $date, \"$timeFrom\", \"$timeUntil\", $task)")->execute()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

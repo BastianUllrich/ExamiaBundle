@@ -64,7 +64,7 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
-
+<p>&nbsp;</p>
         <form action="" id="<?= $this->formId; ?>" method="post">
             <div class="formbody">
                 <input type="hidden" name="FORM_SUBMIT" value="editExam">
@@ -72,7 +72,7 @@ elseif ($this->showDetails === true) {
                 <input type="hidden" name="formIdentity" value="addSupervisor">
                 <input type="hidden" name="date" value="$date">
                 <fieldset>
-                    <legend><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></legend>
+                    <legend><strong><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></strong></legend>
                     <div class="widget widget-select select mandatory">
                         <label for="supervisorName" class="select mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>

@@ -65,10 +65,10 @@ class SupervisorOverviewModule extends \Module
             // Variablen für das Template setzen
             $supervisorData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $supervisorData[$i]['time'] = $result->date;
-            $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
-            $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
-            $supervisorData[$i]['begin'] = $min_time_question->time_from;
-            $supervisorData[$i]['end'] = $max_time_question->time_until;
+            $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) AS 'mintime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
+            $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) AS 'maxtime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
+            $supervisorData[$i]['begin'] = $min_time_question->mintime;
+            $supervisorData[$i]['end'] = $max_time_question->maxtime;
             $supervisorData[$i]['task'] = $result->task;
             $i++;
         }

@@ -61,8 +61,10 @@ elseif ($this->showDetails === true) {
                 </tr>
                 <?php
             }
+            ?>
             </tbody>
         </table>
+        <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }
 }

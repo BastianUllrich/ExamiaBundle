@@ -93,3 +93,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['delete'] = "entfernen";
 $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'] = "Aufsicht entfernen";
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'] = "Assistenz entfernen";
 $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'] = "Keine Aufsichten zugewiesen";
+$GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'] = "Zurück zur Aufsichtsverwaltung";

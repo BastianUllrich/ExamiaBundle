@@ -100,6 +100,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
         $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
         $this->Template->langNoSupervisorsAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'];
+        $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
 
         $startTime = $_GET["date"];
         $endTime = $startTime + 86399;

@@ -66,19 +66,12 @@ class SupervisorOverviewModule extends \Module
             // Variablen für das Template setzen
             $supervisorData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $supervisorData[$i]['time'] = $result->date;
+            $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) AS 'mintime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date")->query();
+            $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) AS 'maxtime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date")->query();
+            $supervisorData[$i]['begin'] = $min_time_question->mintime;
+            $supervisorData[$i]['end'] = $max_time_question->maxtime;
             $supervisorData[$i]['task'] = $result->task;
             $i++;
-        }
-
-        for ($i = 0; $i < sizeof($supervisorData); $i++) {
-            $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) AS 'mintime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $supervisorData[$i]['time']");
-            $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) AS 'maxtime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $supervisorData[$i]['time']");
-            while ($min_time_question->next()) {
-                $supervisorData[$i]['begin'] = $min_time_question->mintime;
-            }
-            while ($max_time_question->next()) {
-                $supervisorData[$i]['end'] = $max_time_question->maxtime;
-            }
         }
         $this->Template->supervisorDataList = $supervisorData;
 

@@ -67,8 +67,8 @@ class SupervisorOverviewModule extends \Module
             $supervisorData[$i]['time'] = $result->date;
             $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
             $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date");
-            $supervisorData[$i]['begin'] = $min_time_question[0];
-            $supervisorData[$i]['end'] = $max_time_question[0];
+            $supervisorData[$i]['begin'] = $min_time_question;
+            $supervisorData[$i]['end'] = $max_time_question;
             $supervisorData[$i]['task'] = $result->task;
             $i++;
         }

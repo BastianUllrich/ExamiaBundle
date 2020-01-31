@@ -95,13 +95,7 @@ elseif ($this->showDetails === true) {
             <?php foreach($this->attendeeDataList as $attendeeData): ?>
                 <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                     <td class="body col_0 col_first"><?= $attendeeData['seat']; ?></td>
-                    <td class="body col_1">
-                        <?php
-                        for ($j = 0; $j < sizeof($this->$attendeeData['rehabTools']); $j++) {
-                            echo ($this->$attendeeData['rehabTools'][$j]."; ");
-                        }
-                        ?>
-                    </td>
+                    <td class="body col_1"><?= $attendeeData['rehabTools']; ?></td>
                     <td class="body col_2"><?= $attendeeData['rehabToolsOthers']; ?></td>
                     <td class="body col_3"><?= $attendeeData['extraTime']; ?></td>
                     <td class="body col_4"><?= $attendeeData['endTime']; ?></td>
@@ -112,11 +106,11 @@ elseif ($this->showDetails === true) {
             if (empty($this->attendeeDataList)) {
             ?>
             <tr class="row_even">
-                <td class="body col_0" colspan="4"><?= $this->langNoDataAvailable; ?></td>
+                <td class="body col_0" colspan="5"><?= $this->langNoDataAvailable; ?></td>
             </tr>
             <?php
-                    }
-                    ?>
+            }
+            ?>
             </tbody>
         </table>
         <p>{{link:back}}</p>

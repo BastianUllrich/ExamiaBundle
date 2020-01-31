@@ -81,9 +81,9 @@ class SupervisorAdministrationModule extends \Module
         }
 
         if ($_GET["do"] == "delete") {
-            $supervisorId = $_GET["delete"];
+            $id = $_GET["delete"];
             $date = $_GET["date"];
-            $this->deleteSupervisor($supervisorId, $date);
+            $this->deleteSupervisor($id, $date);
         }
     }
 
@@ -131,9 +131,9 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->dateReadable = date("d.m.Y", $startTime);
     }
 
-    public function deleteSupervisor($supervisorId, $date) {
+    public function deleteSupervisor($id, $date) {
         $this->Template->deletePerson = true;
-        if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$supervisorId")->execute()->affectedRows) {
+        if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

@@ -184,9 +184,16 @@ class SupervisorOverviewModule extends \Module
         $i = 0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $attendeeData[$i]['seat'] = $result->seat;
+            if (empty($result->seat)) {
+                $result->seat = "no_seat";
+            }
+            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+
             $rehab_tools = unserialize($result->rehab_devices);
-            $attendeeData[$i]['rehabTools'] = $rehab_tools;
+            for ($j=0; j<sizeof($rehab_tools); $j++) {
+                $attendeeData[$i]['rehabTools'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$rehab_tools[$j]];
+            }
+
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;
             $attendeeData[$i]['extraTime'] .= " ";

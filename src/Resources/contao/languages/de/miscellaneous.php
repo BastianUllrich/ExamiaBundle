@@ -50,6 +50,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToAttendeeAdministration'] = "
 
 $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['examDetails'] = "Klausurdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'] = "Klausurdetails anzeigen";
 
 $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] = "Teilnehmer anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'] = "Teilnehmerdetails anzeigen";
@@ -65,6 +66,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'] = 'benötigt';
 $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'] = 'nicht benötigt';
 
 $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'] = "Keine Teilnehmer vorhanden";
+$GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'] = "Keine Daten vorhanden";
 
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationQuestion'] = 'Wollen Sie den Teilnehmer wirklich löschen?';
 $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'] = 'Ja, Teilnehmer löschen';

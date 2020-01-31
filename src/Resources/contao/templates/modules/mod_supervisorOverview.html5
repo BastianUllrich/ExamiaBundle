@@ -60,7 +60,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_2"><?= $examData['begin']; ?></td>
                 <td class="body col_3"><?= $examData['duration']; ?></td>
                 <td class="body col_4"><?= $examData['maxEndTime']; ?></td>
-                <td class="body col_5 col_last">Details</td>
+                <td class="body col_5 col_last"><a href="{{env::request}}&showDetails=<?= $examData['id']; ?>" title="<?= $this->langShowExamDetails; ?>"><?= $this->langShowExamDetails; ?></a></td>
             </tr>
             <?php
             $i++;
@@ -68,7 +68,7 @@ elseif ($this->showDetails === true) {
             if (empty($this->examDataList)) {
                 ?>
                 <tr class="row_even">
-                    <td class="body col_0" colspan="4">Keine Daten vorhanden</td>
+                    <td class="body col_0" colspan="4"><?= $this->langNoDataAvailable; ?></td>
                 </tr>
                 <?php
             }

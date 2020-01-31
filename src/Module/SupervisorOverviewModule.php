@@ -89,6 +89,11 @@ class SupervisorOverviewModule extends \Module
             $detailsDate = $_GET["date"];
             $this->showDetails($detailsDate);
         }
+
+        if ($_GET["do"] == "showDetails") {
+            $detailsDate = $_GET["date"];
+            $this->showDetails($detailsDate);
+        }
     }
 
     public function showDetails($detailsDate) {
@@ -103,6 +108,8 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langLatestEnding = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->dateReadable = date("d.m.Y", $detailsDate);
+        $this->Template->langShowExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'];
+        $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
 
 
         // Klausurabfrage

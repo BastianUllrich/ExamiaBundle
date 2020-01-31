@@ -99,7 +99,6 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
         $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
-        $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
         $this->Template->langNoSupervisorsAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'];
         $this->Template->langAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'];
         $this->Template->langSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['supervisor'];

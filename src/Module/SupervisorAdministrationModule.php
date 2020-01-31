@@ -122,5 +122,6 @@ class SupervisorAdministrationModule extends \Module
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;
+        $this->Template->dateReadable = date("d.m.Y", $startTime);
     }
 }

@@ -64,7 +64,7 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
-<p>&nbsp;</p>
+        <p>
         <form action="" id="<?= $this->formId; ?>" method="post">
             <div class="formbody">
                 <input type="hidden" name="FORM_SUBMIT" value="editExam">
@@ -118,7 +118,8 @@ elseif ($this->showDetails === true) {
                 </fieldset>
             </div>
         </form>
-        <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
+        </p>
+        <p class="right"><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }
 }

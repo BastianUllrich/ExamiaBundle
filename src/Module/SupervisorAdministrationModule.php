@@ -167,7 +167,13 @@ class SupervisorAdministrationModule extends \Module
         $timeFrom = str_replace(":", "", $timeFrom);
         $timeUntil = \Input::post('timeUntil');
         $timeUntil = str_replace(":", "", $timeUntil);
-        $task = \Input::post('task');
+        $task = \Input::post('personTask');
+        if ($task == "supervisor") {
+            $task = "Aufsicht";
+        }
+        if ($task == "writingassistant") {
+            $task = "Schreibassistenz";
+        }
         $timeNow = time();
         if ($this->Database->prepare("INSERT INTO tl_supervisors_exams VALUES(0, $timeNow, $supervisorId, $date, $timeFrom, $timeUntil, $task)")->execute()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);

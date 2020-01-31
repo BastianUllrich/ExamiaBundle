@@ -102,14 +102,14 @@ elseif ($this->showDetails === true) {
                         <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="5" autocomplete="on">
                     </div>
                     <div class="widget widget-select mandatory">
-                        <label for="task" class="select mandatory">
+                        <label for="personTask" class="select mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
                             <?= $this->langTask; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <select name="task" id="task" class="select mandatory" required="">
-                            <option value="Aufsicht"><?= $this->langSupervisor; ?></option>
-                            <option value="Schreibassistent"><?= $this->langAssistant; ?></option>
+                        <select name="personTask" id="personTask" class="select mandatory" required="">
+                            <option value="supervisor"><?= $this->langSupervisor; ?></option>
+                            <option value="writingassistant"><?= $this->langAssistant; ?></option>
                         </select>
                     </div>
                     <div class="widget widget-submit">

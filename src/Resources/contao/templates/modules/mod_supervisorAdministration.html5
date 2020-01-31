@@ -65,54 +65,55 @@ elseif ($this->showDetails === true) {
             </tbody>
         </table>
 
-
-        <p><strong><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></strong></p>
         <form action="" id="<?= $this->formId; ?>" method="post">
             <div class="formbody">
                 <input type="hidden" name="FORM_SUBMIT" value="editExam">
                 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
                 <input type="hidden" name="formIdentity" value="addSupervisor">
                 <input type="hidden" name="date" value="$date">
-                <div class="widget widget-select select mandatory">
-                    <label for="supervisorName" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>
-                        <?= $this->langSupervisorName; ?>
-                        <span class="mandatory">*</span>
-                    </label>
-                    <select name="supervisorName" id="supervisorName" class="select mandatory" required="">
-                        <?php foreach($this->supervisorUserList as $supervisorUser): ?>
-                        <option value="<?= $supervisorUser['id']; ?>"><?= $supervisorUser['firstname']; ?> <?= $supervisorUser['lastname']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="widget widget-text">
-                    <label for="timeFrom" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>
-                        <?= $this->langTimeFrom; ?>
-                        <span class="mandatory">*</span>
-                    </label>
-                    <input type="time" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="10" autocomplete="on">
-                </div>
-                <div class="widget widget-text">
-                    <label for="timeUntil" class="select mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span>
-                        <?= $this->langTimeUntil; ?>
-                        <span class="mandatory">*</span>
-                    </label>
-                    <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="10" autocomplete="on">
-                </div>
-                <div class="widget widget-select mandatory">
-                    <label for="task">
-                        <?= $this->langTask; ?>
-                    </label>
-                    <select name="task" id="task">
-                        <option value="Aufsicht"><?= $this->langSupervisor; ?></option>
-                        <option value="Schreibassistent"><?= $this->langAssistant; ?></option>
-                    </select>
-                </div>
-                <div class="widget widget-submit">
-                    <button type="submit" class="submit"><?= $this->langDoAddSupervisor; ?></button>
-                </div>
+                <fieldset>
+                    <legend><?= $this->langAddSupervisor; ?> - <?= $this->dateReadable; ?></legend>
+                    <div class="widget widget-select select mandatory">
+                        <label for="supervisorName" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langSupervisorName; ?>
+                            <span class="mandatory">*</span>
+                        </label>
+                        <select name="supervisorName" id="supervisorName" class="select mandatory" required="">
+                            <?php foreach($this->supervisorUserList as $supervisorUser): ?>
+                            <option value="<?= $supervisorUser['id']; ?>"><?= $supervisorUser['firstname']; ?> <?= $supervisorUser['lastname']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="timeFrom" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langTimeFrom; ?>
+                            <span class="mandatory">*</span>
+                        </label>
+                        <input type="time" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="10" autocomplete="on">
+                    </div>
+                    <div class="widget widget-text">
+                        <label for="timeUntil" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
+                            <?= $this->langTimeUntil; ?>
+                            <span class="mandatory">*</span>
+                        </label>
+                        <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="10" autocomplete="on">
+                    </div>
+                    <div class="widget widget-select mandatory">
+                        <label for="task">
+                            <?= $this->langTask; ?>
+                        </label>
+                        <select name="task" id="task">
+                            <option value="Aufsicht"><?= $this->langSupervisor; ?></option>
+                            <option value="Schreibassistent"><?= $this->langAssistant; ?></option>
+                        </select>
+                    </div>
+                    <div class="widget widget-submit">
+                        <button type="submit" class="submit"><?= $this->langDoAddSupervisor; ?></button>
+                    </div>
+                </fieldset>
             </div>
         </form>
         <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>

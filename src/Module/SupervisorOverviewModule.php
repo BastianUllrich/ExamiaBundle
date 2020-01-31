@@ -183,7 +183,7 @@ class SupervisorOverviewModule extends \Module
         $i = 0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['$result->seat'];
+            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
             $rehab_tools = unserialize($result->rehab_devices);
             for ($i=0; $i < sizeof($rehab_tools); $i++) {
                 $rehab_tools[$i] = $GLOBALS['TL_LANG']['tl_member'][$rehab_tools[$i]];
@@ -192,7 +192,7 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;
             $attendeeData[$i]['extraTime'] .= " ";
-            $attendeeData[$i]['extraTime'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['$result->extra_time_minutes_percent'];
+            $attendeeData[$i]['extraTime'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
 
             if ($result->extra_time_minutes_percent == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);

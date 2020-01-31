@@ -100,6 +100,7 @@ class SupervisorOverviewModule extends \Module
 
         $this->Template->langNrAttendees = $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'];
         $this->Template->langBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->langDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langLatestEnding = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
 
         // Klausurabfrage
@@ -139,7 +140,7 @@ class SupervisorOverviewModule extends \Module
                 }
             }
             // Späteste Endzeit berechnen
-            $maxEndTime = ($endTimeQuestion->date) + ($maxDuration * 60);
+            $maxEndTime = ($result->date) + ($maxDuration * 60);
             $maxEndTimeReadable = date("H:i", $maxEndTime);
             $examData[$i]['maxEndTime'] = $maxEndTimeReadable;
 

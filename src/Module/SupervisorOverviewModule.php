@@ -187,7 +187,7 @@ class SupervisorOverviewModule extends \Module
             if (empty($result->seat)) {
                 $attendeeData[$i]['seat'] = "no_seat"
             }
-            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG'][tl_attendees_exams']['$result->seat];
+            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG'][tl_attendees_exams'][$result->seat];
             $rehab_tools = unserialize($result->rehab_devices);
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;

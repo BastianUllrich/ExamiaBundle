@@ -45,6 +45,7 @@ class SupervisorAdministrationModule extends \Module
     {
         // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
+        $this->loadLanguageFile('tl_supervisors_exams');
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -94,17 +95,22 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
         $this->Template->langCurrentSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'];
         $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];
+        $this->Template->langTimeFrom = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'];
+        $this->Template->langTimeUntil = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'];
         $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
         $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
         $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
         $this->Template->langNoSupervisorsAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'];
+        $this->Template->langAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'];
+        $this->Template->langDoAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'];
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
 
         $startTime = $_GET["date"];
         $endTime = $startTime + 86399;
-        // Datenbankabfrage
+
+        // Datenbankabfrage aktuell aufgeteilte Aufsichten
         $result = Database::getInstance()->prepare("SELECT 
                                                     tl_member.firstname, tl_member.lastname, 
                                                     tl_supervisors_exams.id, tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
@@ -130,7 +136,20 @@ class SupervisorAdministrationModule extends \Module
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;
+        $this->Template->date = $startTime;
         $this->Template->dateReadable = date("d.m.Y", $startTime);
+
+        // Datenbankabfrage alle Aufsichten
+        $result = Database::getInstance()->prepare("SELECT id, firstname, lastname FROM tl_member WHERE usertype='Aufsicht'")->query();
+        $i = 0;
+        $supervisorUser = array();
+        while ($result->next()) {
+            $supervisorUser[$i]["id"] = $result->id;
+            $supervisorUser[$i]["firstname"] = $result->firstname;
+            $supervisorUser[$i]["lastname"] = $result->lastname;
+            $i++;
+        }
+        $this->Template->supervisorUserList = $supervisorUser;
     }
 
     public function deleteSupervisor($id, $date) {

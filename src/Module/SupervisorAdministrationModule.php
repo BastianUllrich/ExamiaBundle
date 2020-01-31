@@ -164,9 +164,9 @@ class SupervisorAdministrationModule extends \Module
     public function addSupervisor($date) {
         $supervisorId = \Input::post('supervisorId');
         $timeFrom = \Input::post('timeFrom');
-        $timeFrom = str_replace(":", "", $timeFrom);
+        //$timeFrom = str_replace(":", "", $timeFrom);
         $timeUntil = \Input::post('timeUntil');
-        $timeUntil = str_replace(":", "", $timeUntil);
+        //$timeUntil = str_replace(":", "", $timeUntil);
         $task = \Input::post('personTask');
         if ($task == "supervisor") {
             $task = "Aufsicht";
@@ -175,7 +175,7 @@ class SupervisorAdministrationModule extends \Module
             $task = "Schreibassistenz";
         }
         $this->import('Database');
-        $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
+        $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'date' => $date, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
 
         if ($this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);

@@ -104,3 +104,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['timeFormat'] = "[Format: 12:59]";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisorOverview'] = "Meine nächsten Klausuraufsichten";
 
 $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'] = "Anzahl Teilnehmer";
+$GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'] = "Zurück zur Übersicht";

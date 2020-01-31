@@ -110,7 +110,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->dateReadable = date("d.m.Y", $detailsDate);
         $this->Template->langShowExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'];
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
-
+        $this->Template->langBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'];
 
         // Klausurabfrage
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration

@@ -91,7 +91,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
-        $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteText'];
+        $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
         $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
 
         $startTime = $_GET["date"];

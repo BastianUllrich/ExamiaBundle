@@ -86,7 +86,7 @@ elseif ($this->showDetails === true) {
                         </select>
                     </div>
                     <div class="widget widget-text">
-                        <label for="timeFrom" class="select mandatory">
+                        <label for="timeFrom" class="mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
                             <?= $this->langTimeFrom; ?>
                             <span class="mandatory">*</span>
@@ -94,7 +94,7 @@ elseif ($this->showDetails === true) {
                         <input type="time" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="10" autocomplete="on">
                     </div>
                     <div class="widget widget-text">
-                        <label for="timeUntil" class="select mandatory">
+                        <label for="timeUntil" class="mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
                             <?= $this->langTimeUntil; ?>
                             <span class="mandatory">*</span>
@@ -102,10 +102,12 @@ elseif ($this->showDetails === true) {
                         <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="10" autocomplete="on">
                     </div>
                     <div class="widget widget-select mandatory">
-                        <label for="task">
+                        <label for="task" class="select mandatory">
+                            <span class="invisible"><?= $this->mandatory; ?></span>
                             <?= $this->langTask; ?>
+                            <span class="mandatory">*</span>
                         </label>
-                        <select name="task" id="task">
+                        <select name="task" id="task" class="select mandatory" required="">
                             <option value="Aufsicht"><?= $this->langSupervisor; ?></option>
                             <option value="Schreibassistent"><?= $this->langAssistant; ?></option>
                         </select>

@@ -99,3 +99,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['supervisor'] = "Aufsicht";
 $GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'] = "Schreibassistenz";
 $GLOBALS['TL_LANG']['miscellaneous']['timeFormat'] = "[Format: 12:59]";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisorOverview'] = "Meine nächsten Klausuraufsichten";
+
+$GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'] = "Anzahl Teilnehmer";

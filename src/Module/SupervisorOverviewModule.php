@@ -43,12 +43,14 @@ class SupervisorOverviewModule extends \Module
         // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_supervisors_exams');
+        $this->loadLanguageFile('tl_exams');
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
         $this->Template->showDetails = false;
+        $this->Template->showExamDetails = false;
 
         // Alle Klausurdaten laden, die der Person zugeordenet sind und ab dem aktuellen Tag um Mitternacht gelten, gruppiert nach Datum und Aufgabe, sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
@@ -82,5 +84,68 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
         $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
+
+        if ($_GET["do"] == "showDetails") {
+            $detailsDate = $_GET["date"];
+            $this->showDetails($detailsDate);
+        }
     }
+
+    public function showDetails($detailsDate) {
+        $this->Template->showDetails = true;
+        $detailsDateEnd = $detailsDate + 86399;
+
+        // Zusätzliche Sprachvariablen setzen
+        $this->Template->langExamTitle = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+
+        $this->Template->langNrAttendees = $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'];
+        $this->Template->langBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->langLatestEnding = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
+
+        // Klausurabfrage
+        $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration
+                                                    FROM tl_exams 
+                                                    WHERE date
+                                                    BETWEEN $detailsDate
+                                                    AND $detailsDateEnd
+                                                    ORDER BY date ASC
+                                                    ")->query();
+        $examData = array();
+        $i = 0;
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $examData[$i]['id'] = $result->id;
+            $examData[$i]['title'] = $result->title;
+            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            $examData[$i]['dateReadable'] = date("d.m.Y", $result->date);
+            $examData[$i]['begin'] = $result->begin;
+            $examData[$i]['duration'] = $result->duration;
+            $numberOfAttendees = Database::getInstance()->prepare("SELECT COUNT(*) AS 'nrOfAttendees' FROM tl_attendees_exams WHERE exam_id = $result->id")->query();
+            $examData[$i]['nrOfAttendees']  = $numberOfAttendees->nrOfAttendees;
+
+            // Maximale Dauer in Minuten berechnen
+            $endTimeQuestion = Database::getInstance()->prepare("SELECT extra_time, extra_time_minutes_percent FROM tl_attendees_exams WHERE exam_id=$result->id")->query();
+            $i = 0;
+            $maxDuration = $result->duration;
+            while ($endTimeQuestion->next()) {
+                if ($endTimeQuestion->extra_time_minutes_percent == "percent") {
+                    $multiplicator = 1 + ($endTimeQuestion->extra_time / 100);
+                    $duration = ($result->duration) * $multiplicator;
+                } elseif ($endTimeQuestion->extra_time_minutes_percent == "minutes") {
+                    $duration = ($result->duration) + $endTimeQuestion->extra_time;
+                }
+                if ($duration > $maxDuration) {
+                    $maxDuration = $duration;
+                }
+            }
+            // Späteste Endzeit berechnen
+            $maxEndTime = ($endTimeQuestion->date) + ($maxDuration * 60);
+            $maxEndTimeReadable = date("H:i", $maxEndTime);
+            $examData[$i]['maxEndTime'] = $maxEndTimeReadable;
+
+            $i++;
+        }
+        $this->Template->examDataList = $examData;
+    }
+
 }

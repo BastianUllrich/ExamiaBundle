@@ -174,9 +174,10 @@ class SupervisorOverviewModule extends \Module
         $result = Database::getInstance()->prepare("SELECT tl_exams.title, tl_exams.begin, tl_attendees_exams.seat, tl_exams.duration, tl_exams.date,
                                                     tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others,  
                                                     tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent
-                                                    FROM tl_exams, tl_attendees_exams
+                                                    FROM tl_exams, tl_attendees_exams, tl_member
                                                     WHERE tl_exams.id = $examID
                                                     AND tl_attendees_exams.exam_id = $examID
+                                                    AND tl_attendees_exams.attendee_id = tl_member.id
                                                     ORDER BY tl_attendees_exams.seat ASC
                                                     ")->query();
         $attendeeData = array();

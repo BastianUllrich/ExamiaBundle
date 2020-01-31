@@ -40,7 +40,7 @@ elseif ($this->showDetails === true) {
     if ($this->showExamDetails === false) {
         $i = 0;
         ?>
-        <p><strong><?= $this->langCurrentSupervisors; ?> - <?= $this->dateReadable; ?></strong></p>
+        <p><strong><?= $this->langExams; ?> - <?= $this->dateReadable; ?></strong></p>
         <table class="all_records">
             <thead>
             <tr>

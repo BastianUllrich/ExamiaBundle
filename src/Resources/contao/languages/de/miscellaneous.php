@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] = "Teilnehmer anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'] = "Teilnehmerdetails anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'] = "Teilnehmer bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['exam'] = "Klausur";
+$GLOBALS['TL_LANG']['miscellaneous']['exams'] = "Klausuren";
 
 $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'] = "Sortieren";
 $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'] = "Nach Datum absteigend sortieren";

@@ -96,12 +96,14 @@ class SupervisorOverviewModule extends \Module
         $detailsDateEnd = $detailsDate + 86399;
 
         // Zusätzliche Sprachvariablen setzen
+        $this->Template->langExams = $GLOBALS['TL_LANG']['miscellaneous']['exams'];
         $this->Template->langExamTitle = $GLOBALS['TL_LANG']['miscellaneous']['exam'];
-
         $this->Template->langNrAttendees = $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'];
         $this->Template->langBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->langDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langLatestEnding = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
+        $this->Template->dateReadable = date("d.m.Y", $detailsDate);
+
 
         // Klausurabfrage
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration

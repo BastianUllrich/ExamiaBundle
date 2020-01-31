@@ -95,7 +95,13 @@ elseif ($this->showDetails === true) {
             <?php foreach($this->attendeeDataList as $attendeeData): ?>
                 <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                     <td class="body col_0 col_first"><?= $attendeeData['seat']; ?></td>
-                    <td class="body col_1"><?= $attendeeData['rehabTools']; ?></td>
+                    <td class="body col_1">
+                        <?php for ($i=0; $i < sizeof($attendeeData['rehabTools']); $i++) {
+                            echo $attendeeData['rehabTools'][$i];
+                            echo "; ";
+                        }
+                        ?>
+                    </td>
                     <td class="body col_2"><?= $attendeeData['rehabToolsOthers']; ?></td>
                     <td class="body col_3"><?= $attendeeData['extraTime']; ?></td>
                     <td class="body col_4"><?= $attendeeData['endTime']; ?></td>

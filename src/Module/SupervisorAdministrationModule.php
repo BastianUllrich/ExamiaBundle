@@ -98,8 +98,8 @@ class SupervisorAdministrationModule extends \Module
         $endTime = $startTime + 86399;
         // Datenbankabfrage
         $result = Database::getInstance()->prepare("SELECT 
-                                                    tl_member.id, tl_member.firstname, tl_member.lastname, 
-                                                    tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
+                                                    tl_member.firstname, tl_member.lastname, 
+                                                    tl_supervisors_exams.id, tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
                                                     FROM tl_supervisors_exams, tl_member
                                                     WHERE tl_supervisors_exams.date 
                                                     BETWEEN $startTime

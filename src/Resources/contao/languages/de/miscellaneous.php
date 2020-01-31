@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'] = "Klausurdetails anzeig
 $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] = "Teilnehmer anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'] = "Teilnehmerdetails anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'] = "Teilnehmer bearbeiten";
+$GLOBALS['TL_LANG']['miscellaneous']['attendeeDetails'] = "Teilnehmerdetails";
 $GLOBALS['TL_LANG']['miscellaneous']['exam'] = "Klausur";
 $GLOBALS['TL_LANG']['miscellaneous']['exams'] = "Klausuren";
 
@@ -103,5 +104,6 @@ $GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'] = "Schreibassistenz";
 $GLOBALS['TL_LANG']['miscellaneous']['timeFormat'] = "[Format: 12:59]";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisorOverview'] = "Meine nächsten Klausuraufsichten";
 
+$GLOBALS['TL_LANG']['miscellaneous']['endTime'] = "Ende";
 $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'] = "Anzahl Teilnehmer";
 $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'] = "Zurück zur Übersicht";

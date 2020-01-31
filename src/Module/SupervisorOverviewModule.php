@@ -43,6 +43,7 @@ class SupervisorOverviewModule extends \Module
         // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_supervisors_exams');
+        $this->loadLanguageFile('tl_attendees_exams');
         $this->loadLanguageFile('tl_exams');
 
         // FrontendUser Variablen laden
@@ -50,7 +51,7 @@ class SupervisorOverviewModule extends \Module
         $userID = $objUser->id;
 
         $this->Template->showDetails = false;
-        $this->Template->showExamDetails = false;
+        $this->Template->showAttendeeDetails = false;
 
         // Alle Klausurdaten laden, die der Person zugeordenet sind und ab dem aktuellen Tag um Mitternacht gelten, gruppiert nach Datum und Aufgabe, sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
@@ -90,9 +91,9 @@ class SupervisorOverviewModule extends \Module
             $this->showDetails($detailsDate);
         }
 
-        if ($_GET["do"] == "showDetails") {
-            $detailsDate = $_GET["date"];
-            $this->showDetails($detailsDate);
+        if ($_GET["show"] == "attendees") {
+            $examId = $_GET["examid"];
+            $this->showAttendeeDetails($examId);
         }
     }
 
@@ -112,7 +113,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
         $this->Template->langBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'];
 
-        // Klausurabfrage
+        // Klausurenabfrage
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration
                                                     FROM tl_exams 
                                                     WHERE date
@@ -156,6 +157,56 @@ class SupervisorOverviewModule extends \Module
             $i++;
         }
         $this->Template->examDataList = $examData;
+    }
+
+    public function showAttendeeDetails($examID) {
+        $this->Template->showAttendeeDetails = true;
+
+        // Zusätzliche Sprachvariablen setzen
+        $this->Template->langAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['attendeeDetails'];
+        $this->Template->langSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
+        $this->Template->langRehabTools = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'][0];
+        $this->Template->langRehabToolsOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
+        $this->Template->langTimeAddition = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
+        $this->Template->langEndTime = $GLOBALS['TL_LANG']['miscellaneous']['endTime'] ;
+
+        // Klausurabfrage
+        $result = Database::getInstance()->prepare("SELECT tl_exams.title, tl_exams.begin, tl_attendees_exams.seat, tl_exams.duration, tl_exams.date
+                                                    tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others,  
+                                                    tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent
+                                                    FROM tl_exams, tl_attendees_exams
+                                                    WHERE tl_exams.id = $examID
+                                                    AND tl_attendees_exams.exam_id = $examID
+                                                    ORDER BY tl_attendees_exams.seat ASC
+                                                    ")->query();
+        $attendeeData = array();
+        $i = 0;
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['$result->seat'];
+            $rehab_tools = unserialize($result->rehab_devices);
+            for ($i=0; $i < sizeof($rehab_tools); $i++) {
+                $rehab_tools[$i] = $GLOBALS['TL_LANG']['tl_member'][$rehab_tools[$i]];
+            }
+            $attendeeData[$i]['rehabTools'] = $rehab_tools;
+            $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
+            $attendeeData[$i]['extraTime'] = $result->extra_time;
+            $attendeeData[$i]['extraTime'] .= " ";
+            $attendeeData[$i]['extraTime'] = $GLOBALS['TL_LANG']['tl_attendees_exams']['$result->extra_time_minutes_percent'];
+
+            if ($result->extra_time_minutes_percent == "percent") {
+                $multiplicator = 1 + ($result->extra_time / 100);
+                $duration = ($result->duration) * $multiplicator;
+            } elseif ($result->extra_time_minutes_percent == "minutes") {
+                $duration = ($result->duration) + $result->extra_time;
+            }
+            $endTime = ($result->date) + ($duration * 60);
+            $endTimeReadable = date("H:i", $endTime);
+            $attendeeData[$i]['endTime'] = $endTimeReadable;
+            $i++;
+        }
+        $this->Template->attendeeDataList = $attendeeData;
+
     }
 
 }

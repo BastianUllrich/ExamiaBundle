@@ -5,7 +5,7 @@
 <h2><?= $this->langSupervisorOverview; ?></h2>
 </div>
 <?php
-if ($this->showDetails === false && $this->showExamDetails === false) {
+if ($this->showDetails === false && $this->showAttendeeDetails === false) {
     $i = 0;
     ?>
     <table class="all_records">
@@ -60,7 +60,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_2"><?= $examData['begin']; ?></td>
                 <td class="body col_3"><?= $examData['duration']; ?></td>
                 <td class="body col_4"><?= $examData['maxEndTime']; ?></td>
-                <td class="body col_5 col_last"><a href="{{env::request}}&showDetails=<?= $examData['id']; ?>" title="<?= $this->langShowExamDetails; ?>"><?= $this->langShowExamDetails; ?></a></td>
+                <td class="body col_5 col_last"><a href="{{env::request}}&show=attendees&examid=<?= $examData['id']; ?>" title="<?= $this->langShowExamDetails; ?>"><?= $this->langShowExamDetails; ?></a></td>
             </tr>
             <?php
             $i++;
@@ -76,6 +76,51 @@ elseif ($this->showDetails === true) {
             </tbody>
         </table>
         <p><a href="klausurverwaltung/übersicht-für-aufsichten.html" title="<?= $this->langBackToSupervisorOverview; ?>"><?= $this->langBackToSupervisorOverview; ?></a></p>
+        <?php
+    }
+    if ($this->showExamDetails === true) {
+        $i = 0;
+        ?>
+        <p><strong><?= $this->langAttendeeDetails; ?></strong></p>
+        <table class="all_records">
+            <thead>
+            <tr>
+                <th class="head col_first"><?= $this->langSeat; ?></th>
+                <th class="head"><?= $this->langRehabTools; ?></th>
+                <th class="head"><?= $this->langRehabToolsOthers; ?></th>
+                <th class="head"><?= $this->langTimeAddition; ?></th>
+                <th class="head"><?= $this->langEndTime; ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->attendeeDataList as $attendeeData): ?>
+                <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+                    <td class="body col_0 col_first"><?= $attendeeData['seat']; ?></td>
+                    <td class="body col_1">
+                        <?php
+                        for ($j = 0; $j < sizeof($this->$attendeeData['rehabTools']); $j++) {
+                            echo ($this->$attendeeData['rehabTools'][$j]."; ");
+                        }
+                        ?>
+                    </td>
+                    <td class="body col_2"><?= $attendeeData['rehabToolsOthers']; ?></td>
+                    <td class="body col_3"><?= $attendeeData['extraTime']; ?></td>
+                    <td class="body col_4"><?= $attendeeData['endTime']; ?></td>
+                </tr>
+                <?php
+                $i++;
+            endforeach;
+            if (empty($this->attendeeDataList)) {
+            ?>
+            <tr class="row_even">
+                <td class="body col_0" colspan="4"><?= $this->langNoDataAvailable; ?></td>
+            </tr>
+            <?php
+                    }
+                    ?>
+            </tbody>
+        </table>
+        <p>{{link:back}}</p>
         <?php
     }
 }

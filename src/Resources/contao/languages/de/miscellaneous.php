@@ -98,4 +98,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'] = "Ausgewählte Aufsicht
 $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'] = "Zurück zur Aufsichtsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisor'] = "Aufsicht";
 $GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'] = "Schreibassistent";
-$GLOBALS['TL_LANG']['miscellaneous']['timeFormat'] = "12:59";
+$GLOBALS['TL_LANG']['miscellaneous']['timeFormat'] = "[Format: 12:59]";

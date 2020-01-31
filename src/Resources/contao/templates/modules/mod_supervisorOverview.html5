@@ -35,8 +35,8 @@ if ($this->showDetails === false && $this->showAttendeeDetails === false) {
     </table>
 <?php
 }
-elseif ($this->showAttendeeDetails === true) {
-    if ($this->showExamDetails === false) {
+elseif ($this->showDetails === true) {
+    if ($this->showAttendeeDetails === false) {
         $i = 0;
         ?>
         <p><strong><?= $this->langExams; ?> - <?= $this->dateReadable; ?></strong></p>
@@ -77,7 +77,7 @@ elseif ($this->showAttendeeDetails === true) {
         <p><a href="klausurverwaltung/übersicht-für-aufsichten.html" title="<?= $this->langBackToSupervisorOverview; ?>"><?= $this->langBackToSupervisorOverview; ?></a></p>
         <?php
     }
-    if ($this->showExamDetails === true) {
+    if ($this->showAttendeeDetails === true) {
         $i = 0;
         ?>
         <p><strong><?= $this->langAttendeeDetails; ?></strong></p>

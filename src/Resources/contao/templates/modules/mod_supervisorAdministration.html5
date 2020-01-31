@@ -33,6 +33,7 @@ elseif ($this->showDetails === true) {
     if ($this->deletePerson === false && $this->addPerson === false) {
         $i = 0;
         ?>
+        <p><strong><?= $this->langCurrentSupervisors; ?></strong></p>
         <table class="all_records">
             <thead>
             <tr>

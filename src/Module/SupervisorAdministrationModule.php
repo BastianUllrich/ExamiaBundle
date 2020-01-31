@@ -119,6 +119,7 @@ class SupervisorAdministrationModule extends \Module
                                                     BETWEEN $startTime
                                                     AND $endTime
                                                     AND tl_member.id=tl_supervisors_exams.supervisor_id
+                                                    ORDER BY tl_supervisors_exams.time_from
                                                     ")->query();
         $supervisorData = array();
         $i=0;

@@ -91,7 +91,7 @@ elseif ($this->showDetails === true) {
                             <?= $this->langTimeFrom; ?> <?= $this->langTimeFormat; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <input type="text" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="5" autocomplete="on">
+                        <input type="time" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="5" autocomplete="on">
                     </div>
                     <div class="widget widget-text">
                         <label for="timeUntil" class="mandatory">
@@ -99,7 +99,7 @@ elseif ($this->showDetails === true) {
                             <?= $this->langTimeUntil; ?> <?= $this->langTimeFormat; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <input type="text" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="5" autocomplete="on">
+                        <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="5" autocomplete="on">
                     </div>
                     <div class="widget widget-select mandatory">
                         <label for="task" class="select mandatory">

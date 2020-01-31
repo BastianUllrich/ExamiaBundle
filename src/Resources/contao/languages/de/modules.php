@@ -9,6 +9,7 @@ $GLOBALS['TL_LANG']['FMD']['examUnsubscribe'] = ['Von Klausur abmelden', 'Das Mi
 $GLOBALS['TL_LANG']['FMD']['memberAdministration'] = ['Mitglieder verwalten', 'Der Admin kann hiermit die Mitglieder verwalten'];
 $GLOBALS['TL_LANG']['FMD']['examAdministration'] = ['Klausuren verwalten', 'Der Admin kann hiermit die Klausuren verwalten'];
 $GLOBALS['TL_LANG']['FMD']['supervisorAdministration'] = ['Aufsichten verwalten', 'Der Admin kann hiermit die Aufsichten verwalten'];
+$GLOBALS['TL_LANG']['FMD']['supervisorOverview'] = ['Übersicht für Aufsichten', 'Aufsichten erhalten einen Überblick über die nächsten Termine'];
 
 // Backend Modules
 $GLOBALS['TL_LANG']['MOD']['examia'] = ['Klausurverwaltung', ''];

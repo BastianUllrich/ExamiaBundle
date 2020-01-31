@@ -88,18 +88,18 @@ elseif ($this->showDetails === true) {
                     <div class="widget widget-text">
                         <label for="timeFrom" class="mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
-                            <?= $this->langTimeFrom; ?>
+                            <?= $this->langTimeFrom; ?> <?= $this->langTimeFormat; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <input type="time" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="10" autocomplete="on">
+                        <input type="text" name="timeFrom" id="timeFrom" class="text mandatory" required="" maxlength="5" autocomplete="on">
                     </div>
                     <div class="widget widget-text">
                         <label for="timeUntil" class="mandatory">
                             <span class="invisible"><?= $this->mandatory; ?></span>
-                            <?= $this->langTimeUntil; ?>
+                            <?= $this->langTimeUntil; ?> <?= $this->langTimeFormat; ?>
                             <span class="mandatory">*</span>
                         </label>
-                        <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="10" autocomplete="on">
+                        <input type="text" name="timeUntil" id="timeUntil" class="text mandatory" required="" maxlength="5" autocomplete="on">
                     </div>
                     <div class="widget widget-select mandatory">
                         <label for="task" class="select mandatory">

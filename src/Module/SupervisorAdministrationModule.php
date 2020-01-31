@@ -94,6 +94,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];
         $this->Template->langTimeFrom = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'][0];
         $this->Template->langTimeUntil = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'][0];
+        $this->Template->langTimeFormat = $GLOBALS['TL_LANG']['miscellaneous']['timeFormat'];
         $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];

@@ -80,8 +80,8 @@ class SupervisorAdministrationModule extends \Module
             $this->showDetails();
         }
 
-        if ($_GET["do"] == "delete") {
-            $id = $_GET["delete"];
+        if ($_GET["action"] == "delete") {
+            $id = $_GET["id"];
             $date = $_GET["date"];
             $this->deleteSupervisor($id, $date);
         }

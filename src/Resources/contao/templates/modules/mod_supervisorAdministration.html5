@@ -30,9 +30,11 @@ if ($this->showDetails === false) {
 <?php
 }
 elseif ($this->showDetails === true) {
-    if ($this->deletePerson === false && $this->addPerson === false) {
+
+    if ($this->deletePerson === false) {
         $i = 0;
         ?>
+<p><?= $this->formName; ?></p>
         <p><strong><?= $this->langCurrentSupervisors; ?> - <?= $this->dateReadable; ?></strong></p>
         <table class="all_records">
             <thead>
@@ -119,7 +121,7 @@ elseif ($this->showDetails === true) {
             </div>
         </form>
         </p>
-        <p class="right"><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
+        <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linktextBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }
 }

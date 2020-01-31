@@ -53,7 +53,6 @@ class SupervisorAdministrationModule extends \Module
 
         $this->Template->showDetails = false;
         $this->Template->deletePerson = false;
-        $this->Template->addPerson = false;
 
         // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, gruppiert und sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
@@ -86,6 +85,20 @@ class SupervisorAdministrationModule extends \Module
             $date = $_GET["date"];
             $this->deleteSupervisor($id, $date);
         }
+
+        // Formular wurde abgesendet -> Zur Unterscheidung, welches Formular abgesendet wurde, wird das hidden-Feld "formIdentity" ausgelesen
+        $this->Template->formName = \Contao\Input::post('FORM_SUBMIT');
+       /*
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
+
+            $examID = $_GET["exam"];
+            $attendeeID = $_GET["editAttendee"];
+            $formIdentity = \Input::post('formIdentity');
+
+            if ($formIdentity == "editExamData") {
+                $this->saveExamChanges($examID);
+            }
+        }*/
     }
 
     public function showDetails() {

@@ -35,8 +35,7 @@ if ($this->showDetails === false && $this->showAttendeeDetails === false) {
     </table>
 <?php
 }
-elseif ($this->showDetails === true) {
-
+elseif ($this->showAttendeeDetails === true) {
     if ($this->showExamDetails === false) {
         $i = 0;
         ?>

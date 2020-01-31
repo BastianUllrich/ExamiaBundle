@@ -673,7 +673,7 @@ elseif ($this->showCombineForm === true) {
                 </div>
             </div>
         </form>
-        <p>{{link::back}}</p>
+        <p class="right">{{link::back}}</p>
             <?php
     }
     elseif ($this->combinationSaved === true) {

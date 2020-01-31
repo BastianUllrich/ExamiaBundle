@@ -174,8 +174,10 @@ class SupervisorAdministrationModule extends \Module
         if ($task == "writingassistant") {
             $task = "Schreibassistenz";
         }
-        $timeNow = time();
-        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams VALUES(0, $timeNow, $supervisorId, $date, $timeFrom, $timeUntil, $task)")->execute()) {
+        $this->import('Database');
+        $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
+
+        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

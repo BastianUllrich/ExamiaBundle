@@ -184,11 +184,8 @@ class SupervisorOverviewModule extends \Module
         $i = 0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+            $attendeeData[$i]['seat'] = $result->seat;
             $rehab_tools = unserialize($result->rehab_devices);
-            for ($i=0; $i < sizeof($rehab_tools); $i++) {
-                $rehab_tools[$i] = $GLOBALS['TL_LANG']['tl_member'][$rehab_tools[$i]];
-            }
             $attendeeData[$i]['rehabTools'] = $rehab_tools;
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;

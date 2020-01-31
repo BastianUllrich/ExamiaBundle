@@ -5,20 +5,21 @@
 <h2><?= $this->langSupervisorAdministration; ?></h2>
 </div>
 <?php
+if ($this->showDetails === false) {
     $i = 0;
     ?>
     <table class="all_records">
         <thead>
         <tr>
-            <th class="head col_last"><?= $this->langDate; ?></th>
+            <th class="head col_first"><?= $this->langDate; ?></th>
             <th class="head col_last"><?= $this->langDetails; ?></th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach($this->supervisorDataList as $supervisorData): ?>
+        <?php foreach($this->examsDataList as $examsData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
-                <td class="body col_0 col_first"><?= $supervisorData['date']; ?></td>
-                <td class="body col_1 "><a href="{{env::request}}?do=showDetails&date=<?= $supervisorData['todayMidnight']; ?>" title="<?= $this->langShowDetails; ?>"><?= $this->langShowDetails; ?></a></td>
+                <td class="body col_0 col_first"><?= $examsData['dateReadable']; ?></td>
+                <td class="body col_1 col_last"><a href="{{env::request}}?do=showDetails&date=<?= $examsData['time']; ?>" title="<?= $this->langShowDetails; ?>"><?= $this->langShowDetails; ?></a></td>
             </tr>
             <?php
             $i++;
@@ -27,5 +28,36 @@
         </tbody>
     </table>
 <?php
+}
+elseif ($this->showDetails === true) {
+    if ($this->deletePerson === false && $this->addPerson === false) {
+        $i = 0;
+        ?>
+        <table class="all_records">
+            <thead>
+            <tr>
+                <th class="head col_first"><?= $this->langSupervisorName; ?></th>
+                <th class="head"><?= $this->langTimePeriod; ?></th>
+                <th class="head"><?= $this->langTask; ?></th>
+                <th class="head col_last"><?= $this->langDelete; ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->supervisorDataList as $supervisorData): ?>
+            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+                <td class="body col_0 col_first"><?= $supervisorData['name']; ?></td>
+                <td class="body col_1"><?= $supervisorData['timePeriod']; ?></td>
+                <td class="body col_1"><?= $supervisorData['task']; ?></td>
+                <td class="body col_2 col_last"><a href="{{env::request}}&delete=<?= $supervisorData['id']; ?>" title="<?= $this->deleteSupervisorText; ?>"><?= $this->deleteSupervisorText; ?></a></td>
+            </tr>
+            <?php
+            $i++;
+            endforeach;
+            ?>
+            </tbody>
+        </table>
+        <?php
+    }
+}
 $this->endblock();
 ?>

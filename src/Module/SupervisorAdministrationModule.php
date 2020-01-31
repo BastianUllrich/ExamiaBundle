@@ -50,6 +50,10 @@ class SupervisorAdministrationModule extends \Module
         $objUser = FrontendUser::getInstance();
         $this->Template->userID = $objUser->id;
 
+        $this->Template->showDetails = false;
+        $this->Template->deletePerson = false;
+        $this->Template->addPerson = false;
+
         // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, gruppiert und sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
         $result = Database::getInstance()->prepare("SELECT * 
@@ -58,20 +62,65 @@ class SupervisorAdministrationModule extends \Module
                                                     GROUP BY date
                                                     ORDER BY date ASC
                                                     ")->query();
+        $examsData = array();
+        $i=0;
+        while ($result->next()) {
+            // Variablen für das Template setzen
+            $examsData[$i]['dateReadable'] = date("d.m.Y", $result->date);
+            $examsData[$i]['time'] = $result->date;
+            $i++;
+        }
+        $this->Template->examsDataList = $examsData;
+        $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
+        $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];
+        $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
+        $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
+
+        if ($_GET["do"] == "showDetails") {
+            $this->showDetails();
+        }
+    }
+
+    public function showDetails() {
+        $this->Template->showDetails = true;
+
+        // Sprachvariablen
+        $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
+        $this->Template->langCurrentSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'];
+        $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];
+        $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
+        $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
+        $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
+        $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteText'];
+        $this->Template->deleteAssistanceText = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
+
+        $startTime = $_GET["date"];
+        $endTime = $startTime + 86399;
+        // Datenbankabfrage
+        $result = Database::getInstance()->prepare("SELECT 
+                                                    tl_member.id, tl_member.firstname, tl_member.lastname, 
+                                                    tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
+                                                    FROM tl_supervisors_exams, tl_member
+                                                    WHERE tl_supervisors_exams.date 
+                                                    BETWEEN $startTime
+                                                    AND $endTime
+                                                    AND tl_member.id=tl_supervisors_exams.supervisor_id
+                                                    ")->query();
         $supervisorData = array();
         $i=0;
         while ($result->next()) {
             // Variablen für das Template setzen
             $supervisorData[$i]['date'] = date("d.m.Y", $result->date);
-            $supervisorData[$i]['todayMidnight'] = $todayMidnight;
+            $supervisorData[$i]['id'] = $result->id;
+            $supervisorData[$i]['name'] = $result->firstname;
+            $supervisorData[$i]['name'] .= " ";
+            $supervisorData[$i]['name'] .= $result->lastname;
+            $supervisorData[$i]['timePeriod'] = $result->time_from;
+            $supervisorData[$i]['timePeriod'] .= " - ";
+            $supervisorData[$i]['timePeriod'] .= $result->time_until;
+            $supervisorData[$i]['task'] = $result->task;
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;
-
-
-        $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
-        $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];
-        $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
-        $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
     }
 }

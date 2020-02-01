@@ -168,7 +168,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langRehabTools = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'][0];
         $this->Template->langRehabToolsOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
         $this->Template->langTimeAddition = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];
-        $this->Template->langEndTime = $GLOBALS['TL_LANG']['miscellaneous']['endTime'] ;
+        $this->Template->langEndTime = $GLOBALS['TL_LANG']['miscellaneous']['endTime'];
 
         // Klausurabfrage
         $result = Database::getInstance()->prepare("SELECT tl_exams.title, tl_exams.begin, tl_attendees_exams.seat, tl_exams.duration, tl_exams.date,
@@ -185,7 +185,7 @@ class SupervisorOverviewModule extends \Module
         while ($result->next()) {
             // Variablen für das Template setzen
             if (empty($result->seat)) {
-                $attendeeData[$i]['seat'] = "no_seat"
+                $attendeeData[$i]['seat'] = "no_seat";
             }
             $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
             $rehab_tools = unserialize($result->rehab_devices);

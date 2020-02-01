@@ -190,7 +190,7 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
             $rehab_tools = unserialize($result->rehab_devices);
             for ($j=0; $j<sizeof($rehab_tools); $j++) {
-                $attendeeData[$i]['rehabTools'][$j] = $GLOBALS['TL_LANG'][$rehab_tools[$j]];
+                $attendeeData[$i]['rehabTools'][$j] = $GLOBALS['TL_LANG'][$attendeeData[$i]['rehabTools'][$j]];
             }
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;

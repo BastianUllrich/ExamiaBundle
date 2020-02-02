@@ -162,8 +162,8 @@ class ExamRegistrationModule extends \Module
         $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
         $objMailUnsuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
         $objMailUnsuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
-        $objMailUnsuscribe->recipient = $GLOBALS['TL_MEMBER_EMAIL'];
-        $objMailUnsuscribe->sendTo($objMailUnsuscribe->recipient);
+        $memberAdress = $GLOBALS['TL_MEMBER_EMAIL'];
+        $objMailUnsuscribe->sendTo($memberAdress);
         unset($objMailUnsuscribe);
     }
 }

@@ -143,7 +143,7 @@ class ExamRegistrationModule extends \Module
 
             // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
             if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
-                $this->sendMail();
+                $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
                 $this->submitSuccess();
             }
         }
@@ -156,13 +156,48 @@ class ExamRegistrationModule extends \Module
     }
 
     // Mailversand
-    public function sendMail() {
+    public function sendMail($exam_title, $department, $exam_date, $exam_begin) {
         $objUser = FrontendUser::getInstance();
+        $examData = $exam_title;
+        $examData .= " (";
+        $examData .= $department;
+        $examData .= ") ";
+        $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
+        $examData .= $exam_date;
+        $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
+        $examData .= $exam_begin;
+        $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
+        $this->sendMailMember($objUser, $examData);
+        $this->sendMailBliZ($objUser, $examData);
+    }
+
+    public function sendMailMember($objUser, $examData) {
         $objMailSuscribe = new \Email();
-        $objMailSuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
-        $objMailSuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
-        $objMailSuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
-        $objMailSuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
+        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSuscribe->from = 'beratung@bliz.thm.de';
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart1'];
+        $objMailSuscribe->text .= "\n";
+        $objMailSuscribe->text .= $examData;
+        $objMailSuscribe->text .= "\n";
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart2'];
+        $objMailSuscribe->sendTo($objUser->email);
+        unset($objMailSuscribe);
+    }
+    public function sendMailBliZ($objUser, $examData) {
+        $objMailSuscribe = new \Email();
+        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSuscribe->from = 'beratung@bliz.thm.de';
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeBliZ'];
+        $objMailSuscribe->text .= "\n";
+        $objMailSuscribe->text .= $objUser->username;
+        $objMailSuscribe->text .= " (ID ";
+        $objMailSuscribe->text .= $objUser->username;
+        $objMailSuscribe->text .= "), ";
+        $objMailSuscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $objMailSuscribe->text .= ": ";
+        $objMailSuscribe->text .= $examData;
         $objMailSuscribe->sendTo($objUser->email);
         unset($objMailSuscribe);
     }

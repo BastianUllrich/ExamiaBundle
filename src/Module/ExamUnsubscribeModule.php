@@ -120,14 +120,8 @@ class ExamUnsubscribeModule extends \Module
                         $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
                     }
 
-                    // Mailversand
-                    $objMailUnsuscribe = new \Email();
-                    $objMailUnsuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
-                    $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
-                    $objMailUnsuscribe->subject = 'Abmeldung von Klausur im BliZ';
-                    $objMailUnsuscribe->text = 'Eine Abmeldung von einer Klausur im BliZ ist erfolgt';
-                    $objMailUnsuscribe->sendTo('bastian.ullrich@iem.thm.de');
-                    unset($objMailUnsuscribe);
+                    // Mailversand aufrufen
+                    $this->sendMail($examDescription, $examData->department);
 
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
                 }
@@ -137,5 +131,44 @@ class ExamUnsubscribeModule extends \Module
             }
         }
 
+    }
+
+    // Mailversand
+    public function sendMail($examDescription, $department) {
+        $objUser = FrontendUser::getInstance();
+        $examDescription .= " (";
+        $examDescription .= $department;
+        $examDescription .= ")";
+        $this->sendMailMember($objUser, $examDescription);
+        $this->sendMailBliZ($objUser, $examDescription);
+    }
+
+    public function sendMailMember($objUser, $examData) {
+        $objMailSuscribe = new \Email();
+        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSuscribe->from = 'beratung@bliz.thm.de';
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsuscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeMember'];
+        $objMailSuscribe->text .= "\n";
+        $objMailSuscribe->text .= $examData;
+        $objMailSuscribe->sendTo($objUser->email);
+        unset($objMailSuscribe);
+    }
+    public function sendMailBliZ($objUser, $examData) {
+        $objMailSuscribe = new \Email();
+        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSuscribe->from = 'beratung@bliz.thm.de';
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnuscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeBliZ'];
+        $objMailSuscribe->text .= "\n";
+        $objMailSuscribe->text .= $objUser->username;
+        $objMailSuscribe->text .= " (ID ";
+        $objMailSuscribe->text .= $objUser->username;
+        $objMailSuscribe->text .= "), ";
+        $objMailSuscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $objMailSuscribe->text .= ": ";
+        $objMailSuscribe->text .= $examData;
+        $objMailSuscribe->sendTo($objUser->email);
+        unset($objMailSuscribe);
     }
 }

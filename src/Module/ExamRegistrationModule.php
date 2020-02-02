@@ -50,6 +50,7 @@ class ExamRegistrationModule extends \Module
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
+        $this->Template->address = $objUser->email;
 
         // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);

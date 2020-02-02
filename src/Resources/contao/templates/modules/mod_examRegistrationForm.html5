@@ -1,7 +1,6 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<?= $this->address; ?>
 <?php if ($this->formIsSubmitted === false) { ?>
     <div class="ce_text first last  block">
         <h2><?= $this->examRegistration; ?></h2>

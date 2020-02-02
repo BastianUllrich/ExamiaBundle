@@ -126,7 +126,7 @@ class ExamUnsubscribeModule extends \Module
                     $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
                     $objMailUnsuscribe->subject = 'Abmeldung von Klausur im BliZ';
                     $objMailUnsuscribe->text = 'Eine Abmeldung von einer Klausur im BliZ ist erfolgt';
-                    $objMailUnsuscribe->sendTo('bastiullrich@gmail.com');
+                    $objMailUnsuscribe->sendTo('bastian.ullrich@iem.thm.de');
                     unset($objMailUnsuscribe);
 
                     \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');

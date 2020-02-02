@@ -50,7 +50,6 @@ class ExamRegistrationModule extends \Module
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
-        $this->Template->address = $objUser->email;
 
         // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);
@@ -159,15 +158,12 @@ class ExamRegistrationModule extends \Module
     // Mailversand
     public function sendMail() {
         $objUser = FrontendUser::getInstance();
-        $userID = $objUser->id;
-        $memberdata = MemberModel::findBy('id', $userID);
-
         $objMailSuscribe = new \Email();
         $objMailSuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
         $objMailSuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
         $objMailSuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
         $objMailSuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
-        $objMailSuscribe->sendTo($memberdata->email);
+        $objMailSuscribe->sendTo($objUser->email);
         unset($objMailSuscribe);
     }
 }

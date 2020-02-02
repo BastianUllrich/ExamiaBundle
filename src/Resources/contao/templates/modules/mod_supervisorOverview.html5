@@ -94,7 +94,7 @@ elseif ($this->showDetails === true) {
             <tbody>
             <?php foreach($this->attendeeDataList as $attendeeData): ?>
                 <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
-                    <td class="body col_0 col_first"><?= $attendeeData['seat']; ?>  <a href="klausurverwaltung/raumplan-des-bliz.html" title="<?= $this->showRoomPlan; ?>"><?= $this->showRoomPlan; ?></a></td>
+                    <td class="body col_0 col_first"><?= $attendeeData['seat']; ?>  <a href="klausurverwaltung/raumplan-des-bliz.html" title="<?= $this->langShowRoomPlan; ?>"><?= $this->langShowRoomPlan; ?></a></td>
                     <td class="body col_1">
                         <?php for ($i=0; $i < sizeof($attendeeData['rehabTools']); $i++) {
                             echo $attendeeData['rehabTools'][$i];

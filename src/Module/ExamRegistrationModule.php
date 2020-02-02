@@ -158,14 +158,16 @@ class ExamRegistrationModule extends \Module
     // Mailversand
     public function sendMail() {
         $objUser = FrontendUser::getInstance();
-        $memberEmail = $objUser->email;
+        $userID = $objUser->id;
+        $userdata = MemberModel::findBy('id', $userID);
+        $memberEmail = $userdata->email;
 
-        $objMailUnsuscribe = new \Email();
-        $objMailUnsuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
-        $objMailUnsuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
-        $objMailUnsuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
-        $objMailUnsuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
-        $objMailUnsuscribe->sendTo($memberEmail);
-        unset($objMailUnsuscribe);
+        $objMailSuscribe = new \Email();
+        $objMailSuscribe->fromName = $GLOBALS['TL_ADMIN_NAME'];
+        $objMailSuscribe->from = $GLOBALS['TL_ADMIN_EMAIL'];
+        $objMailSuscribe->subject = 'Anmeldung zu einer Klausur im BliZ';
+        $objMailSuscribe->text = 'Eine Anmeldung zu einer Klausur im BliZ ist erfolgt';
+        $objMailSuscribe->sendTo('$memberEmail');
+        unset($objMailSuscribe);
     }
 }

@@ -26,6 +26,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['usertype'] = array
 			'inputType'	=> 'select',
 			'options'	=> array('Student', 'Aufsicht', 'Administrator'),
 			'eval'		=> array(
+                        'includeBlankOption'	=> true,
 						'mandatory'		     => true,
                         'feEditable'		=> true,
                         'feViewable'		=> true,

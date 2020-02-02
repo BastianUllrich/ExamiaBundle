@@ -165,6 +165,7 @@ class SupervisorOverviewModule extends \Module
         // Zusätzliche Sprachvariablen setzen
         $this->Template->langAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['attendeeDetails'];
         $this->Template->langSeat = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat'][0];
+        $this->Template->langShowRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
         $this->Template->langRehabTools = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'][0];
         $this->Template->langRehabToolsOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
         $this->Template->langTimeAddition = $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'][0];

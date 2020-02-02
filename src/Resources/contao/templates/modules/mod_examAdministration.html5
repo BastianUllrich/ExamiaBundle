@@ -176,7 +176,7 @@ elseif ($this->showEditForm === true) {
                         <?= $this->langTimeStart; ?>
                         <span class="mandatory">*</span>
                     </label>
-                    <input type="time" name="begin" id="begin" class="text mandatory" value="<?= $this->begin; ?>" required="" maxlength="10" autocomplete="on">
+                    <input type="time" name="begin" id="begin" class="text mandatory" value="<?= $this->begin; ?>" required="" autocomplete="on">
                 </div>
                 <div class="widget widget-text mandatory">
                     <label for="regularDuration" class="mandatory">
@@ -194,6 +194,7 @@ elseif ($this->showEditForm === true) {
                         <span class="mandatory">*</span>
                     </label>
                     <select name="department" id="department" class="select mandatory" required="">
+                        <option value=""> - </option>
                         <option value="department1" <?php if ($this->examDepartment == "department1") echo "selected"; ?>><?= $this->langDepartment1; ?></option>
                         <option value="department2" <?php if ($this->examDepartment == "department2") echo "selected"; ?>><?= $this->langDepartment2; ?></option>
                         <option value="department3" <?php if ($this->examDepartment == "department3") echo "selected"; ?>><?= $this->langDepartment3; ?></option>
@@ -218,6 +219,7 @@ elseif ($this->showEditForm === true) {
                         <span class="mandatory">*</span>
                     </label>
                     <select name="status" id="status" class="select mandatory" required="">
+                        <option value=""> - </option>
                         <option value="status1" <?php if ($this->status == "status1") echo "selected"; ?>><?= $this->langStatus1; ?></option>
                         <option value="status2" <?php if ($this->status == "status2") echo "selected"; ?>><?= $this->langStatus2; ?></option>
                         <option value="status3" <?php if ($this->status == "status3") echo "selected"; ?>><?= $this->langStatus3; ?></option>

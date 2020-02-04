@@ -50,6 +50,7 @@ class ExamUnsubscribeModule extends \Module
         $userID = $objUser->id;
 
         $this->Template->showConfirmationQuestion = false;
+        $this->Template->unsuscribtionSuccessful = false;
 
         // Auflistung der angemeldeten Klausuren
         // Aktueller Timestamp muss via PHP geholt werden, da SQL nur Datumformat "2020-02-02" erstellen kann
@@ -123,7 +124,9 @@ class ExamUnsubscribeModule extends \Module
                     // Mailversand aufrufen
                     $this->sendMail($examDescription, $examData->department);
 
-                    \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
+                    $this->Template->unsuscribtionSuccessful = true;
+                    $this->Template->unsuscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+                    $this->Template->linkBackToUnsuscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsuscribeText'];
                 }
             }
             elseif ($_GET["confirmed"] == "no") {

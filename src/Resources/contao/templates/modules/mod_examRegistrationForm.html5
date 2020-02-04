@@ -111,10 +111,10 @@
 }
 else {
     ?>
-    <p><strong><?php $this->submittedMessageTitle; ?></strong></p>
+    <p><strong><?= $this->submittedMessageTitle; ?></strong></p>
     <p>
-        <?php $this->submittedMessage; ?><br />
-        <?php $this->submittedMessageStatus; ?>
+        <?= $this->submittedMessage; ?><br />
+        <?= $this->submittedMessageStatus; ?>
     </p>
     <?php
 }

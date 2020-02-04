@@ -2,6 +2,8 @@
 
 namespace Baul\ExamiaBundle\Module;
 use Baul\ExamiaBundle\Model\MemberModel;
+use Baul\ExamiaBundle\Model\ExamsModel;
+use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -127,25 +129,42 @@ class ExamRegistrationModule extends \Module
         //Status der Anmeldung auf "status1" (Noch nicht angefordert) setzen
         $status = 'status1';
 
-        // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
-        $this->import('Database');
-        $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
-                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
-                    'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
-
-        // Eintrag in Tabelle "tl_exams" vornehmen
-        if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
-            if (empty($extra_time)) $extra_time = 0;
-
-            // Insertions für Tabelle "tl_attendees_exams" definieren
-            $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                            'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
-
-            // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
-            if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
-                $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
-                $this->submitSuccess();
+        // Überprüfen, ob das Formular doppelt abgesendet wurde, indem der Student zu einer Zeit nur eine Klausur schreiben kann
+        $checkForExams = ExamsModel::findBy('date', $exam_datetime);
+        $examsFound = 0;
+        while ($checkForExams->next()) {
+            $exam_id = $checkForExams->id;
+            $checkForValuesAttendeesExams = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
+            if (!empty($checkForValuesAttendeesExams)) {
+                $examsFound++;
             }
+        }
+
+        if ($examsFound == 0) {
+            // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
+            $this->import('Database');
+            $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
+                'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
+                'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
+
+            // Eintrag in Tabelle "tl_exams" vornehmen
+            if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
+                if (empty($extra_time)) $extra_time = 0;
+
+                // Insertions für Tabelle "tl_attendees_exams" definieren
+                $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
+                    'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+
+                // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
+                if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+
+                    $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
+                    $this->submitSuccess();
+                }
+            }
+        }
+        else {
+            $this->submittedDouble();
         }
     }
 
@@ -155,6 +174,13 @@ class ExamRegistrationModule extends \Module
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];
+        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
+    }
+
+    // Funktion gibt Meldung aus, wenn Formular doppelt abgesandt wurde
+    public function submittedDouble() {
+        $this->Template->formIsSubmitted = true;
+        $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['anotherExamSameTimeFound'];
         $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 

@@ -11,6 +11,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['mandatory'] = "Pflichtfeld ";
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'] = "Klausuranmeldung erfolgreich übermittelt";
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'] = "Ihre Klausuranmeldung wurde erfolgreich übermittelt.";
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'] = "Den aktuellen Status Ihrer Anmeldung können Sie unter dem Punkt \"Angemeldete Klausuren\" einsehen.";
+$GLOBALS['TL_LANG']['miscellaneous']['anotherExamSameTimeFound'] = "Sie schreiben zur gleichen Zeit schon eine Klausur!";
 $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'] = "Zur Übersicht über die angemeldeten Klausuren";
 
 $GLOBALS['TL_LANG']['miscellaneous']['registeredExams'] = 'Angemeldete Klausuren';

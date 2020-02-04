@@ -82,10 +82,17 @@ class ExamUnsubscribeModule extends \Module
         }
 
         $this->Template->unsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'];
+        $this->Template->unsubscribeThis = $GLOBALS['TL_LANG']['miscellaneous']['examThisUnsubscribe'];
         $this->Template->examParticipationList = $examParticipationList;
         $this->Template->examsUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['examsUnsubscribe'];
         $this->Template->registeredExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsExplanation'];
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
+
+        $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
+        $this->Template->langTimeBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->langTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
+        $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
+        $this->Template->langUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'];
 
         // Von Klausur abmelden
         if ($_GET["do"] == "unsubscribe") {
@@ -108,7 +115,9 @@ class ExamUnsubscribeModule extends \Module
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'];
             $this->Template->examDescription = $examDescription;
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
-            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'];
+            $this->Template->unsuscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribeConfirmation'];
+            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
+            $this->Template->cancel = $GLOBALS['TL_LANG']['miscellaneous']['cancel'];
 
             if (($_GET["confirmed"] == "yes")) {
                 if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {

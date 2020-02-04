@@ -15,11 +15,11 @@ if ($this->showConfirmationQuestion === false && $this->unsuscribtionSuccessful 
             <thead>
             <tr>
                 <th class="head col_first">#</th>
-                <th class="head col_last">Datum</th>
-                <th class="head col_last">Uhrzeit</th>
-                <th class="head col_last">Titel</th>
-                <th class="head col_last">Dozent</th>
-                <th class="head col_last">Abmelden</th>
+                <th class="head col_last"><?= $this->langDate; ?></th>
+                <th class="head col_last"><?= $this->langTimeBegin; ?></th>
+                <th class="head col_last"><?= $this->langTitle; ?></th>
+                <th class="head col_last"><?= $this->langLecturer; ?></th>
+                <th class="head col_last"><?= $this->langUnsuscribe; ?></th>
             </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@ if ($this->showConfirmationQuestion === false && $this->unsuscribtionSuccessful 
                 <td class="body col_2"><?= $examParticipation['time']; ?></td>
                 <td class="body col_3"><?= $examParticipation['title']; ?></td>
                 <td class="body col_4"><?= $examParticipation['lecturer_name']; ?></td>
-                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsubscribe&exam=<?= $examParticipation['examsID']; ?>" title="Von Klausur abmelden"><?= $this->unsubscribe; ?></a></td>
+                <td class="body col_5 col_last"><a href="{{env::request}}?do=unsubscribe&exam=<?= $examParticipation['examsID']; ?>" title="<?= $this->Template->unsubscribeThis; ?>"><?= $this->unsubscribe; ?></a></td>
             </tr>
             <?php
             $i++;
@@ -50,8 +50,8 @@ elseif ($this->showConfirmationQuestion === true) {
         ?>
         <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
         <p><?= $this->examDescription; ?></p>
-        <span class="left"><a href="{{env::request}}&confirmed=yes" title="Abmeldung bestätigen"><?= $this->confirmationYes; ?></a></span>
-        <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+        <span class="left"><a href="{{env::request}}&confirmed=yes" title="<?= $this->unsuscribeConfirmation; ?>"><?= $this->confirmationYes; ?></a></span>
+        <span class="right"><a href="{{env::request}}&confirmed=no" title="<?= $this->cancel; ?>"><?= $this->confirmationNo; ?></a></span>
         <?php
     }
     else {

@@ -42,6 +42,7 @@ class ExamUnsubscribeModule extends \Module
     protected function compile()
     {
         // Sprachdatei einbinden
+        $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('tl_attendees_exams');
         $this->loadLanguageFile('miscellaneous');
 

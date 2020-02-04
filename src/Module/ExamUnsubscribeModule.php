@@ -135,7 +135,7 @@ class ExamUnsubscribeModule extends \Module
                     $this->sendMail($examDescription, $examData->department);
 
                     $this->Template->unsubscribtionSuccessful = true;
-                    $this->Template->unsusbcribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+                    $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
                     $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                 }
             }

@@ -6,7 +6,7 @@
         <h2><?= $this->examRegistration; ?></h2>
         <p><?= $this->examRegistrationExplanation; ?></p>
     </div>
-    <form action="klausurverwaltung/klausuranmeldung.html" method="post">
+    <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
         <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">

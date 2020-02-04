@@ -109,6 +109,13 @@
     </form>
 <?php
 }
-else echo $this->submittedMessage;
-
+else {
+    ?>
+    <p><strong><?php $this->submittedMessageTitle; ?></strong></p>
+    <p>
+        <?php $this->submittedMessage; ?><br />
+        <?php $this->submittedMessageStatus; ?>
+    </p>
+    <?php
+}
 $this->endblock(); ?>

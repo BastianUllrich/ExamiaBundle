@@ -152,7 +152,9 @@ class ExamRegistrationModule extends \Module
     // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
     public function submitSuccess() {
         $this->Template->formIsSubmitted = true;
+        $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
+        $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];
     }
 
     // Mailversand

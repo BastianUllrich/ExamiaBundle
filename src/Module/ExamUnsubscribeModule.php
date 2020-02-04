@@ -134,6 +134,7 @@ class ExamUnsubscribeModule extends \Module
                     // Mailversand aufrufen
                     $this->sendMail($examDescription, $examData->department);
 
+                    // Rückmeldung geben, dass die Abmeldung erfolgreich war
                     $this->Template->unsubscribtionSuccessful = true;
                     $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
                     $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];

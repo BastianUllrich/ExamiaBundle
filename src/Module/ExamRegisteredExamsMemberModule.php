@@ -41,6 +41,7 @@ class ExamRegisteredExamsMemberModule extends \Module
     protected function compile()
     {
         // Sprachdatei einbinden
+        $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('tl_attendees_exams');
         $this->loadLanguageFile('miscellaneous');
 
@@ -48,6 +49,12 @@ class ExamRegisteredExamsMemberModule extends \Module
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
+        // Sprachvariablen setzen
+        $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
+        $this->Template->langTime = $GLOBALS['TL_LANG']['tl_exams']['time'];
+        $this->Template->langTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
+        $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
+        $this->Template->langStatus = $GLOBALS['TL_LANG']['tl_exams']['status'][0];
 
         $this->import('Database');
         $examParticipationList = array();

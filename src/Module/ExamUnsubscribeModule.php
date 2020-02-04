@@ -91,7 +91,7 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->registeredExamsNone = $GLOBALS['TL_LANG']['miscellaneous']['registeredExamsNone'];
 
         $this->Template->langDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
-        $this->Template->langTimeBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
+        $this->Template->langTimeBegin = $GLOBALS['TL_LANG']['tl_exams']['time'];
         $this->Template->langTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
         $this->Template->langUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'];

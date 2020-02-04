@@ -9,6 +9,7 @@ $GLOBALS['TL_LANG']['tl_exams']['title_short'] = 'Titel';
 $GLOBALS['TL_LANG']['tl_exams']['title'] = ['Titel der Lehrveranstaltung', 'Bitte genaue Bezeichnung'];
 $GLOBALS['TL_LANG']['tl_exams']['date'] = ['Datum', 'Bitte Datum wählen'];
 $GLOBALS['TL_LANG']['tl_exams']['time_begin'] = ['Beginn (Uhrzeit)', 'Uhrzeit im Format 12:00'];
+$GLOBALS['TL_LANG']['tl_exams']['time'] = 'Uhrzeit';
 $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'] = 'Reguläre Dauer';
 $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration_long'] = 'Reguläre Dauer (in <em>Minuten</em>)';
 $GLOBALS['TL_LANG']['tl_exams']['exam_duration'] = ['Dauer (in <em>Minuten</em>)', 'Bitte reguläre Dauer angeben'];

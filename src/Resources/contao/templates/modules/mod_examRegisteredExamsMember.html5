@@ -13,11 +13,11 @@
             <thead>
             <tr>
                 <th class="head col_first">#</th>
-                <th class="head col_last">Datum</th>
-                <th class="head col_last">Uhrzeit</th>
-                <th class="head col_last">Titel</th>
-                <th class="head col_last">Dozent</th>
-                <th class="head col_last">Status</th>
+                <th class="head col_last"><?= $this->langDate; ?></th>
+                <th class="head col_last"><?= $this->langTime; ?></th>
+                <th class="head col_last"><?= $this->langTitle; ?></th>
+                <th class="head col_last"><?= $this->langLecturer; ?></th>
+                <th class="head col_last"><?= $this->langStatus; ?></th>
             </tr>
             </thead>
             <tbody>

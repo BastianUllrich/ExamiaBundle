@@ -116,6 +116,9 @@ else {
         <?= $this->submittedMessage; ?><br />
         <?= $this->submittedMessageStatus; ?>
     </p>
+    <p>
+        <a href="klausurverwaltung/angemeldete-klausuren.html" title="<?= $this->goToExamsOverview; ?>"><?= $this->goToExamsOverview; ?></a>
+    </p>
     <?php
 }
 $this->endblock(); ?>

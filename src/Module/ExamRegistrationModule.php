@@ -155,6 +155,7 @@ class ExamRegistrationModule extends \Module
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];
+        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 
     // Mailversand

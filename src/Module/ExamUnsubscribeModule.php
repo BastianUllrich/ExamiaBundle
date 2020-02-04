@@ -51,7 +51,7 @@ class ExamUnsubscribeModule extends \Module
         $userID = $objUser->id;
 
         $this->Template->showConfirmationQuestion = false;
-        $this->Template->unsuscribtionSuccessful = false;
+        $this->Template->unsubscribtionSuccessful = false;
 
         // Auflistung der angemeldeten Klausuren
         // Aktueller Timestamp muss via PHP geholt werden, da SQL nur Datumformat "2020-02-02" erstellen kann
@@ -116,12 +116,12 @@ class ExamUnsubscribeModule extends \Module
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'];
             $this->Template->examDescription = $examDescription;
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
-            $this->Template->unsuscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsuscribeConfirmation'];
+            $this->Template->unsubscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribeConfirmation'];
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
             $this->Template->cancel = $GLOBALS['TL_LANG']['miscellaneous']['cancel'];
 
             if (($_GET["confirmed"] == "yes")) {
-                if ($unsuscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
+                if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
                     // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
                     $getExamRegistration = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
@@ -134,9 +134,9 @@ class ExamUnsubscribeModule extends \Module
                     // Mailversand aufrufen
                     $this->sendMail($examDescription, $examData->department);
 
-                    $this->Template->unsuscribtionSuccessful = true;
-                    $this->Template->unsuscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
-                    $this->Template->linkBackToUnsuscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsuscribeText'];
+                    $this->Template->unsusbcribtionSuccessful = true;
+                    $this->Template->unsusbcribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+                    $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                 }
             }
             elseif ($_GET["confirmed"] == "no") {
@@ -157,31 +157,31 @@ class ExamUnsubscribeModule extends \Module
     }
 
     public function sendMailMember($objUser, $examData) {
-        $objMailSuscribe = new \Email();
-        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsuscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeMember'];
-        $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text .= $examData;
-        $objMailSuscribe->sendTo($objUser->email);
-        unset($objMailSuscribe);
+        $objMailSubscribe = new \Email();
+        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSubscribe->from = 'beratung@bliz.thm.de';
+        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
+        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'];
+        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->sendTo($objUser->email);
+        unset($objMailSubscribe);
     }
     public function sendMailBliZ($objUser, $examData) {
-        $objMailSuscribe = new \Email();
-        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnuscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeBliZ'];
-        $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text .= $objUser->username;
-        $objMailSuscribe->text .= " (ID ";
-        $objMailSuscribe->text .= $objUser->username;
-        $objMailSuscribe->text .= "), ";
-        $objMailSuscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
-        $objMailSuscribe->text .= ": ";
-        $objMailSuscribe->text .= $examData;
-        $objMailSuscribe->sendTo($objUser->email);
-        unset($objMailSuscribe);
+        $objMailSubscribe = new \Email();
+        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSubscribe->from = 'beratung@bliz.thm.de';
+        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
+        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'];
+        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= $objUser->username;
+        $objMailSubscribe->text .= " (ID ";
+        $objMailSubscribe->text .= $objUser->username;
+        $objMailSubscribe->text .= "), ";
+        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $objMailSubscribe->text .= ": ";
+        $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->sendTo($objUser->email);
+        unset($objMailSubscribe);
     }
 }

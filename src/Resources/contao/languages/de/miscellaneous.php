@@ -24,10 +24,10 @@ $GLOBALS['TL_LANG']['miscellaneous']['examThisUnsubscribe'] = 'Von der Klausur a
 $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'] = 'Wollen Sie sich wirklich von folgender Klausur abmelden?';
 $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'] = 'Ja, von der Klausur abmelden';
 $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'] = 'Nein, nicht abmelden';
-$GLOBALS['TL_LANG']['miscellaneous']['unsuscribeConfirmation'] = 'Abmeldung bestätigen';
+$GLOBALS['TL_LANG']['miscellaneous']['unsubscribeConfirmation'] = 'Abmeldung bestätigen';
 $GLOBALS['TL_LANG']['miscellaneous']['cancel'] = 'Abbrechen';
 $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'] = 'Sie wurden erfolgreich von der Klausur abgemeldet.';
-$GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsuscribeText'] = 'Zurück zur Klausurabmeldung';
+$GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'] = 'Zurück zur Klausurabmeldung';
 
 $GLOBALS['TL_LANG']['miscellaneous']['dateAt'] = 'am';
 $GLOBALS['TL_LANG']['miscellaneous']['timeAt'] = 'um';
@@ -113,11 +113,11 @@ $GLOBALS['TL_LANG']['miscellaneous']['nrAttendees'] = "Anzahl Teilnehmer";
 $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'] = "Zurück zur Übersicht";
 
 $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'] = "Zentrum für blinde und sehbehinderte Studierende der THM";
-$GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'] = "Anmeldung zu einer Klausur";
-$GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart1'] = "Sie haben sich erfolgreich zur nachfolgenden Klausur im BliZ angemeldet:";
-$GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart2'] = "Den Anmeldestatus können Sie in der Klausurverwaltung unter dem Punkt \"Angemeldete Klausuren\" einsehen.";
-$GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeBliZ'] = "Folgendes Mitglied hat sich zur nachfolgenden Klausur im BliZ angemeldet:";
+$GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'] = "Anmeldung zu einer Klausur";
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'] = "Sie haben sich erfolgreich zur nachfolgenden Klausur im BliZ angemeldet:";
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'] = "Den Anmeldestatus können Sie in der Klausurverwaltung unter dem Punkt \"Angemeldete Klausuren\" einsehen.";
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'] = "Folgendes Mitglied hat sich zur nachfolgenden Klausur im BliZ angemeldet:";
 
-$GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsuscribe'] = "Abmeldung von einer Klausur";
-$GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeMember'] = "Sie haben sich erfolgreich von nachfolgender Klausur im BliZ abgemeldet:";
-$GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsuscribeBliZ'] = "Folgendes Mitglied hat sich von nachfolgender Klausur im BliZ abgemeldet:";
+$GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'] = "Abmeldung von einer Klausur";
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'] = "Sie haben sich erfolgreich von nachfolgender Klausur im BliZ abgemeldet:";
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'] = "Folgendes Mitglied hat sich von nachfolgender Klausur im BliZ abgemeldet:";

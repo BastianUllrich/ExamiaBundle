@@ -5,7 +5,7 @@
 <h2><?= $this->examsUnsubscribe; ?></h2>
 </div>
 <?php
-if ($this->showConfirmationQuestion === false && $this->unsuscribtionSuccessful === false) {
+if ($this->showConfirmationQuestion === false && $this->unsubscribtionSuccessful === false) {
 
     if (sizeof($this->examParticipationList) > 0) {
         $i = 0;
@@ -19,7 +19,7 @@ if ($this->showConfirmationQuestion === false && $this->unsuscribtionSuccessful 
                 <th class="head col_last"><?= $this->langTimeBegin; ?></th>
                 <th class="head col_last"><?= $this->langTitle; ?></th>
                 <th class="head col_last"><?= $this->langLecturer; ?></th>
-                <th class="head col_last"><?= $this->langUnsuscribe; ?></th>
+                <th class="head col_last"><?= $this->langUnsubscribe; ?></th>
             </tr>
             </thead>
             <tbody>
@@ -46,18 +46,18 @@ if ($this->showConfirmationQuestion === false && $this->unsuscribtionSuccessful 
     }
 }
 elseif ($this->showConfirmationQuestion === true) {
-    if ($this->unsuscribtionSuccessful === false) {
+    if ($this->unsubscribtionSuccessful === false) {
         ?>
         <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
         <p><?= $this->examDescription; ?></p>
-        <span class="left"><a href="{{env::request}}&confirmed=yes" title="<?= $this->unsuscribeConfirmation; ?>"><?= $this->confirmationYes; ?></a></span>
+        <span class="left"><a href="{{env::request}}&confirmed=yes" title="<?= $this->unsubscribeConfirmation; ?>"><?= $this->confirmationYes; ?></a></span>
         <span class="right"><a href="{{env::request}}&confirmed=no" title="<?= $this->cancel; ?>"><?= $this->confirmationNo; ?></a></span>
         <?php
     }
     else {
         ?>
         <p><strong><?= $this->unsuscribtionSuccessfulMessage; ?></strong></p>
-        <p><a href="klausurverwaltung/von-klausur-abmelden.html" title="<?= $this->linkBackToUnsuscribeText; ?>"><?= $this->linkBackToUnsuscribeText; ?></a></p>
+        <p><a href="klausurverwaltung/von-klausur-abmelden.html" title="<?= $this->linkBackToUnsubscribeText; ?>"><?= $this->linkBackToUnsubscribeText; ?></a></p>
         <?php
     }
 }

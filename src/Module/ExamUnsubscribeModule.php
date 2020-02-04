@@ -117,7 +117,7 @@ class ExamUnsubscribeModule extends \Module
             $this->Template->examDescription = $examDescription;
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
             $this->Template->unsubscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribeConfirmation'];
-            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
+            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'];
             $this->Template->cancel = $GLOBALS['TL_LANG']['miscellaneous']['cancel'];
 
             if (($_GET["confirmed"] == "yes")) {
@@ -134,7 +134,7 @@ class ExamUnsubscribeModule extends \Module
                     // Mailversand aufrufen
                     $this->sendMail($examDescription, $examData->department);
 
-                    $this->Template->unsusbcribtionSuccessful = true;
+                    $this->Template->unsubscribtionSuccessful = true;
                     $this->Template->unsusbcribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
                     $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                 }

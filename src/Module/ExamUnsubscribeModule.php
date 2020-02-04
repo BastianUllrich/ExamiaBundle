@@ -5,6 +5,7 @@ use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
 use Baul\ExamiaBundle\Model\ExamsModel;
+use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 
 
 class ExamUnsubscribeModule extends \Module
@@ -112,31 +113,51 @@ class ExamUnsubscribeModule extends \Module
             $examDescription .= ' ';
             $examDescription .= $examData->lecturer_lastname;
 
-            $this->Template->showConfirmationQuestion = true;
-            $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'];
-            $this->Template->examDescription = $examDescription;
-            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
-            $this->Template->unsubscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribeConfirmation'];
-            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'];
-            $this->Template->cancel = $GLOBALS['TL_LANG']['miscellaneous']['cancel'];
+            // Doppeltes Absenden überprüfen
+            $checkForDoubleSending = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
+            if (!empty($checkForDoubleSending->exam_id)) {
+                $this->Template->showConfirmationQuestion = true;
+                $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationQuestion'];
+                $this->Template->examDescription = $examDescription;
+                $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationYes'];
+                $this->Template->unsubscribeConfirmation = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribeConfirmation'];
+                $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['examConfirmationNo'];
+                $this->Template->cancel = $GLOBALS['TL_LANG']['miscellaneous']['cancel'];
+            }
+            else {
+                $this->Template->showConfirmationQuestion = true;
+                $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['noExamFound'];
+                $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
+            }
 
             if (($_GET["confirmed"] == "yes")) {
-                if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
-                    // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
-                    $getExamRegistration = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
+                // Doppeltes Absenden überprüfen
+                $checkForDoubleSending = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
 
-                    // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
-                    if (empty($getExamRegistration->attendee_id)) {
-                        $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
+                if (!empty($checkForDoubleSending->exam_id)) {
+                    if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
+
+                        // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
+                        $getExamRegistration = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$exam_id")->query();
+
+                        // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
+                        if (empty($getExamRegistration->attendee_id)) {
+                            $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
+                        }
+
+                        // Mailversand aufrufen
+                        $this->sendMail($examDescription, $examData->department);
+
+                        // Rückmeldung geben, dass die Abmeldung erfolgreich war
+                        $this->Template->unsubscribtionSuccessful = true;
+                        $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+                        $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                     }
-
-                    // Mailversand aufrufen
-                    $this->sendMail($examDescription, $examData->department);
-
-                    // Rückmeldung geben, dass die Abmeldung erfolgreich war
+                }
+                else {
                     $this->Template->unsubscribtionSuccessful = true;
-                    $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
+                    $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['noExamFound'];
                     $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                 }
             }

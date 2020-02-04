@@ -28,6 +28,8 @@ $GLOBALS['TL_LANG']['miscellaneous']['cancel'] = 'Abbrechen';
 $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'] = 'Sie wurden erfolgreich von der Klausur abgemeldet.';
 $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'] = 'Zurück zur Klausurabmeldung';
 
+$GLOBALS['TL_LANG']['miscellaneous']['noExamFound'] = 'Es wurde keine Klausur gefunden';
+
 $GLOBALS['TL_LANG']['miscellaneous']['dateAt'] = 'am';
 $GLOBALS['TL_LANG']['miscellaneous']['timeAt'] = 'um';
 $GLOBALS['TL_LANG']['miscellaneous']['timeHour'] = 'Uhr';

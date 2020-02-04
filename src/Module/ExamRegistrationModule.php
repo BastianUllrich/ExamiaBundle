@@ -132,11 +132,13 @@ class ExamRegistrationModule extends \Module
         // Überprüfen, ob das Formular doppelt abgesendet wurde, indem der Student zu einer Zeit nur eine Klausur schreiben kann
         $checkForExams = ExamsModel::findBy('date', $exam_datetime);
         $examsFound = 0;
-        while ($checkForExams->next()) {
-            $exam_id = $checkForExams->id;
-            $checkForValuesAttendeesExams = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
-            if (!empty($checkForValuesAttendeesExams)) {
-                $examsFound++;
+        if (!is_null($checkForExams)) {
+            while ($checkForExams->next()) {
+                $exam_id = $checkForExams->id;
+                $checkForValuesAttendeesExams = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
+                if (!empty($checkForValuesAttendeesExams)) {
+                    $examsFound++;
+                }
             }
         }
 

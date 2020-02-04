@@ -39,11 +39,9 @@
                     </label>
                     <input type="text" name="lecturer_lastname" id="lecturer_lastname" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
                 </div>
-                <div class="widget widget-text mandatory">
-                    <label for="lecturer_email" class="mandatory">
-                        <span class="invisible"><?= $this->mandatory; ?></span><?= $this->lecturer_email_label; ?><span class="mandatory">*</span>
-                    </label>
-                    <input type="email" name="lecturer_email" id="lecturer_email" class="text mandatory" value="" required="" maxlength="255" autocomplete="on">
+                <div class="widget widget-text">
+                    <label for="lecturer_email" ><?= $this->lecturer_email_label; ?></label>
+                    <input type="email" name="lecturer_email" id="lecturer_email" class="text" value="" maxlength="255" autocomplete="on">
                 </div>
                 <div class="widget widget-text">
                     <label for="lecturer_mobile">
@@ -87,11 +85,9 @@
                 </label>
                 <input type="text" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
             </div>
-            <div class="widget widget-text mandatory">
-                <label for="exam_duration" class="mandatory">
-                    <span class="invisible"><?= $this->mandatory; ?></span><?= $this->exam_duration_label; ?><span class="mandatory">*</span>
-                </label>
-                <input type="text" name="exam_duration" id="exam_duration" class="text mandatory" value="" required="" maxlength="3" autocomplete="on">
+            <div class="widget widget-text">
+                <label for="exam_duration"><?= $this->exam_duration_label; ?></label>
+                <input type="text" name="exam_duration" id="exam_duration" class="text" value="" maxlength="3" autocomplete="on">
             </div>
             <div class="widget widget-textarea">
                 <label for="tools" class=""><?= $this->tools_label; ?></label>

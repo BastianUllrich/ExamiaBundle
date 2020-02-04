@@ -142,32 +142,39 @@ class ExamRegistrationModule extends \Module
             }
         }
 
-        if ($examsFound == 0) {
-            // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
-            $this->import('Database');
-            $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
-                'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
-                'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
+        // Überprüfen, ob das Datum der Klausur in der Zukunft liegt
+        if ($exam_datetime > time()) {
 
-            // Eintrag in Tabelle "tl_exams" vornehmen
-            if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
-                if (empty($extra_time)) $extra_time = 0;
+            if ($examsFound == 0) {
+                // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
+                $this->import('Database');
+                $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_prename' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
+                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
+                    'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
-                // Insertions für Tabelle "tl_attendees_exams" definieren
-                $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                    'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+                // Eintrag in Tabelle "tl_exams" vornehmen
+                if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
+                    if (empty($extra_time)) $extra_time = 0;
 
-                // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
-                if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+                    // Insertions für Tabelle "tl_attendees_exams" definieren
+                    $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
+                        'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
 
-                    $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
-                    $this->submitSuccess();
+                    // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
+                    if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+
+                        $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
+                        $this->submitSuccess();
+                    }
                 }
+            } elseif ($examsFound <> 0) {
+                $this->submittedDouble();
             }
         }
-        else {
-            $this->submittedDouble();
+        elseif ($exam_datetime <= time()) {
+            $this->examInPast();
         }
+
     }
 
     // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
@@ -183,6 +190,13 @@ class ExamRegistrationModule extends \Module
     public function submittedDouble() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['anotherExamSameTimeFound'];
+        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
+    }
+
+    // Funktion gibt Meldung aus, wenn Klausur in Vergangenheit ist
+    public function examInPast() {
+        $this->Template->formIsSubmitted = true;
+        $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examInPast'];
         $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 

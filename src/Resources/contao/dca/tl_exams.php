@@ -73,7 +73,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         'duration' => [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['exam_duration'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'natural', 'maxlength' => 3, 'mandatory' => true],
+            'eval' => ['rgxp' => 'natural', 'maxlength' => 3],
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0]
         ],
         'department' => [
@@ -125,13 +125,13 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         'lecturer_email' => [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['lecturer_email'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'email', 'maxlength' => 255, 'mandatory' => true],
+            'eval' => ['rgxp' => 'email', 'maxlength' => 255],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '']
         ],
         'lecturer_mobile' => [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'phone', 'maxlength' => 15, 'mandatory' => false],
+            'eval' => ['rgxp' => 'phone', 'maxlength' => 15],
             'sql' => ['type' => 'string', 'length' => 15, 'default' => '']
         ]
     ],

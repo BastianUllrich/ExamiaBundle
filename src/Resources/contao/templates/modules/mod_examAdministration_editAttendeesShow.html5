@@ -22,7 +22,7 @@
         <td class="body col_5 col_last">
             <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&showAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleViewAttendeeDetails; ?>"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="<?= $this->imgAltViewAttendeeDetails; ?>"></a>
             <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&editAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleEditAttendeeDetails; ?>"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="<?= $this->imgAltEditAttendeeDetails; ?>"></a>
-            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleDeleteAttendee; ?>"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="<?= $this->imgAltDeleteAttendee; ?>n"></a>
+            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleDeleteAttendee; ?>"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="<?= $this->imgAltDeleteAttendee; ?>"></a>
         </td>
     </tr>
     <?php

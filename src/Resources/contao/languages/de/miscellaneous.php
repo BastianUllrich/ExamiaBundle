@@ -174,5 +174,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleGoToExamsOverview'] = "Führt zur
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToUnsubscribe'] = 'Führt zurück zur Klausurabmeldung';
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'] = 'Führt zurück zur Aufsichtsverwaltung';
 
-$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Klausurdetails";
-$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht von der Klausur";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Details zum gewählten Tag";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht vom gewählten Tag";

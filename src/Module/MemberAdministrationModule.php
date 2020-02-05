@@ -71,8 +71,8 @@ class MemberAdministrationModule extends \Module
         $this->Template->imgAltDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteMember'];
 
 
-        $this->Template->linkTitleViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkAltViewMemberDetails'];
-        $this->Template->linkTitleEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkAltEditMemberDetails'];
+        $this->Template->linkTitleViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewMemberDetails'];
+        $this->Template->linkTitleEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditMemberDetails'];
         $this->Template->linkTitleActivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'];
         $this->Template->linkTitleDeactivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'];
         $this->Template->linkTitleDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'];

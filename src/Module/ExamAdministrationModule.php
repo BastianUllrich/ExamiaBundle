@@ -73,6 +73,24 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
         $this->Template->orderAltText = $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
 
+        $this->Template->imgAltViewExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewExamDetails'];
+        $this->Template->imgAltEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditExamDetails'];
+        $this->Template->imgAltEditAttendees = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendees'];
+        $this->Template->imgAltCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['imgAltCombineExams'];
+        $this->Template->imgAltDeleteExam = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteExam'];
+
+        $this->Template->linkTitleViewExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewExamDetails'];
+        $this->Template->linkTitleEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditExamDetails'];
+        $this->Template->linkTitleEditAttendees = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendees'];
+        $this->Template->linkTitleCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleCombineExams'];
+        $this->Template->linkTitleDeleteExam = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExam'];
+
+        $this->Template->linkTitleDeleteExamConfirmYes = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmYes'];
+        $this->Template->linkTitleDeleteExamConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmNo'];
+
+        $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
+        $this->Template->linkTitleBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'];
+
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
 
         // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
@@ -82,6 +100,7 @@ class ExamAdministrationModule extends \Module
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
+
         } else {
             $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
             $this->Template->isOrderedBy = "dateASC";
@@ -257,7 +276,6 @@ class ExamAdministrationModule extends \Module
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;
             $this->Template->combinationSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'];
-            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         }
 
     }
@@ -424,7 +442,6 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
         $this->Template->headerStatus = $GLOBALS['TL_LANG']['tl_attendees_exams']['status'][0];
         $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'];
-        $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
     }
 
     public function setExamValuesEdit($examData)
@@ -477,7 +494,6 @@ class ExamAdministrationModule extends \Module
         if ($exam->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
-            $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         }
     }
 

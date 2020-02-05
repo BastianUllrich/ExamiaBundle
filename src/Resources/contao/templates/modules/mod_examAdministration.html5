@@ -30,11 +30,11 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
                 <td class="body col_2"><?= $examData['title']; ?></td>
                 <td class="body col_3"><?= $examData['department']; ?></td>
                 <td class="body col_4 col_last">
-                    <a href="klausurverwaltung/klausurverwaltung.html?do=viewDetails&exam=<?= $examData['id']; ?>" title="Klausurdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Klausurdetails"></a>
-                    <a href="klausurverwaltung/klausurverwaltung.html?do=editDetails&exam=<?= $examData['id']; ?>" title="Klausur bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Klausur bearbeiten"></a>
-                    <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $examData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/user.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>
-                    <a href="klausurverwaltung/klausurverwaltung.html?do=combine&exam=<?= $examData['id']; ?>" title="Klausuren zusammenlegen"><img src="system/themes/flexible/icons/sync.svg" width="16" height="16" alt="Klausuren zusammenlegen"></a>
-                    <a href="klausurverwaltung/klausurverwaltung.html?do=delete&exam=<?= $examData['id']; ?>" title="Klausur löschen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Klausur löschen"></a>
+                    <a href="klausurverwaltung/klausurverwaltung.html?do=viewDetails&exam=<?= $examData['id']; ?>" title="<?= $this->linkTitleViewExamDetails; ?>"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="<?= $this->imgAltViewExamDetails; ?>"></a>
+                    <a href="klausurverwaltung/klausurverwaltung.html?do=editDetails&exam=<?= $examData['id']; ?>" title="<?= $this->linkTitleEditExamDetails; ?>"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="<?= $this->imgAltEditExamDetails; ?>"></a>
+                    <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $examData['id']; ?>" title="<?= $this->linkTitleEditAttendees; ?>"><img src="system/themes/flexible/icons/user.svg" width="16" height="16" alt="<?= $this->imgAltEditAttendees; ?>"></a>
+                    <a href="klausurverwaltung/klausurverwaltung.html?do=combine&exam=<?= $examData['id']; ?>" title="<?= $this->linkTitleCombineExams; ?>"><img src="system/themes/flexible/icons/sync.svg" width="16" height="16" alt="<?= $this->imgAltCombineExams; ?>"></a>
+                    <a href="klausurverwaltung/klausurverwaltung.html?do=delete&exam=<?= $examData['id']; ?>" title="<?= $this->linkTitleDeleteExam; ?>"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="<?= $this->imgAltDeleteExam; ?>"></a>
                 </td>
             </tr>
             <?php
@@ -48,8 +48,8 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
 elseif ($this->showConfirmationQuestion === true) {
     ?>
     <p class="warning"><strong><?= $this->confirmationQuestion; ?></strong></p>
-    <span class="left"><a href="{{env::request}}&confirmed=yes" title="Löschen bestätigen"><?= $this->confirmationYes; ?></a></span>
-    <span class="right"><a href="{{env::request}}&confirmed=no" title="Abbrechen"><?= $this->confirmationNo; ?></a></span>
+    <span class="left"><a href="{{env::request}}&confirmed=yes" title="<?= $this->linkTitleDeleteExamConfirmYes; ?>"><?= $this->confirmationYes; ?></a></span>
+    <span class="right"><a href="{{env::request}}&confirmed=no" title="<?= $this->linkTitleDeleteExamConfirmNo; ?>"><?= $this->confirmationNo; ?></a></span>
     <?php
 }
 elseif ($this->showDetails === true) {
@@ -60,7 +60,7 @@ elseif ($this->showEditForm === true) {
     if ($this->changesSaved === true) {
         ?>
         <p><em><?= $this->changesSavedMessage; ?></em></p>
-        <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
+        <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linkTitleBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
         <?php
     }
     else {

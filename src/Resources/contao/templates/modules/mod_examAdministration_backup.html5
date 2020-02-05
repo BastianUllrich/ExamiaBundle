@@ -53,7 +53,90 @@ elseif ($this->showConfirmationQuestion === true) {
     <?php
 }
 elseif ($this->showDetails === true) {
-    $this->insert('mod_examAdministration_showDetails.html5', $this->getData());
+    ?>
+    <p><strong><?= $this->langExamDetails; ?></strong></p>
+    <table class="single_record">
+        <tbody>
+        <tr class="row_0 row_first even">
+            <td class="label"><?= $this->langExamTitel; ?></td>
+            <td class="value"><?= $this->detailExamTitel; ?></td>
+        </tr>
+        <tr class="row_1 odd">
+            <td class="label"><?= $this->langDate; ?></td>
+            <td class="value"><?= $this->detailDate; ?></td>
+        </tr>
+        <tr class="row_2 even">
+            <td class="label"><?= $this->langTimeStart; ?></td>
+            <td class="value"><?= $this->detailTimeStart; ?></td>
+        </tr>
+        <tr class="row_3 odd">
+            <td class="label"><?= $this->langRegularDuration; ?></td>
+            <td class="value"><?= $this->detailRegularDuration; ?></td>
+        </tr>
+        <tr class="row_4 even">
+            <td class="label"><?= $this->langMaxEndtime; ?></td>
+            <td class="value"><?= $this->detailMaxEndtime; ?></td>
+        </tr>
+        <tr class="row_5 odd">
+            <td class="label"><?= $this->langLecturer; ?></td>
+            <td class="value"><?= $this->detailLecturer; ?></td>
+        </tr>
+        <tr class="row_6 even">
+            <td class="label"><?= $this->langDepartment; ?></td>
+            <td class="value"><?= $this->detailDepartment; ?></td>
+        </tr>
+        <tr class="row_7 odd">
+            <td class="label"><?= $this->langTools; ?></td>
+            <td class="value"><?= $this->detailTools; ?></td>
+        </tr>
+        <tr class="row_8 even">
+            <td class="label"><?= $this->langStatus; ?></td>
+            <td class="value"><?= $this->detailStatus; ?></td>
+        </tr>
+        <tr class="row_9 odd">
+            <td class="label"><?= $this->langSupervisors; ?></td>
+            <td class="value">
+                <?php foreach($this->supervisorsDataList as $supervisorsData):
+                    echo $supervisorsData['firstname'];
+                    echo " ";
+                    echo $supervisorsData['lastname'];
+                    echo " (";
+                    echo $supervisorsData['task'];
+                    echo ", ";
+                    echo $supervisorsData['time_from'];
+                    echo " - ";
+                    echo $supervisorsData['time_until'];
+                    echo " ";
+                    echo $this->langHour;
+                    echo ")<br>";
+                endforeach;
+                ?>
+            </td>
+        </tr>
+        <tr class="row_10 even">
+            <td class="label"><?= $this->langAttendees; ?></td>
+            <td class="value">
+                <?php foreach($this->attendeesDataList as $attendeesData):
+                    echo $attendeesData['firstname'];
+                    echo " ";
+                    echo $attendeesData['lastname'];
+                    echo " (";
+                    echo $attendeesData['extra_time'];
+                    echo " ";
+                    echo $attendeesData['extra_time_minutes_percent'];
+                    echo ")<br>";
+                    endforeach;
+                ?>
+            </td>
+        </tr>
+        <tr class="row_11 odd">
+            <td class="label"><?= $this->langRemarks; ?></td>
+            <td class="value"><?= $this->detailRemarks; ?></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>{{link::back}}</p>
+    <?php
 }
 // Klausur bearbeiten
 elseif ($this->showEditForm === true) {

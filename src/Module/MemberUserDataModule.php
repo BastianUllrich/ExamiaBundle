@@ -54,7 +54,7 @@ class MemberUserDataModule extends \Module
 
 
         // Sprachvariablen für das Template setzen
-        $this->Template->headline = $GLOBALS['TL_LANG']['miscellaneous']['showMasterData'];
+        $this->Template->langShowMasterData = $GLOBALS['TL_LANG']['miscellaneous']['showMasterData'];
         $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];

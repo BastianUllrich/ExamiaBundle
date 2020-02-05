@@ -61,7 +61,7 @@ class MemberUserDataModule extends \Module
         $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];
         $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
         $this->Template->langContact = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
-        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
+        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['departmentShort'];
         $this->Template->langCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
 
         // Variablen für das Template setzen

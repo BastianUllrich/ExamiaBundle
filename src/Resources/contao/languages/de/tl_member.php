@@ -83,6 +83,7 @@ $GLOBALS['TL_LANG']['tl_member']['department12'] = 'FB 21 - MuK - Management und
 $GLOBALS['TL_LANG']['tl_member']['department13'] = 'ZDH - Wissenschaftliches Zentrum Duales Hochschulstudium, StudiumPlus (Wz)';
 $GLOBALS['TL_LANG']['tl_member']['department14'] = 'JLU';
 
+$GLOBALS['TL_LANG']['tl_member']['departmentShort'] = "Fachbereich";
 
 //** Klausurinformationen **//
 

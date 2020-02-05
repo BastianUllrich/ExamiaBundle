@@ -62,8 +62,9 @@
         <td class="label">Behinderungen</td>
         <td class="value">
             <?php
-                    for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
-            echo ($this->detailHandicaps[$i]."; ");
+            for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
+                echo $this->detailHandicaps[$i];
+                if ($i != (sizeof($this->detailHandicaps) - 1) echo "; ";
             }
             ?>
         </td>
@@ -76,8 +77,9 @@
         <td class="label">Benötigte Hilfsmittel</td>
         <td class="value">
             <?php
-                    for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
-            echo ($this->detailRehabDevices[$i]."; ");
+            for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
+                echo $this->detailRehabDevices[$i];
+                if ($i != (sizeof($this->detailRehabDevices) - 1) echo "; ";
             }
             ?>
         </td>

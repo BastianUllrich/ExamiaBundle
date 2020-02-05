@@ -246,11 +246,9 @@ class ExamAdministrationModule extends \Module
         $id = $examDetails->id;
 
         $results = ExamsModel::findBy(['id <> ?', 'date > ?'], [$id, $timeNow]);
-        //$result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $id AND date > $timeNow")->query();
         $i = 0;
         $examFromData = array();
         foreach ($results as $result) {
-        //while ($result->next()) {
             // Variablen für das Template setzen
             $examFromData[$i]['id'] = $result->id;
             $examFromData[$i]['title'] = $result->title;
@@ -269,13 +267,10 @@ class ExamAdministrationModule extends \Module
         /* Verhindern, dass ein Teilnehmer doppelt eingetragen wird */
         // Alle Teilnehmer der "alten" Klausur heraussuchen
         $getAttendeesFromExam = AttendeesExamsModel::findBy(['exam_id = ?'], [$combineFromId]);
-        //$getAttendeeFromExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineFromId")->query();
         foreach ($getAttendeesFromExam as $getAttendeeFromExam) {
-        //while ($getAttendeeFromExam->next()) {
             $attendeeIdFromExam = $getAttendeeFromExam->attendee_id;
             // Ist dieser Teilnehmer in der "neuen" Klausur vorhanden?
             $getAttendeesToExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$combineToId, $attendeeIdFromExam]);
-            //$getAttendeesToExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineToId AND attendee_id=$attendeeIdFromExam")->query();
             $attendeeIdToExam = $getAttendeesToExam->attendee_id;
             // Wenn der Teilnehmer schon vorhanden ist, wird er aus der "alten" Klausur gelöscht
             if (!empty($attendeeIdToExam)) {
@@ -284,7 +279,10 @@ class ExamAdministrationModule extends \Module
         }
 
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
-        if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->execute()) {
+        $getAttendeesFromExam->exam_id = $combineToId;
+
+        //if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->execute()) {
+        if ($getAttendeesFromExam->save()) {
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;
             $this->Template->combinationSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'];

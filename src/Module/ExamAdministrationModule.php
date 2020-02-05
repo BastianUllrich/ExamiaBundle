@@ -97,19 +97,28 @@ class ExamAdministrationModule extends \Module
         $this->import('Database');
 
         if ($_GET["orderBy"] == "dateDESC") {
-            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
+            //$result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
+            $options = [
+                'order' => 'date DESC'
+            ];
             $this->Template->isOrderedBy = "dateDESC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
 
         } else {
-            $result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
+            //$result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
+            $options = [
+                'order' => 'date ASC'
+            ];
             $this->Template->isOrderedBy = "dateASC";
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
         }
 
+        $results = ExamsModel::findAll($options);
+
         $i = 0;
         $examData = array();
-        while ($result->next()) {
+        //while ($result->next()) {
+        foreach ($results as $result) {
             // Variablen für das Template setzen
             $examData[$i]['date'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;

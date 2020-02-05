@@ -1,7 +1,6 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<h2 class="ce_headline first "><?= $this->headline; ?></h2>
 
 <table class="single_record">
     <tbody>

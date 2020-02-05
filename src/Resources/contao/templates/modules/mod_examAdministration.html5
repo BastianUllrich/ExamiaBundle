@@ -40,10 +40,10 @@ if ($this->showConfirmationQuestion === false && $this->showDetails === false &&
             <?php
             $i++;
         endforeach;
-        if (empty($this->examsDataList)) {
+        if (empty($this->examDataList)) {
             ?>
             <tr class="row_even">
-                <td class="body col_0" colspan="2"><?= $this->langNoDataAvailable; ?></td>
+                <td class="body col_0" colspan="5"><?= $this->langNoDataAvailable; ?></td>
             </tr>
             <?php
         }

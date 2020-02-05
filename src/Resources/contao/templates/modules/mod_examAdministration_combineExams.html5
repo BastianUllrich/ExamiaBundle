@@ -1,0 +1,26 @@
+<h3><?= $this->langCombineExams; ?></h3>
+<p><strong><?= $this->langCombineExamsExplanation; ?></strong></p>
+<p><?= $this->langCombineExamsTo; ?> <?= $this->examToTitle; ?> - <?= $this->examToDepartment; ?> (ID<?= $this->examToId; ?>, <?= $this->examToDate; ?> <?= $this->langExamTimeAt; ?> <?= $this->examToTime; ?> <?= $this->langExamTimeHour; ?>)</p>
+<form action="{{env::request}}" method="post">
+    <div class="formbody">
+        <input type="hidden" name="FORM_SUBMIT" value="editExam">
+        <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+        <input type="hidden" name="formIdentity" value="combineExams">
+        <div class="widget widget-select select mandatory">
+            <label for="examFrom" class="select mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langCombineExamsFrom; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <select name="examFrom" id="examFrom" class="select mandatory" required="">
+                <?php foreach($this->examFromDataList as $examFromData): ?>
+                <option value="<?= $examFromData['id']; ?>"><?= $examFromData['title']; ?> - <?= $examFromData['department']; ?> (ID<?= $examFromData['id']; ?>,<?php echo (" " . $examFromData['date'] . " " . $this->langExamTimeAt . " " . $examFromData['begin'] . " " . $this->langExamTimeHour ); ?>)</option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="widget widget-submit">
+            <button type="submit" class="submit"><?= $this->langCombineDoCombine; ?></button>
+        </div>
+    </div>
+</form>
+<p class="right">{{link::back}}</p>

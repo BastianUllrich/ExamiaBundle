@@ -43,6 +43,7 @@ class MemberUserDataModule extends \Module
     {
         // Sprachdatei einbinden
         $this->loadLanguageFile('tl_member');
+        $this->loadLanguageFile('miscellaneous');
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();

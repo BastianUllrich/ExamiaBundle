@@ -145,6 +145,10 @@ $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendees'] = "Teilnehmer bearbe
 $GLOBALS['TL_LANG']['miscellaneous']['imgAltCombineExams'] = "Klausuren zusammenlegen";
 $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteExam'] = "Klausur löschen";
 
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltViewAttendeeDetails'] = "Teilnehmerdetails anzeigen";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendeeDetails'] = "Teilnehmer bearbeiten";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteAttendee'] = "Teilnehmer löschen";
+
 // Link Titles
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewExamDetails'] = "Zeigt eine Liste mit Klausurdetails an";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditExamDetails'] = "Öffnet ein Formular zum Bearbeiten der Klausurdetails";
@@ -155,6 +159,10 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExam'] = "Löscht die Klaus
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'] = "Löschen bestätigen und zurück zur Mitgliedsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'] = "Ohne löschen zurück zur Mitgliedsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "Führt zurück zur Mitgliedsverwaltung";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewAttendeeDetails'] = "Zeigt eine Liste mit dem Details des Teilnehmers an";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendeeDetails'] = "Öffnet ein Formular zum Bearbeiten des Teilnehmers";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'] = "Löscht den Teilnehmer";
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmYes'] = "Löschen bestätigen und zurück zur Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmNo'] = "Ohne löschen zurück zur Klausurverwaltung";

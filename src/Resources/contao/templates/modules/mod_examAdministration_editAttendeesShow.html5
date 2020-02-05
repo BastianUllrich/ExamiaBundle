@@ -20,9 +20,9 @@
         <td class="body col_3"><?= $attendeeData['writingAssistance']; ?></td>
         <td class="body col_4"><?= $attendeeData['status']; ?></td>
         <td class="body col_5 col_last">
-            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&showAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmerdetails anzeigen"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="Teilnehmerdetails anzeigen"></a>
-            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&editAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer bearbeiten"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Teilnehmer bearbeiten"></a>
-            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="Teilnehmer entfernen"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Teilnehmer entfernen"></a>
+            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&showAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleViewAttendeeDetails; ?>"><img src="system/themes/flexible/icons/show.svg" width="16" height="16" alt="<?= $this->imgAltViewAttendeeDetails; ?>"></a>
+            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&editAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleEditAttendeeDetails; ?>"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="<?= $this->imgAltEditAttendeeDetails; ?>"></a>
+            <a href="klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=<?= $this->examID; ?>&deleteAttendee=<?= $attendeeData['id']; ?>" title="<?= $this->linkTitleDeleteAttendee; ?>"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="<?= $this->imgAltDeleteAttendee; ?>n"></a>
         </td>
     </tr>
     <?php
@@ -38,4 +38,4 @@
             ?>
     </tbody>
 </table>
-<p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linktextBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>
+<p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linkTitleBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>

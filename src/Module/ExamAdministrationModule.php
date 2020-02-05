@@ -704,6 +704,14 @@ class ExamAdministrationModule extends \Module
         $this->Template->langStatusInProgress = $GLOBALS['TL_LANG']['tl_attendees_exams']['in_progress'][0];
         $this->Template->langStatusConfirmed = $GLOBALS['TL_LANG']['tl_attendees_exams']['confirmed'][0];
 
+        $this->Template->imgAltViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewAttendeeDetails'];
+        $this->Template->imgAltEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendeeDetails'];
+        $this->Template->imgAltDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteAttendee'];
+
+        $this->Template->linkTitleViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewAttendeeDetails'];
+        $this->Template->linkTitleEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendeeDetails'];
+        $this->Template->linkTitleDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'];
+
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
 }

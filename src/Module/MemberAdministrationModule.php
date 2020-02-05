@@ -124,11 +124,11 @@ class MemberAdministrationModule extends \Module
 
             // Sprachvariablen für das Template setzen
             $this->Template->langMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['memberDetails'];
-
+            $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'][0];
             $this->Template->langMobile = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
             $this->Template->langPhone = $GLOBALS['TL_LANG']['tl_member']['phone'][0];
             $this->Template->langGender = $GLOBALS['TL_LANG']['tl_member']['gender'][0];
-            $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateofbirth'][0];
+            $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateOfBirth'][0];
             $this->Template->langCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
             $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
             $this->Template->langChipcardNr = $GLOBALS['TL_LANG']['tl_member']['chipcard_nr'][0];

@@ -1,20 +1,20 @@
-<p><strong>Mitgliedsdetails</strong></p>
+<h3><?= $this->langMemberDetails; ?></h3>
 <table class="single_record">
     <tbody>
     <tr class="row_0 row_first even">
-        <td class="label">Vorname</td>
+        <td class="label"><?= $this->langFirstname; ?></td>
         <td class="value"><?= $this->detailFirstname; ?></td>
     </tr>
     <tr class="row_1 odd">
-        <td class="label">Nachname</td>
+        <td class="label"><?= $this->langLastname; ?></td>
         <td class="value"><?= $this->detailLastname; ?></td>
     </tr>
     <tr class="row_2 even">
-        <td class="label">Benutzername</td>
+        <td class="label"><?= $this->langUsername; ?></td>
         <td class="value"><?= $this->detailUsername; ?></td>
     </tr>
     <tr class="row_3 odd">
-        <td class="label">E-Mail-Adresse</td>
+        <td class="label"><?= $this->langEmail; ?></td>
         <td class="value"><?= $this->detailEmail; ?></td>
     </tr>
     <?php
@@ -22,7 +22,7 @@
         if ($this->memberType != "Administrator") {
     ?>
     <tr class="row_4 even">
-        <td class="label">Handynummer</td>
+        <td class="label"><?= $this->langMobile; ?></td>
         <td class="value"><?= $this->detailMobile; ?></td>
     </tr>
     <?php
@@ -31,35 +31,35 @@
         if ($this->memberType == "Student") {
     ?>
     <tr class="row_5 odd">
-        <td class="label">Telefonnummer</td>
+        <td class="label"><?= $this->langPhone; ?></td>
         <td class="value"><?= $this->detailPhone; ?></td>
     </tr>
     <tr class="row_6 even">
-        <td class="label">Geschlecht</td>
+        <td class="label"><?= $this->langGender; ?></td>
         <td class="value"><?= $this->detailGender; ?></td>
     </tr>
     <tr class="row_7 odd">
-        <td class="label">Geburtsdatum</td>
+        <td class="label"><?= $this->langDateOfBirth; ?></td>
         <td class="value"><?= $this->detailDateOfBirth; ?></td>
     </tr>
     <tr class="row_8 even">
-        <td class="label">Studiengang</td>
+        <td class="label"><?= $this->langCourse; ?></td>
         <td class="value"><?= $this->detailCourse; ?></td>
     </tr>
     <tr class="row_9 odd">
-        <td class="label">Hochschule | Fachbereich</td>
+        <td class="label"><?= $this->langDepartment; ?></td>
         <td class="value"><?= $this->detailDepartment; ?></td>
     </tr>
     <tr class="row_10 even">
-        <td class="label">Chipkarten-Nr</td>
+        <td class="label"><?= $this->langChipcardNr; ?></td>
         <td class="value"><?= $this->detailChipcardNr; ?></td>
     </tr>
     <tr class="row_11 odd">
-        <td class="label">Ansprechpartner</td>
+        <td class="label"><?= $this->langContact; ?></td>
         <td class="value"><?= $this->detailContactPerson; ?></td>
     </tr>
     <tr class="row_12 even">
-        <td class="label">Behinderungen</td>
+        <td class="label"><?= $this->langHandicaps; ?></td>
         <td class="value">
             <?php
             for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
@@ -70,11 +70,11 @@
         </td>
     </tr>
     <tr class="row_13 odd">
-        <td class="label">Sonstige Behinderungen</td>
+        <td class="label"><?= $this->langHandicapsOthers; ?></td>
         <td class="value"><?= $this->detailHandicapsOthers; ?></td>
     </tr>
     <tr class="row_14 even">
-        <td class="label">Benötigte Hilfsmittel</td>
+        <td class="label"><?= $this->langRehabDevices; ?></td>
         <td class="value">
             <?php
             for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
@@ -85,11 +85,11 @@
         </td>
     </tr>
     <tr class="row_15 odd">
-        <td class="label">Sonstige benötigte Hilfsmittel</td>
+        <td class="label"><?= $this->langRehabDevicesOthers; ?></td>
         <td class="value"><?= $this->detailRehabDevicesOthers; ?></td>
     </tr>
     <tr class="row_16 even">
-        <td class="label">Zeitverlängerung</td>
+        <td class="label"><?= $this->langExtraTime; ?></td>
         <td class="value"><?= $this->detailExtraTime; ?> <?= $this->detailExtraTimeUnit; ?></td>
     </tr>
     <?php

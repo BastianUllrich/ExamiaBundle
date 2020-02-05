@@ -122,6 +122,24 @@ class MemberAdministrationModule extends \Module
             $memberDetailsData = MemberModel::findBy('id', $member);
             $this->Template->showDetails = true;
 
+            // Sprachvariablen für das Template setzen
+            $this->Template->langMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['memberDetails'];
+
+            $this->Template->langMobile = $GLOBALS['TL_LANG']['tl_member']['mobile'][0];
+            $this->Template->langPhone = $GLOBALS['TL_LANG']['tl_member']['phone'][0];
+            $this->Template->langGender = $GLOBALS['TL_LANG']['tl_member']['gender'][0];
+            $this->Template->langDateOfBirth = $GLOBALS['TL_LANG']['tl_member']['dateofbirth'][0];
+            $this->Template->langCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
+            $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
+            $this->Template->langChipcardNr = $GLOBALS['TL_LANG']['tl_member']['chipcard_nr'][0];
+            $this->Template->langContact = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
+            $this->Template->langHandicaps = $GLOBALS['TL_LANG']['tl_member']['handicaps'][0];
+            $this->Template->langHandicapsOthers = $GLOBALS['TL_LANG']['tl_member']['handicaps_others'][0];
+            $this->Template->langRehabDevices = $GLOBALS['TL_LANG']['tl_member']['rehab_devices'][0];
+            $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'][0];
+            $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
+
+            // Variablen für das Template setzen
             $this->Template->memberType = $memberDetailsData->usertype;
             $this->Template->detailFirstname = $memberDetailsData->firstname;
             $this->Template->detailLastname = $memberDetailsData->lastname;

@@ -130,6 +130,8 @@ $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'] = "Abmeldung von
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'] = "Sie haben sich erfolgreich von nachfolgender Klausur im BliZ abgemeldet:";
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'] = "Folgendes Mitglied hat sich von nachfolgender Klausur im BliZ abgemeldet:";
 
+$GLOBALS['TL_LANG']['miscellaneous']['memberDetails'] = "Mitgliedsdetails";
+
 // Image Alternatives
 $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewMemberDetails'] = "Mitgliedsdetails anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditMemberDetails'] = "Mitglied bearbeiten";
@@ -143,8 +145,6 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditMemberDetails'] = "Öffnet ei
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'] = "Aktiviert das Mitglied";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'] = "Deaktiviert das Mitglied";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'] = "Löscht das Mitglied";
-
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'] = "Löschen bestätigen und zurück zur Mitgliedsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'] = "Ohne löschen zurück zur Mitgliedsverwaltung";
-
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "Führt zurück zur Mitgliedsverwaltung";

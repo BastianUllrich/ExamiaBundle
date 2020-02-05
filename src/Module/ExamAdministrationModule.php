@@ -7,6 +7,7 @@ use Contao\FrontendUser;
 use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 
 
 class ExamAdministrationModule extends \Module
@@ -93,9 +94,6 @@ class ExamAdministrationModule extends \Module
 
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
         $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
-
-        // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
-        $this->import('Database');
 
         if ($_GET["orderBy"] == "dateDESC") {
             $options = [
@@ -208,9 +206,22 @@ class ExamAdministrationModule extends \Module
 
             // Klausur erst nach Bestätigung löschen
             if (($_GET["confirmed"] == "yes")) {
+                $this->import('Database');
 
                 // Klausurteilnehmer entfernen
                 $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam")->execute()->affectedRows;
+
+                // Aufsichten vom Klausurtag entfernen, falls am Tag der Klausur keine Klausuren mehr vorhanden sind
+                $getExamDate = ExamsModel::findBy('id', $exam);
+                // Umwandeln der Time-Angabe von Tag + Uhrzeit auf Tag
+                $examDateString = date("d.m.Y", $getExamDate->date);
+                $examDateFrom = strtotime($examDateString);
+                $examDateTo = $examDateFrom + 86399;
+                // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
+                $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
+                if ($resultCount != 0) {
+                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
+                }
 
                 // Klausur aus Datenbank löschen und zur Seite "Klausurverwaltung" zurückkehren
                 if ($deleteExam = $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam")->execute()->affectedRows) {

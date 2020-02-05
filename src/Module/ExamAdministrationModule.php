@@ -75,14 +75,6 @@ class ExamAdministrationModule extends \Module
 
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
 
-        /* Deaktiviert -> alle Klausuren anzeigen, auch vergangene!
-        // Heute 0 Uhr festlegen -> wichtig für Datenbankabfrage
-        $today_midnight = date("d.m.Y");
-        $today_midnight .= " ";
-        $today_midnight .= "00:00:00";
-        $today_midnight_time = strtotime($today_midnight);
-        */
-
         // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
 
@@ -359,8 +351,13 @@ class ExamAdministrationModule extends \Module
             // Variablen für das Template setzen
             $attendeesData[$i]['firstname'] = $result->firstname;
             $attendeesData[$i]['lastname'] = $result->lastname;
-            $attendeesData[$i]['extra_time'] = $result->extra_time;
-            $attendeesData[$i]['extra_time_minutes_percent'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            if (!empty($result->extra_time) && !empty($result->extra_time_minutes_percent)) {
+                $attendeesData[$i]['extra_time'] = $result->extra_time;
+                $attendeesData[$i]['extra_time_minutes_percent'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            }
+            else {
+                $attendeesData[$i]['extra_time'] = $GLOBALS['TL_LANG']['miscellaneous']['noExtraTime'];
+            }
             $i++;
         }
         $this->Template->attendeesDataList = $attendeesData;
@@ -434,7 +431,7 @@ class ExamAdministrationModule extends \Module
     {
         $this->Template->title = $examData->title;
         $this->Template->date = date("Y-m-d", $examData->date);
-        $this->Template->begin = $examData->begin;
+        $this->Template->begin = date("H:i", $examData->date);
         $this->Template->regularDuration = $examData->duration;
         $this->Template->examDepartment = $examData->department;
         $this->Template->status = $examData->status;

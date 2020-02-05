@@ -280,8 +280,6 @@ class ExamAdministrationModule extends \Module
 
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
         $getAttendeesFromExam->exam_id = $combineToId;
-
-        //if($this->Database->prepare("UPDATE tl_attendees_exams SET exam_id=$combineToId WHERE exam_id=$combineFromId")->execute()) {
         if ($getAttendeesFromExam->save()) {
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;
@@ -305,10 +303,10 @@ class ExamAdministrationModule extends \Module
         /* Späteste Endzeit berechnen */
 
         // Maximale Dauer in Minuten berechnen
-        $result = Database::getInstance()->prepare("SELECT extra_time, extra_time_minutes_percent FROM tl_attendees_exams WHERE exam_id=$examDetails->id")->query();
+        $results = AttendeesExamsModel::findBy('exam_id', $examDetails->id);
         $i = 0;
         $maxDuration = $examDetails->duration;
-        while ($result->next()) {
+        foreach ($results as $result) {
             if ($result->extra_time_minutes_percent == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);
                 $duration = ($examDetails->duration) * $multiplicator;

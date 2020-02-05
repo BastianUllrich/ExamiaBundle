@@ -69,7 +69,7 @@ elseif ($this->showEditForm === true) {
     if ($this->changesSaved === true) {
         ?>
         <p><em><?= $this->changesSavedMessage; ?></em></p>
-        <p><a href="benutzerbereich/mitglieder-verwalten.html" title="<?= $this->linktextBackToMemberAdministration; ?>"><?= $this->linktextBackToMemberAdministration; ?></a></p>
+        <p><a href="benutzerbereich/mitglieder-verwalten.html" title="<?= $this->linkTitleBackToMemberAdministration; ?>"><?= $this->linktextBackToMemberAdministration; ?></a></p>
         <?php
     }
     else {

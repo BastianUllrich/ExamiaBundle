@@ -386,6 +386,7 @@ class MemberAdministrationModule extends \Module
         if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
+            $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];
             $this->Template->linktextBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToMemberAdministration'];
         }
     }

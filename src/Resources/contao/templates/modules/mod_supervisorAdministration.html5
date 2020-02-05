@@ -24,6 +24,13 @@ if ($this->showDetails === false) {
             <?php
             $i++;
         endforeach;
+        if (empty($this->examsDataList)) {
+            ?>
+            <tr class="row_even">
+                <td class="body col_0" colspan="2"><?= $this->langNoDataAvailable; ?></td>
+            </tr>
+            <?php
+        }
         ?>
         </tbody>
     </table>

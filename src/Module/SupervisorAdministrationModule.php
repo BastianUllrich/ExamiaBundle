@@ -70,6 +70,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linkTitleShowExamDateDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'];
         $this->Template->linkTitleDeleteSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
 
+        $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
+
         if ($_GET["do"] == "showDetails") {
             $this->showDetails();
         }

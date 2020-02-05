@@ -67,6 +67,8 @@ class ExamAdministrationModule extends \Module
         // Sprachvariablen setzen
         $this->Template->manage_exams = $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'];
 
+        $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
+
         $this->Template->headerDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
         $this->Template->headerBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->headerExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];

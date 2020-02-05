@@ -53,7 +53,7 @@ elseif ($this->showConfirmationQuestion === true) {
     <?php
 }
 elseif ($this->showDetails === true) {
-    $this->insert('mod_examAdministration_showDetails.html5', $this->getData());
+    $this->insert('mod_examAdministration_showDetails', $this->getData());
 }
 // Klausur bearbeiten
 elseif ($this->showEditForm === true) {

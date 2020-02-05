@@ -43,6 +43,7 @@ class MemberUserDataModule extends \Module
     {
         // Sprachdatei einbinden
         $this->loadLanguageFile('tl_member');
+        $this->loadLanguageFile('miscellaneous');
 
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
@@ -50,6 +51,18 @@ class MemberUserDataModule extends \Module
 
         // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);
+
+
+
+        // Sprachvariablen für das Template setzen
+        $this->Template->headline = $GLOBALS['TL_LANG']['miscellaneous']['showMasterData'];
+        $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'];
+        $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'];
+        $this->Template->langEmail = $GLOBALS['TL_LANG']['tl_member']['email'];
+        $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'];
+        $this->Template->langContact = $GLOBALS['TL_LANG']['tl_member']['contact_person'][0];
+        $this->Template->langDepartment = $GLOBALS['TL_LANG']['tl_member']['department'][0];
+        $this->Template->langCourse = $GLOBALS['TL_LANG']['tl_member']['study_course'][0];
 
         // Variablen für das Template setzen
         $this->Template->firstname = $userdata->firstname;

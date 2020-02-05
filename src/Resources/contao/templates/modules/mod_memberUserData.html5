@@ -6,36 +6,36 @@
 <table class="single_record">
     <tbody>
     <tr class="row_0 row_first even">
-        <td class="label">Vorname</td>
+        <td class="label"><?= $this->langFirstname; ?></td>
         <td class="value"><?= $this->firstname; ?></td>
     </tr>
     <tr class="row_1 odd">
-        <td class="label">Nachname</td>
+        <td class="label"><?= $this->langLastname; ?></td>
         <td class="value"><?= $this->lastname; ?></td>
     </tr>
     <tr class="row_2 even">
-        <td class="label">E-Mail-Adresse</td>
+        <td class="label"><?= $this->langEmail; ?></td>
         <td class="value"><?= $this->email; ?></td>
     </tr>
     <tr class="row_3 odd">
-        <td class="label">Benutzername</td>
+        <td class="label"><?= $this->langUsername; ?></td>
         <td class="value"><?= $this->username; ?></td>
     </tr>
     <?php if (!empty($this->contact)) { ?>
     <tr class="row_4 even">
-        <td class="label">Ansprechpartner im BliZ</td>
+        <td class="label"><?= $this->langContact; ?></td>
         <td class="value"><?= $this->contact; ?></td>
     </tr>
     <?php }
     if (!empty($this->department)) { ?>
     <tr class="row_5 odd">
-        <td class="label">Fachbereich</td>
+        <td class="label"><?= $this->langDepartment; ?></td>
         <td class="value"><?= $this->department; ?></td>
     </tr>
     <?php }
     if (!empty($this->course)) { ?>
     <tr class="row_6 even">
-        <td class="label">Studiengang</td>
+        <td class="label"><?= $this->langCourse; ?></td>
         <td class="value"><?= $this->course; ?></td>
     </tr>
     <?php } ?>

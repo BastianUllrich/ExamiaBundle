@@ -159,4 +159,4 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "F
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmYes'] = "Löschen bestätigen und zurück zur Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmNo'] = "Ohne löschen zurück zur Klausurverwaltung";
 
-$GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'] = "Führt zurück zur Klausurverwaltung";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'] = "Führt zurück zur Klausurverwaltung";

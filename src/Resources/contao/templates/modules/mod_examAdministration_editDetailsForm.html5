@@ -1,0 +1,138 @@
+<p><strong><?= $this->langEditExamDetails; ?></strong></p>
+<form action="{{env::request}}" method="post">
+    <div class="formbody">
+        <input type="hidden" name="FORM_SUBMIT" value="editExam">
+        <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+        <input type="hidden" name="formIdentity" value="editExamData">
+        <div class="widget widget-text mandatory">
+            <label for="title" class="mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langExamTitel; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <input type="text" name="title" id="title" class="text mandatory" value="<?= $this->title; ?>" required="" maxlength="255" autocomplete="on">
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="date" class="mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langDate; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <input type="date" name="date" id="date" class="text mandatory" value="<?= $this->date; ?>" required="" autocomplete="on">
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="begin" class="mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langTimeStart; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <input type="time" name="begin" id="begin" class="text mandatory" value="<?= $this->begin; ?>" required="" autocomplete="on">
+        </div>
+        <div class="widget widget-text mandatory">
+            <label for="regularDuration" class="mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langRegularDurationLong; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <input type="text" name="regularDuration" id="regularDuration" class="text mandatory" value="<?= $this->regularDuration; ?>" required="" maxlength="3" autocomplete="on">
+        </div>
+
+        <div class="widget widget-select select mandatory">
+            <label for="department" class="select mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langDepartment; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <select name="department" id="department" class="select mandatory" required="">
+                <option value=""> - </option>
+                <option value="department1" <?php if ($this->examDepartment == "department1") echo "selected"; ?>><?= $this->langDepartment1; ?></option>
+                <option value="department2" <?php if ($this->examDepartment == "department2") echo "selected"; ?>><?= $this->langDepartment2; ?></option>
+                <option value="department3" <?php if ($this->examDepartment == "department3") echo "selected"; ?>><?= $this->langDepartment3; ?></option>
+                <option value="department4" <?php if ($this->examDepartment == "department4") echo "selected"; ?>><?= $this->langDepartment4; ?></option>
+                <option value="department5" <?php if ($this->examDepartment == "department5") echo "selected"; ?>><?= $this->langDepartment5; ?></option>
+                <option value="department6" <?php if ($this->examDepartment == "department6") echo "selected"; ?>><?= $this->langDepartment6; ?></option>
+                <option value="department7" <?php if ($this->examDepartment == "department7") echo "selected"; ?>><?= $this->langDepartment7; ?></option>
+                <option value="department8" <?php if ($this->examDepartment == "department8") echo "selected"; ?>><?= $this->langDepartment8; ?></option>
+                <option value="department9" <?php if ($this->examDepartment == "department9") echo "selected"; ?>><?= $this->langDepartment9; ?></option>
+                <option value="department10" <?php if ($this->examDepartment == "department10") echo "selected"; ?>><?= $this->langDepartment10; ?></option>
+                <option value="department11" <?php if ($this->examDepartment == "department11") echo "selected"; ?>><?= $this->langDepartment11; ?></option>
+                <option value="department12" <?php if ($this->examDepartment == "department12") echo "selected"; ?>><?= $this->langDepartment12; ?></option>
+                <option value="department13" <?php if ($this->examDepartment == "department13") echo "selected"; ?>><?= $this->langDepartment13; ?></option>
+                <option value="department14" <?php if ($this->examDepartment == "department14") echo "selected"; ?>><?= $this->langDepartment14; ?></option>
+            </select>
+        </div>
+
+        <div class="widget widget-select select mandatory">
+            <label for="status" class="select mandatory">
+                <span class="invisible"><?= $this->mandatory; ?></span>
+                <?= $this->langStatus; ?>
+                <span class="mandatory">*</span>
+            </label>
+            <select name="status" id="status" class="select mandatory" required="">
+                <option value=""> - </option>
+                <option value="status1" <?php if ($this->status == "status1") echo "selected"; ?>><?= $this->langStatus1; ?></option>
+                <option value="status2" <?php if ($this->status == "status2") echo "selected"; ?>><?= $this->langStatus2; ?></option>
+                <option value="status3" <?php if ($this->status == "status3") echo "selected"; ?>><?= $this->langStatus3; ?></option>
+                <option value="status4" <?php if ($this->status == "status4") echo "selected"; ?>><?= $this->langStatus4; ?></option>
+                <option value="status5" <?php if ($this->status == "status5") echo "selected"; ?>><?= $this->langStatus5; ?></option>
+                <option value="status6" <?php if ($this->status == "status6") echo "selected"; ?>><?= $this->langStatus6; ?></option>
+            </select>
+        </div>
+
+        <div class="widget widget-textarea">
+            <label for="tools" class=""><?= $this->langTools; ?></label>
+            <textarea name="tools" id="tools" class="textarea" rows="4" cols="255" maxlength="255"><?= $this->tools; ?></textarea>
+        </div>
+        <div class="widget widget-textarea">
+            <label for="remarks" class=""><?= $this->langRemarks; ?></label>
+            <textarea name="remarks" id="remarks" class="textarea" rows="4" cols="255" maxlength="255"><?= $this->remarks; ?></textarea>
+        </div>
+
+
+        <fieldset>
+            <legend><?= $this->langLecturerLong; ?></legend>
+            <div class="widget widget-text">
+                <label for="lecturerTitle">
+                    <?= $this->langLecturerTitle; ?>
+                </label>
+                <input type="text" name="lecturerTitle" id="lecturerTitle" class="text" value="<?= $this->lecturerTitle; ?>" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text">
+                <label for="lecturerFirstname" class="mandatory">
+                    <span class="invisible"><?= $this->mandatory; ?> </span>
+                    <?= $this->langLecturerFirstname; ?>
+                    <span class="mandatory">*</span>
+                </label>
+                <input type="text" name="lecturerFirstname" id="lecturerFirstname" class="text mandatory" value="<?= $this->lecturerFirstname; ?>" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text">
+                <label for="lecturerLastname" class="mandatory">
+                    <span class="invisible"><?= $this->mandatory; ?> </span>
+                    <?= $this->langLecturerLastname; ?>
+                    <span class="mandatory">*</span>
+                </label>
+                <input type="text" name="lecturerLastname" id="lecturerLastname" class="text mandatory" value="<?= $this->lecturerLastname; ?>" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text">
+                <label for="lecturerEmail" class="mandatory">
+                    <span class="invisible"><?= $this->mandatory; ?> </span>
+                    <?= $this->langLecturerEmail; ?>
+                    <span class="mandatory">*</span>
+                </label>
+                <input type="email" name="lecturerEmail" id="lecturerEmail" class="text mandatory" value="<?= $this->lecturerEmail; ?>" required="" maxlength="255" autocomplete="on">
+            </div>
+            <div class="widget widget-text">
+                <label for="lecturerMobile">
+                    <?= $this->langLecturerMobile; ?>
+                </label>
+                <input type="text" name="lecturerMobile" id="lecturerMobile" class="text" value="<?= $this->lecturerMobile; ?>" maxlength="15" autocomplete="on">
+            </div>
+        </fieldset>
+
+        <div class="widget widget-submit">
+            <button type="submit" class="submit"><?= $this->langSaveChanges; ?></button>
+        </div>
+    </div>
+</form>
+
+<p class="right">{{link::back}}</p>

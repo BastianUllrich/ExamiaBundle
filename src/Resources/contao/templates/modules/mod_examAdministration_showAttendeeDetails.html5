@@ -1,0 +1,50 @@
+<p><strong><?= $this->langAttendeeDetails; ?></strong></p>
+<p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
+<table class="single_record">
+    <tbody>
+    <tr class="row_0 row_first even">
+        <td class="label"><?= $this->langUsername; ?></td>
+        <td class="value"><?= $this->username;; ?></td>
+    </tr>
+    <tr class="row_1 odd">
+        <td class="label"><?= $this->langFirstname; ?></td>
+        <td class="value"><?= $this->firstname; ?></td>
+    </tr>
+    <tr class="row_2 even">
+        <td class="label"><?= $this->langLastname; ?></td>
+        <td class="value"><?= $this->lastname; ?></td>
+    </tr>
+    <tr class="row_3 odd">
+        <td class="label"><?= $this->langContactPerson; ?></td>
+        <td class="value"><?= $this->contactPerson; ?></td>
+    </tr>
+    <tr class="row_4 even">
+        <td class="label"><?= $this->langSeat; ?></td>
+        <td class="value"><?= $this->detailSeat; ?> <a href="klausurverwaltung/raumplan-des-bliz.html" title="<?= $this->showRoomPlan; ?>"><?= $this->showRoomPlan; ?></a></td>
+    </tr>
+    <tr class="row_5 odd">
+        <td class="label"><?= $this->langRehabDevices; ?></td>
+        <td class="value">
+            <?php
+            for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
+                echo ($this->detailRehabDevices[$i]);
+                if ($i != (sizeof($this->detailRehabDevices)-1)) echo "; ";
+            }
+            ?>
+        </td>
+    </tr>
+    <tr class="row_6 even">
+        <td class="label"><?= $this->langRehabDevicesOthersAssistant; ?></td>
+        <td class="value"><?= $this->rehabDevicesOthers; ?></td>
+    </tr>
+    <tr class="row_7 odd">
+        <td class="label"><?= $this->langExtraTime; ?></td>
+        <td class="value"><?= $this->detailExtraTime; ?></td>
+    </tr>
+    <tr class="row_8 even">
+        <td class="label"><?= $this->langStatus; ?></td>
+        <td class="value"><?= $this->detailStatus; ?></td>
+    </tr>
+    </tbody>
+</table>
+<p>{{link::back}}</p>

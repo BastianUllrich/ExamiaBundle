@@ -18,83 +18,83 @@
         <td class="value"><?= $this->detailEmail; ?></td>
     </tr>
     <?php
-        // Extra-Details von Aufsichten und Studenten
-        if ($this->memberType != "Administrator") {
-    ?>
-    <tr class="row_4 even">
-        <td class="label"><?= $this->langMobile; ?></td>
-        <td class="value"><?= $this->detailMobile; ?></td>
-    </tr>
-    <?php
-        }
-        // Extra-Details von Studenten
-        if ($this->memberType == "Student") {
-    ?>
-    <tr class="row_5 odd">
-        <td class="label"><?= $this->langPhone; ?></td>
-        <td class="value"><?= $this->detailPhone; ?></td>
-    </tr>
-    <tr class="row_6 even">
-        <td class="label"><?= $this->langGender; ?></td>
-        <td class="value"><?= $this->detailGender; ?></td>
-    </tr>
-    <tr class="row_7 odd">
-        <td class="label"><?= $this->langDateOfBirth; ?></td>
-        <td class="value"><?= $this->detailDateOfBirth; ?></td>
-    </tr>
-    <tr class="row_8 even">
-        <td class="label"><?= $this->langCourse; ?></td>
-        <td class="value"><?= $this->detailCourse; ?></td>
-    </tr>
-    <tr class="row_9 odd">
-        <td class="label"><?= $this->langDepartment; ?></td>
-        <td class="value"><?= $this->detailDepartment; ?></td>
-    </tr>
-    <tr class="row_10 even">
-        <td class="label"><?= $this->langChipcardNr; ?></td>
-        <td class="value"><?= $this->detailChipcardNr; ?></td>
-    </tr>
-    <tr class="row_11 odd">
-        <td class="label"><?= $this->langContact; ?></td>
-        <td class="value"><?= $this->detailContactPerson; ?></td>
-    </tr>
-    <tr class="row_12 even">
-        <td class="label"><?= $this->langHandicaps; ?></td>
-        <td class="value">
-            <?php
-            for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
-                echo $this->detailHandicaps[$i];
-                if ($i != (sizeof($this->detailHandicaps) - 1)) echo "; ";
-            }
-            ?>
-        </td>
-    </tr>
-    <tr class="row_13 odd">
-        <td class="label"><?= $this->langHandicapsOthers; ?></td>
-        <td class="value"><?= $this->detailHandicapsOthers; ?></td>
-    </tr>
-    <tr class="row_14 even">
-        <td class="label"><?= $this->langRehabDevices; ?></td>
-        <td class="value">
-            <?php
-            for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
-                echo $this->detailRehabDevices[$i];
-                if ($i != (sizeof($this->detailRehabDevices) - 1)) echo "; ";
-            }
-            ?>
-        </td>
-    </tr>
-    <tr class="row_15 odd">
-        <td class="label"><?= $this->langRehabDevicesOthers; ?></td>
-        <td class="value"><?= $this->detailRehabDevicesOthers; ?></td>
-    </tr>
-    <tr class="row_16 even">
-        <td class="label"><?= $this->langExtraTime; ?></td>
-        <td class="value"><?= $this->detailExtraTime; ?> <?= $this->detailExtraTimeUnit; ?></td>
-    </tr>
-    <?php
-        }
+    // Extra-Details von Aufsichten und Studenten
+    if ($this->memberType != "Administrator") {
         ?>
+        <tr class="row_4 even">
+            <td class="label"><?= $this->langMobile; ?></td>
+            <td class="value"><?= $this->detailMobile; ?></td>
+        </tr>
+        <?php
+    }
+    // Extra-Details von Studenten
+    if ($this->memberType == "Student") {
+        ?>
+        <tr class="row_5 odd">
+            <td class="label"><?= $this->langPhone; ?></td>
+            <td class="value"><?= $this->detailPhone; ?></td>
+        </tr>
+        <tr class="row_6 even">
+            <td class="label"><?= $this->langGender; ?></td>
+            <td class="value"><?= $this->detailGender; ?></td>
+        </tr>
+        <tr class="row_7 odd">
+            <td class="label"><?= $this->langDateOfBirth; ?></td>
+            <td class="value"><?= $this->detailDateOfBirth; ?></td>
+        </tr>
+        <tr class="row_8 even">
+            <td class="label"><?= $this->langCourse; ?></td>
+            <td class="value"><?= $this->detailCourse; ?></td>
+        </tr>
+        <tr class="row_9 odd">
+            <td class="label"><?= $this->langDepartment; ?></td>
+            <td class="value"><?= $this->detailDepartment; ?></td>
+        </tr>
+        <tr class="row_10 even">
+            <td class="label"><?= $this->langChipcardNr; ?></td>
+            <td class="value"><?= $this->detailChipcardNr; ?></td>
+        </tr>
+        <tr class="row_11 odd">
+            <td class="label"><?= $this->langContact; ?></td>
+            <td class="value"><?= $this->detailContactPerson; ?></td>
+        </tr>
+        <tr class="row_12 even">
+            <td class="label"><?= $this->langHandicaps; ?></td>
+            <td class="value">
+                <?php
+                for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
+                    echo $this->detailHandicaps[$i];
+                    if ($i != (sizeof($this->detailHandicaps) - 1)) echo "; ";
+                }
+                ?>
+            </td>
+        </tr>
+        <tr class="row_13 odd">
+            <td class="label"><?= $this->langHandicapsOthers; ?></td>
+            <td class="value"><?= $this->detailHandicapsOthers; ?></td>
+        </tr>
+        <tr class="row_14 even">
+            <td class="label"><?= $this->langRehabDevices; ?></td>
+            <td class="value">
+                <?php
+                for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
+                    echo $this->detailRehabDevices[$i];
+                    if ($i != (sizeof($this->detailRehabDevices) - 1)) echo "; ";
+                }
+                ?>
+            </td>
+        </tr>
+        <tr class="row_15 odd">
+            <td class="label"><?= $this->langRehabDevicesOthers; ?></td>
+            <td class="value"><?= $this->detailRehabDevicesOthers; ?></td>
+        </tr>
+        <tr class="row_16 even">
+            <td class="label"><?= $this->langExtraTime; ?></td>
+            <td class="value"><?= $this->detailExtraTime; ?> <?= $this->detailExtraTimeUnit; ?></td>
+        </tr>
+        <?php
+        }
+    ?>
 
     </tbody>
 </table>

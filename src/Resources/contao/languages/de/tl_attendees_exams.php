@@ -20,7 +20,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['in_progress'] = ['In Bearbeitung', ''
 $GLOBALS['TL_LANG']['tl_attendees_exams']['confirmed'] = ['Anmeldung bestätigt', ''];
 
 //Benötigte Hilfsmittel
-$GLOBALS['TL_LANG']['tl_attendees_exams']['tl_attendees_exams']['rehab_devices'] = ['Benötigte Hilfsmittel', 'Bitte geben Sie an, welche Hilfsmittel für die Klausur benötigt werden'];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'] = ['Benötigte Hilfsmittel', 'Bitte geben Sie an, welche Hilfsmittel für die Klausur benötigt werden'];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['pc'] = 'PC';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['blind workspace'] = 'Blindenarbeitsplatz';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['Zoomtext'] = 'Zoomtext';

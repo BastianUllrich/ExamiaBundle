@@ -97,7 +97,6 @@ class ExamAdministrationModule extends \Module
         $this->import('Database');
 
         if ($_GET["orderBy"] == "dateDESC") {
-            //$result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date DESC")->query();
             $options = [
                 'order' => 'date DESC'
             ];
@@ -105,7 +104,6 @@ class ExamAdministrationModule extends \Module
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
 
         } else {
-            //$result = Database::getInstance()->prepare("SELECT id, date, begin, title, department FROM tl_exams ORDER BY date ASC")->query();
             $options = [
                 'order' => 'date ASC'
             ];
@@ -117,7 +115,6 @@ class ExamAdministrationModule extends \Module
 
         $i = 0;
         $examData = array();
-        //while ($result->next()) {
         foreach ($results as $result) {
             // Variablen für das Template setzen
             $examData[$i]['date'] = date("d.m.Y", $result->date);
@@ -247,10 +244,13 @@ class ExamAdministrationModule extends \Module
         // Andere Klausuren aus Datenbank holen (nur aktuelle)
         $timeNow = time();
         $id = $examDetails->id;
-        $result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $id AND date > $timeNow")->query();
+
+        $results = ExamsModel::findBy(['id <> ?', 'date > ?'], [$id, $timeNow]);
+        //$result = Database::getInstance()->prepare("SELECT * FROM tl_exams WHERE id <> $id AND date > $timeNow")->query();
         $i = 0;
         $examFromData = array();
-        while ($result->next()) {
+        foreach ($results as $result) {
+        //while ($result->next()) {
             // Variablen für das Template setzen
             $examFromData[$i]['id'] = $result->id;
             $examFromData[$i]['title'] = $result->title;
@@ -268,11 +268,14 @@ class ExamAdministrationModule extends \Module
 
         /* Verhindern, dass ein Teilnehmer doppelt eingetragen wird */
         // Alle Teilnehmer der "alten" Klausur heraussuchen
-        $getAttendeeFromExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineFromId")->query();
-        while ($getAttendeeFromExam->next()) {
+        $getAttendeesFromExam = AttendeesExamsModel::findBy(['exam_id = ?'], [$combineFromId]);
+        //$getAttendeeFromExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineFromId")->query();
+        foreach ($getAttendeesFromExam as $getAttendeeFromExam) {
+        //while ($getAttendeeFromExam->next()) {
             $attendeeIdFromExam = $getAttendeeFromExam->attendee_id;
             // Ist dieser Teilnehmer in der "neuen" Klausur vorhanden?
-            $getAttendeesToExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineToId AND attendee_id=$attendeeIdFromExam")->query();
+            $getAttendeesToExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$combineToId, $attendeeIdFromExam]);
+            //$getAttendeesToExam = Database::getInstance()->prepare("SELECT * FROM tl_attendees_exams WHERE exam_id=$combineToId AND attendee_id=$attendeeIdFromExam")->query();
             $attendeeIdToExam = $getAttendeesToExam->attendee_id;
             // Wenn der Teilnehmer schon vorhanden ist, wird er aus der "alten" Klausur gelöscht
             if (!empty($attendeeIdToExam)) {

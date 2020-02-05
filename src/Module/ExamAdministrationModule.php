@@ -92,6 +92,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->linkTitleBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'];
 
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
+        $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
 
         // Daten der Klausuren aus der Datenbank laden, je nach Sortierung -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
@@ -454,7 +455,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->imgAltViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewAttendeeDetails'];
         $this->Template->imgAltEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendeeDetails'];
         $this->Template->imgAltDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteAttendee'];
-        
+
         $this->Template->linkTitleViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewAttendeeDetails'];
         $this->Template->linkTitleEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendeeDetails'];
         $this->Template->linkTitleDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'];

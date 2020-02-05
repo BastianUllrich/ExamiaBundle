@@ -95,6 +95,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'] = "Die Teil
 $GLOBALS['TL_LANG']['miscellaneous']['action'] = "Aktion";
 
 $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'] = "Raumplan anzeigen";
+$GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'] = "Öffnet eine Seite mit dem Raumplan des BliZ";
 
 $GLOBALS['TL_LANG']['miscellaneous']['date'] = "Datum";
 $GLOBALS['TL_LANG']['miscellaneous']['details'] = "Details";

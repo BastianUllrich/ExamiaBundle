@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationYes'] = 'Ja, Klausur
 $GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationNo'] = 'Nein, nicht löschen';
 $GLOBALS['TL_LANG']['miscellaneous']['deletionExamSuccessful'] = 'Die Klausur wurde erfolgreich gelöscht.';
 
+$GLOBALS['TL_LANG']['miscellaneous']['administrateMembers'] = "Mitglieder verwalten";
 $GLOBALS['TL_LANG']['miscellaneous']['editMember'] = "Mitgliedsdetails bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['editExamDetails'] = "Klausur bearbeiten";
 $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'] = "Änderungen speichern";
@@ -128,3 +129,22 @@ $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'] = "Folgendes Mitg
 $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'] = "Abmeldung von einer Klausur";
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'] = "Sie haben sich erfolgreich von nachfolgender Klausur im BliZ abgemeldet:";
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'] = "Folgendes Mitglied hat sich von nachfolgender Klausur im BliZ abgemeldet:";
+
+// Image Alternatives
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltViewMemberDetails'] = "Mitgliedsdetails anzeigen";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltEditMemberDetails'] = "Mitglied bearbeiten";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltActivateMember'] = "Mitglied aktivieren";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltDeactivateMember'] = "Mitglied deaktivieren";
+$GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteMember'] = "Mitglied löschen";
+
+// Link Titles
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewMemberDetails'] = "Zeigt eine Liste mit Mitgliedsdetails an";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditMemberDetails'] = "Öffnet ein Formular zum Bearbeiten der Mitgliedsdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'] = "Aktiviert das Mitglied";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'] = "Deaktiviert das Mitglied";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'] = "Löscht das Mitglied";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'] = "Löschen bestätigen und zurück zur Mitgliedsverwaltung";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'] = "Ohne löschen zurück zur Mitgliedsverwaltung";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "Führt zurück zur Mitgliedsverwaltung";

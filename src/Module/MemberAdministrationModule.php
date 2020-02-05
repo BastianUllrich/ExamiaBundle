@@ -55,6 +55,33 @@ class MemberAdministrationModule extends \Module
         $objUser = FrontendUser::getInstance();
         $this->Template->userID = $objUser->id;
 
+        // Sprachvariablen für das Template setzen
+        $this->Template->langAdministrateMembers = $GLOBALS['TL_LANG']['miscellaneous']['administrateMembers'];
+
+        $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
+        $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
+        $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
+        $this->Template->langUsertype = $GLOBALS['TL_LANG']['tl_member']['usertype'][0];
+        $this->Template->langAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
+
+        $this->Template->imgAltViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewMemberDetails'];
+        $this->Template->imgAltEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditMemberDetails'];
+        $this->Template->imgAltActivateMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltActivateMember'];
+        $this->Template->imgAltDeactivateMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeactivateMember'];
+        $this->Template->imgAltDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteMember'];
+
+
+        $this->Template->linkTitleViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkAltViewMemberDetails'];
+        $this->Template->linkTitleEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkAltEditMemberDetails'];
+        $this->Template->linkTitleActivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'];
+        $this->Template->linkTitleDeactivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'];
+        $this->Template->linkTitleDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'];
+
+        $this->Template->linkTitleDeleteMemberConfirmYes = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'];
+        $this->Template->linkTitleDeleteMemberConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberNo'];
+
+        $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];
+
         // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
         $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC, usertype ASC")->query();

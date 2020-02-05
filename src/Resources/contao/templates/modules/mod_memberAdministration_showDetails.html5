@@ -64,7 +64,7 @@
             <?php
             for ($i = 0; $i < sizeof($this->detailHandicaps); $i++) {
                 echo $this->detailHandicaps[$i];
-                if ($i != (sizeof($this->detailHandicaps) - 1) echo "; ";
+                if ($i != (sizeof($this->detailHandicaps) - 1)) echo "; ";
             }
             ?>
         </td>
@@ -79,7 +79,7 @@
             <?php
             for ($i = 0; $i < sizeof($this->detailRehabDevices); $i++) {
                 echo $this->detailRehabDevices[$i];
-                if ($i != (sizeof($this->detailRehabDevices) - 1) echo "; ";
+                if ($i != (sizeof($this->detailRehabDevices) - 1)) echo "; ";
             }
             ?>
         </td>

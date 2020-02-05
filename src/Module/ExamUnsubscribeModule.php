@@ -96,6 +96,9 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
         $this->Template->langUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribe'];
 
+        $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
+        $this->Template->linkTitleBackToUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToUnsubscribe'];
+
         // Von Klausur abmelden
         if ($_GET["do"] == "unsubscribe") {
             $exam_id = $_GET["exam"];
@@ -152,13 +155,11 @@ class ExamUnsubscribeModule extends \Module
                         // Rückmeldung geben, dass die Abmeldung erfolgreich war
                         $this->Template->unsubscribtionSuccessful = true;
                         $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
-                        $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                     }
                 }
                 else {
                     $this->Template->unsubscribtionSuccessful = true;
                     $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['noExamFound'];
-                    $this->Template->linkBackToUnsubscribeText = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
                 }
             }
             elseif ($_GET["confirmed"] == "no") {

@@ -67,6 +67,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];
         $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
         $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
+        $this->Template->linkTitleShowExamDateDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'];
+        $this->Template->linkTitleDeleteSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
 
         if ($_GET["do"] == "showDetails") {
             $this->showDetails();
@@ -105,6 +107,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langAssistant = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistant'];
         $this->Template->langDoAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'];
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
+        $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
         $startTime = $_GET["date"];
         $endTime = $startTime + 86399;

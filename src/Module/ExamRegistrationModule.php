@@ -97,6 +97,9 @@ class ExamRegistrationModule extends \Module
         $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
+        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
+        $this->Template->linkTitleGoToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverviewLinkTitle'];
+
         // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
             // Funktion zum Eintrag in die Datenbank aufrufen, mit Entitäten des Mitglieds für die Tabelle "tl_attendees_exams" (Zuweisung Klausur - Mitglied)
@@ -186,21 +189,18 @@ class ExamRegistrationModule extends \Module
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];
-        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 
     // Funktion gibt Meldung aus, wenn Formular doppelt abgesandt wurde
     public function submittedDouble() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['anotherExamSameTimeFound'];
-        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 
     // Funktion gibt Meldung aus, wenn Klausur in Vergangenheit ist
     public function examInPast() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examInPast'];
-        $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
     }
 
     // Mailversand

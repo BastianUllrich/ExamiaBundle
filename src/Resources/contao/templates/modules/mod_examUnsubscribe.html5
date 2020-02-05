@@ -57,7 +57,7 @@ elseif ($this->showConfirmationQuestion === true) {
     else {
         ?>
         <p><strong><?= $this->unsubscribtionSuccessfulMessage; ?></strong></p>
-        <p><a href="klausurverwaltung/von-klausur-abmelden.html" title="<?= $this->linkBackToUnsubscribeText; ?>"><?= $this->linkBackToUnsubscribeText; ?></a></p>
+        <p><a href="klausurverwaltung/von-klausur-abmelden.html" title="<?= $this->linkTitleBackToUnsubscribe; ?>"><?= $this->linkBackToUnsubscribeText; ?></a></p>
         <?php
     }
 }

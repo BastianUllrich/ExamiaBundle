@@ -151,7 +151,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendeeDetails'] = "Teilnehmer 
 $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteAttendee'] = "Teilnehmer löschen";
 
 // Link Titles
-$GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewExamDetails'] = "Zeigt eine Liste mit Klausurdetails an";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewExamDetails'] = "Öffnet eine Liste mit den Klausurdetails";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditExamDetails'] = "Öffnet ein Formular zum Bearbeiten der Klausurdetails";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendees'] = "Öffnet eine Liste mit den Klausur-Teilnehmer";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleCombineExams'] = "Öffnet ein Formular zum Zusammenlegen von zwei Klausuren";
@@ -163,9 +163,16 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "F
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewAttendeeDetails'] = "Zeigt eine Liste mit dem Details des Teilnehmers an";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendeeDetails'] = "Öffnet ein Formular zum Bearbeiten des Teilnehmers";
-$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'] = "Löscht den Teilnehmer";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'] = "Entfernt den Teilnehmer von der Klausur";
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmYes'] = "Löschen bestätigen und zurück zur Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmNo'] = "Ohne löschen zurück zur Klausurverwaltung";
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'] = "Führt zurück zur Klausurverwaltung";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleGoToExamsOverview'] = "Führt zurück zur Übersicht über die angemeldeten Klausuren";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToUnsubscribe'] = 'Führt zurück zur Klausurabmeldung';
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'] = 'Führt zurück zur Aufsichtsverwaltung';
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Klausurdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht von der Klausur";

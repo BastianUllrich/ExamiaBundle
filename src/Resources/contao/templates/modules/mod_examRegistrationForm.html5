@@ -113,7 +113,7 @@ else {
         <?= $this->submittedMessageStatus; ?>
     </p>
     <p>
-        <a href="klausurverwaltung/angemeldete-klausuren.html" title="<?= $this->goToExamsOverview; ?>"><?= $this->goToExamsOverview; ?></a>
+        <a href="klausurverwaltung/angemeldete-klausuren.html" title="<?= $this->linkTitleGoToExamsOverview; ?>"><?= $this->goToExamsOverview; ?></a>
     </p>
     <?php
 }

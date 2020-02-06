@@ -158,6 +158,12 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendees'] = "Öffnet eine L
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleCombineExams'] = "Öffnet ein Formular zum Zusammenlegen von zwei Klausuren";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExam'] = "Löscht die Klausur";
 
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewMemberDetails'] = "Öffnet eine Liste mit den Mitgliedsdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditMemberDetails'] = "Öffnet ein Formular zum Bearbeiten der Mitgliedsdetails";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'] = "Aktiviert das Mitglied";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'] = "Deaktiviert das Mitglied";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'] = "Löscht das Mitglied";
+
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'] = "Löschen bestätigen und zurück zur Mitgliedsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'] = "Ohne löschen zurück zur Mitgliedsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'] = "Führt zurück zur Mitgliedsverwaltung";

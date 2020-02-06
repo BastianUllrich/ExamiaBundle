@@ -59,7 +59,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_2"><?= $examData['begin']; ?></td>
                 <td class="body col_3"><?= $examData['duration']; ?></td>
                 <td class="body col_4"><?= $examData['maxEndTime']; ?></td>
-                <td class="body col_5 col_last"><a href="{{env::request}}&show=attendees&examid=<?= $examData['id']; ?>" title="<?= $this->langShowExamDetails; ?>"><?= $this->langShowExamDetails; ?></a></td>
+                <td class="body col_5 col_last"><a href="{{env::request}}&show=attendees&examid=<?= $examData['id']; ?>" title="<?= $this->linkTitleShowAttendees; ?>"><?= $this->langShowAttendeeDetails; ?></a></td>
             </tr>
             <?php
             $i++;

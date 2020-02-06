@@ -109,7 +109,8 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langDuration = $GLOBALS['TL_LANG']['tl_exams']['exam_reg_duration'];
         $this->Template->langLatestEnding = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->dateReadable = date("d.m.Y", $detailsDate);
-        $this->Template->langShowExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'];
+        $this->Template->langShowAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'];
+        $this->Template->linkTitleShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'];
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
         $this->Template->langBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'];
 
@@ -186,9 +187,11 @@ class SupervisorOverviewModule extends \Module
         while ($result->next()) {
             // Variablen für das Template setzen
             if (empty($result->seat)) {
-                $attendeeData[$i]['seat'] = "no_seat";
+                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams']["no_seat"];
             }
-            $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+            else {
+                $attendeeData[$i]['seat'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
+            }
             $rehab_tools = unserialize($result->rehab_devices);
             for ($j=0; $j<sizeof($rehab_tools); $j++) {
                 $rehab_tools[$j] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$rehab_tools[$j]];

@@ -112,7 +112,7 @@ $GLOBALS['TL_LANG']['tl_member']['own room'] = 'Eigener Raum';
 
 $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'] = array
         (
-                'Sonstigte Hilfsmittel',
+                'Sonstige Hilfsmittel',
                 'Bitte geben Sie an, welche sonstigen Hilfsmittel für die Klausur benötigt werden'
         );
 

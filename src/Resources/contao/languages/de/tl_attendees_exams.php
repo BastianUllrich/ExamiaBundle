@@ -35,7 +35,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['own room'] = 'Eigener Raum';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['different'] = 'Sonstige';
 
 //Andere Hilfsmittel
-$GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'] = ['Sonstigte Hilfsmittel', 'Bitte geben Sie an, welche sonstigen Hilfsmittel für die Klausur benötigt werden'];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'] = ['Sonstige Hilfsmittel', 'Bitte geben Sie an, welche sonstigen Hilfsmittel für die Klausur benötigt werden'];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_assistant'] = 'Sonstige Hilfsmittel / Schreibassistenz';
 
 //Schreibassistenz

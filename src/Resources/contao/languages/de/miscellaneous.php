@@ -62,6 +62,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'] = "Klausurverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['examDetails'] = "Klausurdetails";
 $GLOBALS['TL_LANG']['miscellaneous']['showExamDetails'] = "Klausurdetails anzeigen";
 
+
 $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'] = "Teilnehmer anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'] = "Teilnehmerdetails anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'] = "Teilnehmer bearbeiten";
@@ -176,3 +177,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'] 
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Details zum gewählten Tag";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht vom gewählten Tag";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'] = "Zeigt eine Liste mit den Teilnehmern an";

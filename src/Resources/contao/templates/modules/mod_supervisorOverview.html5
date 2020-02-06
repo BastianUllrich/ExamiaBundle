@@ -74,7 +74,7 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
-        <p><a href="klausurverwaltung/übersicht-für-aufsichten.html" title="<?= $this->langBackToSupervisorOverview; ?>"><?= $this->langBackToSupervisorOverview; ?></a></p>
+        <p><a href="klausurverwaltung/übersicht-für-aufsichten.html" title="<?= $this->linkTitleBackToSupervisorOverview; ?>"><?= $this->langBackToSupervisorOverview; ?></a></p>
         <?php
     }
     if ($this->showAttendeeDetails === true) {

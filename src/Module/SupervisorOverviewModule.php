@@ -114,6 +114,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->linkTitleShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'];
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
         $this->Template->langBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'];
+        $this->Template->linkTitleBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorOverview'];
 
         // Klausurenabfrage
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration

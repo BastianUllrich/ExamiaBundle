@@ -39,7 +39,7 @@ elseif ($this->showDetails === true) {
     if ($this->showAttendeeDetails === false) {
         $i = 0;
         ?>
-        <p><strong><?= $this->langExams; ?> - <?= $this->dateReadable; ?></strong></p>
+        <h3><?= $this->langExams; ?> - <?= $this->dateReadable; ?></h3>
         <table class="all_records">
             <thead>
             <tr>
@@ -80,7 +80,7 @@ elseif ($this->showDetails === true) {
     if ($this->showAttendeeDetails === true) {
         $i = 0;
         ?>
-        <p><strong><?= $this->langAttendeeDetails; ?></strong></p>
+        <h3><?= $this->langAttendeeDetails; ?></h3>
         <table class="all_records">
             <thead>
             <tr>

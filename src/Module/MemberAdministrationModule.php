@@ -1,11 +1,13 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\ExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 
 
 class MemberAdministrationModule extends \Module
@@ -211,9 +213,21 @@ class MemberAdministrationModule extends \Module
                         foreach ($examIDs as $exam_id) {
                             $exID = $exam_id['exam_id'];
                             $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
-                            // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
+                            // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
                                 $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
+                                
+                                // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
+                                $examDate = $getAttendeesExam->date;
+                                $examDateReadable = date("d.m.Y", $examDate);
+                                $examDateFrom = strtotime($examDateReadable);
+                                $examDateTo = $examDateFrom+86399;
+                                // Anzahl der Klausuren des Tages heraussuchen -> Falls 0, wird die Aufsichtsverteilung entfernt
+                                $examsAtDate = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
+                                if ($examsAtDate == 0) {
+                                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date=$examDateFrom")->execute()->affectedRows;
+                                }
+
                             }
                         }
                     }

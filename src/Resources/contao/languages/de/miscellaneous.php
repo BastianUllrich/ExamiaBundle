@@ -178,4 +178,5 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'] 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Details zum gewählten Tag";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht vom gewählten Tag";
 
-$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'] = "Zeigt eine Liste mit den Teilnehmern an";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamsDetails'] = "Öffnet eine Liste mit den Klausuren des gewählten Tags";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'] = "Öffnet eine Liste mit den Klausur-Teilnehmern";

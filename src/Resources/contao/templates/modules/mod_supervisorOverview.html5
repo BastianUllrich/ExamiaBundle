@@ -25,7 +25,7 @@ if ($this->showDetails === false && $this->showAttendeeDetails === false) {
                 <td class="body col_1"><?= $supervisorData['begin']; ?></td>
                 <td class="body col_2"><?= $supervisorData['end']; ?></td>
                 <td class="body col_3"><?= $supervisorData['task']; ?></td>
-                <td class="body col_4 col_last"><a href="{{env::request}}?do=showDetails&date=<?= $supervisorData['time']; ?>" title="<?= $this->langShowDetails; ?>"><?= $this->langShowDetails; ?></a></td>
+                <td class="body col_4 col_last"><a href="{{env::request}}?do=showDetails&date=<?= $supervisorData['time']; ?>" title="<?= $this->linkTitleShowExamsDetails; ?>"><?= $this->langShowDetails; ?></a></td>
             </tr>
             <?php
             $i++;

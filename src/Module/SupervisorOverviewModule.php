@@ -85,6 +85,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
         $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
+        $this->Template->linkTitleShowExamsDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamsDetails'];
 
         if ($_GET["do"] == "showDetails") {
             $detailsDate = $_GET["date"];

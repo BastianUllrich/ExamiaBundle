@@ -78,7 +78,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->linkTitleDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'];
 
         $this->Template->linkTitleDeleteMemberConfirmYes = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'];
-        $this->Template->linkTitleDeleteMemberConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberNo'];
+        $this->Template->linkTitleDeleteMemberConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'];
 
         $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];
 

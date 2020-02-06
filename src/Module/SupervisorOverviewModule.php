@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -54,6 +55,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->showAttendeeDetails = false;
 
         // Alle Klausurdaten laden, die der Person zugeordenet sind und ab dem aktuellen Tag um Mitternacht gelten, gruppiert nach Datum und Aufgabe, sortiert nach Datum
+        // Aufgrund der Gruppierung nicht über Model / Collection
         $todayMidnight = strtotime(date("d.m.Y"));
         $result = Database::getInstance()->prepare("SELECT date, time_from, time_until, task
                                                     FROM tl_supervisors_exams 
@@ -69,6 +71,8 @@ class SupervisorOverviewModule extends \Module
             // Variablen für das Template setzen
             $supervisorData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $supervisorData[$i]['time'] = $result->date;
+            // Beginn & Ende der Aufsicht/Schreibassistenz aus Datenbank lesen
+            // Aufgrund der speziellen Abfrage nicht über Model / Collection
             $min_time_question = Database::getInstance()->prepare("SELECT MIN(time_from) AS 'mintime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date AND task = '$result->task'")->query();
             $max_time_question = Database::getInstance()->prepare("SELECT MAX(time_until) AS 'maxtime' FROM tl_supervisors_exams WHERE supervisor_id = $userID AND date = $result->date AND task = '$result->task'")->query();
             $supervisorData[$i]['begin'] = $min_time_question->mintime;
@@ -117,6 +121,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->linkTitleBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorOverview'];
 
         // Klausurenabfrage
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration
                                                     FROM tl_exams 
                                                     WHERE date
@@ -134,19 +139,21 @@ class SupervisorOverviewModule extends \Module
             $examData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['duration'] = $result->duration;
+            // Anzahl der Teilnehmer aus Datenbank abfragen
+            // Aufgrund der speziellen Abfrage nicht über Model / Collection
             $numberOfAttendees = Database::getInstance()->prepare("SELECT COUNT(*) AS 'nrOfAttendees' FROM tl_attendees_exams WHERE exam_id = $result->id")->query();
             $examData[$i]['nrOfAttendees']  = $numberOfAttendees->nrOfAttendees;
 
             // Maximale Dauer in Minuten berechnen
-            $endTimeQuestion = Database::getInstance()->prepare("SELECT extra_time, extra_time_minutes_percent FROM tl_attendees_exams WHERE exam_id=$result->id")->query();
+            $endTimeQuestion = AttendeesExamsModel::findBy("exam_id", $result->id);
             $i = 0;
             $maxDuration = $result->duration;
-            while ($endTimeQuestion->next()) {
-                if ($endTimeQuestion->extra_time_minutes_percent == "percent") {
-                    $multiplicator = 1 + ($endTimeQuestion->extra_time / 100);
+            foreach ($endTimeQuestion as $endTime) {
+                if ($endTime->extra_time_minutes_percent == "percent") {
+                    $multiplicator = 1 + ($endTime->extra_time / 100);
                     $duration = ($result->duration) * $multiplicator;
-                } elseif ($endTimeQuestion->extra_time_minutes_percent == "minutes") {
-                    $duration = ($result->duration) + $endTimeQuestion->extra_time;
+                } elseif ($endTime->extra_time_minutes_percent == "minutes") {
+                    $duration = ($result->duration) + $endTime->extra_time;
                 }
                 if ($duration > $maxDuration) {
                     $maxDuration = $duration;
@@ -175,6 +182,7 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langEndTime = $GLOBALS['TL_LANG']['miscellaneous']['endTime'];
 
         // Klausurabfrage
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT tl_exams.title, tl_exams.begin, tl_attendees_exams.seat, tl_exams.duration, tl_exams.date,
                                                     tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others,  
                                                     tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent

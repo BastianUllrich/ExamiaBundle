@@ -34,7 +34,7 @@
         </td>
     </tr>
     <tr class="row_6 even">
-        <td class="label"><?= $this->langRehabDevicesOthersAssistant; ?></td>
+        <td class="label"><?= $this->langRehabDevicesOthers; ?></td>
         <td class="value"><?= $this->rehabDevicesOthers; ?></td>
     </tr>
     <tr class="row_7 odd">

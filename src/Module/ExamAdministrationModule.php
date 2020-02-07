@@ -295,6 +295,7 @@ class ExamAdministrationModule extends \Module
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
         $getAttendeesFromExam->exam_id = $combineToId;
         if ($getAttendeesFromExam->save()) {
+            // "Alte" Klausur löschen
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;
             $this->Template->combinationSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['combinationSavedSavedMessage'];
@@ -336,7 +337,7 @@ class ExamAdministrationModule extends \Module
         $maxEndTimeReadable = date("H:i", $maxEndTime);
         $this->Template->detailMaxEndtime = $maxEndTimeReadable;
 
-            // Dozentendaten zusammensetzen
+        // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_prename;
@@ -715,7 +716,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
         $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
 
-        $this->Template->langRehabDevicesOthersAssistant = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others_assistant'];
+        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
         $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];

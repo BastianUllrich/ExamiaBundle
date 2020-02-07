@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -145,10 +146,10 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->dateReadable = date("d.m.Y", $startTime);
 
         // Datenbankabfrage alle Aufsichten
-        $result = Database::getInstance()->prepare("SELECT id, firstname, lastname FROM tl_member WHERE usertype='Aufsicht'")->query();
+        $results = MemberModel::findBy('usertype', 'Aufsicht');
         $i = 0;
         $supervisorUser = array();
-        while ($result->next()) {
+        foreach ($results as $result) {
             $supervisorUser[$i]["id"] = $result->id;
             $supervisorUser[$i]["firstname"] = $result->firstname;
             $supervisorUser[$i]["lastname"] = $result->lastname;

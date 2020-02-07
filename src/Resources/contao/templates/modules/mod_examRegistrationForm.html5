@@ -83,7 +83,7 @@
                 <label for="exam_begin" class="mandatory">
                     <span class="invisible"><?= $this->mandatory; ?></span><?= $this->exam_begin_label; ?><span class="mandatory">*</span>
                 </label>
-                <input type="text" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
+                <input type="time" name="exam_begin" id="exam_begin" class="text mandatory" value="" required="" maxlength="10" autocomplete="on">
             </div>
             <div class="widget widget-text">
                 <label for="exam_duration"><?= $this->exam_duration_label; ?></label>

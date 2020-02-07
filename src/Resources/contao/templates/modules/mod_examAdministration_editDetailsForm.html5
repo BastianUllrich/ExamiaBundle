@@ -29,12 +29,10 @@
             <input type="time" name="begin" id="begin" class="text mandatory" value="<?= $this->begin; ?>" required="" autocomplete="on">
         </div>
         <div class="widget widget-text mandatory">
-            <label for="regularDuration" class="mandatory">
-                <span class="invisible"><?= $this->mandatory; ?></span>
+            <label for="regularDuration">
                 <?= $this->langRegularDurationLong; ?>
-                <span class="mandatory">*</span>
             </label>
-            <input type="text" name="regularDuration" id="regularDuration" class="text mandatory" value="<?= $this->regularDuration; ?>" required="" maxlength="3" autocomplete="on">
+            <input type="text" name="regularDuration" id="regularDuration" class="text" value="<?= $this->regularDuration; ?>" maxlength="3" autocomplete="on">
         </div>
 
         <div class="widget widget-select select mandatory">
@@ -114,12 +112,10 @@
                 <input type="text" name="lecturerLastname" id="lecturerLastname" class="text mandatory" value="<?= $this->lecturerLastname; ?>" required="" maxlength="255" autocomplete="on">
             </div>
             <div class="widget widget-text">
-                <label for="lecturerEmail" class="mandatory">
-                    <span class="invisible"><?= $this->mandatory; ?> </span>
+                <label for="lecturerEmail">
                     <?= $this->langLecturerEmail; ?>
-                    <span class="mandatory">*</span>
                 </label>
-                <input type="email" name="lecturerEmail" id="lecturerEmail" class="text mandatory" value="<?= $this->lecturerEmail; ?>" required="" maxlength="255" autocomplete="on">
+                <input type="email" name="lecturerEmail" id="lecturerEmail" class="text" value="<?= $this->lecturerEmail; ?>" maxlength="255" autocomplete="on">
             </div>
             <div class="widget widget-text">
                 <label for="lecturerMobile">

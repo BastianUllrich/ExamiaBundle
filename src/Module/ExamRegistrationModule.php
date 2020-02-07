@@ -120,7 +120,7 @@ class ExamRegistrationModule extends \Module
         $exam_date = \Input::post('exam_date');
         $exam_begin = \Input::post('exam_begin');
         $exam_duration = \Input::post('exam_duration');
-        if (empty($exam_duration)) {
+        if (empty($exam_duration) || !is_numeric($exam_duration)) {
             $exam_duration = 0;
         }
         $tools = \Input::post('tools');

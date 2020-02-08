@@ -527,7 +527,7 @@ class ExamAdministrationModule extends \Module
         }
     }
 
-    // Teilnehmer anzeigen
+    // Alle Klausurteilnehmer anzeigen
     public function showAttendeeList($exam)
     {
         $examData = ExamsModel::findBy('id', $exam);
@@ -561,11 +561,13 @@ class ExamAdministrationModule extends \Module
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
                 $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
-                $assistantData = MemberModel::findBy('id', $supervisorsExamData->id);
-                $assistant = $assistantData->firstname;
-                $assistant .= " ";
-                $assistant .= $assistantData->lastname;
-                $attendeeData[$i]['writingAssistance'] = $assistant;
+                while ($supervisorsExamData->next()) {
+                    $assistantData = MemberModel::findBy('id', $supervisorsExamData->id);
+                    $assistant = $assistantData->firstname;
+                    $assistant .= " ";
+                    $assistant .= $assistantData->lastname;
+                    $attendeeData[$i]['writingAssistance'] = $assistant;
+                }
             }
         }
         $this->Template->attendeeDataList = $attendeeData;

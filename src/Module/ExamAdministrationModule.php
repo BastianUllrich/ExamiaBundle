@@ -616,6 +616,7 @@ class ExamAdministrationModule extends \Module
     public function saveAttendeeChanges($examID, $attendeeID) {
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
         $id = $attendeeExam->id;
+        $ae_id = $id;
 
         $addSupervisor = false;
         $deleteSupervisor = false;
@@ -637,13 +638,10 @@ class ExamAdministrationModule extends \Module
         $writingAssistance_explode = explode('|', $writingAssistance);
         $assistantID = $writingAssistance_explode[0];
         $supervisors_exams_ID = $writingAssistance_explode[1];
-        $attendeeExam->assistant_id = $supervisors_exams_ID;
 
         // Die ID der Schreibassistenz in einer Variable speichern, um sie aktualisieren oder aus der Tabelle löschen zu können
         $supervisorData = SupervisorsExamsModel::findBy('id', $attendeeExam->supervisor_id);
         $actualSupervisorID = $supervisorData->id;
-
-        if (empty($actualSupervisorID)) $actualSupervisorID=0;
 
         if ($actualSupervisorID == 0 && $assistantID <> 0) {
             $addSupervisor = true;
@@ -686,15 +684,26 @@ class ExamAdministrationModule extends \Module
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
                 // Eintrag in Tabelle "tl_supervisors_exams" vornehmen
                 $this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute();
+                // Eingetragene ID herausfinden und in Eintrag von tl_attendees_exams eintragen
+                $latestSupervisorsExamsData = Database::getInstance()->prepare("SELECT MAX(id) AS latestID FROM tl_supervisors_exams")->query();
+                $latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
+                $set = array('supervisor_id' => $latestSupervisorsExamsID);
+                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$actualSupervisorID")->execute()->affectedRows;
+                // Eintrag in tl_attendees_exams aktualisieren
+                $set = array('supervisor_id' => 0);
+                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
                 $this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
+                // Eintrag in tl_attendees_exams aktualisieren
+                $set = array('supervisor_id' => $actualSupervisorID);
+                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
 
             $this->Template->attendeeChangesSaved = true;

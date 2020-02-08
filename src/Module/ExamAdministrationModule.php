@@ -687,14 +687,14 @@ class ExamAdministrationModule extends \Module
                 // Eingetragene ID herausfinden und in Eintrag von tl_attendees_exams eintragen
                 $latestSupervisorsExamsData = Database::getInstance()->prepare("SELECT MAX(id) AS latestID FROM tl_supervisors_exams")->query();
                 $latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
-                $set = array('supervisor_id' => $latestSupervisorsExamsID);
+                $set = array('assistant_id' => $latestSupervisorsExamsID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$actualSupervisorID")->execute()->affectedRows;
                 // Eintrag in tl_attendees_exams aktualisieren
-                $set = array('supervisor_id' => 0);
+                $set = array('assistant_id' => 0);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz aktualisieren
@@ -702,7 +702,7 @@ class ExamAdministrationModule extends \Module
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
                 $this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
                 // Eintrag in tl_attendees_exams aktualisieren
-                $set = array('supervisor_id' => $actualSupervisorID);
+                $set = array('assistant_id' => $actualSupervisorID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
 

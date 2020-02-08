@@ -59,8 +59,10 @@ class SupervisorAdministrationModule extends \Module
         $i=0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $examsData[$i]['dateReadable'] = date("d.m.Y", $result->date);
-            $examsData[$i]['time'] = $result->date;
+            $examDateReadable = date("d.m.Y", $result->date);
+            $examsData[$i]['dateReadable'] = $examDateReadable;
+            $examDateTimeStamp = strtotime($examDateReadable);
+            $examsData[$i]['time'] = $examDateTimeStamp;
             $i++;
         }
         $this->Template->examsDataList = $examsData;

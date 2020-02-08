@@ -51,16 +51,12 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'supervisor_id' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['supervisor_id'],
             'inputType' => 'select',
-	        //Optionen aus Funktion getAttendee() holen
-            'options_callback' => ['tl_supervisors_exams', 'getSupervisor'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'default' => 0]
         ],
         'date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'],
             'inputType' => 'select',
-	        //Optionen aus Funktion getExam() holen
-            'options_callback' => ['tl_supervisors_exams', 'getExamDate'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'length' => 10, 'default' => 0]
         ],
@@ -88,43 +84,5 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'default' => 'supervisor_id,date,time_from,time_until,task'
     ],
 ];
-
-class tl_supervisors_exams extends Backend
-{
-
-    // Alle Infos für Select-Box "Aufsicht" sammeln
-    public function getSupervisor()
-    {
-        $array = array();
-        $this->import('Database');
-        $result = Database::getInstance()->prepare("SELECT id, firstname, lastname FROM tl_member WHERE usertype='Aufsicht'")->query();
-        while ($result->next()) {
-            $nameset = $result->firstname;
-            $nameset .= ' ';
-            $nameset .= $result->lastname;
-            $array[$result->id] = $nameset;
-        }
-        return $array;
-    }
-
-    // Alle Infos für Select-Box "Klausur" sammeln
-    public function getExamDate()
-    {
-        $array = array();
-        $this->import('Database');
-        $result = Database::getInstance()->prepare("SELECT id, title, date, department, begin FROM tl_exams")->query();
-        while ($result->next()) {
-	    //Verkürzte Schreibweise für die Fachbereiche
-	    $nameset = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_supervisors_exams'][$result->department],0,5)));
-	    $nameset .= ', ';
-            $nameset .= date("d.m.Y", $result->date);
-            $nameset .= ' um ';
-            $nameset .= date("H:i", $result->begin);
-            $nameset .= ' Uhr';
-            $array[$result->id] = $nameset;
-        }
-        return $array;
-    }
-}
 ?>
 

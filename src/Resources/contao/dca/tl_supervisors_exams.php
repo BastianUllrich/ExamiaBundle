@@ -65,13 +65,13 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'time_from' => [
             'label' => $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'time', 'maxlength' => 10, 'mandatory' => true],
+            'eval' => ['maxlength' => 10, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 10, 'default' => '']
         ],
         'time_until' => [
             'label' => $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'time', 'maxlength' => 10, 'mandatory' => true],
+            'eval' => ['maxlength' => 10, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 10, 'default' => '']
         ],
         'task' => [

@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         'label' => [
             'fields' => ['title', 'date', 'status'],
             'format' => '%s',
-	    'showColumns' => true,
+	        'showColumns' => true,
         ],
         'operations' => [
             'edit' => [
@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'show' => [
                 'href' => 'act=show',
                 'icon' => 'show.svg',
-		'label' => &$GLOBALS['TL_LANG']['tl_exams']['show']
+		        'label' => &$GLOBALS['TL_LANG']['tl_exams']['show']
             ],
         ],
     ],

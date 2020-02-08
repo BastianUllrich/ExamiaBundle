@@ -17,12 +17,10 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [
-            'fields' => ['attendee_id:tl_member.firstname', 'attendee_id:tl_member.lastname', 'exam_id:tl_exams.title'],
-            //'fields' => ['firstname', 'lastname', 'title'],
-	    'format' => '%s',
-            'showColumns' => true,
-            //'label_callback' => ['tl_attendees_exams', 'getLabels']
-	],
+            'fields' => ['attendee_id', 'exam_id'],
+	        'format' => '%s',
+            'showColumns' => true
+	    ],
         'operations' => [
             'edit' => [
                 'href' => 'act=edit',

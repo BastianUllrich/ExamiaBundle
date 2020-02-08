@@ -49,7 +49,7 @@ $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'] = ['Titel', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'] = ['Vorname', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'] = ['Nachname', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'] = ['Hochschul-E-Mail-Adresse', ''];
-$GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'] = ['Handynummer (freiwillige Angabe)', ''];
+$GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'] = ['Handynummer', ''];
 
 $GLOBALS['TL_LANG']['tl_exams']['exam_legend'] = 'Angaben zur Klausur / Prüfung';
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'] = 'Angaben zum Dozenten';

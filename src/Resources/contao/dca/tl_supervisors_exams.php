@@ -17,7 +17,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [
-            'fields' => ['supervisor_id:tl_member.lastname', 'exam_id:tl_exams.date', 'task'],
+            'fields' => ['supervisor_id', 'exam_id', 'task'],
             'format' => '%s',
             'showColumns' => true,
         ],

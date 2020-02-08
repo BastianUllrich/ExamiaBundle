@@ -6,7 +6,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['edit'] = ['Zuweisung bearbeiten', 'Zu
 $GLOBALS['TL_LANG']['tl_attendees_exams']['delete'] = ['Zuweisung löschen', 'Zuweisung löschen'];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['show'] = ['Details anzeigen', 'Details anzeigen'];
 
-$GLOBALS['TL_LANG']['tl_supervisors_exams']['id'] = ['ID', ''];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['id'] = ['ID', ''];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['attendee_id'] = ['Teilnehmer-ID', ''];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['exam_id'] = ['Klausur-ID', ''];
 

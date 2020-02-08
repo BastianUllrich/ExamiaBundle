@@ -759,14 +759,13 @@ class ExamAdministrationModule extends \Module
         $i = 0;
         $writingAssistance = array();
         foreach ($supervisors as $supervisor) {
-            $writingAssistance[$i]["selected"] = "false";
+            $writingAssistance[$i]["selected"] = false;
             $writingAssistance[$i]["member_id"] = $supervisor->id;
             $writingAssistance[$i]["assistant_id"] = $result->assistant_id;
             $writingAssistance[$i]["firstname"] = $supervisor->firstname;
             $writingAssistance[$i]["lastname"] = $supervisor->lastname;
-
             $assistants = SupervisorsExamsModel::findBy('id', $result->assistant_id);
-            if ($supervisor->id == $assistants->supervisor_id) $writingAssistance[$i]["selected"] = "true";
+            if ($supervisor->id == $assistants->supervisor_id) $writingAssistance[$i]["selected"] = true;
 
             $i++;
         }

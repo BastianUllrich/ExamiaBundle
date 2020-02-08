@@ -17,7 +17,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [
-            'fields' => ['supervisor_id', 'exam_id', 'task'],
+            'fields' => ['id', 'supervisor_id', 'date', 'task'],
             'format' => '%s',
             'showColumns' => true,
         ],
@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         ],
     ],
     'palettes' => [
-        'default' => 'supervisor_id,exam_id,status,time_from,time_until,task'
+        'default' => 'supervisor_id,date,time_from,time_until,task'
     ],
 ];
 

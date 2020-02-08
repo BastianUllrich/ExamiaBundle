@@ -760,25 +760,14 @@ class ExamAdministrationModule extends \Module
         $this->Template->rehabDevicesOthers = $result->rehab_devices_others;
 
         // Aufsichten für Feld "Schreibassistenz" heraussuchen und in Array einsetzen
-        $results = MemberModel::findBy('usertype', 'Aufsicht');
+        $supervisors = MemberModel::findBy('usertype', 'Aufsicht');
         $i = 0;
         $writingAssistance = array();
-        foreach ($results as $result) {
-            /*
-            Für Selected und Wert für Aktualisierung / Löschung der Schreibassistenz in Tabelle tl_supervisors_exams
-            wird die tl_supervisor_exams.id anhand von Datum, Uhrzeit und Member-ID herausgesucht
-            Zuerst: timestamp der Klausur anpassen
-            */
-            $fullTimestampExam = $examData->date;
-            $dateStringExam = date("d.m.Y", $fullTimestampExam);
-            $dateTimestampExam = strtotime($dateStringExam);
-            $timeStringExam = date("H:i", $fullTimestampExam);
-            $se = SupervisorsExamsModel::findBy(['supervisor_id = ?', 'date = ?', 'time_from = ?', 'task = ?'], [$assistantID, $dateTimestampExam, $timeStringExam, 'Schreibassistenz']);
-
-            $writingAssistance[$i]["member_id"] = $result->id;
-            $writingAssistance[$i]["se_id"] = $se->id;;
-            $writingAssistance[$i]["firstname"] = $result->firstname;
-            $writingAssistance[$i]["lastname"] = $result->lastname;
+        foreach ($supervisors as $supervisor) {
+            $writingAssistance[$i]["member_id"] = $supervisor->id;
+            $writingAssistance[$i]["assistant_id"] = $result->assistant_id;;
+            $writingAssistance[$i]["firstname"] = $supervisor->firstname;
+            $writingAssistance[$i]["lastname"] = $supervisor->lastname;
             $i++;
         }
         $this->Template->writingAssistanceList = $writingAssistance;

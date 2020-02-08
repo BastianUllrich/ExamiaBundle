@@ -637,7 +637,7 @@ class ExamAdministrationModule extends \Module
         $writingAssistance_explode = explode('|', $writingAssistance);
         $assistantID = $writingAssistance_explode[0];
         $supervisors_exams_ID = $writingAssistance_explode[1];
-        $attendeeExam->assistant_id = $assistantID;
+        $attendeeExam->assistant_id = $supervisors_exams_ID;
 
         // Die ID der Schreibassistenz in einer Variable speichern, um sie aktualisieren oder aus der Tabelle löschen zu können
         $supervisorData = SupervisorsExamsModel::findBy('id', $attendeeExam->supervisor_id);

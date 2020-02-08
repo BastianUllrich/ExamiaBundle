@@ -655,7 +655,7 @@ class ExamAdministrationModule extends \Module
             /* Schreibassistenz in die Datenbank hinzufügen, aktualisieren oder löschen */
             $this->import('Database');
             // Klausurdatum & Uhrzeit holen
-            $examData = ExamsModel::findBy('exam_id', $examID);
+            $examData = ExamsModel::findBy('id', $examID);
             $fullTimestampExam = $examData->date;
             $dateStringExam = date("d.m.Y", $fullTimestampExam);
             $dateTimestampExam = strtotime($dateStringExam);

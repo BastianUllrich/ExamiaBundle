@@ -643,13 +643,13 @@ class ExamAdministrationModule extends \Module
         $supervisorData = SupervisorsExamsModel::findBy('id', $attendeeExam->supervisor_id);
         $actualSupervisorID = $supervisorData->id;
 
-        if (empty($actualSupervisorID) && $assistantID <> 0) {
+        if ($actualSupervisorID == 0 && $assistantID <> 0) {
             $addSupervisor = true;
         }
-        elseif (!empty($actualSupervisorID) && $assistantID == 0) {
+        elseif ($actualSupervisorID > 0 && $assistantID == 0) {
             $deleteSupervisor = true;
         }
-        else {
+        elseif ($actualSupervisorID > 0 && $assistantID <> 0) {
             $updateSupervisor = true;
         }
 

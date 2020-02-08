@@ -67,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         'begin' => [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['time_begin'],
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'time', 'maxlength' => 10, 'mandatory' => true],
+            'eval' => ['maxlength' => 10, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 10, 'default' => '']
         ],
         'duration' => [

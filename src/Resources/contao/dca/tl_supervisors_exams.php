@@ -43,6 +43,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
 
     'fields' => [
         'id' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['id'],
             'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
         ],
         'tstamp' => [
@@ -56,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         ],
         'date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'],
-            'inputType' => 'select',
+            'inputType' => 'date',
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'length' => 10, 'default' => 0]
         ],

@@ -535,7 +535,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->examID = $exam;
         $result = Database::getInstance()->prepare("SELECT
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
-                                                        tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices
+                                                        tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices,
+                                                        tl_attendees_exams.assistant_id
                                                         FROM tl_member, tl_exams, tl_attendees_exams
                                                         WHERE tl_member.id=tl_attendees_exams.attendee_id
                                                         AND tl_attendees_exams.exam_id = tl_exams.id
@@ -558,11 +559,14 @@ class ExamAdministrationModule extends \Module
 
             // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
-            $rehab_devices = unserialize($result->rehab_devices);
-            for ($j = 0; $j < sizeof($rehab_devices); $j++) {
-                if ($rehab_devices[$j] == "own room") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceRequired'];
+            if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
+                $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
+                $assistantData = MemberModel::findBy('id', $supervisorsExamData->id);
+                $assistant = $assistantData->firstname;
+                $assistant .= " ";
+                $assistant .= $assistantData->lastname;
+                $attendeeData[$i]['writingAssistance'] = $assistant;
             }
-            $i++;
         }
         $this->Template->attendeeDataList = $attendeeData;
         $this->setLangValuesEditAttendees();

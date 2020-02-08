@@ -206,9 +206,7 @@
             <select name="writingAssistance" id="writingAssistance" class="select">
                 <option value="0|0"> - </option>
                 <?php foreach($this->writingAssistanceList as $writingAssistance): ?>
-                    <option value="<?= $writingAssistance['member_id']; ?>|<?= $writingAssistance['assistant_id']; ?>" <?php if ($writingAssistance['selected'] === true) echo "selected"; ?>>
-                <?= $writingAssistance['firstname']; ?> <?= $writingAssistance['lastname']; ?>
-                    </option>
+                <option value="<?= $writingAssistance['member_id']; ?>|<?= $writingAssistance['assistant_id']; ?>" <?php if ($writingAssistance['selected'] === true) echo "selected"; ?>><?= $writingAssistance['firstname']; ?> <?= $writingAssistance['lastname']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

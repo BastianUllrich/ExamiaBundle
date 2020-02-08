@@ -680,6 +680,8 @@ class ExamAdministrationModule extends \Module
             $timeExamEnd = $fullTimestampExam + $examDurationExtraTimeInSeconds;
             $timeStringExamEnd = date("G:i", $timeExamEnd);
 
+            $text = "";
+
             // Schreibassistenz hinzufügen
             if ($addSupervisor === true) {
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
@@ -690,6 +692,7 @@ class ExamAdministrationModule extends \Module
                 $latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
                 $set = array('assistant_id' => $latestSupervisorsExamsID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                $text.="Hinzugefügt";
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
@@ -697,6 +700,7 @@ class ExamAdministrationModule extends \Module
                 // Eintrag in tl_attendees_exams aktualisieren
                 $set = array('assistant_id' => 0);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                $text.="Gelöscht";
             }
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
@@ -705,11 +709,12 @@ class ExamAdministrationModule extends \Module
                 // Eintrag in tl_attendees_exams aktualisieren
                 $set = array('assistant_id' => $actualSupervisorID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                $text.="Aktualisiert";
             }
 
             $this->Template->attendeeChangesSaved = true;
             $this->Template->examID = $examID;
-            $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
+            $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'] . $text;
             $this->Template->linktextBackToAttendeeAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToAttendeeAdministration'];
         }
     }

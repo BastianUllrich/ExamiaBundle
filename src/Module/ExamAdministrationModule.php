@@ -765,8 +765,12 @@ class ExamAdministrationModule extends \Module
             $writingAssistance[$i]["firstname"] = $supervisor->firstname;
             $writingAssistance[$i]["lastname"] = $supervisor->lastname;
             $assistants = SupervisorsExamsModel::findBy('id', $result->assistant_id);
-            if ($supervisor->id == $assistants->supervisor_id) $writingAssistance[$i]["selected"] = true;
-
+            if ($supervisor->id == $assistants->supervisor_id) {
+                $writingAssistance[$i]["selected"] = true;
+                $this->Template->writingAssistance = $supervisor->firstname;
+                $this->Template->writingAssistance .= " ";
+                $this->Template->writingAssistance .= $supervisor->lastname;
+            }
             $i++;
         }
         $this->Template->writingAssistanceList = $writingAssistance;

@@ -38,10 +38,14 @@
         <td class="value"><?= $this->rehabDevicesOthers; ?></td>
     </tr>
     <tr class="row_7 odd">
+        <td class="label"><?= $this->langWritingAssistance; ?></td>
+        <td class="value"><?= $this->writingAssistance; ?></td>
+    </tr>
+    <tr class="row_8 even">
         <td class="label"><?= $this->langExtraTime; ?></td>
         <td class="value"><?= $this->detailExtraTime; ?></td>
     </tr>
-    <tr class="row_8 even">
+    <tr class="row_9 odd">
         <td class="label"><?= $this->langStatus; ?></td>
         <td class="value"><?= $this->detailStatus; ?></td>
     </tr>

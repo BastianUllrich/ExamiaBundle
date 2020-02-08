@@ -562,7 +562,7 @@ class ExamAdministrationModule extends \Module
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
 
                 $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
-                $attendeeData[$i]['writingAssistance'] = $supervisorsExamData->id;
+                $attendeeData[$i]['writingAssistance'] = $supervisorsExamData->supervisor_id;
                 /*
                 while ($supervisorsExamData->next()) {
                     $assistantData = MemberModel::findBy('id', $supervisorsExamData->id);

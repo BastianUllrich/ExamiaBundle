@@ -680,8 +680,6 @@ class ExamAdministrationModule extends \Module
             $timeExamEnd = $fullTimestampExam + $examDurationExtraTimeInSeconds;
             $timeStringExamEnd = date("G:i", $timeExamEnd);
 
-            $text = "";
-
             // Schreibassistenz hinzufügen
             if ($addSupervisor === true) {
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
@@ -692,7 +690,6 @@ class ExamAdministrationModule extends \Module
                 $latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
                 $set = array('assistant_id' => $latestSupervisorsExamsID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
-                $text.="Hinzugefügt";
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
@@ -700,7 +697,6 @@ class ExamAdministrationModule extends \Module
                 // Eintrag in tl_attendees_exams aktualisieren
                 $set = array('assistant_id' => 0);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
-                $text.="Gelöscht";
             }
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
@@ -709,7 +705,6 @@ class ExamAdministrationModule extends \Module
                 // Eintrag in tl_attendees_exams aktualisieren
                 $set = array('assistant_id' => $actualSupervisorID);
                 $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
-                $text.="Aktualisiert";
             }
 
             $this->Template->attendeeChangesSaved = true;
@@ -764,10 +759,13 @@ class ExamAdministrationModule extends \Module
         $i = 0;
         $writingAssistance = array();
         foreach ($supervisors as $supervisor) {
+            $writingAssistance[$i]["selected"] = false;
             $writingAssistance[$i]["member_id"] = $supervisor->id;
-            $writingAssistance[$i]["assistant_id"] = $result->assistant_id;;
+            $writingAssistance[$i]["assistant_id"] = $result->assistant_id;
             $writingAssistance[$i]["firstname"] = $supervisor->firstname;
             $writingAssistance[$i]["lastname"] = $supervisor->lastname;
+            $assistants = SupervisorsExamsModel::findBy('id', $result->assistant_id);
+            if ($supervisor->id == $assistants->supervisor_id) $writingAssistance[$i]["selected"] = true;
             $i++;
         }
         $this->Template->writingAssistanceList = $writingAssistance;

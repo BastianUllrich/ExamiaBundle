@@ -560,6 +560,8 @@ class ExamAdministrationModule extends \Module
             // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
+                $attendeeData[$i]['writingAssistance'] = $result->assistant_id;
+                /*
                 $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
                 while ($supervisorsExamData->next()) {
                     $assistantData = MemberModel::findBy('id', $supervisorsExamData->id);
@@ -567,7 +569,7 @@ class ExamAdministrationModule extends \Module
                     $assistant .= " ";
                     $assistant .= $assistantData->lastname;
                     $attendeeData[$i]['writingAssistance'] = $assistant;
-                }
+                }*/
             }
         }
         $this->Template->attendeeDataList = $attendeeData;

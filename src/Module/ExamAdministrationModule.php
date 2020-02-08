@@ -622,6 +622,7 @@ class ExamAdministrationModule extends \Module
         $attendeeExam->rehab_devices = serialize($rehab_devices);
         $attendeeExam->rehab_devices_others = \Input::post('rehab_devices_others');
         $extraTime = \Input::post('extra_time');
+        if (empty($extraTime) || !is_numeric($extraTime)) $extraTime = 0;
         $attendeeExam->extra_time = $extraTime;
         $extraTimeValue = \Input::post('extra_time_minutes_percent');
         $attendeeExam->extra_time_minutes_percent = $extraTimeValue;
@@ -810,8 +811,9 @@ class ExamAdministrationModule extends \Module
         $this->Template->langNearDoor = $GLOBALS['TL_LANG']['tl_member']['near door'];
         $this->Template->langOwnRoom = $GLOBALS['TL_LANG']['tl_member']['own room'];
         $this->Template->langRDDifferent = $GLOBALS['TL_LANG']['tl_member']['different'];
+        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'][0];
 
-        $this->Template->langRehabDevicesOthers = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices_others'];
+        $this->Template->langWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
         $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];

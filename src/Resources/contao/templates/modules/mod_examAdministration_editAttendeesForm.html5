@@ -201,7 +201,7 @@
 
         <div class="widget widget-select select">
             <label for="writingAssistance" class="select">
-                <?= $this->writingAssistance; ?>
+                <?= $this->langWritingAssistance; ?>
             </label>
             <select name="writingAssistance" id="writingAssistance" class="select">
                 <option value="0|0"> - </option>

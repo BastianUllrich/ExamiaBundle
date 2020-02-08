@@ -57,7 +57,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_0 col_first"><?= $supervisorData['name']; ?></td>
                 <td class="body col_1"><?= $supervisorData['timePeriod']; ?></td>
                 <td class="body col_1"><?= $supervisorData['task']; ?></td>
-                <td class="body col_2 col_last"><a href="{{env::request}}&action=delete&id=<?= $supervisorData['id']; ?>" title="<?= $this->linkTitleDeleteSupervisor; ?>"><?= $this->deleteSupervisorText; ?></a></td>
+                <td class="body col_2 col_last"><?php if ($supervisorData['task'] == "Aufsicht") {?><a href="{{env::request}}&action=delete&id=<?= $supervisorData['id']; ?>" title="<?= $this->linkTitleDeleteSupervisor; ?>"><?= $this->deleteSupervisorText; ?></a><?php } else { echo "-"; }</td>
             </tr>
             <?php
             $i++;
@@ -108,18 +108,6 @@ elseif ($this->showDetails === true) {
                                 <span class="mandatory">*</span>
                             </label>
                             <input type="time" name="timeUntil" id="timeUntil" class="text mandatory" required="" autocomplete="on">
-                        </div>
-                        <div class="widget widget-select mandatory">
-                            <label for="personTask" class="select mandatory">
-                                <span class="invisible"><?= $this->mandatory; ?></span>
-                                <?= $this->langTask; ?>
-                                <span class="mandatory">*</span>
-                            </label>
-                            <select name="personTask" id="personTask" class="select mandatory" required="">
-                                <option value=""> - </option>
-                                <option value="supervisor"><?= $this->langSupervisor; ?></option>
-                                <option value="writingassistant"><?= $this->langAssistant; ?></option>
-                            </select>
                         </div>
                         <div class="widget widget-submit">
                             <button type="submit" class="submit"><?= $this->langDoAddSupervisor; ?></button>

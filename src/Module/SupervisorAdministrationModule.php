@@ -173,13 +173,7 @@ class SupervisorAdministrationModule extends \Module
         $supervisorId = \Input::post('supervisorId');
         $timeFrom = \Input::post('timeFrom');
         $timeUntil = \Input::post('timeUntil');
-        $task = \Input::post('personTask');
-        if ($task == "supervisor") {
-            $task = "Aufsicht";
-        }
-        if ($task == "writingassistant") {
-            $task = "Schreibassistenz";
-        }
+        $task = "Aufsicht";
         $this->import('Database');
         $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'date' => $date, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
 

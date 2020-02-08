@@ -594,6 +594,11 @@ class ExamAdministrationModule extends \Module
         $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'];
 
         if ($_GET['confirmed'] == "yes") {
+            // Schreibassistenz heraussuchen und entfernen
+            $attendeeData = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$attendeeID, $examID]);
+            $writingAssistanceID = $attendeeData->assistant_id;
+            $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$writingAssistanceID")->execute()->affectedRows;
+            // Teilnehmer aus Tabelle tl_attendees_exams entfernen
             if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$examID AND attendee_id=$attendeeID")->execute()->affectedRows) {
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
             }
@@ -614,6 +619,7 @@ class ExamAdministrationModule extends \Module
 
     }
 
+    // Änderungen nach dem Editieren von Teilnehmern speichern
     public function saveAttendeeChanges($examID, $attendeeID) {
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
         $id = $attendeeExam->id;
@@ -714,6 +720,7 @@ class ExamAdministrationModule extends \Module
         }
     }
 
+    // Variablen beim Editieren und Anzeigen von Teilnehmern
     public function setShowEditAttendeeValues($examID, $attendeeID) {
 
         $result = Database::getInstance()->prepare("SELECT
@@ -786,6 +793,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
     }
 
+    // Sprach-Variablen beim Editieren und Anzeigen von Teilnehmern
     public function setShowEditAttendeeLangValues() {
         $this->Template->langEditAttendee = $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'];
         $this->Template->langAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'];

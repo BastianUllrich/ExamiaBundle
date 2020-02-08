@@ -99,6 +99,9 @@ class tl_supervisors_exams extends Backend
             $nameset = $result->lastname;
             $nameset .= ', ';
             $nameset .= $result->firstname;
+            $nameset .= '( ID ';
+            $nameset .= $result->id;
+            $nameset .= ')';
             $array[$result->id] = $nameset;
         }
         return $array;

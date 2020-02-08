@@ -508,7 +508,6 @@ class ExamAdministrationModule extends \Module
         $exam_datetime .= $exam_begin;
         $exam_datetime = strtotime($exam_datetime);
         $exam->date = $exam_datetime;
-
         $exam->begin = $exam_begin;
         $exam->duration = \Input::post('regularDuration');
         $exam->department = \Input::post('department');
@@ -613,16 +612,84 @@ class ExamAdministrationModule extends \Module
     public function saveAttendeeChanges($examID, $attendeeID) {
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
         $id = $attendeeExam->id;
+
+        $addSupervisor = false;
+        $deleteSupervisor = false;
+        $updateSupervisor = false;
+
         $attendeeExam->seat = \Input::post('seat');
         $rehab_devices = \Input::post('rehab_devices');
         $attendeeExam->rehab_devices = serialize($rehab_devices);
         $attendeeExam->rehab_devices_others = \Input::post('rehab_devices_others');
-        $attendeeExam->extra_time = \Input::post('extra_time');
-        $attendeeExam->extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');
+        $extraTime = \Input::post('extra_time');
+        $attendeeExam->extra_time = $extraTime;
+        $extraTimeValue = \Input::post('extra_time_minutes_percent');
+        $attendeeExam->extra_time_minutes_percent = $extraTimeValue;
         $attendeeExam->status = \Input::post('status');
 
-        // update the record in the database
+        // Werte von Select-Feld "Schreibassistenz" trennen
+        $writingAssistance = \Input::post('writingAssistance');
+        $writingAssistance_explode = explode('|', $writingAssistance);
+        $assistantID = $writingAssistance_explode[0];
+        $supervisors_exams_ID = $writingAssistance_explode[1];
+        $attendeeExam->assistant_id = $assistantID;
+
+        // Die ID der Schreibassistenz in einer Variable speichern, um sie aktualisieren oder aus der Tabelle löschen zu können
+        $supervisorData = SupervisorsExamsModel::findBy('id', $attendeeExam->supervisor_id);
+        $actualSupervisorID = $supervisorData->id;
+
+        if (empty($actualSupervisorID) && $supervisors_exams_ID <> 0) {
+            $addSupervisor = true;
+        }
+        elseif (!empty($actualSupervisorID) && $supervisors_exams_ID == 0) {
+            $deleteSupervisor = true;
+        }
+        else {
+            $updateSupervisor = true;
+        }
+
+        // Eintrag in der Datenbank aktualisieren
         if ($attendeeExam->save()) {
+
+            /* Schreibassistenz in die Datenbank hinzufügen, aktualisieren oder löschen */
+            $this->import('Database');
+            // Klausurdatum & Uhrzeit holen
+            $examData = ExamsModel::findBy('exam_id', $examID);
+            $fullTimestampExam = $examData->date;
+            $dateStringExam = date("d.m.Y", $fullTimestampExam);
+            $dateTimestampExam = strtotime($dateStringExam);
+            $timeStringExamBegin = date("H:i", $fullTimestampExam);
+            $examDuration = $examData->duration;
+            // "Zeit bis" aus Klausurdauer + Zeitverlängerung berechnen
+            if ($extraTimeValue == "percent") {
+                $examDurationExtraTime = $examDuration + ($examDuration*($extraTime/100));
+            }
+            elseif ($extraTimeValue == "minutes") {
+                $examDurationExtraTime = $examDuration + $extraTime;
+            }
+            else {
+                $examDurationExtraTime = $examDuration;
+            }
+            $examDurationExtraTimeInSeconds = $examDurationExtraTime*60;
+            $timeExamEnd = $fullTimestampExam + $examDurationExtraTimeInSeconds;
+            $timeStringExamEnd = date("G:i", $timeExamEnd);
+
+            // Schreibassistenz hinzufügen
+            if ($addSupervisor === true) {
+                $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
+                // Eintrag in Tabelle "tl_supervisors_exams" vornehmen
+                $this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute();
+            }
+            // Schreibassistenz löschen
+            if ($deleteSupervisor === true) {
+                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$actualSupervisorID")->execute()->affectedRows;
+            }
+            // Schreibassistenz aktualisieren
+            if ($updateSupervisor === true) {
+                $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
+                $this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
+            }
+
             $this->Template->attendeeChangesSaved = true;
             $this->Template->examID = $examID;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
@@ -635,7 +702,8 @@ class ExamAdministrationModule extends \Module
         $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
                                                     tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent,
-                                                    tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others, tl_attendees_exams.status
+                                                    tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others, tl_attendees_exams.status,
+                                                    tl_attendees_exams.assistant_id
                                                     FROM tl_member, tl_attendees_exams
                                                     WHERE tl_member.id=$attendeeID
                                                     AND tl_attendees_exams.exam_id = $examID
@@ -654,6 +722,8 @@ class ExamAdministrationModule extends \Module
             $this->Template->seat = $result->seat;
         }
 
+        $assistantID = $result->assistant_id;
+
         $this->Template->detailSeat = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->seat];
 
         $rehab_devices = unserialize($result->rehab_devices);
@@ -666,6 +736,31 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRehabDevices = $rehab_devices;
 
         $this->Template->rehabDevicesOthers = $result->rehab_devices_others;
+
+        // Aufsichten für Feld "Schreibassistenz" heraussuchen und in Array einsetzen
+        $results = MemberModel::findBy('usertype', 'Aufsicht');
+        $i = 0;
+        $writingAssistance = array();
+        foreach ($results as $result) {
+            /*
+            Für Selected und Wert für Aktualisierung / Löschung der Schreibassistenz in Tabelle tl_supervisors_exams
+            wird die tl_supervisor_exams.id anhand von Datum, Uhrzeit und Member-ID herausgesucht
+            Zuerst: timestamp der Klausur anpassen
+            */
+            $fullTimestampExam = $examData->date;
+            $dateStringExam = date("d.m.Y", $fullTimestampExam);
+            $dateTimestampExam = strtotime($dateStringExam);
+            $timeStringExam = date("H:i", $fullTimestampExam);
+            $se = SupervisorsExamsModel::findBy(['supervisor_id = ?', 'date = ?', 'time_from = ?', 'task = ?'], [$assistantID, $dateTimestampExam, $timeStringExam, 'Schreibassistenz']);
+
+            $writingAssistance[$i]["member_id"] = $result->id;
+            $writingAssistance[$i]["se_id"] = $se->id;;
+            $writingAssistance[$i]["firstname"] = $result->firstname;
+            $writingAssistance[$i]["lastname"] = $result->lastname;
+            $i++;
+        }
+        $this->Template->writingAssistanceList = $writingAssistance;
+
         $this->Template->extraTime = $result->extra_time;
         $this->Template->extraTimeUnit = $result->extra_time_minutes_percent;
 

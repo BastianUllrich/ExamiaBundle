@@ -52,12 +52,13 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'supervisor_id' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['supervisor_id'],
             'inputType' => 'select',
+            'options_callback' => ['tl_supervisors_exams', 'getAssistant'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'default' => 0]
         ],
         'date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'],
-            'inputType' => 'date',
+            'inputType' => 'text',
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'integer', 'length' => 10, 'default' => 0]
         ],
@@ -85,5 +86,23 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'default' => 'supervisor_id,date,time_from,time_until,task'
     ],
 ];
+
+class tl_supervisors_exams extends Backend
+{
+    // Alle Infos für Select-Box "Aufsichts-ID" sammeln
+    public function getAssistant()
+    {
+        $array = array();
+        $this->import('Database');
+        $result = Database::getInstance()->prepare("SELECT id, firstname, lastname FROM tl_member WHERE usertype='Aufsicht'")->query();
+        while ($result->next()) {
+            $nameset = $result->lastname;
+            $nameset .= ', ';
+            $nameset .= $result->firstname;
+            $array[$result->id] = $nameset;
+        }
+        return $array;
+    }
+}
 ?>
 

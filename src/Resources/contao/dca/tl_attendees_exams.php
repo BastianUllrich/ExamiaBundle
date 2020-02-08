@@ -194,6 +194,9 @@ class tl_attendees_exams extends Backend
             $nameset = $result->lastname;
             $nameset .= ', ';
             $nameset .= $result->firstname;
+            $nameset .= '( ID ';
+            $nameset .= $result->id;
+            $nameset .= ')';
             $array[$result->id] = $nameset;
         }
         return $array;

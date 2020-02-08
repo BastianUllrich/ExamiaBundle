@@ -6,7 +6,7 @@ $GLOBALS['TL_LANG']['tl_supervisors_exams']['show'] = ['Details anzeigen', 'Deta
 
 $GLOBALS['TL_LANG']['tl_supervisors_exams']['id'] = ['ID', ''];
 $GLOBALS['TL_LANG']['tl_supervisors_exams']['supervisor_id'] = ['Aufsichts-ID', ''];
-$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'] = ['Datum', ''];
+$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'] = ['Timestamp', ''];
 
 $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'] = ['Zeit (von)', 'Bitte wählen Sie die Zeit aus, zu der die Aufsicht beginnen soll'];
 $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_until'] = ['Zeit (bis)', 'Bitte wählen Sie die Zeit aus, zu der die Aufsicht enden soll'];

@@ -130,7 +130,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->examDataList = $examData;
 
         // Klausurdetails anzeigen
-        if ($_GET["do"] == "viewDetails") {
+        if (\Input::get("do") == "viewDetails") {
             $this->Template->showDetails = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
@@ -139,7 +139,7 @@ class ExamAdministrationModule extends \Module
         }
 
         // Klausurdetails bearbeiten
-        if ($_GET["do"] == "editDetails") {
+        if (\Input::get("do") == "editDetails") {
             $this->Template->showEditForm = true;
             $exam = $_GET["exam"];
             $examDetails = ExamsModel::findBy('id', $exam);
@@ -161,7 +161,7 @@ class ExamAdministrationModule extends \Module
         }
 
         // Teilnehmer bearbeiten
-        if ($_GET["do"] == "editAttendees") {
+        if (\Input::get("do") == "editAttendees") {
             $this->Template->editAttendees = true;
             $this->Template->showAttendeeDetails = false;
             $this->Template->showEditAttendeeForm = false;
@@ -187,8 +187,8 @@ class ExamAdministrationModule extends \Module
         }
 
         // Klausuren zusammenlegen
-        if ($_GET["do"] == "combine") {
-            $exam = $_GET["exam"];
+        if (\Input::get("do") == "combine") {
+            $exam = \Input::get("exam");
             $this->Template->showCombineForm = true;
             $examDetails = ExamsModel::findBy('id', $exam);
             $this->setLangValuesCombineExams();
@@ -196,15 +196,15 @@ class ExamAdministrationModule extends \Module
         }
 
         // Klausur löschen
-        if ($_GET["do"] == "delete") {
-            $exam = $_GET["exam"];
+        if (\Input::get("do") == "delete") {
+            $exam = \Input::get("exam");
             $this->Template->showConfirmationQuestion = true;
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationQuestion'];
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationYes'];
             $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteExamConfirmationNo'];
 
             // Klausur erst nach Bestätigung löschen
-            if (($_GET["confirmed"] == "yes")) {
+            if ((\Input::get("confirmed") == "yes")) {
                 $this->import('Database');
 
                 // Klausurteilnehmer entfernen
@@ -227,7 +227,7 @@ class ExamAdministrationModule extends \Module
                     \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
                 }
 
-            } elseif ($_GET["confirmed"] == "no") {
+            } elseif ((\Input::get("confirmed") == "no")) {
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
             }
         }

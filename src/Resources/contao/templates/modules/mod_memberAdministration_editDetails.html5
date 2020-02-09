@@ -391,7 +391,7 @@
                 <label for="extra_time_minutes_percent">
                     <?= $this->langExtraTimeUnit; ?>
                 </label>
-                <select name="extra_time_minutes_percent" id="extra_time_minutes_percent" class="select mandatory" required="">
+                <select name="extra_time_minutes_percent" id="extra_time_minutes_percent" class="select mandatory">
                     <option value="" <?php if ($this->extra_time_minutes_percent == "") echo "selected"; ?>> - </option>
                     <option value="minutes" <?php if ($this->extra_time_minutes_percent == "minutes") echo "selected"; ?>><?= $this->langExtraTimeMinutes; ?></option>
                     <option value="percent" <?php if ($this->extra_time_minutes_percent == "percent") echo "selected"; ?>><?= $this->langExtraTimePercent; ?></option>

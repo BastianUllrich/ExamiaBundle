@@ -7,8 +7,6 @@ use Contao\Module;
 use Contao\FrontendUser;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
-use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
-
 
 class MemberAdministrationModule extends \Module
 {
@@ -104,23 +102,23 @@ class MemberAdministrationModule extends \Module
         $this->Template->memberDataList = $memberData;
 
         // Mitglied aktivieren / deaktivieren
-        if ($_GET["do"] == "activate") {
-            $member = $_GET["member"];
+        if (\Input::get("do") == "activate") {
+            $member = \Input::get("member");
             if ($member != $objUser->id) {
                 $this->Database->prepare("UPDATE tl_member SET disable='' WHERE id=$member")->execute()->affectedRows;
             }
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
-        if ($_GET["do"] == "deactivate") {
-            $member = $_GET["member"];
+        if (\Input::get("do") == "deactivate") {
+            $member = \Input::get("member");
             if ($member != $objUser->id) {
                 $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows;
             }
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
 
-        if ($_GET["do"] == "viewDetails") {
-            $member = $_GET["member"];
+        if (\Input::get("do") == "viewDetails") {
+            $member = \Input::get("member");
             $memberDetailsData = MemberModel::findBy('id', $member);
             $this->Template->showDetails = true;
 
@@ -178,8 +176,8 @@ class MemberAdministrationModule extends \Module
         }
 
         // Mitglied löschen
-        if ($_GET["do"] == "delete") {
-            $member = $_GET["member"];
+        if (\Input::get("do") == "delete") {
+            $member = \Input::get("member");
             $this->Template->showConfirmationQuestion = true;
             $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'];
             $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'];
@@ -192,7 +190,7 @@ class MemberAdministrationModule extends \Module
             }
             else {
                 // Mitglied erst nach Bestätigung löschen
-                if (($_GET["confirmed"] == "yes")) {
+                if ((\Input::get("confirmed") == "yes")) {
 
                     // Aufsichtsverteilung, Klausurzuweisung und ggf. Klausur aus Datenbank löschen
 
@@ -240,21 +238,21 @@ class MemberAdministrationModule extends \Module
                         \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                     }
                 }
-                elseif ($_GET["confirmed"] == "no") {
+                elseif (\Input::get("confirmed") == "no") {
                     \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                 }
             }
         }
 
-        if ($_GET["do"] == "editDetails") {
+        if (\Input::get("do") == "editDetails") {
             $this->Template->showEditForm = true;
-            $member = $_GET["member"];
+            $member = \Input::get("member");
             $memberData = MemberModel::findBy('id', $member);
             $this->setLangValuesEdit();
             $this->setMemberValuesEdit($memberData);
         }
 
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editMember') {
+        if (\Input::post('FORM_SUBMIT') == 'editMember') {
             $this->saveChanges($memberData->usertype, $member);
         }
     }

@@ -100,8 +100,8 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->linkTitleBackToUnsubscribe = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToUnsubscribe'];
 
         // Von Klausur abmelden
-        if ($_GET["do"] == "unsubscribe") {
-            $exam_id = $_GET["exam"];
+        if (\Input::get("do") == "unsubscribe") {
+            $exam_id = \Input::get("exam");
 
             $examData = ExamsModel::findBy('id', $exam_id);
             $examDescription = $examData->title;
@@ -133,7 +133,7 @@ class ExamUnsubscribeModule extends \Module
                 $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['linkBackToUnsubscribeText'];
             }
 
-            if (($_GET["confirmed"] == "yes")) {
+            if ((\Input::get("confirmed") == "yes")) {
 
                 // Doppeltes Absenden überprüfen
                 $checkForDoubleSending = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
@@ -162,7 +162,7 @@ class ExamUnsubscribeModule extends \Module
                     $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['noExamFound'];
                 }
             }
-            elseif ($_GET["confirmed"] == "no") {
+            elseif (\Input::get("confirmed") == "no") {
                 \Controller::redirect('klausurverwaltung/von-klausur-abmelden.html');
             }
         }

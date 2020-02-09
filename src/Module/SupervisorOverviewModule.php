@@ -91,13 +91,13 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
         $this->Template->linkTitleShowExamsDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamsDetails'];
 
-        if ($_GET["do"] == "showDetails") {
-            $detailsDate = $_GET["date"];
+        if (\Input::get("do") == "showDetails") {
+            $detailsDate = \Input::get("date");
             $this->showDetails($detailsDate);
         }
 
-        if ($_GET["show"] == "attendees") {
-            $examId = $_GET["examid"];
+        if (\Input::get("show") == "attendees") {
+            $examId = \Input::get("examid");
             $this->showAttendeeDetails($examId);
         }
     }

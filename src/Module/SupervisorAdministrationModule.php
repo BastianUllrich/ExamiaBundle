@@ -75,19 +75,19 @@ class SupervisorAdministrationModule extends \Module
 
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
 
-        if ($_GET["do"] == "showDetails") {
+        if (\Input::get("do") == "showDetails") {
             $this->showDetails();
         }
 
-        if ($_GET["action"] == "delete") {
-            $id = $_GET["id"];
-            $date = $_GET["date"];
+        if (\Input::get("action") == "delete") {
+            $id = \Input::get("id");
+            $date = \Input::get("date");
             $this->deleteSupervisor($id, $date);
         }
 
         // Formular wurde abgesendet
         if (\Contao\Input::post('FORM_SUBMIT') == 'addSupervisor') {
-            $date = $_GET["date"];
+            $date = \Input::get("date");
             $this->addSupervisor($date);
         }
     }
@@ -114,7 +114,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
         $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
-        $startTime = $_GET["date"];
+        $startTime = \Input::get("date");
         $endTime = $startTime + 86399;
 
         // Datenbankabfrage aktuell aufgeteilte Aufsichten

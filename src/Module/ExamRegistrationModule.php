@@ -222,14 +222,16 @@ class ExamRegistrationModule extends \Module
     public function sendMailMember($objUser, $examData) {
         $objMailSuscribe = new \Email();
         $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSuscribe->from = 'beratung@bliz.thm.de';
+        //$objMailSuscribe->from = 'beratung@bliz.thm.de';
+        $objMailSuscribe->from = 'bastian.ullrich@iem.thm.de';
         $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'];
         $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart1'];
         $objMailSuscribe->text .= "\n";
         $objMailSuscribe->text .= $examData;
         $objMailSuscribe->text .= "\n";
         $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart2'];
-        $objMailSuscribe->sendTo($objUser->email);
+        //$objMailSuscribe->sendTo($objUser->email);
+        $objMailSuscribe->sendTo('bastiullrich@gmail.com');
         unset($objMailSuscribe);
     }
     public function sendMailBliZ($objUser, $examData) {

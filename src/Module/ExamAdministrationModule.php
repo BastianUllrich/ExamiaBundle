@@ -98,7 +98,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
 
         // Sortierung nach Datum aufsteigend / absteigend
-        if ($_GET["orderBy"] == "dateDESC") {
+        if (\Input::get("orderBy") == "dateDESC") {
             $options = [
                 'order' => 'date DESC'
             ];
@@ -132,7 +132,7 @@ class ExamAdministrationModule extends \Module
         // Klausurdetails anzeigen
         if (\Input::get("do") == "viewDetails") {
             $this->Template->showDetails = true;
-            $exam = $_GET["exam"];
+            $exam = \Input::get("exam");
             $examDetails = ExamsModel::findBy('id', $exam);
             $this->setLangValuesViewEditDetails();
             $this->setExamValuesViewDetails($examDetails);
@@ -141,7 +141,7 @@ class ExamAdministrationModule extends \Module
         // Klausurdetails bearbeiten
         if (\Input::get("do") == "editDetails") {
             $this->Template->showEditForm = true;
-            $exam = $_GET["exam"];
+            $exam = \Input::get("exam");
             $examDetails = ExamsModel::findBy('id', $exam);
             $this->setLangValuesViewEditDetails();
             $this->setExamValuesEdit($examDetails);
@@ -166,7 +166,7 @@ class ExamAdministrationModule extends \Module
             $this->Template->showAttendeeDetails = false;
             $this->Template->showEditAttendeeForm = false;
             $this->Template->showDeleteAttendeeConfirmation = false;
-            $exam = $_GET["exam"];
+            $exam = \Input::get("exam");
 
             // Teilnehmer löschen
             if (array_key_exists('deleteAttendee', $_GET)) {
@@ -585,7 +585,7 @@ class ExamAdministrationModule extends \Module
     {
         $this->Template->showAttendeeDetails = true;
         $examID = $exam;
-        $attendeeID = $_GET['showAttendee'];
+        $attendeeID = \Input::get('showAttendee');
         $this->setShowEditAttendeeLangValues();
         $this->setShowEditAttendeeValues($examID, $attendeeID);
     }
@@ -595,12 +595,12 @@ class ExamAdministrationModule extends \Module
     {
         $this->Template->showDeleteAttendeeConfirmation = true;
         $examID = $exam;
-        $attendeeID = $_GET['deleteAttendee'];
+        $attendeeID = \Input::get('deleteAttendee');
         $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationQuestion'];
         $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationYes'];
         $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteAttendeeConfirmationNo'];
 
-        if ($_GET['confirmed'] == "yes") {
+        if (\Input::get('confirmed') == "yes") {
             // Schreibassistenz heraussuchen und entfernen
             $attendeeData = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$attendeeID, $examID]);
             $writingAssistanceID = $attendeeData->assistant_id;
@@ -609,7 +609,7 @@ class ExamAdministrationModule extends \Module
             if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$examID AND attendee_id=$attendeeID")->execute()->affectedRows) {
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
             }
-        } elseif ($_GET["confirmed"] == "no") {
+        } elseif (\Input::get("confirmed") == "no") {
             \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
         }
     }
@@ -620,7 +620,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->editAttendees = true;
         $this->Template->showEditAttendeeForm = true;
         $examID = $exam;
-        $attendeeID = $_GET['editAttendee'];
+        $attendeeID = \Input::get('editAttendee');
         $this->setShowEditAttendeeLangValues();
         $this->setShowEditAttendeeValues($examID, $attendeeID);
 

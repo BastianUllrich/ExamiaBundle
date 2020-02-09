@@ -139,11 +139,11 @@ class SupervisorAdministrationModule extends \Module
             $supervisorData[$i]['timePeriod'] .= " - ";
             $supervisorData[$i]['timePeriod'] .= $result->time_until;
             $supervisorData[$i]['task'] = $result->task;
-            if ($supervisorData[$i]['task'] == "Aufsicht") {
+            if ($result->task == "Aufsicht") {
                 $this->Template->$supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
                 $this->Template->$supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
             }
-            if ($supervisorData[$i]['task'] == "Schreibassistenz") {
+            if ($result->task == "Schreibassistenz") {
                 $this->Template->$supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'];
                 $this->Template->$supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
             }

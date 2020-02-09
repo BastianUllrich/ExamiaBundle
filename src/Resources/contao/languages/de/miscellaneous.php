@@ -109,6 +109,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'] = "Zeit (von - bis)";
 $GLOBALS['TL_LANG']['miscellaneous']['task'] = "Aufgabe";
 $GLOBALS['TL_LANG']['miscellaneous']['delete'] = "Entfernen";
 $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'] = "Aufsicht entfernen";
+$GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'] = "Schreibassistenz entfernen";
 $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'] = "Keine Aufsichten zugewiesen";
 $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'] = "Aufsicht hinzufügen";
 $GLOBALS['TL_LANG']['miscellaneous']['doAddSupervisor'] = "Ausgewählte Aufsicht hinzufügen";
@@ -183,6 +184,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'] 
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'] = "Öffnet eine Liste mit den Details zum gewählten Tag";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'] = "Entfernt die Aufsicht vom gewählten Tag";
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'] = "Entfernt die Schreibassistenz vom gewählten Tag";
 
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamsDetails'] = "Öffnet eine Liste mit den Klausuren des gewählten Tags";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'] = "Öffnet eine Liste mit den Klausur-Teilnehmern";

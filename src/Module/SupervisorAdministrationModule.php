@@ -71,7 +71,6 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
         $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
         $this->Template->linkTitleShowExamDateDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'];
-        $this->Template->linkTitleDeleteSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
 
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
 
@@ -105,7 +104,6 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langTimePeriod = $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'];
         $this->Template->langTask = $GLOBALS['TL_LANG']['miscellaneous']['task'];
         $this->Template->langDelete = $GLOBALS['TL_LANG']['miscellaneous']['delete'];
-        $this->Template->deleteSupervisorText = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
         $this->Template->langNoSupervisorsAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noSupervisorsAvailable'];
         $this->Template->langAddSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['addSupervisor'];
         $this->Template->langSupervisor = $GLOBALS['TL_LANG']['miscellaneous']['supervisor'];
@@ -141,6 +139,14 @@ class SupervisorAdministrationModule extends \Module
             $supervisorData[$i]['timePeriod'] .= " - ";
             $supervisorData[$i]['timePeriod'] .= $result->time_until;
             $supervisorData[$i]['task'] = $result->task;
+            if ($supervisorData[$i]['task'] == "Aufsicht") {
+                $this->Template->$supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
+                $this->Template->$supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
+            }
+            if ($supervisorData[$i]['task'] == "Schreibassistenz") {
+                $this->Template->$supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'];
+                $this->Template->$supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
+            }
             $i++;
         }
         $this->Template->supervisorDataList = $supervisorData;

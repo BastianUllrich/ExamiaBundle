@@ -212,11 +212,12 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['extraTime'] .= " ";
             $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
 
+            $duration = $result->duration;
             if ($result->extra_time_minutes_percent == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);
-                $duration = ($result->duration) * $multiplicator;
+                $duration = $duration * $multiplicator;
             } elseif ($result->extra_time_minutes_percent == "minutes") {
-                $duration = ($result->duration) + $result->extra_time;
+                $duration = $duration + $result->extra_time;
             }
             $endTime = ($result->date) + ($duration * 60);
             $endTimeReadable = date("H:i", $endTime);

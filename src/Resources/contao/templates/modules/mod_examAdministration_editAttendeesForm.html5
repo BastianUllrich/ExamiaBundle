@@ -2,9 +2,8 @@
 <p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
-        <input type="hidden" name="FORM_SUBMIT" value="editExam">
+        <input type="hidden" name="FORM_SUBMIT" value="editAttendeeData">
         <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-        <input type="hidden" name="formIdentity" value="editAttendeeData">
         <div class="widget widget-text">
                         <span>
                             <strong>

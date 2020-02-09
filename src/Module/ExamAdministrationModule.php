@@ -97,6 +97,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
         $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
 
+        // Sortierung nach Datum aufsteigend / absteigend
         if ($_GET["orderBy"] == "dateDESC") {
             $options = [
                 'order' => 'date DESC'
@@ -146,21 +147,17 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesEdit($examDetails);
         }
 
-        // Formular wurde abgesendet -> Zur Unterscheidung, welches Formular abgesendet wurde, wird das hidden-Feld "formIdentity" ausgelesen
-        if (\Contao\Input::post('FORM_SUBMIT') == 'editExam') {
-            $examID = $_GET["exam"];
-            $attendeeID = $_GET["editAttendee"];
-            $formIdentity = \Input::post('formIdentity');
-
-            if ($formIdentity == "editExamData") {
-                $this->saveExamChanges($examID);
-            }
-            elseif ($formIdentity == "editAttendeeData") {
-                $this->saveAttendeeChanges($examID, $attendeeID);
-            }
-            elseif ($formIdentity == "combineExams") {
-                $this->saveCombineChanges($examID);
-            }
+        // Formular wurde abgesendet
+        $examID = \Input::get("exam");
+        $attendeeID = \Input::get("editAttendee");
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editExamData') {
+            $this->saveExamChanges($examID);
+        }
+        if (\Contao\Input::post('FORM_SUBMIT') == 'editAttendeeData') {
+            $this->saveAttendeeChanges($examID, $attendeeID);
+        }
+        if (\Contao\Input::post('FORM_SUBMIT') == 'combineExams') {
+            $this->saveCombineChanges($examID);
         }
 
         // Teilnehmer bearbeiten
@@ -492,6 +489,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->lecturerMobile = $examData->lecturer_mobile;
     }
 
+    //
     public function saveExamChanges($examID)
     {
         // Wird über Model gelöst

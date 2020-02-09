@@ -1,9 +1,8 @@
 <p><strong><?= $this->langEditExamDetails; ?></strong></p>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
-        <input type="hidden" name="FORM_SUBMIT" value="editExam">
+        <input type="hidden" name="FORM_SUBMIT" value="editExamData">
         <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-        <input type="hidden" name="formIdentity" value="editExamData">
         <div class="widget widget-text mandatory">
             <label for="title" class="mandatory">
                 <span class="invisible"><?= $this->mandatory; ?></span>

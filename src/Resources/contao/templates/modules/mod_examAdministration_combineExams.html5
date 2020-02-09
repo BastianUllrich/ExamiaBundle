@@ -3,9 +3,8 @@
 <p><?= $this->langCombineExamsTo; ?> <?= $this->examToTitle; ?> - <?= $this->examToDepartment; ?> (ID<?= $this->examToId; ?>, <?= $this->examToDate; ?> <?= $this->langExamTimeAt; ?> <?= $this->examToTime; ?> <?= $this->langExamTimeHour; ?>)</p>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
-        <input type="hidden" name="FORM_SUBMIT" value="editExam">
+        <input type="hidden" name="FORM_SUBMIT" value="combineExams">
         <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-        <input type="hidden" name="formIdentity" value="combineExams">
         <div class="widget widget-select select mandatory">
             <label for="examFrom" class="select mandatory">
                 <span class="invisible"><?= $this->mandatory; ?></span>

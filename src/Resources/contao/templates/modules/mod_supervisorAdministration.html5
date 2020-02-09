@@ -57,7 +57,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_0 col_first"><?= $supervisorData['name']; ?></td>
                 <td class="body col_1"><?= $supervisorData['timePeriod']; ?></td>
                 <td class="body col_1"><?= $supervisorData['task']; ?></td>
-                <td class="body col_2 col_last"><?php if ($supervisorData['task'] == "Aufsicht") { ?><a href="{{env::request}}&action=delete&id=<?= $supervisorData['id']; ?>" title="<?= $this->linkTitleDeleteSupervisor; ?>"><?= $this->deleteSupervisorText; ?></a><?php } else { echo "-"; }?></td>
+                <td class="body col_2 col_last"><a href="{{env::request}}&action=delete&id=<?= $supervisorData['id']; ?>" title="<?= $this->linkTitleDeleteSupervisor; ?>"><?= $this->deleteSupervisorText; ?></a></td>
             </tr>
             <?php
             $i++;

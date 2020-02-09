@@ -558,13 +558,16 @@ class ExamAdministrationModule extends \Module
             $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
 
             /* Überprüfen, ob eine Schreibassistenz benötigt wird */
-            // Default: Keine Schreibassistenz
-            $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
-            // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben
+            // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben, sonst "nicht benötigt"
             // Erst Rehab-Devices in Array schreiben, dann überprüfen, ob "writing assistance" darin steht
             $rehab_devices = unserialize($result->rehab_devices);
-            for ($i=0; $i < sizeof($rehab_devices); $i++) {
-                if ($rehab_devices[$i] == "writing assistance") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotAssigned'];
+            for ($j=0; $j < sizeof($rehab_devices); $j++) {
+                if ($rehab_devices[$j] == "writing assistance") {
+                    $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotAssigned'];
+                }
+                else {
+                    $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
+                }
             }
             // Wenn eine Schreibassistenz benötigt wird und das Feld "assistant_id" mit der ID einer Schreibassistenz gefüllt ist, wird ihr Name ausgegeben
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {

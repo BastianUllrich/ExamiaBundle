@@ -557,10 +557,17 @@ class ExamAdministrationModule extends \Module
 
             $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
 
-            // Überprüfen, ob eine Schreibassistenz benötigt wird -> Default: Keine Schreibassistenz
+            /* Überprüfen, ob eine Schreibassistenz benötigt wird */
+            // Default: Keine Schreibassistenz
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
+            // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben
+            // Erst Rehab-Devices in Array schreiben, dann überprüfen, ob "writing assistance" darin steht
+            $rehab_devices = unserialize($result->rehab_devices);
+            for ($i=0; $i < sizeof($rehab_devices); $i++) {
+                if ($rehab_devices[$i] == "writing assistance") $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotAssigned'];
+            }
+            // Wenn eine Schreibassistenz benötigt wird und das Feld "assistant_id" mit der ID einer Schreibassistenz gefüllt ist, wird ihr Name ausgegeben
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
-
                 $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
                 $assistantData = MemberModel::findBy('id', $supervisorsExamData->supervisor_id);
                 $assistant = $assistantData->firstname;

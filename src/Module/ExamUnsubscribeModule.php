@@ -175,7 +175,7 @@ class ExamUnsubscribeModule extends \Module
 
                         // Rückmeldung geben, dass die Abmeldung erfolgreich war
                         $this->Template->unsubscribtionSuccessful = true;
-                        $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful']. $numberOfExamsTimePeriod->numberOfExams;
+                        $this->Template->unsubscribtionSuccessfulMessage = $GLOBALS['TL_LANG']['miscellaneous']['unsubscribtionSuccessful'];
                     }
                 }
                 else {

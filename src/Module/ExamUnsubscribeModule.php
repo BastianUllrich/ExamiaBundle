@@ -115,6 +115,7 @@ class ExamUnsubscribeModule extends \Module
             $examDescription .= $examData->lecturer_prename;
             $examDescription .= ' ';
             $examDescription .= $examData->lecturer_lastname;
+            $examFullTimestamp = $examData->date;
 
             // Doppeltes Absenden überprüfen
             $checkForDoubleSending = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
@@ -145,28 +146,28 @@ class ExamUnsubscribeModule extends \Module
                         $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$writingAssistanceID")->execute()->affectedRows;
                     }
 
-                    /* Werden noch Klausuren am gleichen Tag geschrieben? Falls nein, Aufsichten entfernen */
-                    // Klausurdatum auslesen und auf "Datum 0 Uhr" umwandeln, anschließend Timestamp von "Datum 23:59:59 Uhr" berechnen
-                    $examFullTimestamp = $examData->date;
-                    $examDateReadable = date("d.m.Y", $examFullTimestamp);
-                    $examDayStartTimestamp = strtotime($examDateReadable);
-                    $examDayEndTimestamp = $examDayStartTimestamp+86399;
-                    // Anzahl Klausuren im Zeitraum heraussuchen
-                    $numberOfExamsTimePeriod = Database::getInstance()->prepare("SELECT COUNT(*) FROM tl_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->query();
-                    // Wenn Anzahl = 0, Aufsichten entfernen
-                    if ($numberOfExamsTimePeriod == 0) {
-                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->execute()->affectedRows;
-                    }
 
                     // Klausurteilnahme löschen
                     if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
                         // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
                         $getExamRegistration = AttendeesExamsModel::findBy('exam_id', $exam_id);
-                        
+
                         // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                         if (empty($getExamRegistration->attendee_id)) {
                             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
+                        }
+
+                        /* Werden noch Klausuren am gleichen Tag geschrieben? Falls nein, Aufsichten entfernen */
+                        // Klausurdatum auf "Datum 0 Uhr" umwandeln, anschließend Timestamp von "Datum 23:59:59 Uhr" berechnen
+                        $examDateReadable = date("d.m.Y", $examFullTimestamp);
+                        $examDayStartTimestamp = strtotime($examDateReadable);
+                        $examDayEndTimestamp = $examDayStartTimestamp+86399;
+                        // Anzahl Klausuren im Zeitraum heraussuchen
+                        $numberOfExamsTimePeriod = Database::getInstance()->prepare("SELECT COUNT(*) FROM tl_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->query();
+                        // Wenn Anzahl = 0, Aufsichten entfernen
+                        if ($numberOfExamsTimePeriod == 0) {
+                            $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->execute()->affectedRows;
                         }
 
                         // Mailversand aufrufen

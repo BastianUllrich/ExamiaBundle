@@ -211,13 +211,16 @@ class MemberAdministrationModule extends \Module
                         foreach ($examIDs as $exam_id) {
                             $exID = $exam_id['exam_id'];
                             $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
+                            
+                            // Schreibassistenz des Teilnehmers entfernen
+                            $assistanceID = $getAttendeesExam->assistant_id;
+                            $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
+
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
-                                $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
 
-                                // Schreibassistenz des Teilnehmers entfernen
-                                $assistanceID = $getAttendeesExam->assistant_id;
-                                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
+                                // Klausur löschen
+                                $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
 
                                 // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
                                 $examDate = $getAttendeesExam->date;

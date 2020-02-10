@@ -178,7 +178,7 @@ class MemberAdministrationModule extends \Module
         // Mitglied löschen
         if (\Input::get("do") == "delete") {
             $member = \Input::get("member");
-            
+
             // Verhindern, dass ein Administrator gelöscht wird
             $memberDeleteData = MemberModel::findBy('id', $member);
             if ($memberDeleteData->usertype == "Administrator") {
@@ -214,6 +214,10 @@ class MemberAdministrationModule extends \Module
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
                                 $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
+
+                                // Schreibassistenz des Teilnehmers entfernen
+                                $assistanceID = $getAttendeesExam->assistant_id;
+                                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
 
                                 // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
                                 $examDate = $getAttendeesExam->date;

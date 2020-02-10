@@ -1,5 +1,5 @@
-<p><strong><?= $this->langAttendeeDetails; ?></strong></p>
-<p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
+<h3><?= $this->langAttendeeDetails; ?></h3>
+<h4><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</h4>
 <table class="single_record">
     <tbody>
     <tr class="row_0 row_first even">

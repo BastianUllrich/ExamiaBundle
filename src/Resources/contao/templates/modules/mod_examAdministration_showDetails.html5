@@ -1,4 +1,4 @@
-    <p><strong><?= $this->langExamDetails; ?></strong></p>
+    <h3><?= $this->langExamDetails; ?></h3>
     <table class="single_record">
         <tbody>
         <tr class="row_0 row_first even">

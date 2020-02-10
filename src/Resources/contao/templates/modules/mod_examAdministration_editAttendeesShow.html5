@@ -1,5 +1,5 @@
-<p><strong><?= $this->langShowAttendees; ?></strong></p>
-<p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
+<h3><?= $this->langShowAttendees; ?></h3>
+<h4><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</h4>
 <table class="all_records">
     <thead>
     <tr>

@@ -1,4 +1,4 @@
-<p><strong><?= $this->langEditExamDetails; ?></strong></p>
+<h3><?= $this->langEditExamDetails; ?></h3>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="editExamData">

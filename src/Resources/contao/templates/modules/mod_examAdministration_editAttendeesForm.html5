@@ -1,5 +1,5 @@
-<p><strong><?= $this->langEditAttendee; ?></strong></p>
-<p><strong><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</strong></p>
+<h3><?= $this->langEditAttendee; ?></h3>
+<h4><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</h4>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="editAttendeeData">

@@ -136,9 +136,17 @@ class ExamUnsubscribeModule extends \Module
             if ((\Input::get("confirmed") == "yes")) {
 
                 // Doppeltes Absenden überprüfen
-                $checkForDoubleSending = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
+                $attendeeExamData = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$userID, $exam_id]);
 
-                if (!empty($checkForDoubleSending->exam_id)) {
+                if (!empty($attendeeExamData->exam_id)) {
+
+                    // Schreibassistenz löschen
+                    $writingAssistanceID = $attendeeExamData->assistant_id;
+                    if ($writingAssistanceID > 0) {
+                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$writingAssistanceID")->execute()->affectedRows;
+                    }
+                    
+                    // Klausurteilnahme löschen
                     if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
 
                         // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden

@@ -178,17 +178,17 @@ class MemberAdministrationModule extends \Module
         // Mitglied löschen
         if (\Input::get("do") == "delete") {
             $member = \Input::get("member");
-            $this->Template->showConfirmationQuestion = true;
-            $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'];
-            $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'];
-            $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'];
-
+            
             // Verhindern, dass ein Administrator gelöscht wird
             $memberDeleteData = MemberModel::findBy('id', $member);
             if ($memberDeleteData->usertype == "Administrator") {
                 \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
             }
             else {
+                $this->Template->showConfirmationQuestion = true;
+                $this->Template->confirmationQuestion = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationQuestion'];
+                $this->Template->confirmationYes = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationYes'];
+                $this->Template->confirmationNo = $GLOBALS['TL_LANG']['miscellaneous']['deleteMemberConfirmationNo'];
                 // Mitglied erst nach Bestätigung löschen
                 if ((\Input::get("confirmed") == "yes")) {
 

@@ -207,7 +207,7 @@ class MemberAdministrationModule extends \Module
                         // Klausurteilnahmen des Mitglieds aus Datenbank löschen
                         $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$member")->execute()->affectedRows;
 
-                        // Klausuren aus Datenbank löschen, falls sie keinen Teilnehmer mehr haben
+                        // Schreibassistenten, Klausuren & Aufsichtsverteilung aus Datenbank löschen, falls die Klausuren keinen Teilnehmer mehr haben
                         foreach ($examIDs as $exam_id) {
                             $exID = $exam_id['exam_id'];
                             $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
@@ -217,13 +217,11 @@ class MemberAdministrationModule extends \Module
                             if (!empty($assistanceID)) {
                                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
                             }
-                            
+
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
-
                                 // Klausur löschen
                                 $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
-
                                 // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
                                 $examDate = $getAttendeesExam->date;
                                 $examDateReadable = date("d.m.Y", $examDate);
@@ -240,7 +238,9 @@ class MemberAdministrationModule extends \Module
                     }
 
                     // Aufsichtsverteilung des Mitglieds aus Datenbank löschen
-                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE supervisor_id=$member")->execute()->affectedRows;
+                    if ($memberDeleteData->usertype == "Aufsicht") {
+                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE supervisor_id=$member")->execute()->affectedRows;
+                    }
 
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
                     if ($deleteMember = $this->Database->prepare("DELETE FROM tl_member WHERE id=$member")->execute()->affectedRows) {

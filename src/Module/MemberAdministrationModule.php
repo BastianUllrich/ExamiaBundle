@@ -221,8 +221,8 @@ class MemberAdministrationModule extends \Module
                                 $examDateFrom = strtotime($examDateReadable);
                                 $examDateTo = $examDateFrom+86399;
                                 // Anzahl der Klausuren des Tages heraussuchen -> Falls 0, wird die Aufsichtsverteilung entfernt
-                                $examsAtDate = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
-                                if ($examsAtDate == 0) {
+                                $numberOfExamsTimePeriod = $this->Database->prepare("SELECT count(*) AS numberOfExams  FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
+                                if ($numberOfExamsTimePeriod->numberOfExams == 0) {
                                     $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date=$examDateFrom")->execute()->affectedRows;
                                 }
 

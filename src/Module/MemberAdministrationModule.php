@@ -211,11 +211,13 @@ class MemberAdministrationModule extends \Module
                         foreach ($examIDs as $exam_id) {
                             $exID = $exam_id['exam_id'];
                             $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
-                            
+
                             // Schreibassistenz des Teilnehmers entfernen
                             $assistanceID = $getAttendeesExam->assistant_id;
-                            $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
-
+                            if (!empty($assistanceID)) {
+                                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
+                            }
+                            
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
 

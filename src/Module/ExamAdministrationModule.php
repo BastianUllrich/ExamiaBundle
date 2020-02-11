@@ -286,40 +286,16 @@ class ExamAdministrationModule extends \Module
             // Ist dieser Teilnehmer in der "neuen" Klausur vorhanden?
             $getAttendeesToExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$combineToId, $attendeeIdFromExam]);
             $attendeeIdToExam = $getAttendeesToExam->attendee_id;
-            // Wenn der Teilnehmer schon vorhanden ist, wird er aus der "alten" Klausur gelöscht
+            $assistantID = $getAttendeesFromExam->assistant_id;
+
+            // Wenn der Teilnehmer schon vorhanden ist, wird die Schreibassistenz gelöscht, dann wird er aus der "alten" Klausur gelöscht
             if (!empty($attendeeIdToExam)) {
+                if (!empty($assistantID)) {
+                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistantID")->execute()->affectedRows;
+                }
                 $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$attendeeIdToExam AND exam_id=$combineFromId")->execute()->affectedRows;
             }
-            // Falls Schreibassistenz vorhanden: Datum und Uhrzeit übertragen
-            $assistantFromExamID = $getAttendeesFromExam->assistant_id;
-            if (!empty($assistantFromExamID) && $assistantFromExamID > 0) {
-                $assistantExamData = SupervisorsExamsModel::findBy('id', $assistantFromExamID);
-                $examToData = ExamsModel::findBy('id', $combineToId);
-                // Datum & Dauer der "neuen" Klausur sowie Zeitverlängerung des Teilnehmers auslesen
-                $examToDate = $examToData->date; // Timestamp aus Datum + Uhrzeit
-                $examToDuration = $examToData->duration;
-                $extraTime = $getAttendeeFromExam->extra_time;
-                // Zeitverlängerung in Minuten berechnen
-                if ($getAttendeeFromExam->extra_time_minutes_percent == "percent") {
-                    $multiplicator = 1 + ($extraTime / 100);
-                    $attendeeDuration = $examToDuration * $multiplicator;
-                } elseif ($getAttendeeFromExam->extra_time_minutes_percent == "minutes") {
-                    $attendeeDuration = $examToDuration + $extraTime;
-                }
-                $attendeeExamEndTime = $examToDate + ($attendeeDuration*60); // Endzeit als Timestamp
-                // Neuer Timestamp für Schreibassistenz aus Datum berechnen
-                $assistantDateReadable = date("d.m.Y", $examToDate);
-                $assistantDate = strtotime($assistantDateReadable);
-                // Start- und Endzeit für Schreibassistenz umwandeln
-                $assistantTimeBeginReadable = date("H:i", $examToDate);
-                $assistantTimeEndReadable = date("H:i", $attendeeExamEndTime);
-                // Variablen für Supervisor-Model setzen
-                $assistantExamData->date = $assistantDate;
-                $assistantExamData->time_from = $assistantTimeBeginReadable;
-                $assistantExamData->time_until = $assistantTimeEndReadable;
-                // Supervisor-Model speichern
-                $assistantExamData->save();
-            }
+
         }
 
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)

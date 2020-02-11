@@ -553,7 +553,7 @@ class ExamAdministrationModule extends \Module
         foreach ($examAttendeesData as $examAttendee) {
             $assistantID = $examAttendee->assistant_id;
             if (!empty($assistantID) && $assistantID > 0) {
-                $assistantData = SupervisorsExamsModel::findBy($assistantID);
+                $assistantData = SupervisorsExamsModel::findBy('id', $assistantID);
                 $assistantData->date = $exam_date;
                 $assistantData->begin = $exam_begin;
 

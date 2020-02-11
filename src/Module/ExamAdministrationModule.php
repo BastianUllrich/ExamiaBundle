@@ -147,7 +147,7 @@ class ExamAdministrationModule extends \Module
             $this->setExamValuesEdit($examDetails);
         }
 
-        // Formular wurde abgesendet
+        // Ein Formular wurde abgesendet
         $examID = \Input::get("exam");
         $attendeeID = \Input::get("editAttendee");
         if (\Contao\Input::post('FORM_SUBMIT') == 'editExamData') {
@@ -521,12 +521,9 @@ class ExamAdministrationModule extends \Module
     // Formular "Klausurdetails bearbeiten" verarbeiten
     public function saveExamChanges($examID)
     {
-        // Wird über Model gelöst
         $exam = ExamsModel::findBy('id', $examID);
         $id = $exam->id;
-        // set the values
         $exam->title = \Input::post('title');
-
         $exam_date = \Input::post('date');
         $exam_begin = \Input::post('begin');
         // Datum um Beginn verknüpfen und in Variable für Datenbank schreiben
@@ -536,7 +533,11 @@ class ExamAdministrationModule extends \Module
         $exam_datetime = strtotime($exam_datetime);
         $exam->date = $exam_datetime;
         $exam->begin = $exam_begin;
-        $exam->duration = \Input::post('regularDuration');
+        $examDuration = \Input::post('regularDuration');
+        if (empty($examDuration) || !is_numeric($examDuration)) {
+            $examDuration = 0;
+        }
+        $exam->duration = $examDuration;
         $exam->department = \Input::post('department');
         $exam->status = \Input::post('status');
         $exam->tools = \Input::post('tools');
@@ -547,7 +548,39 @@ class ExamAdministrationModule extends \Module
         $exam->lecturer_email = \Input::post('lecturerEmail');
         $exam->lecturer_mobile = \Input::post('lecturerMobile');
 
-        // update the record in the database
+        // Datum und Uhrzeit für Schreibassistenten der Teilnehmer aktualisieren
+        $examAttendeesData = AttendeesExamsModel::findBy('exam_id', $id);
+        foreach ($examAttendeesData as $examAttendee) {
+            $assistantID = $examAttendee->assistant_id;
+            if (!empty($assistantID) && $assistantID > 0) {
+                $assistantData = SupervisorsExamsModel::findBy($assistantID);
+                $assistantData->date = $exam_date;
+                $assistantData->begin = $exam_begin;
+
+                $extraTime = $examAttendee->extra_time;
+                $extraTimeValue = $examAttendee->extra_time_minutes_percent;
+
+                // "Zeit bis" aus Klausurdauer + Zeitverlängerung berechnen
+                if ($extraTimeValue == "percent") {
+                    $examDurationExtraTime = $examDuration + ($examDuration*($extraTime/100));
+                }
+                elseif ($extraTimeValue == "minutes") {
+                    $examDurationExtraTime = $examDuration + $extraTime;
+                }
+                else {
+                    $examDurationExtraTime = $examDuration;
+                }
+                $examDurationExtraTimeInSeconds = $examDurationExtraTime*60;
+                $timeExamEnd = $fullTimestampExam + $examDurationExtraTimeInSeconds;
+
+                $assistantData->end = date("G:i", $timeExamEnd);
+
+                // Schreibassistenz aktualisieren
+                $assistantData->save();
+            }
+        }
+
+        // Klausurdaten speichern
         if ($exam->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
@@ -742,6 +775,7 @@ class ExamAdministrationModule extends \Module
             }
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
+
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
                 $this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
                 // Eintrag in tl_attendees_exams aktualisieren

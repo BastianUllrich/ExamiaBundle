@@ -117,6 +117,7 @@ class MemberAdministrationModule extends \Module
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
 
+        // Details des Mitglieds einsehen
         if (\Input::get("do") == "viewDetails") {
             $member = \Input::get("member");
             $memberDetailsData = MemberModel::findBy('id', $member);
@@ -253,6 +254,7 @@ class MemberAdministrationModule extends \Module
             }
         }
 
+        // Details des Mitglieds bearbeiten
         if (\Input::get("do") == "editDetails") {
             $this->Template->showEditForm = true;
             $member = \Input::get("member");
@@ -261,11 +263,13 @@ class MemberAdministrationModule extends \Module
             $this->setMemberValuesEdit($memberData);
         }
 
+        // Formular "Mitgliedsdetails bearbeiten" wurde abgesendet
         if (\Input::post('FORM_SUBMIT') == 'editMember') {
             $this->saveChanges($memberData->usertype, $member);
         }
     }
 
+    // Variablen für "Details des Mitglieds bearbeiten" setzen
     public function setMemberValuesEdit($memberData) {
         $this->Template->memberType = $memberData->usertype;
 
@@ -294,6 +298,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->comments = $memberData->comments;
     }
 
+    // Sprachvariablen für "Details des Mitglieds bearbeiten" setzen
     public function setLangValuesEdit() {
         $this->Template->editMember = $GLOBALS['TL_LANG']['miscellaneous']['editMember'];
 
@@ -377,6 +382,8 @@ class MemberAdministrationModule extends \Module
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
 
+    // Formular "Mitgliedsdetails bearbeiten" wurde abgesendet
+    // Eingaben entgegennehmen und Verarbeiten
     public function saveChanges($usertype, $member)
     {
         // Felder auslesen

@@ -233,6 +233,7 @@ class ExamAdministrationModule extends \Module
         }
     }
 
+    // Sprachvariablen für "Klausuren zusammenlegen" setzen
     public function setLangValuesCombineExams() {
         $this->Template->langCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['combineExams'];
         $this->Template->langCombineExamsExplanation = $GLOBALS['TL_LANG']['miscellaneous']['combineExamsExplanation'];
@@ -244,6 +245,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langExamTimeHour = $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
     }
 
+    // Variablen für "Klausuren zusammenlegen" setzen
     public function setValuesCombineExams($examDetails) {
         $this->Template->examToId = $examDetails->id;
         $this->Template->examToTitle = $examDetails->title;
@@ -271,6 +273,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->examFromDataList = $examFromData;
     }
 
+    // Klausuren zusammenlegen
     public function saveCombineChanges($examID) {
         $combineToId = $examID;
         $combineFromId = \Input::post('examFrom');
@@ -287,6 +290,36 @@ class ExamAdministrationModule extends \Module
             if (!empty($attendeeIdToExam)) {
                 $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$attendeeIdToExam AND exam_id=$combineFromId")->execute()->affectedRows;
             }
+            // Falls Schreibassistenz vorhanden: Datum und Uhrzeit übertragen
+            $assistantFromExamID = $getAttendeesFromExam->assistant_id;
+            if (!empty($assistantFromExamID) && $assistantFromExamID > 0) {
+                $assistantExamData = SupervisorsExamsModel::findBy('id', $assistantFromExamID);
+                $examToData = ExamsModel::findBy('id', $combineToId);
+                // Datum & Dauer der "neuen" Klausur sowie Zeitverlängerung des Teilnehmers auslesen
+                $examToDate = $examToData->date; // Timestamp aus Datum + Uhrzeit
+                $examToDuration = $examToData->duration;
+                $extraTime = $getAttendeeFromExam->extra_time;
+                // Zeitverlängerung in Minuten berechnen
+                if ($getAttendeeFromExam->extra_time_minutes_percent == "percent") {
+                    $multiplicator = 1 + ($extraTime / 100);
+                    $attendeeDuration = $examToDuration * $multiplicator;
+                } elseif ($getAttendeeFromExam->extra_time_minutes_percent == "minutes") {
+                    $attendeeDuration = $examToDuration + $extraTime;
+                }
+                $attendeeExamEndTime = $examToDate + ($attendeeDuration*60); // Endzeit als Timestamp
+                // Neuer Timestamp für Schreibassistenz aus Datum berechnen
+                $assistantDateReadable = date("d.m.Y", $examToDate);
+                $assistantDate = strtotime($assistantDateReadable);
+                // Start- und Endzeit für Schreibassistenz umwandeln
+                $assistantTimeBeginReadable = date("H:i", $examToDate);
+                $assistantTimeEndReadable = date("H:i", $attendeeExamEndTime);
+                // Variablen für Supervisor-Model setzen
+                $assistantExamData->date = $assistantDate;
+                $assistantExamData->time_from = $assistantTimeBeginReadable;
+                $assistantExamData->time_until = $assistantTimeEndReadable;
+                // Supervisor-Model speichern
+                $assistantExamData->save();
+            }
         }
 
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
@@ -300,6 +333,7 @@ class ExamAdministrationModule extends \Module
 
     }
 
+    // Variablen "Klausurdetails einsehen" setzen
     public function setExamValuesViewDetails($examDetails)
     {
         $this->Template->detailExamTitel = $examDetails->title;
@@ -403,6 +437,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRemarks = $examDetails->remarks;
     }
 
+    // Sprachvariablen "Klausurdetails einsehen" und "Klausurdetails bearbeiten" setzen
     public function setLangValuesViewEditDetails()
     {
         $this->Template->langExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['examDetails'];
@@ -452,6 +487,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langSaveChanges = $GLOBALS['TL_LANG']['miscellaneous']['saveChanges'];
     }
 
+    // Sprachvariablen "Teilnehmer bearbeiten" setzen
     public function setLangValuesEditAttendees()
     {
         $this->Template->langShowAttendees = $GLOBALS['TL_LANG']['miscellaneous']['show_Attendees'];
@@ -472,6 +508,8 @@ class ExamAdministrationModule extends \Module
         $this->Template->linkTitleDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'];
     }
 
+
+    // Variablen Klausurdetails bearbeiten" setzen
     public function setExamValuesEdit($examData)
     {
         $this->Template->title = $examData->title;
@@ -489,7 +527,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->lecturerMobile = $examData->lecturer_mobile;
     }
 
-    //
+    // Formular "Klausurdetails bearbeiten" verarbeiten
     public function saveExamChanges($examID)
     {
         // Wird über Model gelöst
@@ -727,7 +765,7 @@ class ExamAdministrationModule extends \Module
         }
     }
 
-    // Variablen beim Editieren und Anzeigen von Teilnehmern
+    // Variablen beim Editieren und Anzeigen von Teilnehmern setzen
     public function setShowEditAttendeeValues($examID, $attendeeID) {
 
         $result = Database::getInstance()->prepare("SELECT
@@ -800,7 +838,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
     }
 
-    // Sprach-Variablen beim Editieren und Anzeigen von Teilnehmern
+    // Sprach-Variablen beim Editieren und Anzeigen von Teilnehmern setzen
     public function setShowEditAttendeeLangValues() {
         $this->Template->langEditAttendee = $GLOBALS['TL_LANG']['miscellaneous']['edit_Attendee'];
         $this->Template->langAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['details_Attendee'];

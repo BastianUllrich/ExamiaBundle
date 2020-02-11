@@ -301,6 +301,19 @@ class ExamAdministrationModule extends \Module
         // Alle Teilnehmer der "alten" Klausur in die "neue" Klausur übertragen (falls noch nicht drin)
         $getAttendeesFromExam->exam_id = $combineToId;
         if ($getAttendeesFromExam->save()) {
+
+            // Aufsichten vom Klausurtag entfernen, falls am Tag der Klausur keine Klausuren mehr vorhanden sind
+            $getExamDate = ExamsModel::findBy('id', $combineFromId);
+            // Umwandeln der Time-Angabe von Tag + Uhrzeit auf Tag
+            $examDateString = date("d.m.Y", $getExamDate->date);
+            $examDateFrom = strtotime($examDateString);
+            $examDateTo = $examDateFrom + 86399;
+            // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
+            $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
+            if ($resultCount != 0) {
+                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
+            }
+
             // "Alte" Klausur löschen
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
             $this->Template->combinationSaved = true;

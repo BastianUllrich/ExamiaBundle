@@ -211,48 +211,44 @@ class ExamRegistrationModule extends \Module
         $examData .= $department;
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
-        $examData .= " ";
         $examData .= $exam_date;
-        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
-        $examData .= " ";
         $examData .= $exam_begin;
-        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
         $this->sendMailMember($objUser, $examData);
         $this->sendMailBliZ($objUser, $examData);
     }
 
     public function sendMailMember($objUser, $examData) {
-        $objMailSuscribe = new \Email();
-        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSubscribe = new \Email();
+        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
         //$objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSuscribe->from = 'bastian.ullrich@iem.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
-        $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text .= $examData;
-        $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
+        $objMailSubscribe->from = 'bastian.ullrich@iem.thm.de';
+        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
+        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
+        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
         //$objMailSuscribe->sendTo($objUser->email);
-        $objMailSuscribe->sendTo('bastiullrich@gmail.com');
-        unset($objMailSuscribe);
+        $objMailSubscribe->sendTo('bastiullrich@gmail.com');
+        unset($objMailSubscribe);
     }
     public function sendMailBliZ($objUser, $examData) {
-        $objMailSuscribe = new \Email();
-        $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'];
-        $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text .= $objUser->username;
-        $objMailSuscribe->text .= " (ID ";
-        $objMailSuscribe->text .= $objUser->id;
-        $objMailSuscribe->text .= "), ";
-        $objMailSuscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
-        $objMailSuscribe->text .= ": ";
-        $objMailSuscribe->text .= $examData;
-        $objMailSuscribe->sendTo($objUser->email);
-        unset($objMailSuscribe);
+        $objMailSubscribe = new \Email();
+        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailSubscribe->from = 'beratung@bliz.thm.de';
+        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
+        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'];
+        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= $objUser->username;
+        $objMailSubscribe->text .= " (ID ";
+        $objMailSubscribe->text .= $objUser->id;
+        $objMailSubscribe->text .= "), ";
+        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $objMailSubscribe->text .= ": ";
+        $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->sendTo($objUser->email);
+        unset($objMailSubscribe);
     }
 }

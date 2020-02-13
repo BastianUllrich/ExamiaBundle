@@ -242,9 +242,9 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->from = 'bastian.ullrich@iem.thm.de';
         $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
         $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
-        $objMailSubscribe->text .= "\n";
-        $objMailSubscribe->text .= $examData;
         $objMailSubscribe->text .= "\n\n";
+        $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->text .= ".\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
         $objMailSubscribe->text .= "\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
@@ -265,7 +265,7 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $objMailSubscribe->text .= ": ";
         $objMailSubscribe->text .= $examData;
-        $objMailSubscribe->text .= "\n\n";
+        $objMailSubscribe->text .= ".\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         $objMailSubscribe->sendTo("bastian.ullrich@iem.thm.de");
         //$objMailSubscribe->sendTo($objUser->email);

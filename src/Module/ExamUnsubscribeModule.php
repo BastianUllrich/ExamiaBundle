@@ -217,7 +217,7 @@ class ExamUnsubscribeModule extends \Module
         $objMailUnsubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'];
         $objMailUnsubscribe->text .= "\n\n";
         $objMailUnsubscribe->text .= $examData;
-        $objMailUnsubscribe->text .= "\n\n";
+        $objMailUnsubscribe->text .= ".\n\n";
         $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         $objMailUnsubscribe->sendTo($objUser->email);
         unset($objMailUnsubscribe);
@@ -236,7 +236,7 @@ class ExamUnsubscribeModule extends \Module
         $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $objMailUnsubscribe->text .= ": ";
         $objMailUnsubscribe->text .= $examData;
-        $objMailUnsubscribe->text .= "\n\n";
+        $objMailUnsubscribe->text .= ".\n\n";
         $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         $objMailUnsubscribe->sendTo("bastian.ullrich@iem.thm.de");
         unset($objMailUnsubscribe);

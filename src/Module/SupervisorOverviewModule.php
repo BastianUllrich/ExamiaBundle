@@ -149,10 +149,10 @@ class SupervisorOverviewModule extends \Module
             $i = 0;
             $maxDuration = $result->duration;
             foreach ($endTimeQuestion as $endTime) {
-                if ($endTime->extra_time_minutes_percent == "percent") {
+                if ($endTime->extra_time_unit == "percent") {
                     $multiplicator = 1 + ($endTime->extra_time / 100);
                     $duration = ($result->duration) * $multiplicator;
-                } elseif ($endTime->extra_time_minutes_percent == "minutes") {
+                } elseif ($endTime->extra_time_unit == "minutes") {
                     $duration = ($result->duration) + $endTime->extra_time;
                 }
                 if ($duration > $maxDuration) {
@@ -185,7 +185,7 @@ class SupervisorOverviewModule extends \Module
         // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT tl_exams.title, tl_exams.begin, tl_attendees_exams.seat, tl_exams.duration, tl_exams.date,
                                                     tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others,  
-                                                    tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent
+                                                    tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit
                                                     FROM tl_exams, tl_attendees_exams, tl_member
                                                     WHERE tl_exams.id = $examID
                                                     AND tl_attendees_exams.exam_id = $examID
@@ -210,13 +210,13 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['rehabToolsOthers'] = $result->rehab_devices_others;
             $attendeeData[$i]['extraTime'] = $result->extra_time;
             $attendeeData[$i]['extraTime'] .= " ";
-            $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+            $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_unit];
 
             $duration = $result->duration;
-            if ($result->extra_time_minutes_percent == "percent") {
+            if ($result->extra_time_unit == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);
                 $duration = $duration * $multiplicator;
-            } elseif ($result->extra_time_minutes_percent == "minutes") {
+            } elseif ($result->extra_time_unit == "minutes") {
                 $duration = $duration + $result->extra_time;
             }
             $endTime = ($result->date) + ($duration * 60);

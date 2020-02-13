@@ -40,7 +40,7 @@ $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'] = 'Schreibassistenz';
 
 //Zeitverlängerung
 $GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time'] = ['Zeitverlängerung', 'Bitte geben Sie die Zeitverlängerung in Minuten oder Prozent an'];
-$GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time_minutes_percent'] = ['Einheit der Zeitverlängerung', 'Bitte wählen Sie aus, ob die Zeitverlängerung in Minuten oder Prozent angegeben ist'];
+$GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time_unit'] = ['Einheit der Zeitverlängerung', 'Bitte wählen Sie aus, ob die Zeitverlängerung in Minuten oder Prozent angegeben ist'];
 $GLOBALS['TL_LANG']['tl_attendees_exams']['minutes'] = 'Minuten';
 $GLOBALS['TL_LANG']['tl_attendees_exams']['percent'] = 'Prozent';
 

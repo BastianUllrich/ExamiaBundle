@@ -104,8 +104,8 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
             'eval' => ['rgxp' => 'natural', 'maxlength' => 3, 'mandatory' => false],
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0]
         ],
-        'extra_time_minutes_percent' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time_minutes_percent'],
+        'extra_time_unit' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_attendees_exams']['extra_time_unit'],
             'inputType' => 'select',
             'options' => ['minutes', 'percent'],
             'reference' => &$GLOBALS['TL_LANG']['tl_attendees_exams'],
@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
         ]
     ],
     'palettes' => [
-        'default' => 'attendee_id,exam_id,status,rehab_devices,rehab_devices_others,assistant_id,extra_time,extra_time_minutes_percent,seat'
+        'default' => 'attendee_id,exam_id,status,rehab_devices,rehab_devices_others,assistant_id,extra_time,extra_time_unit,seat'
     ],
 ];
 

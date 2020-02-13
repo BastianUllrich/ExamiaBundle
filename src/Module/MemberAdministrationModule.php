@@ -294,7 +294,7 @@ class MemberAdministrationModule extends \Module
 
         $this->Template->rehab_devices_others = $memberData->rehab_devices_others;
         $this->Template->extra_time = $memberData->extra_time;
-        $this->Template->extra_time_minutes_percent = $memberData->extra_time_minutes_percent;
+        $this->Template->extra_time_unit = $memberData->extra_time_unit;
         $this->Template->comments = $memberData->comments;
     }
 
@@ -375,7 +375,7 @@ class MemberAdministrationModule extends \Module
         $this->Template->langComments = $GLOBALS['TL_LANG']['tl_member']['comments'][0];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
-        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];
+        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_unit'][0];
         $this->Template->langExtraTimeMinutes = $GLOBALS['TL_LANG']['tl_member']['minutes'];
         $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
 
@@ -414,7 +414,7 @@ class MemberAdministrationModule extends \Module
             $rehab_devices = serialize(\Input::post('rehab_devices'));
             $rehab_devices_others = \Input::post('rehab_devices_others');
             $extra_time = \Input::post('extra_time');
-            $extra_time_minutes_percent = \Input::post('extra_time_minutes_percent');
+            $extra_time_unit = \Input::post('extra_time_unit');
             $comments = \Input::post('comments');
         }
 
@@ -425,7 +425,7 @@ class MemberAdministrationModule extends \Module
             case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
                                                 'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
                                                 'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
-                                                'extra_time'=>$extra_time, 'extra_time_minutes_percent'=>$extra_time_minutes_percent, 'comments'=>$comments); break;
+                                                'extra_time'=>$extra_time, 'extra_time_unit'=>$extra_time_unit, 'comments'=>$comments); break;
             default: break;
         }
 

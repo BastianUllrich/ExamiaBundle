@@ -344,10 +344,10 @@ class ExamAdministrationModule extends \Module
         $i = 0;
         $maxDuration = $examDetails->duration;
         foreach ($results as $result) {
-            if ($result->extra_time_minutes_percent == "percent") {
+            if ($result->extra_time_unit == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);
                 $duration = ($examDetails->duration) * $multiplicator;
-            } elseif ($result->extra_time_minutes_percent == "minutes") {
+            } elseif ($result->extra_time_unit == "minutes") {
                 $duration = ($examDetails->duration) + $result->extra_time;
             }
             if ($duration > $maxDuration) {
@@ -403,7 +403,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->supervisorsDataList = $supervisorsData;
 
         // Teilnehmer heraussuchen
-        $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_member.id, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent
+        $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_member.id, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit
                                                     FROM tl_member, tl_attendees_exams
                                                     WHERE tl_attendees_exams.exam_id=$examDetails->id
                                                     AND tl_attendees_exams.attendee_id=tl_member.id
@@ -414,9 +414,9 @@ class ExamAdministrationModule extends \Module
             // Variablen für das Template setzen
             $attendeesData[$i]['firstname'] = $result->firstname;
             $attendeesData[$i]['lastname'] = $result->lastname;
-            if (!empty($result->extra_time) && !empty($result->extra_time_minutes_percent)) {
+            if (!empty($result->extra_time) && !empty($result->extra_time_unit)) {
                 $attendeesData[$i]['extra_time'] = $result->extra_time;
-                $attendeesData[$i]['extra_time_minutes_percent'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_minutes_percent];
+                $attendeesData[$i]['extra_time_unit'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_unit];
             }
             else {
                 $attendeesData[$i]['extra_time'] = $GLOBALS['TL_LANG']['miscellaneous']['noExtraTime'];
@@ -558,7 +558,7 @@ class ExamAdministrationModule extends \Module
                 $assistantData->begin = $exam_begin;
 
                 $extraTime = $examAttendee->extra_time;
-                $extraTimeValue = $examAttendee->extra_time_minutes_percent;
+                $extraTimeValue = $examAttendee->extra_time_unit;
 
                 // "Zeit bis" aus Klausurdauer + Zeitverlängerung berechnen
                 if ($extraTimeValue == "percent") {
@@ -705,8 +705,8 @@ class ExamAdministrationModule extends \Module
         $extraTime = \Input::post('extra_time');
         if (empty($extraTime) || !is_numeric($extraTime)) $extraTime = 0;
         $attendeeExam->extra_time = $extraTime;
-        $extraTimeValue = \Input::post('extra_time_minutes_percent');
-        $attendeeExam->extra_time_minutes_percent = $extraTimeValue;
+        $extraTimeValue = \Input::post('extra_time_unit');
+        $attendeeExam->extra_time_unit = $extraTimeValue;
         $attendeeExam->status = \Input::post('status');
 
         // Werte von Select-Feld "Schreibassistenz" trennen
@@ -795,7 +795,7 @@ class ExamAdministrationModule extends \Module
 
         $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
-                                                    tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_minutes_percent,
+                                                    tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit,
                                                     tl_attendees_exams.rehab_devices, tl_attendees_exams.rehab_devices_others, tl_attendees_exams.status,
                                                     tl_attendees_exams.assistant_id
                                                     FROM tl_member, tl_attendees_exams
@@ -853,11 +853,11 @@ class ExamAdministrationModule extends \Module
         $this->Template->writingAssistanceList = $writingAssistance;
 
         $this->Template->extraTime = $result->extra_time;
-        $this->Template->extraTimeUnit = $result->extra_time_minutes_percent;
+        $this->Template->extraTimeUnit = $result->extra_time_unit;
 
         $this->Template->detailExtraTime =  $result->extra_time;
         $this->Template->detailExtraTime .=  " ";
-        $this->Template->detailExtraTime .=  $GLOBALS['TL_LANG']['tl_member'][$result->extra_time_minutes_percent];
+        $this->Template->detailExtraTime .=  $GLOBALS['TL_LANG']['tl_member'][$result->extra_time_unit];
 
         $this->Template->status = $result->status;
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
@@ -907,7 +907,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
 
         $this->Template->langExtraTime = $GLOBALS['TL_LANG']['tl_member']['extra_time'][0];
-        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'][0];
+        $this->Template->langExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member']['extra_time_unit'][0];
         $this->Template->langExtraTimeMinutes = $GLOBALS['TL_LANG']['tl_member']['minutes'];
         $this->Template->langExtraTimePercent = $GLOBALS['TL_LANG']['tl_member']['percent'];
 

@@ -67,7 +67,7 @@
                     echo " (";
                     echo $attendeesData['extra_time'];
                     echo " ";
-                    echo $attendeesData['extra_time_minutes_percent'];
+                    echo $attendeesData['extra_time_unit'];
                     echo ")<br>";
                     endforeach;
                 ?>

@@ -103,11 +103,11 @@ class ExamRegistrationModule extends \Module
         // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
             // Funktion zum Eintrag in die Datenbank aufrufen, mit Entitäten des Mitglieds für die Tabelle "tl_attendees_exams" (Zuweisung Klausur - Mitglied)
-            $this->registerExam($userID, $userdata->rehab_devices, $userdata->rehab_devices_others, $userdata->extra_time, $userdata->extra_time_minutes_percent);
+            $this->registerExam($userID, $userdata->rehab_devices, $userdata->rehab_devices_others, $userdata->extra_time, $userdata->extra_time_unit);
         }
     }
 
-    public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_minutes_percent) {
+    public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_unit) {
 
         // Felder aus Formular auslesen
         $exam_title = \Input::post('exam_title');
@@ -164,7 +164,7 @@ class ExamRegistrationModule extends \Module
 
                     // Insertions für Tabelle "tl_attendees_exams" definieren
                     $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                        'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_minutes_percent' => $extra_time_minutes_percent);
+                        'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
 
                     // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
                     if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {

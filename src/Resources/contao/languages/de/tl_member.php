@@ -124,7 +124,7 @@ $GLOBALS['TL_LANG']['tl_member']['extra_time'] = array
                 'Bitte geben Sie die Zeitverlängerung in Minuten oder Prozent an'
         );
 
-$GLOBALS['TL_LANG']['tl_member']['extra_time_minutes_percent'] = array
+$GLOBALS['TL_LANG']['tl_member']['extra_time_unit'] = array
         (
                 'Einheit der Zeitverlängerung',
                 'Bitte wählen Sie aus, ob die Zeitverlängerung in Minuten oder Prozent angegeben ist'

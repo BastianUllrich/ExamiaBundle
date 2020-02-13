@@ -209,10 +209,18 @@ class ExamRegistrationModule extends \Module
         $examDateTimestamp = strtotime($exam_date);
         $examDateReadable = date("d.m.Y", $examDateTimestamp);
 
+        // Fachbereich in lesbareres Format wandeln (außer JLU)
+        if ($department != "department14")  {
+            $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -5);
+        }
+        else {
+            $departmentReadable = $GLOBALS['TL_LANG']['tl_exams'][$department];
+        }
+
         $objUser = FrontendUser::getInstance();
         $examData = $exam_title;
         $examData .= " (";
-        $examData .= $GLOBALS['TL_LANG']['tl_exams'][$department];
+        $examData .= $departmentReadable;
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
         $examData .= " ";

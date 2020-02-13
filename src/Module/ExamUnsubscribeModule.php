@@ -193,8 +193,17 @@ class ExamUnsubscribeModule extends \Module
     // Mailversand
     public function sendMail($examDescription, $department) {
         $objUser = FrontendUser::getInstance();
+
+        // Fachbereich in lesbareres Format wandeln (außer JLU)
+        if ($department != "department14")  {
+            $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -5);
+        }
+        else {
+            $departmentReadable = $GLOBALS['TL_LANG']['tl_exams'][$department];
+        }
+
         $examDescription .= " (";
-        $examDescription .= $GLOBALS['TL_LANG']['tl_exams'][$department];
+        $examDescription .= $departmentReadable;
         $examDescription .= ")";
         $this->sendMailMember($objUser, $examDescription);
         $this->sendMailBliZ($objUser, $examDescription);

@@ -236,8 +236,7 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
         $objMailSubscribe->text .= "\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
-        //$objMailSuscribe->sendTo($objUser->email);
-        $objMailSubscribe->sendTo('bastiullrich@gmail.com');
+        $objMailSubscribe->sendTo($objUser->email);
         unset($objMailSubscribe);
     }
     public function sendMailBliZ($objUser, $examData) {
@@ -256,7 +255,8 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= $examData;
         $objMailSubscribe->text .= "\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
-        $objMailSubscribe->sendTo($objUser->email);
+        $objMailSubscribe->sendTo("bastian.ullrich@iem.thm.de");
+        //$objMailSubscribe->sendTo($objUser->email);
         unset($objMailSubscribe);
     }
 }

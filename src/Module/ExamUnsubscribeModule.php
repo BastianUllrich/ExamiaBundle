@@ -194,7 +194,7 @@ class ExamUnsubscribeModule extends \Module
     public function sendMail($examDescription, $department) {
         $objUser = FrontendUser::getInstance();
         $examDescription .= " (";
-        $examDescription .= $department;
+        $examDescription .= $GLOBALS['TL_LANG']['tl_exams'][$department];
         $examDescription .= ")";
         $this->sendMailMember($objUser, $examDescription);
         $this->sendMailBliZ($objUser, $examDescription);

@@ -257,7 +257,7 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->from = 'beratung@bliz.thm.de';
         $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
         $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'];
-        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= "\n\n";
         $objMailSubscribe->text .= $objUser->username;
         $objMailSubscribe->text .= " (ID ";
         $objMailSubscribe->text .= $objUser->id;

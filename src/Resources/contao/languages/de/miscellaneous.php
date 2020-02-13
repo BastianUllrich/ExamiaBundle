@@ -134,6 +134,8 @@ $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'] = "Abmeldung von
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'] = "Sie haben sich erfolgreich von nachfolgender Klausur im BliZ abgemeldet:";
 $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'] = "Folgendes Mitglied hat sich von nachfolgender Klausur im BliZ abgemeldet:";
 
+$GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'] = "Dies ist eine automatisch erzeugte E-Mail. Bitte antworten Sie nicht darauf.";
+
 $GLOBALS['TL_LANG']['miscellaneous']['memberDetails'] = "Mitgliedsdetails";
 
 // Image Alternatives

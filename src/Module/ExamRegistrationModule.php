@@ -208,11 +208,11 @@ class ExamRegistrationModule extends \Module
         $objUser = FrontendUser::getInstance();
         $examData = $exam_title;
         $examData .= " (";
-        $examData .= $department;
+        $examData .= $GLOBALS['TL_LANG']['tl_exams'][$department];
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
         $examData .= " ";
-        $examData .= $exam_date;
+        $examData .= date("d.m.Y", $exam_date);
         $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
         $examData .= " ";
@@ -232,8 +232,10 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
         $objMailSubscribe->text .= "\n";
         $objMailSubscribe->text .= $examData;
-        $objMailSubscribe->text .= "\n";
+        $objMailSubscribe->text .= "\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
+        $objMailSubscribe->text .= "\n\n";
+        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         //$objMailSuscribe->sendTo($objUser->email);
         $objMailSubscribe->sendTo('bastiullrich@gmail.com');
         unset($objMailSubscribe);
@@ -252,6 +254,8 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $objMailSubscribe->text .= ": ";
         $objMailSubscribe->text .= $examData;
+        $objMailSubscribe->text .= "\n\n";
+        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         $objMailSubscribe->sendTo($objUser->email);
         unset($objMailSubscribe);
     }

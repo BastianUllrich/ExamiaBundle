@@ -201,31 +201,35 @@ class ExamUnsubscribeModule extends \Module
     }
 
     public function sendMailMember($objUser, $examData) {
-        $objMailSubscribe = new \Email();
-        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSubscribe->from = 'beratung@bliz.thm.de';
-        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
-        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'];
-        $objMailSubscribe->text .= "\n";
-        $objMailSubscribe->text .= $examData;
-        $objMailSubscribe->sendTo($objUser->email);
-        unset($objMailSubscribe);
+        $objMailUnsubscribe = new \Email();
+        $objMailUnsubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailUnsubscribe->from = 'beratung@bliz.thm.de';
+        $objMailUnsubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
+        $objMailUnsubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'];
+        $objMailUnsubscribe->text .= "\n";
+        $objMailUnsubscribe->text .= $examData;
+        $objMailUnsubscribe->text .= "\n\n";
+        $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
+        $objMailUnsubscribe->sendTo($objUser->email);
+        unset($objMailUnsubscribe);
     }
     public function sendMailBliZ($objUser, $examData) {
-        $objMailSubscribe = new \Email();
-        $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        $objMailSubscribe->from = 'beratung@bliz.thm.de';
-        $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
-        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'];
-        $objMailSubscribe->text .= "\n";
-        $objMailSubscribe->text .= $objUser->username;
-        $objMailSubscribe->text .= " (ID ";
-        $objMailSubscribe->text .= $objUser->id;
-        $objMailSubscribe->text .= "), ";
-        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
-        $objMailSubscribe->text .= ": ";
-        $objMailSubscribe->text .= $examData;
-        $objMailSubscribe->sendTo($objUser->email);
-        unset($objMailSubscribe);
+        $objMailUnsubscribe = new \Email();
+        $objMailUnsubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
+        $objMailUnsubscribe->from = 'beratung@bliz.thm.de';
+        $objMailUnsubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
+        $objMailUnsubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'];
+        $objMailUnsubscribe->text .= "\n";
+        $objMailUnsubscribe->text .= $objUser->username;
+        $objMailUnsubscribe->text .= " (ID ";
+        $objMailUnsubscribe->text .= $objUser->id;
+        $objMailUnsubscribe->text .= "), ";
+        $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
+        $objMailUnsubscribe->text .= ": ";
+        $objMailUnsubscribe->text .= $examData;
+        $objMailUnsubscribe->text .= "\n\n";
+        $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
+        $objMailUnsubscribe->sendTo($objUser->email);
+        unset($objMailUnsubscribe);
     }
 }

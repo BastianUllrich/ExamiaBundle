@@ -213,7 +213,7 @@ class ExamRegistrationModule extends \Module
         if ($department != "department12" && $department != "department14")  {
             $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -5);
         }
-        elseif ($department != "department12") {
+        elseif ($department == "department12") {
             $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -9);
         }
         else {

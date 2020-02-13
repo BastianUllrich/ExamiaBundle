@@ -211,9 +211,13 @@ class ExamRegistrationModule extends \Module
         $examData .= $department;
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
+        $examData .= " ";
         $examData .= $exam_date;
+        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
+        $examData .= " ";
         $examData .= $exam_begin;
+        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
         $this->sendMailMember($objUser, $examData);
         $this->sendMailBliZ($objUser, $examData);
@@ -229,7 +233,7 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= "\n";
         $objMailSubscribe->text .= $examData;
         $objMailSubscribe->text .= "\n";
-        $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
+        $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
         //$objMailSuscribe->sendTo($objUser->email);
         $objMailSubscribe->sendTo('bastiullrich@gmail.com');
         unset($objMailSubscribe);

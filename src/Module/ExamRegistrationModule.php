@@ -210,8 +210,11 @@ class ExamRegistrationModule extends \Module
         $examDateReadable = date("d.m.Y", $examDateTimestamp);
 
         // Fachbereich in lesbareres Format wandeln (außer JLU)
-        if ($department != "department14")  {
+        if ($department != "department12" && $department != "department14")  {
             $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -5);
+        }
+        elseif ($department != "department12") {
+            $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -9);
         }
         else {
             $departmentReadable = $GLOBALS['TL_LANG']['tl_exams'][$department];
@@ -238,8 +241,7 @@ class ExamRegistrationModule extends \Module
     public function sendMailMember($objUser, $examData) {
         $objMailSubscribe = new \Email();
         $objMailSubscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
-        //$objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSubscribe->from = 'bastian.ullrich@iem.thm.de';
+        $objMailSubscribe->from = 'beratung@bliz.thm.de';
         $objMailSubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
         $objMailSubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
         $objMailSubscribe->text .= "\n\n";

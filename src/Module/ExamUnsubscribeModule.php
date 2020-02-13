@@ -195,8 +195,11 @@ class ExamUnsubscribeModule extends \Module
         $objUser = FrontendUser::getInstance();
 
         // Fachbereich in lesbareres Format wandeln (außer JLU)
-        if ($department != "department14")  {
+        if ($department != "department12" && $department != "department14")  {
             $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -5);
+        }
+        elseif ($department != "department12") {
+            $departmentReadable = substr($GLOBALS['TL_LANG']['tl_exams'][$department], 0, -9);
         }
         else {
             $departmentReadable = $GLOBALS['TL_LANG']['tl_exams'][$department];

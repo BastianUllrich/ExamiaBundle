@@ -205,6 +205,10 @@ class ExamRegistrationModule extends \Module
 
     // Mailversand
     public function sendMail($exam_title, $department, $exam_date, $exam_begin) {
+        // Datum in deutsches Format wandeln
+        $examDateTimestamp = strtotime($exam_date);
+        $examDateReadable = date("d.m.Y", $examDateTimestamp);
+
         $objUser = FrontendUser::getInstance();
         $examData = $exam_title;
         $examData .= " (";
@@ -212,7 +216,7 @@ class ExamRegistrationModule extends \Module
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
         $examData .= " ";
-        $examData .= date("d.m.Y", $exam_date);
+        $examData .= $examDateReadable;
         $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
         $examData .= " ";

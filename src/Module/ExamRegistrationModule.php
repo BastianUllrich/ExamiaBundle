@@ -242,8 +242,8 @@ class ExamRegistrationModule extends \Module
         $objMailSuscribe = new \Email();
         $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
         $objMailSuscribe->from = 'beratung@bliz.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeBliZ'];
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeBliZ'];
         $objMailSuscribe->text .= "\n";
         $objMailSuscribe->text .= $objUser->username;
         $objMailSuscribe->text .= " (ID ";

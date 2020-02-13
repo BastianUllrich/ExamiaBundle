@@ -173,7 +173,7 @@ class MemberAdministrationModule extends \Module
 
             $this->Template->detailRehabDevicesOthers = $memberDetailsData->rehab_devices_others;
             $this->Template->detailExtraTime = $memberDetailsData->extra_time;
-            $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_minutes_percent];
+            $this->Template->detailExtraTimeUnit = $GLOBALS['TL_LANG']['tl_member'][$memberDetailsData->extra_time_unit];
         }
 
         // Mitglied löschen

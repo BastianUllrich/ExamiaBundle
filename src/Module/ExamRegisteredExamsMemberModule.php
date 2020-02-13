@@ -60,7 +60,7 @@ class ExamRegisteredExamsMemberModule extends \Module
         $examParticipationList = array();
         $i = 0;
         $result = Database::getInstance()->prepare(
-            "SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_prename, tl_exams.lecturer_lastname, tl_attendees_exams.status 
+            "SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_firstname, tl_exams.lecturer_lastname, tl_attendees_exams.status 
              FROM tl_exams, tl_attendees_exams 
              WHERE tl_exams.id=tl_attendees_exams.exam_id 
              AND tl_attendees_exams.attendee_id=$userID
@@ -73,7 +73,7 @@ class ExamRegisteredExamsMemberModule extends \Module
 
             $examParticipationList[$i]['lecturer_name'] = $result->lecturer_title;
             $examParticipationList[$i]['lecturer_name'] .= ' ';
-            $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_prename;
+            $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_firstname;
             $examParticipationList[$i]['lecturer_name'] .= ' ';
             $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_lastname;
 

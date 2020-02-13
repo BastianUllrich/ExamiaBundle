@@ -46,7 +46,7 @@ $GLOBALS['TL_LANG']['tl_exams']['department14'] = 'JLU';
 
 $GLOBALS['TL_LANG']['tl_exams']['lecturer'] = 'Dozent';
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'] = ['Titel', ''];
-$GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'] = ['Vorname', ''];
+$GLOBALS['TL_LANG']['tl_exams']['lecturer_firstname'] = ['Vorname', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'] = ['Nachname', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'] = ['Hochschul-E-Mail-Adresse', ''];
 $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'] = ['Handynummer', ''];

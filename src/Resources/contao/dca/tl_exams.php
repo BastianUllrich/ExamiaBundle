@@ -110,8 +110,8 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'eval' => ['maxlength' => 255],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '']
         ],
-        'lecturer_prename' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'],
+        'lecturer_firstname' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_exams']['lecturer_firstname'],
             'inputType' => 'text',
             'eval' => ['maxlength' => 255, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '']
@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         ]
     ],
     'palettes' => [
-        'default' => '{exam_legend},title,department,date,begin,duration,status,remarks;{lecturer_legend},lecturer_title,lecturer_prename,lecturer_lastname,lecturer_email,lecturer_mobile'
+        'default' => '{exam_legend},title,department,date,begin,duration,status,remarks;{lecturer_legend},lecturer_title,lecturer_firstname,lecturer_lastname,lecturer_email,lecturer_mobile'
     ],
 ];
 ?>

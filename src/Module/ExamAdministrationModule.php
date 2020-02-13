@@ -362,7 +362,7 @@ class ExamAdministrationModule extends \Module
         // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;
         $this->Template->detailLecturer .= " ";
-        $this->Template->detailLecturer .= $examDetails->lecturer_prename;
+        $this->Template->detailLecturer .= $examDetails->lecturer_firstname;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_lastname;
         $this->Template->detailLecturer .= " (";
@@ -442,7 +442,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->langLecturer = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
         $this->Template->langLecturerLong = $GLOBALS['TL_LANG']['tl_exams']['lecturer_legend'];
         $this->Template->langLecturerTitle = $GLOBALS['TL_LANG']['tl_exams']['lecturer_title'][0];
-        $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_prename'][0];
+        $this->Template->langLecturerFirstname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_firstname'][0];
         $this->Template->langLecturerLastname = $GLOBALS['TL_LANG']['tl_exams']['lecturer_lastname'][0];
         $this->Template->langLecturerEmail = $GLOBALS['TL_LANG']['tl_exams']['lecturer_email'][0];
         $this->Template->langLecturerMobile = $GLOBALS['TL_LANG']['tl_exams']['lecturer_mobile'][0];
@@ -512,7 +512,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->tools = $examData->tools;
         $this->Template->remarks = $examData->remarks;
         $this->Template->lecturerTitle = $examData->lecturer_title;
-        $this->Template->lecturerFirstname = $examData->lecturer_prename;
+        $this->Template->lecturerFirstname = $examData->lecturer_firstname;
         $this->Template->lecturerLastname = $examData->lecturer_lastname;
         $this->Template->lecturerEmail = $examData->lecturer_email;
         $this->Template->lecturerMobile = $examData->lecturer_mobile;
@@ -543,7 +543,7 @@ class ExamAdministrationModule extends \Module
         $exam->tools = \Input::post('tools');
         $exam->remarks = \Input::post('remarks');
         $exam->lecturer_title = \Input::post('lecturerTitle');
-        $exam->lecturer_prename = \Input::post('lecturerFirstname');
+        $exam->lecturer_firstname = \Input::post('lecturerFirstname');
         $exam->lecturer_lastname = \Input::post('lecturerLastname');
         $exam->lecturer_email = \Input::post('lecturerEmail');
         $exam->lecturer_mobile = \Input::post('lecturerMobile');

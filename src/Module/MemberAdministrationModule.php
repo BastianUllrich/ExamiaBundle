@@ -213,7 +213,7 @@ class MemberAdministrationModule extends \Module
                             $exID = $exam_id['exam_id'];
                             $getAttendeesExam = AttendeesExamsModel::findBy('exam_id', $exID);
 
-                            // Schreibassistenz des Teilnehmers entfernen
+                            // Schreibassistenzen des Mitglieds für Klausuren entfernen
                             $assistanceID = $getAttendeesExam->assistant_id;
                             if (!empty($assistanceID)) {
                                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;

@@ -220,7 +220,7 @@ class ExamUnsubscribeModule extends \Module
         $objMailSubscribe->text .= "\n";
         $objMailSubscribe->text .= $objUser->username;
         $objMailSubscribe->text .= " (ID ";
-        $objMailSubscribe->text .= $objUser->username;
+        $objMailSubscribe->text .= $objUser->id;
         $objMailSubscribe->text .= "), ";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $objMailSubscribe->text .= ": ";

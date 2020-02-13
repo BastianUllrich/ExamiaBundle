@@ -211,9 +211,13 @@ class ExamRegistrationModule extends \Module
         $examData .= $department;
         $examData .= ") ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['dateAt'];
+        $examData .= " ";
         $examData .= $exam_date;
+        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeAt'];
+        $examData .= " ";
         $examData .= $exam_begin;
+        $examData .= " ";
         $examData .= $GLOBALS['TL_LANG']['miscellaneous']['timeHour'];
         $this->sendMailMember($objUser, $examData);
         $this->sendMailBliZ($objUser, $examData);
@@ -224,12 +228,12 @@ class ExamRegistrationModule extends \Module
         $objMailSuscribe->fromName = $GLOBALS['TL_LANG']['miscellaneous']['emailFromName'];
         //$objMailSuscribe->from = 'beratung@bliz.thm.de';
         $objMailSuscribe->from = 'bastian.ullrich@iem.thm.de';
-        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSuscribe'];
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart1'];
+        $objMailSuscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectSubscribe'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart1'];
         $objMailSuscribe->text .= "\n";
         $objMailSuscribe->text .= $examData;
         $objMailSuscribe->text .= "\n";
-        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSuscribeMemberPart2'];
+        $objMailSuscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextSubscribeMemberPart2'];
         //$objMailSuscribe->sendTo($objUser->email);
         $objMailSuscribe->sendTo('bastiullrich@gmail.com');
         unset($objMailSuscribe);
@@ -243,7 +247,7 @@ class ExamRegistrationModule extends \Module
         $objMailSuscribe->text .= "\n";
         $objMailSuscribe->text .= $objUser->username;
         $objMailSuscribe->text .= " (ID ";
-        $objMailSuscribe->text .= $objUser->username;
+        $objMailSuscribe->text .= $objUser->id;
         $objMailSuscribe->text .= "), ";
         $objMailSuscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['exam'];
         $objMailSuscribe->text .= ": ";

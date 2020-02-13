@@ -215,7 +215,7 @@ class ExamUnsubscribeModule extends \Module
         $objMailUnsubscribe->from = 'beratung@bliz.thm.de';
         $objMailUnsubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
         $objMailUnsubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeMember'];
-        $objMailUnsubscribe->text .= "\n";
+        $objMailUnsubscribe->text .= "\n\n";
         $objMailUnsubscribe->text .= $examData;
         $objMailUnsubscribe->text .= "\n\n";
         $objMailUnsubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
@@ -228,7 +228,7 @@ class ExamUnsubscribeModule extends \Module
         $objMailUnsubscribe->from = 'beratung@bliz.thm.de';
         $objMailUnsubscribe->subject = $GLOBALS['TL_LANG']['miscellaneous']['emailSubjectUnsubscribe'];
         $objMailUnsubscribe->text = $GLOBALS['TL_LANG']['miscellaneous']['emailTextUnsubscribeBliZ'];
-        $objMailUnsubscribe->text .= "\n";
+        $objMailUnsubscribe->text .= "\n\n";
         $objMailUnsubscribe->text .= $objUser->username;
         $objMailUnsubscribe->text .= " (ID ";
         $objMailUnsubscribe->text .= $objUser->id;

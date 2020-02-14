@@ -59,7 +59,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_supervisors_exams']['date'],
             'inputType' => 'text',
-            'eval' => ['mandatory' => true, 'includeBlankOption' => true],
+            'eval' => ['mandatory' => true],
             'sql' => ['type' => 'integer', 'length' => 10, 'default' => 0]
         ],
         'time_from' => [

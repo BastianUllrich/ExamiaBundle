@@ -87,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
         'tools' => [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['tools'],
             'inputType' => 'text',
-            'eval' => ['maxlength' => 255, 'mandatory' => true],
+            'eval' => ['maxlength' => 255, 'mandatory' => false],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '']
         ],
         'status' => [

@@ -1,7 +1,6 @@
 <?php
 
 // Frontend modules
-$GLOBALS['TL_LANG']['FMD']['memberGreeting'] = ['Begrüßung der Mitglieder', 'Gibt eine Willkommens-Nachricht an das Mitglied aus'];
 $GLOBALS['TL_LANG']['FMD']['memberUserData'] = ['Stammdaten des Mitglieds', 'Gibt die Stammdaten des Mitglieds aus'];
 $GLOBALS['TL_LANG']['FMD']['examRegistration'] = ['Klausuranmeldung', 'Formular zur Klausuranmeldung'];
 $GLOBALS['TL_LANG']['FMD']['examRegisteredExamsMember'] = ['Angemeldete Klausuren', 'Übersicht über angemeldete Klausuren für das Mitglied'];

@@ -1,6 +1,5 @@
 <?php
 // Frontend modules
-$GLOBALS['FE_MOD']['examia']['memberGreeting'] = 'Baul\ExamiaBundle\Module\MemberGreetingModule';
 $GLOBALS['FE_MOD']['examia']['memberUserData'] = 'Baul\ExamiaBundle\Module\MemberUserDataModule';
 $GLOBALS['FE_MOD']['examia']['examRegistration'] = 'Baul\ExamiaBundle\Module\ExamRegistrationModule';
 $GLOBALS['FE_MOD']['examia']['examRegisteredExamsMember'] = 'Baul\ExamiaBundle\Module\ExamRegisteredExamsMemberModule';
@@ -41,4 +40,3 @@ use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 $GLOBALS['TL_MODELS']['tl_supervisors_exams'] = SupervisorsExamsModel::class;
 
 ?>
-

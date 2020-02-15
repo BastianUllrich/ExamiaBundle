@@ -18,7 +18,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [
-            'fields' => ['title', 'date', 'status'],
+            'fields' => ['id', 'title', 'date', 'status'],
             'format' => '%s',
 	        'showColumns' => true,
         ],

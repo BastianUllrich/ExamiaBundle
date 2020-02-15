@@ -44,6 +44,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
 
     'fields' => [
         'id' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_exams']['id'],
             'sql' => ['type' => 'integer', 'unsigned' => true, 'autoincrement' => true],
         ],
         'tstamp' => [

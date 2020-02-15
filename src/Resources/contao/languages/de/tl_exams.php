@@ -5,6 +5,7 @@ $GLOBALS['TL_LANG']['tl_exams']['edit'] = ['Klausur bearbeiten', 'Klausur bearbe
 $GLOBALS['TL_LANG']['tl_exams']['delete'] = ['Klausur löschen', 'Klausur löschen'];
 $GLOBALS['TL_LANG']['tl_exams']['show'] = ['Details anzeigen', 'Details anzeigen'];
 
+$GLOBALS['TL_LANG']['tl_exams']['id'] = ['ID', 'ID der Klausur'];
 $GLOBALS['TL_LANG']['tl_exams']['title_short'] = 'Titel';
 $GLOBALS['TL_LANG']['tl_exams']['title'] = ['Titel der Lehrveranstaltung', 'Bitte genaue Bezeichnung'];
 $GLOBALS['TL_LANG']['tl_exams']['date'] = ['Datum', 'Bitte Datum wählen'];

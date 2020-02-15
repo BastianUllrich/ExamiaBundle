@@ -12,8 +12,8 @@ $GLOBALS['TL_DCA']['tl_attendees_exams'] = [
     'list' => [
         'sorting' => [
             'mode' => 1,
-            'fields' => ['date'],
-            'flag' => 12,
+            'fields' => ['exam_id'],
+            'flag' => 1,
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [

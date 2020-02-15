@@ -13,7 +13,7 @@ $GLOBALS['TL_DCA']['tl_supervisors_exams'] = [
         'sorting' => [
             'mode' => 1,
             'fields' => ['date'],
-            'flag' => 1,
+            'flag' => 12,
             'panelLayout' => 'search,filter;limit,sort'
         ],
         'label' => [

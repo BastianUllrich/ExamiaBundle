@@ -14,7 +14,7 @@ class ExamRegistrationModule extends \Module
     /**
      * @var string
      */
-    protected $strTemplate = 'mod_examRegistrationForm';
+    protected $strTemplate = 'mod_examRegistration';
 
     /**
      * Displays a wildcard in the back end.

@@ -145,7 +145,7 @@ elseif ($this->formIsSubmitted === true && $this->dataIsConfirmed === false) {
         </tr>
         </tbody>
     </table>
-    <p><a href="{{env:request}}?confirmed=yes" title="<?= $this->verifyDataLinkTitle; ?>"><?= $this->verifyData; ?></a></p>
+    <p><a href="klausurverwaltung/klausuranmeldung.html?confirmed=yes" title="<?= $this->verifyDataLinkTitle; ?>"><?= $this->verifyData; ?></a></p>
     <p><a href="javascript:history.go(-1)" title="<?= $this->correctDataLinkTitle; ?>"><?= $this->correctData; ?></a></p>
 <?php
 }

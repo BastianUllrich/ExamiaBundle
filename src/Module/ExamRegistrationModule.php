@@ -170,9 +170,10 @@ class ExamRegistrationModule extends \Module
             $this->Template->lecturer .= " ";
         }
         $this->Template->lecturer .= $lecturer_firstname;
+        $this->Template->lecturer .= " ";
         $this->Template->lecturer .= $lecturer_lastname;
         if (!empty($lecturer_email) || !empty($lecturer_mobile)) {
-            $this->Template->lecturer .= "(";
+            $this->Template->lecturer .= " (";
         }
         if (!empty($lecturer_email)) {
             $this->Template->lecturer .= $lecturer_email;

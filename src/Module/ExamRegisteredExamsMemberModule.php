@@ -64,7 +64,7 @@ class ExamRegisteredExamsMemberModule extends \Module
              FROM tl_exams, tl_attendees_exams 
              WHERE tl_exams.id=tl_attendees_exams.exam_id 
              AND tl_attendees_exams.attendee_id=$userID
-             ORDER BY tl_exams.date DESC
+             ORDER BY tl_exams.date
             ")->query();
         while ($result->next()) {
             $examParticipationList[$i]['date'] = date("d.m.Y", $result->date);

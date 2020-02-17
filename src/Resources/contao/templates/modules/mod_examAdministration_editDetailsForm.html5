@@ -129,5 +129,4 @@
         </div>
     </div>
 </form>
-
-<p class="right">{{link::back}}</p>
+<p class="right"><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>

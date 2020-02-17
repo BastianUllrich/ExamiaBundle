@@ -115,6 +115,7 @@ else {
     <p>
         <a href="klausurverwaltung/angemeldete-klausuren.html" title="<?= $this->linkTitleGoToExamsOverview; ?>"><?= $this->goToExamsOverview; ?></a>
     </p>
+<p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
     <?php
 }
 $this->endblock(); ?>

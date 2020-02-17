@@ -100,6 +100,9 @@ class ExamRegistrationModule extends \Module
         $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
         $this->Template->linkTitleGoToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverviewLinkTitle'];
 
+        $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
+        $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
+
         // Aktionen nach Absenden des Formulars
         if (\Contao\Input::post('FORM_SUBMIT') == 'examRegistration') {
             // Funktion zum Eintrag in die Datenbank aufrufen, mit Entitäten des Mitglieds für die Tabelle "tl_attendees_exams" (Zuweisung Klausur - Mitglied)

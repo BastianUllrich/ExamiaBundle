@@ -62,7 +62,6 @@ class ExamRegistrationModule extends \Module
 
         // Formular nur angezeigen, wenn es nicht abgesandt wurde
         $this->Template->formIsSubmitted = false;
-        $this->Template->dataIsConfirmed = false;
 
         // Sprach-Variablen setzen
 
@@ -98,13 +97,6 @@ class ExamRegistrationModule extends \Module
         $this->Template->tools_label = $GLOBALS['TL_LANG']['tl_exams']['tools'][0];
         $this->Template->remarks_label = $GLOBALS['TL_LANG']['tl_exams']['remarks'][0];
 
-        $this->Template->lecturer_label = $GLOBALS['TL_LANG']['tl_exams']['lecturer'];
-        $this->Template->verifyDataRequest = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyDataRequest'];
-        $this->Template->verifyData = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyData'];
-        $this->Template->verifyDataLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyDataLinkTitle'];
-        $this->Template->correctData = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationCorrectData'];
-        $this->Template->correctDataLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationCorrectDataLinkTitle'];
-
         $this->Template->goToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverview'];
         $this->Template->linkTitleGoToExamsOverview = $GLOBALS['TL_LANG']['miscellaneous']['goToExamsOverviewLinkTitle'];
 
@@ -119,9 +111,6 @@ class ExamRegistrationModule extends \Module
     }
 
     public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_unit) {
-
-        $this->Template->formIsSubmitted = true;
-
         // Felder aus Formular auslesen
         $exam_title = \Input::post('exam_title');
         $lecturer_title = \Input::post('lecturer_title');
@@ -161,78 +150,42 @@ class ExamRegistrationModule extends \Module
             }
         }
 
-        // Angaben für "Eingaben Überprüfen"-Seite vorbereiten
-        $this->Template->examTitle = $exam_title;
+        // Überprüfen, ob das Datum der Klausur in der Zukunft liegt
+        if ($exam_datetime > time()) {
 
-        $this->Template->lecturer = "";
-        if (!empty($lecturer_title)) {
-            $this->Template->lecturer .= $lecturer_title;
-            $this->Template->lecturer .= " ";
-        }
-        $this->Template->lecturer .= $lecturer_firstname;
-        $this->Template->lecturer .= " ";
-        $this->Template->lecturer .= $lecturer_lastname;
-        if (!empty($lecturer_email) || !empty($lecturer_mobile)) {
-            $this->Template->lecturer .= " (";
-        }
-        if (!empty($lecturer_email)) {
-            $this->Template->lecturer .= $lecturer_email;
-        }
-        if (!empty($lecturer_mobile)) {
-            $this->Template->lecturer .= ", ";
-            $this->Template->lecturer .= $lecturer_mobile;
-        }
-        if (!empty($lecturer_email) || !empty($lecturer_mobile)) {
-            $this->Template->lecturer .= ")";
-        }
-        $this->Template->department = $GLOBALS['TL_LANG']['tl_exams'][$department];
-        $this->Template->examDate = date("d.m.Y", $exam_datetime);
-        $this->Template->examBegin = date("H:i", $exam_datetime);
-        $this->Template->examDuration = $exam_duration;
-        $this->Template->tools = $tools;
-        $this->Template->remarks = $remarks;
-
-        // Eintragung erst vornehmen, wenn die Eingaben bestätigt wurden
-        if (\Input::get("confirmed") == "yes") {
-            $this->Template->dataIsConfirmed = true;
-
-            // Überprüfen, ob das Datum der Klausur in der Zukunft liegt
-            if ($exam_datetime > time()) {
-
-                if ($examsFound == 0) {
-                    // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
-                    $this->import('Database');
-                    $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_firstname' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
+            if ($examsFound == 0) {
+                // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
+                $this->import('Database');
+                $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_firstname' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
                         'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
                         'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
-                    // Eintrag in Tabelle "tl_exams" vornehmen
-                    if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
-                        if (empty($extra_time)) $extra_time = 0;
+                // Eintrag in Tabelle "tl_exams" vornehmen
+                if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
+                    if (empty($extra_time)) $extra_time = 0;
 
-                        // Insertions für Tabelle "tl_attendees_exams" definieren
-                        $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                            'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
+                    // Insertions für Tabelle "tl_attendees_exams" definieren
+                    $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
+                                    'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
 
-                        // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
-                        if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
-
-                            $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
-                            $this->submitSuccess();
-                        }
+                    // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
+                    if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+                        $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
+                        $this->submitSuccess();
                     }
-                } elseif ($examsFound <> 0) {
-                    $this->submittedDouble();
                 }
-            } elseif ($exam_datetime <= time()) {
-                $this->examInPast();
+            } elseif ($examsFound <> 0) {
+                $this->submittedDouble();
             }
+        } elseif ($exam_datetime <= time()) {
+            $this->examInPast();
         }
 
     }
 
     // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
     public function submitSuccess() {
+        $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];

@@ -1,7 +1,7 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-<?php if ($this->formIsSubmitted === false && $this->dataIsConfirmed === false) { ?>
+<?php if ($this->formIsSubmitted === false) { ?>
     <div class="ce_text first last  block">
         <h2><?= $this->examRegistration; ?></h2>
         <p><?= $this->examRegistrationExplanation; ?></p>
@@ -103,50 +103,6 @@
         </fieldset>
     </div>
     </form>
-<?php
-}
-elseif ($this->formIsSubmitted === true && $this->dataIsConfirmed === false) {
-    ?>
-    <h2 class="ce_headline first "><?= $this->verifyDataRequest; ?></h2>
-
-    <table class="single_record">
-        <tbody>
-        <tr class="row_0 row_first even">
-            <td class="label"><?= $this->title_label; ?></td>
-            <td class="value"><?= $this->examTitle; ?></td>
-        </tr>
-        <tr class="row_1 odd">
-            <td class="label"><?= $this->lecturer_label; ?></td>
-            <td class="value"><?= $this->lecturer; ?></td>
-        </tr>
-        <tr class="row_2 even">
-            <td class="label"><?= $this->department_label; ?></td>
-            <td class="value"><?= $this->department; ?></td>
-        </tr>
-        <tr class="row_3 odd">
-            <td class="label"><?= $this->exam_date_label; ?></td>
-            <td class="value"><?= $this->examDate; ?></td>
-        </tr>
-        <tr class="row_4 even">
-            <td class="label"><?= $this->exam_begin_label; ?></td>
-            <td class="value"><?= $this->examBegin; ?></td>
-        </tr>
-        <tr class="row_5 odd">
-            <td class="label"><?= $this->exam_duration_label; ?></td>
-            <td class="value"><?= $this->examDuration; ?></td>
-        </tr>
-        <tr class="row_6 even">
-            <td class="label"><?= $this->tools_label; ?></td>
-            <td class="value"><?= $this->tools; ?></td>
-        </tr>
-        <tr class="row_7 odd">
-            <td class="label"><?= $this->remarks_label; ?></td>
-            <td class="value"><?= $this->remarks; ?></td>
-        </tr>
-        </tbody>
-    </table>
-    <p><a href="klausurverwaltung/klausuranmeldung.html?confirmed=yes" title="<?= $this->verifyDataLinkTitle; ?>"><?= $this->verifyData; ?></a></p>
-    <p><a href="javascript:history.go(-1)" title="<?= $this->correctDataLinkTitle; ?>"><?= $this->correctData; ?></a></p>
 <?php
 }
 else {

@@ -10,6 +10,12 @@ $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationExplanation'] = "Mit diese
 
 $GLOBALS['TL_LANG']['miscellaneous']['mandatory'] = "Pflichtfeld ";
 
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyDataRequest'] = "Überprüfen Sie Ihre Eingaben auf Richtigkeit";
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyData'] = "Eingaben bestätigen";
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationVerifyDataLinkTitle'] = "Speichert die Eingaben";
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationCorrectData'] = "Eingaben korrigieren";
+$GLOBALS['TL_LANG']['miscellaneous']['examRegistrationCorrectDataLinkTitle'] = "Führt zurück zum Formular";
+
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'] = "Klausuranmeldung erfolgreich übermittelt";
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'] = "Ihre Klausuranmeldung wurde erfolgreich übermittelt.";
 $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'] = "Den aktuellen Status Ihrer Anmeldung können Sie unter dem Punkt \"Angemeldete Klausuren\" einsehen.";

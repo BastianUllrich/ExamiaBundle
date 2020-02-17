@@ -119,7 +119,7 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
-        <p>{{link::back}}</p>
+        <p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
         <?php
     }
 }

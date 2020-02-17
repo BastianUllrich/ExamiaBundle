@@ -94,6 +94,9 @@ class ExamAdministrationModule extends \Module
         $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         $this->Template->linkTitleBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'];
 
+        $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
+        $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
+
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
         $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
 

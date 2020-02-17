@@ -192,3 +192,6 @@ $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'] = "Entfernt di
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamsDetails'] = "Öffnet eine Liste mit den Klausuren des gewählten Tags";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowAttendees'] = "Öffnet eine Liste mit den Klausur-Teilnehmern";
 $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorOverview'] = "Führt zurück zur Übersicht für Aufsichten";
+
+$GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'] = "Navigiert eine Seite zurück";
+$GLOBALS['TL_LANG']['miscellaneous']['linktextBack'] = "Zurück";

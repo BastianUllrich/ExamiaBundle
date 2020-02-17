@@ -119,6 +119,8 @@ class SupervisorOverviewModule extends \Module
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
         $this->Template->langBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['backToSupervisorOverview'];
         $this->Template->linkTitleBackToSupervisorOverview = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorOverview'];
+        $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
+        $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
 
         // Klausurenabfrage
         // Aufgrund der speziellen Abfrage nicht über Model / Collection

@@ -82,6 +82,9 @@ class MemberAdministrationModule extends \Module
 
         $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];
 
+        $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
+        $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
+
         // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
         $this->import('Database');
         $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC, usertype ASC")->query();

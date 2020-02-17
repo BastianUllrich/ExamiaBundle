@@ -120,6 +120,8 @@ class ExamRegistrationModule extends \Module
 
     public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_unit) {
 
+        $this->Template->formIsSubmitted = true;
+
         // Felder aus Formular auslesen
         $exam_title = \Input::post('exam_title');
         $lecturer_title = \Input::post('lecturer_title');
@@ -230,7 +232,6 @@ class ExamRegistrationModule extends \Module
 
     // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
     public function submitSuccess() {
-        $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
         $this->Template->submittedMessage = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccess'];
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];

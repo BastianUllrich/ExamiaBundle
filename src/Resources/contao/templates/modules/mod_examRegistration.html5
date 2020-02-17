@@ -131,7 +131,6 @@ elseif ($this->formIsSubmitted === true && $this->dataIsConfirmed === false) {
             <td class="label"><?= $this->exam_begin_label; ?></td>
             <td class="value"><?= $this->examBegin; ?></td>
         </tr>
-        <?php
         <tr class="row_5 odd">
             <td class="label"><?= $this->exam_duration_label; ?></td>
             <td class="value"><?= $this->examDuration; ?></td>

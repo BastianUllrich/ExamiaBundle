@@ -62,7 +62,7 @@ class SupervisorAdministrationModule extends \Module
             $examDateTimeStamp = strtotime($examDateReadable);
             // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
             // Wenn der Datums-Wert nicht schon im Array ist, wird er angezeigt
-            if (var_dump(in_array($examDateReadable, $examsData, true)) === false) {
+            if (in_array($examDateReadable, $examsData, true) === false) {
                 $examsData[$i]['dateReadable'] = $examDateReadable;
                 $examsData[$i]['time'] = $examDateTimeStamp;
                 $i++;

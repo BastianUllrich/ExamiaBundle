@@ -316,9 +316,9 @@ class ExamAdministrationModule extends \Module
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
 
             // Aufsichten vom Klausurtag entfernen, falls am Tag der gelöschten Klausur keine Klausuren mehr vorhanden sind
-            $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->query();
-            if ($resultCount != 0) {
-                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE 'date' BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
+            $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
+            if ($resultCount->result != 0) {
+                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
             }
 
             $this->Template->combinationSaved = true;

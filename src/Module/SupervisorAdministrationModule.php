@@ -54,22 +54,19 @@ class SupervisorAdministrationModule extends \Module
                                                     WHERE date > $todayMidnight
                                                     ORDER BY date ASC
                                                     ")->query();
-        $examsData = array();
+        $examsDataAllDates = array();
         $i=0;
         while ($result->next()) {
             // Variablen für das Template setzen
             $examDateReadable = date("d.m.Y", $result->date);
             $examDateTimeStamp = strtotime($examDateReadable);
-            // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
-            // Wenn der Datums-Wert nicht schon im Array ist, wird er angezeigt
-            foreach ($examsData as $examData) {
-                if (in_array($examDateReadable, $examData['dateReadable'], true) === false) {
-                    $examsData[$i]['dateReadable'] = $examDateReadable;
-                    $examsData[$i]['time'] = $examDateTimeStamp;
-                    $i++;
-                }
-            }
+            $examsDataAllDates[$i]['dateReadable'] = $examDateReadable;
+            $examsDataAllDates[$i]['time'] = $examDateTimeStamp;
+            $i++;
         }
+        // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
+        $examsData = array_unique($examsDataAllDates, SORT_REGULAR);
+
         $this->Template->examsDataList = $examsData;
         $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
         $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];

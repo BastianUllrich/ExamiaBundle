@@ -47,12 +47,11 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->showDetails = false;
         $this->Template->deletePerson = false;
 
-        // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, gruppiert und sortiert nach Datum
+        // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
         $result = Database::getInstance()->prepare("SELECT * 
                                                     FROM tl_exams 
                                                     WHERE date > $todayMidnight
-                                                    GROUP BY date
                                                     ORDER BY date ASC
                                                     ")->query();
         $examsData = array();
@@ -60,10 +59,14 @@ class SupervisorAdministrationModule extends \Module
         while ($result->next()) {
             // Variablen für das Template setzen
             $examDateReadable = date("d.m.Y", $result->date);
-            $examsData[$i]['dateReadable'] = $examDateReadable;
             $examDateTimeStamp = strtotime($examDateReadable);
-            $examsData[$i]['time'] = $examDateTimeStamp;
-            $i++;
+            // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
+            // Wenn der Datums-Wert nicht schon im Array ist, wird er angezeigt
+            if (var_dump(in_array($examDateReadable, $examsData, true)) === false) {
+                $examsData[$i]['dateReadable'] = $examDateReadable;
+                $examsData[$i]['time'] = $examDateTimeStamp;
+                $i++;
+            }
         }
         $this->Template->examsDataList = $examsData;
         $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];

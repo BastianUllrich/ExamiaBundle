@@ -65,7 +65,8 @@ class SupervisorAdministrationModule extends \Module
             $i++;
         }
         // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
-        $examsData = array_unique($examsDataAllDates, SORT_REGULAR);
+        $examsDataTmp = array_unique($examsDataAllDates, SORT_REGULAR);
+        $examsData = array_intersect_key($examsDataAllDates, $examsDataTmp);
 
         $this->Template->examsDataList = $examsData;
         $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];

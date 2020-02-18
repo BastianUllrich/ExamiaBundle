@@ -317,7 +317,7 @@ class ExamAdministrationModule extends \Module
 
             // Aufsichten vom Klausurtag entfernen, falls am Tag der gelöschten Klausur keine Klausuren mehr vorhanden sind
             $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
-            if ($resultCount->result != 0) {
+            if ($resultCount != 0) {
                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
             }
 

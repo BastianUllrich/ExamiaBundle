@@ -596,7 +596,7 @@ class ExamAdministrationModule extends \Module
         $examData = ExamsModel::findBy('id', $exam);
         $this->Template->examTitle = $examData->title;
         $this->Template->examID = $exam;
-        $result = Database::getInstance()->prepare("SELECT
+        $results = Database::getInstance()->prepare("SELECT
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
                                                         tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices,
                                                         tl_attendees_exams.assistant_id
@@ -607,7 +607,7 @@ class ExamAdministrationModule extends \Module
                                                         ")->query();
         $i = 0;
         $attendeeData = array();
-        while ($result->next()) {
+        foreach ($results as $result) {
             // Variablen für das Template setzen
             $attendeeData[$i]['id'] = $result->id;
             $attendeeData[$i]['firstname'] = $result->firstname;

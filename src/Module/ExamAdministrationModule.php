@@ -607,7 +607,9 @@ class ExamAdministrationModule extends \Module
                                                         ")->query();
         $i = 0;
         $attendeeData = array();
-        foreach ($results as $result) {
+        foreach ($result as $results) {
+            $attendeeData[$i]['id'] = "hallo";
+            /*
             // Variablen für das Template setzen
             $attendeeData[$i]['id'] = $result->id;
             $attendeeData[$i]['firstname'] = $result->firstname;
@@ -619,8 +621,9 @@ class ExamAdministrationModule extends \Module
             }
 
             $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
-
+*/
             /* Überprüfen, ob eine Schreibassistenz benötigt wird */
+            /*
             // Default "nicht benötigt"
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
             // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben
@@ -639,7 +642,7 @@ class ExamAdministrationModule extends \Module
                 $assistant .= " ";
                 $assistant .= $assistantData->lastname;
                 $attendeeData[$i]['writingAssistance'] = $assistant;
-            }
+            }*/
         }
         $this->Template->attendeeDataList = $attendeeData;
         $this->setLangValuesEditAttendees();

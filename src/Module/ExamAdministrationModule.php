@@ -596,7 +596,7 @@ class ExamAdministrationModule extends \Module
         $examData = ExamsModel::findBy('id', $exam);
         $this->Template->examTitle = $examData->title;
         $this->Template->examID = $exam;
-        $results = Database::getInstance()->prepare("SELECT
+        $result = Database::getInstance()->prepare("SELECT
                                                         tl_member.firstname, tl_member.lastname, tl_member.id,
                                                         tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices,
                                                         tl_attendees_exams.assistant_id
@@ -607,9 +607,7 @@ class ExamAdministrationModule extends \Module
                                                         ")->query();
         $i = 0;
         $attendeeData = array();
-        foreach ($result as $results) {
-            $attendeeData[$i]['id'] = "hallo";
-            /*
+        while ($result->next()) {
             // Variablen für das Template setzen
             $attendeeData[$i]['id'] = $result->id;
             $attendeeData[$i]['firstname'] = $result->firstname;
@@ -621,9 +619,7 @@ class ExamAdministrationModule extends \Module
             }
 
             $attendeeData[$i]['status'] = $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->status][0];
-*/
             /* Überprüfen, ob eine Schreibassistenz benötigt wird */
-            /*
             // Default "nicht benötigt"
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
             // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben
@@ -642,7 +638,8 @@ class ExamAdministrationModule extends \Module
                 $assistant .= " ";
                 $assistant .= $assistantData->lastname;
                 $attendeeData[$i]['writingAssistance'] = $assistant;
-            }*/
+            }
+            $i++;
         }
         $this->Template->attendeeDataList = $attendeeData;
         $this->setLangValuesEditAttendees();

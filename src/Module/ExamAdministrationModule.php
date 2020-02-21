@@ -220,7 +220,7 @@ class ExamAdministrationModule extends \Module
                 $examDateFrom = strtotime($examDateString);
                 $examDateTo = $examDateFrom + 86399;
 
-                $resultCount = ExamsModel::findBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
+                $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
                 // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
                 //$resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
                 if ($resultCount != 0) {

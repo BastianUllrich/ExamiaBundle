@@ -220,16 +220,15 @@ class ExamAdministrationModule extends \Module
                 $examDateFrom = strtotime($examDateString);
                 $examDateTo = $examDateFrom + 86399;
 
-                $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
                 // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
-                //$resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
+                $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
                 if ($resultCount != 0) {
                     $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
                 }
 
                 // Klausur aus Datenbank löschen und zur Seite "Klausurverwaltung" zurückkehren
                 if ($deleteExam = $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam")->execute()->affectedRows) {
-                    \Controller::redirect('klausurverwaltung/klausurverwaltung.html?'.$resultCount);
+                    \Controller::redirect('klausurverwaltung/klausurverwaltung.html?');
                 }
 
             } elseif ((\Input::get("confirmed") == "no")) {
@@ -318,7 +317,7 @@ class ExamAdministrationModule extends \Module
             $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
 
             // Aufsichten vom Klausurtag entfernen, falls am Tag der gelöschten Klausur keine Klausuren mehr vorhanden sind
-            $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
+            $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
             if ($resultCount != 0) {
                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
             }

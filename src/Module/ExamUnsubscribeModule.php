@@ -163,9 +163,11 @@ class ExamUnsubscribeModule extends \Module
                             $examDayStartTimestamp = strtotime($examDateReadable);
                             $examDayEndTimestamp = $examDayStartTimestamp+86399;
                             // Anzahl Klausuren im Zeitraum heraussuchen
-                            $numberOfExamsTimePeriod = Database::getInstance()->prepare("SELECT COUNT(*) AS numberOfExams FROM tl_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->query();
+                            $numberOfExamsTimePeriod = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDayStartTimestamp, $examDayEndTimestamp]);
+                            //$numberOfExamsTimePeriod = Database::getInstance()->prepare("SELECT COUNT(*) AS numberOfExams FROM tl_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->query();
                             // Wenn Anzahl = 0, Aufsichten entfernen
-                            if ($numberOfExamsTimePeriod->numberOfExams == 0) {
+                            //if ($numberOfExamsTimePeriod->numberOfExams == 0) {
+                            if ($numberOfExamsTimePeriod == 0) {
                                 $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->execute()->affectedRows;
                             }
                         }

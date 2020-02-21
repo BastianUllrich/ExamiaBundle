@@ -2,6 +2,7 @@
 
 namespace Baul\ExamiaBundle\Module;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
+use Baul\ExamiaBundle\Model\ExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -124,16 +125,23 @@ class SupervisorOverviewModule extends \Module
 
         // Klausurenabfrage
         // Aufgrund der speziellen Abfrage nicht über Model / Collection
+
+        $options = [
+            'order' => 'date ASC'
+        ];
+        $results = ExamsModel::findBy(['date BETWEEN ?', '?'], [$detailsDate, $detailsDateEnd], $options);
+/*
         $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration
-                                                    FROM tl_exams 
+                                                    FROM tl_exams
                                                     WHERE date
                                                     BETWEEN $detailsDate
                                                     AND $detailsDateEnd
                                                     ORDER BY date ASC
-                                                    ")->query();
+                                                    ")->query();*/
         $examData = array();
         $i = 0;
-        while ($result->next()) {
+        foreach ($results AS $result) {
+        //while ($result->next()) {
             // Variablen für das Template setzen
             $examData[$i]['id'] = $result->id;
             $examData[$i]['title'] = $result->title;

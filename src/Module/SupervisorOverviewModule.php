@@ -124,20 +124,10 @@ class SupervisorOverviewModule extends \Module
         $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
 
         // Klausurenabfrage
-        // Aufgrund der speziellen Abfrage nicht über Model / Collection
-
         $options = [
             'order' => 'date ASC'
         ];
         $results = ExamsModel::findBy(['date BETWEEN ?', '?'], [$detailsDate, $detailsDateEnd], $options);
-/*
-        $result = Database::getInstance()->prepare("SELECT id, title, department, date, begin, duration
-                                                    FROM tl_exams
-                                                    WHERE date
-                                                    BETWEEN $detailsDate
-                                                    AND $detailsDateEnd
-                                                    ORDER BY date ASC
-                                                    ")->query();*/
         $examData = array();
         $i = 0;
         foreach ($results AS $result) {
@@ -219,6 +209,7 @@ class SupervisorOverviewModule extends \Module
             $attendeeData[$i]['extraTime'] .= " ";
             $attendeeData[$i]['extraTime'] .= $GLOBALS['TL_LANG']['tl_attendees_exams'][$result->extra_time_unit];
 
+            // Endzeit des Teilnehmers berechnen
             $duration = $result->duration;
             if ($result->extra_time_unit == "percent") {
                 $multiplicator = 1 + ($result->extra_time / 100);
@@ -229,6 +220,7 @@ class SupervisorOverviewModule extends \Module
             $endTime = ($result->date) + ($duration * 60);
             $endTimeReadable = date("H:i", $endTime);
             $attendeeData[$i]['endTime'] = $endTimeReadable;
+            
             $i++;
         }
 

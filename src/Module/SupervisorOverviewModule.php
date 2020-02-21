@@ -142,8 +142,7 @@ class SupervisorOverviewModule extends \Module
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['duration'] = $result->duration;
             // Anzahl der Teilnehmer aus Datenbank abfragen
-            // Aufgrund der speziellen Abfrage nicht über Model / Collection
-            $numberOfAttendees = Database::getInstance()->prepare("SELECT COUNT(*) AS 'nrOfAttendees' FROM tl_attendees_exams WHERE exam_id = $result->id")->query();
+            $numberOfAttendees = AttendeesExamsModel::countBy('exam_id', $result->id);
             $examData[$i]['nrOfAttendees']  = $numberOfAttendees->nrOfAttendees;
 
             // Maximale Dauer in Minuten berechnen

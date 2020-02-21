@@ -219,18 +219,16 @@ class ExamAdministrationModule extends \Module
                 $examDateString = date("d.m.Y", $getExamDate->date);
                 $examDateFrom = strtotime($examDateString);
                 $examDateTo = $examDateFrom + 86399;
+
                 // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
-
-                $resultCount = ExamsModel::countBy('date', 'BETWEEN ' . $examDateFrom .' AND '. $examDateTo);
-
-                //$resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
+                $resultCount = $this->Database->prepare("SELECT count(*) FROM tl_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->query();
                 if ($resultCount != 0) {
                     $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
                 }
 
                 // Klausur aus Datenbank löschen und zur Seite "Klausurverwaltung" zurückkehren
                 if ($deleteExam = $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam")->execute()->affectedRows) {
-                    \Controller::redirect('klausurverwaltung/klausurverwaltung.html?'.$resultCount);
+                    \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
                 }
 
             } elseif ((\Input::get("confirmed") == "no")) {

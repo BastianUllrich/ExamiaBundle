@@ -155,9 +155,7 @@ class SupervisorOverviewModule extends \Module
 
             // Maximale Dauer in Minuten berechnen
             $endTimeQuestion = AttendeesExamsModel::findBy("exam_id", $result->id);
-            $i = 0;
-            $maxDuration = 0;
-            if ($result->duration != '') $maxDuration = $result->duration;
+            $maxDuration = $result->duration;
             foreach ($endTimeQuestion as $endTime) {
                 if ($endTime->extra_time_unit == "percent") {
                     $multiplicator = 1 + ($endTime->extra_time / 100);
@@ -173,7 +171,6 @@ class SupervisorOverviewModule extends \Module
             $maxEndTime = ($result->date) + ($maxDuration * 60);
             $maxEndTimeReadable = date("H:i", $maxEndTime);
             $examData[$i]['maxEndTime'] = $maxEndTimeReadable;
-
             $i++;
         }
         $this->Template->examDataList = $examData;

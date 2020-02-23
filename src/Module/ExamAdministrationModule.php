@@ -50,6 +50,7 @@ class ExamAdministrationModule extends \Module
         $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('tl_attendees_exams');
 
+        // Variablen zur Bestimmung des anzuzeigenden Inhalts
         $this->Template->showConfirmationQuestion = false;
         $this->Template->showDetails = false;
         $this->Template->showEditForm = false;
@@ -66,37 +67,29 @@ class ExamAdministrationModule extends \Module
 
         // Sprachvariablen setzen
         $this->Template->manage_exams = $GLOBALS['TL_LANG']['miscellaneous']['manage_exams'];
-
         $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
-
         $this->Template->headerDate = $GLOBALS['TL_LANG']['tl_exams']['date'][0];
         $this->Template->headerBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin'][0];
         $this->Template->headerExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
         $this->Template->headerDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->headerAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
         $this->Template->orderAltText = $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
-
         $this->Template->imgAltViewExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewExamDetails'];
         $this->Template->imgAltEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditExamDetails'];
         $this->Template->imgAltEditAttendees = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendees'];
         $this->Template->imgAltCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['imgAltCombineExams'];
         $this->Template->imgAltDeleteExam = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteExam'];
-
         $this->Template->linkTitleViewExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewExamDetails'];
         $this->Template->linkTitleEditExamDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditExamDetails'];
         $this->Template->linkTitleEditAttendees = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendees'];
         $this->Template->linkTitleCombineExams = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleCombineExams'];
         $this->Template->linkTitleDeleteExam = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExam'];
-
         $this->Template->linkTitleDeleteExamConfirmYes = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmYes'];
         $this->Template->linkTitleDeleteExamConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteExamConfirmNo'];
-
         $this->Template->linktextBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToExamsAdministration'];
         $this->Template->linkTitleBackToExamsAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToExamsAdministration'];
-
         $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
         $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
-
         $this->Template->showRoomPlan = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlan'];
         $this->Template->showRoomPlanLinkTitle = $GLOBALS['TL_LANG']['miscellaneous']['showRoomPlanLinkTitle'];
 
@@ -116,8 +109,8 @@ class ExamAdministrationModule extends \Module
             $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
         }
 
+        // Ausgabe aller Klausuren
         $results = ExamsModel::findAll($options);
-
         $i = 0;
         $examData = array();
         foreach ($results as $result) {
@@ -261,7 +254,6 @@ class ExamAdministrationModule extends \Module
         // Andere Klausuren aus Datenbank holen (nur aktuelle)
         $timeNow = time();
         $id = $examDetails->id;
-
         $results = ExamsModel::findBy(['id <> ?', 'date > ?'], [$id, $timeNow]);
         $i = 0;
         $examFromData = array();
@@ -328,7 +320,7 @@ class ExamAdministrationModule extends \Module
 
     }
 
-    // Variablen "Klausurdetails einsehen" setzen
+    // Klausurdetails einsehen
     public function setExamValuesViewDetails($examDetails)
     {
         $this->Template->detailExamTitel = $examDetails->title;
@@ -342,7 +334,6 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailRegularDuration .= $GLOBALS['TL_LANG']['tl_attendees_exams']['minutes'];
 
         /* Späteste Endzeit berechnen */
-
         // Maximale Dauer in Minuten berechnen
         $results = AttendeesExamsModel::findBy('exam_id', $examDetails->id);
         $i = 0;
@@ -358,7 +349,7 @@ class ExamAdministrationModule extends \Module
                 $maxDuration = $duration;
             }
         }
-        // Späteste Endzeit berechnen
+        // Späteste Endzeit aus Beginn + maximaler Dauer berechnen
         $maxEndTime = ($examDetails->date) + ($maxDuration * 60);
         $maxEndTimeReadable = date("H:i", $maxEndTime);
         $this->Template->detailMaxEndtime = $maxEndTimeReadable;
@@ -376,7 +367,6 @@ class ExamAdministrationModule extends \Module
             $this->Template->detailLecturer .= $examDetails->lecturer_mobile;
         }
         $this->Template->detailLecturer .= ")";
-
         $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->department];
         $this->Template->detailTools = $examDetails->tools;
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
@@ -406,7 +396,7 @@ class ExamAdministrationModule extends \Module
         }
         $this->Template->supervisorsDataList = $supervisorsData;
 
-        // Teilnehmer heraussuchen
+        // Klausurteilnehmer heraussuchen
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_member.id, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit
                                                     FROM tl_member, tl_attendees_exams
                                                     WHERE tl_attendees_exams.exam_id=$examDetails->id
@@ -493,11 +483,9 @@ class ExamAdministrationModule extends \Module
         $this->Template->headerWritingAssistance = $GLOBALS['TL_LANG']['tl_attendees_exams']['assistant'];
         $this->Template->headerStatus = $GLOBALS['TL_LANG']['tl_attendees_exams']['status'][0];
         $this->Template->noAttendeeExam = $GLOBALS['TL_LANG']['miscellaneous']['noAttendeeExam'];
-
         $this->Template->imgAltViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewAttendeeDetails'];
         $this->Template->imgAltEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditAttendeeDetails'];
         $this->Template->imgAltDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteAttendee'];
-
         $this->Template->linkTitleViewAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewAttendeeDetails'];
         $this->Template->linkTitleEditAttendeeDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditAttendeeDetails'];
         $this->Template->linkTitleDeleteAttendee = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAttendee'];
@@ -891,7 +879,6 @@ class ExamAdministrationModule extends \Module
         $this->Template->langSeat9 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat9'];
         $this->Template->langSeat10 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat10'];
         $this->Template->langSeat11 = $GLOBALS['TL_LANG']['tl_attendees_exams']['seat11'];
-
 
         $this->Template->langRehabDevices = $GLOBALS['TL_LANG']['tl_attendees_exams']['rehab_devices'][0];
         $this->Template->langPC = $GLOBALS['TL_LANG']['tl_member']['pc'];

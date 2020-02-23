@@ -40,7 +40,7 @@ class ExamRegisteredExamsMemberModule extends \Module
      */
     protected function compile()
     {
-        // Sprachdatei einbinden
+        // Sprachdateien einbinden
         $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('tl_attendees_exams');
         $this->loadLanguageFile('miscellaneous');

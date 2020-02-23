@@ -51,6 +51,7 @@ class ExamUnsubscribeModule extends \Module
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
 
+        // Variablen zur Bestimmung des anzuzeigenden Inhalts
         $this->Template->showConfirmationQuestion = false;
         $this->Template->unsubscribtionSuccessful = false;
 

@@ -56,15 +56,10 @@ class ExamRegistrationModule extends \Module
         // Daten des Mitglieds aus der Datenbank laden
         $userdata = MemberModel::findBy('id', $userID);
 
-        /**
-        * Variablen für das Template setzen *
-        */
-
         // Formular nur angezeigen, wenn es nicht abgesandt wurde
         $this->Template->formIsSubmitted = false;
 
         // Sprach-Variablen setzen
-
         $this->Template->mandatory = $GLOBALS['TL_LANG']['miscellaneous']['mandatory'];
         $this->Template->examRegistration = $GLOBALS['TL_LANG']['miscellaneous']['examRegistration'];
         $this->Template->examRegistrationExplanation = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationExplanation'];
@@ -110,6 +105,7 @@ class ExamRegistrationModule extends \Module
         }
     }
 
+    // Formular wurde abgesendet
     public function registerExam($userID, $rehab_devices, $rehab_devices_others, $extra_time, $extra_time_unit) {
         // Felder aus Formular auslesen
         $exam_title = \Input::post('exam_title');
@@ -183,7 +179,7 @@ class ExamRegistrationModule extends \Module
 
     }
 
-    // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesandt wurde
+    // Funktion gibt Erfolgsmeldung aus, wenn Formular abgesendet wurde
     public function submitSuccess() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessTitle'];
@@ -191,7 +187,7 @@ class ExamRegistrationModule extends \Module
         $this->Template->submittedMessageStatus = $GLOBALS['TL_LANG']['miscellaneous']['examRegistrationSuccessStatus'];
     }
 
-    // Funktion gibt Meldung aus, wenn Formular doppelt abgesandt wurde
+    // Funktion gibt Meldung aus, wenn Formular doppelt abgesendet wurde
     public function submittedDouble() {
         $this->Template->formIsSubmitted = true;
         $this->Template->submittedMessageTitle = $GLOBALS['TL_LANG']['miscellaneous']['anotherExamSameTimeFound'];
@@ -270,7 +266,6 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= ".\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
         $objMailSubscribe->sendTo("bastian.ullrich@iem.thm.de");
-        //$objMailSubscribe->sendTo($objUser->email);
         unset($objMailSubscribe);
     }
 }

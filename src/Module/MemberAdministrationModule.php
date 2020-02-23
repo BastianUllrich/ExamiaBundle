@@ -42,10 +42,14 @@ class MemberAdministrationModule extends \Module
      */
     protected function compile()
     {
+        // Datenbank einbinden
+        $this->import('Database');
+
         // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_member');
 
+        // Variablen zur Bestimmung des anzuzeigenden Inhalts
         $this->Template->showConfirmationQuestion = false;
         $this->Template->showDetails = false;
         $this->Template->showEditForm = false;
@@ -57,42 +61,35 @@ class MemberAdministrationModule extends \Module
 
         // Sprachvariablen für das Template setzen
         $this->Template->langAdministrateMembers = $GLOBALS['TL_LANG']['miscellaneous']['administrateMembers'];
-
         $this->Template->langFirstname = $GLOBALS['TL_LANG']['tl_member']['firstname'][0];
         $this->Template->langLastname = $GLOBALS['TL_LANG']['tl_member']['lastname'][0];
         $this->Template->langUsername = $GLOBALS['TL_LANG']['tl_member']['username'][0];
         $this->Template->langUsertype = $GLOBALS['TL_LANG']['tl_member']['usertype'][0];
         $this->Template->langAction = $GLOBALS['TL_LANG']['miscellaneous']['action'];
-
         $this->Template->imgAltViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltViewMemberDetails'];
         $this->Template->imgAltEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['imgAltEditMemberDetails'];
         $this->Template->imgAltActivateMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltActivateMember'];
         $this->Template->imgAltDeactivateMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeactivateMember'];
         $this->Template->imgAltDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['imgAltDeleteMember'];
-
-
         $this->Template->linkTitleViewMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleViewMemberDetails'];
         $this->Template->linkTitleEditMemberDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleEditMemberDetails'];
         $this->Template->linkTitleActivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleActivateMember'];
         $this->Template->linkTitleDeactivateMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeactivateMember'];
         $this->Template->linkTitleDeleteMember = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMember'];
-
         $this->Template->linkTitleDeleteMemberConfirmYes = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmYes'];
         $this->Template->linkTitleDeleteMemberConfirmNo = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteMemberConfirmNo'];
-
         $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];
-
         $this->Template->linktextBack = $GLOBALS['TL_LANG']['miscellaneous']['linktextBack'];
         $this->Template->linkTitleBack = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBack'];
 
-        // Daten des Mitglieds aus der Datenbank laden -> wegen Sortierung nicht über Model/Collection gelöst
-        $this->import('Database');
-        $allMembers = Database::getInstance()->prepare("SELECT * FROM tl_member ORDER BY disable DESC, usertype ASC")->query();
-
+        // Daten der Mitglieder aus der Datenbank laden
+        $options = [
+            'order' => 'disable DESC, usertype ASC'
+        ];
+        $allMembersData = MemberModel::findAll($options);
         $i = 0;
         $memberData = array();
-
-        while ($allMembers->next()) {
+        foreach ($allMembersData as $allMembers) {
             // Variablen für das Template setzen
             $memberData[$i]['firstname'] = $allMembers->firstname;
             $memberData[$i]['lastname'] = $allMembers->lastname;
@@ -391,19 +388,28 @@ class MemberAdministrationModule extends \Module
     {
         // Felder auslesen
         // Allgemeine Felder für alle Mitgliedstypen
+        $memberData = MemberModel::findBy('id', $member);
 
+        $memberData->firstname = \Input::post('firstname');
+        $memberData->lastname = \Input::post('lastname');
+        $memberData->email = \Input::post('email');
+        $memberData->username = \Input::post('username');
+        /*
         $firstname = \Input::post('firstname');
         $lastname = \Input::post('lastname');
         $email = \Input::post('email');
-        $username = \Input::post('username');
+        $username = \Input::post('username');*/
 
         // Felder für Mitgliedstypen Student und Aufsicht
         if ($usertype != "Administrator") {
-            $mobile = \Input::post('mobile');
+            $memberData->mobile = \Input::post('mobile');
+            //$mobile = \Input::post('mobile');
         }
 
         // Felder für Mitgliedstyp Student
+
         if ($usertype == "Student") {
+            /*
             $phone = \Input::post('phone');
             $dateOfBirth = \Input::post('dateOfBirth');
             $dateOfBirth = strtotime($dateOfBirth);
@@ -419,20 +425,41 @@ class MemberAdministrationModule extends \Module
             $extra_time = \Input::post('extra_time');
             $extra_time_unit = \Input::post('extra_time_unit');
             $comments = \Input::post('comments');
+            */
+
+            $memberData->phone = \Input::post('phone');
+
+            $dateOfBirth = \Input::post('dateOfBirth');
+            $dateOfBirth = strtotime($dateOfBirth);
+            $memberData->dateOfBirth = $dateOfBirth;
+
+            $memberData->handicaps = serialize(\Input::post('handicaps'));
+            $memberData->handicaps_others = \Input::post('handicaps_others');
+            $memberData->study_course = \Input::post('study_course');
+            $memberData->chipcard_nr = \Input::post('chipcard_nr');
+            $memberData->department = \Input::post('department');
+            $memberData->contact_person = \Input::post('contact_person');
+            $memberData->rehab_devices = serialize(\Input::post('rehab_devices'));
+            $memberData->rehab_devices_others = \Input::post('rehab_devices_others');
+            $memberData->extra_time = \Input::post('extra_time');
+            $memberData->extra_time_unit = \Input::post('extra_time_unit');
+            $memberData->comments = \Input::post('comments');
         }
 
         // Verschiedene Abfragen erstellen
+        /*
         switch ($usertype) {
             case "Administrator" : $set = array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username); break;
-            case "Aufsicht" : $set =    array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
-            case "Student" : $set =     array(  'firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
+            case "Aufsicht" : $set =      array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
+            case "Student" : $set =       array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
                                                 'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
                                                 'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
                                                 'extra_time'=>$extra_time, 'extra_time_unit'=>$extra_time_unit, 'comments'=>$comments); break;
             default: break;
-        }
+        }*/
 
-        if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+        //if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+        if ($memberData->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];
             $this->Template->linkTitleBackToMemberAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToMemberAdministration'];

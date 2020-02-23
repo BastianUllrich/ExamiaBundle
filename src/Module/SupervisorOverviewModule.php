@@ -220,7 +220,7 @@ class SupervisorOverviewModule extends \Module
             $endTime = ($result->date) + ($duration * 60);
             $endTimeReadable = date("H:i", $endTime);
             $attendeeData[$i]['endTime'] = $endTimeReadable;
-            
+
             $i++;
         }
 

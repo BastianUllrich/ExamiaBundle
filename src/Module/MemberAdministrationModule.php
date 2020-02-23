@@ -402,7 +402,6 @@ class MemberAdministrationModule extends \Module
         }
 
         // Felder für Mitgliedstyp Student
-
         if ($usertype == "Student") {
             $memberData->phone = \Input::post('phone');
             $dateOfBirth = \Input::post('dateOfBirth');

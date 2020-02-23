@@ -394,11 +394,6 @@ class MemberAdministrationModule extends \Module
         $memberData->lastname = \Input::post('lastname');
         $memberData->email = \Input::post('email');
         $memberData->username = \Input::post('username');
-        /*
-        $firstname = \Input::post('firstname');
-        $lastname = \Input::post('lastname');
-        $email = \Input::post('email');
-        $username = \Input::post('username');*/
 
         // Felder für Mitgliedstypen Student und Aufsicht
         if ($usertype != "Administrator") {
@@ -409,30 +404,10 @@ class MemberAdministrationModule extends \Module
         // Felder für Mitgliedstyp Student
 
         if ($usertype == "Student") {
-            /*
-            $phone = \Input::post('phone');
-            $dateOfBirth = \Input::post('dateOfBirth');
-            $dateOfBirth = strtotime($dateOfBirth);
-            $gender = \Input::post('gender');
-            $handicaps = serialize(\Input::post('handicaps'));
-            $handicaps_others = \Input::post('handicaps_others');
-            $study_course = \Input::post('study_course');
-            $chipcard_nr = \Input::post('chipcard_nr');
-            $department = \Input::post('department');
-            $contact_person = \Input::post('contact_person');
-            $rehab_devices = serialize(\Input::post('rehab_devices'));
-            $rehab_devices_others = \Input::post('rehab_devices_others');
-            $extra_time = \Input::post('extra_time');
-            $extra_time_unit = \Input::post('extra_time_unit');
-            $comments = \Input::post('comments');
-            */
-
             $memberData->phone = \Input::post('phone');
-
             $dateOfBirth = \Input::post('dateOfBirth');
             $dateOfBirth = strtotime($dateOfBirth);
             $memberData->dateOfBirth = $dateOfBirth;
-
             $memberData->handicaps = serialize(\Input::post('handicaps'));
             $memberData->handicaps_others = \Input::post('handicaps_others');
             $memberData->study_course = \Input::post('study_course');
@@ -446,19 +421,7 @@ class MemberAdministrationModule extends \Module
             $memberData->comments = \Input::post('comments');
         }
 
-        // Verschiedene Abfragen erstellen
-        /*
-        switch ($usertype) {
-            case "Administrator" : $set = array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username); break;
-            case "Aufsicht" : $set =      array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile); break;
-            case "Student" : $set =       array('firstname'=>$firstname, 'lastname'=>$lastname, 'email'=>$email, 'username'=>$username, 'mobile'=>$mobile, 'phone'=>$phone, 'dateOfBirth'=>$dateOfBirth,
-                                                'gender'=>$gender, 'handicaps'=>$handicaps, 'handicaps_others'=>$handicaps_others, 'study_course'=>$study_course, 'chipcard_nr'=>$chipcard_nr,
-                                                'department'=>$department, 'contact_person'=>$contact_person, 'rehab_devices'=>$rehab_devices, 'rehab_devices_others'=>$rehab_devices_others,
-                                                'extra_time'=>$extra_time, 'extra_time_unit'=>$extra_time_unit, 'comments'=>$comments); break;
-            default: break;
-        }*/
-
-        //if($this->Database->prepare("UPDATE tl_member %s WHERE id=$member")->set($set)->execute()) {
+        // Daten aktualisieren
         if ($memberData->save()) {
             $this->Template->changesSaved = true;
             $this->Template->changesSavedMessage = $GLOBALS['TL_LANG']['miscellaneous']['changesSavedMessage'];

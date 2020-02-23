@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
 use Contao\Module;
@@ -44,19 +45,27 @@ class SupervisorAdministrationModule extends \Module
         $this->loadLanguageFile('miscellaneous');
         $this->loadLanguageFile('tl_supervisors_exams');
 
+        // Variablen zur Bestimmung des anzuzeigenden Inhalts
         $this->Template->showDetails = false;
         $this->Template->deletePerson = false;
 
         // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
-        $result = Database::getInstance()->prepare("SELECT * 
-                                                    FROM tl_exams 
+
+        $options = [
+            'order' => 'date ASC'
+        ];
+        $results = ExamsModel::findBy(['date > ?'], [$todayMidnight], $options);
+
+        /*$result = Database::getInstance()->prepare("SELECT *
+                                                    FROM tl_exams
                                                     WHERE date > $todayMidnight
                                                     ORDER BY date ASC
-                                                    ")->query();
+                                                    ")->query();*/
         $examsDataAllDates = array();
         $i=0;
-        while ($result->next()) {
+        //while ($result->next()) {
+        foreach ($results as $result) {
             // Variablen für das Template setzen
             $examDateReadable = date("d.m.Y", $result->date);
             $examDateTimeStamp = strtotime($examDateReadable);

@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
 use Contao\Database;
@@ -56,15 +57,8 @@ class SupervisorAdministrationModule extends \Module
             'order' => 'date ASC'
         ];
         $results = ExamsModel::findBy(['date > ?'], [$todayMidnight], $options);
-
-        /*$result = Database::getInstance()->prepare("SELECT *
-                                                    FROM tl_exams
-                                                    WHERE date > $todayMidnight
-                                                    ORDER BY date ASC
-                                                    ")->query();*/
         $examsDataAllDates = array();
         $i=0;
-        //while ($result->next()) {
         foreach ($results as $result) {
             // Variablen für das Template setzen
             $examDateReadable = date("d.m.Y", $result->date);
@@ -181,10 +175,9 @@ class SupervisorAdministrationModule extends \Module
     // Aufsicht löschen
     public function deleteSupervisor($id, $date) {
         $this->Template->deletePerson = true;
-        // Schreibassistenz aus Tabelle tl_attendees_exams entfernen (Wert auf 0 setzen)
+        // Schreibassistenz aus Tabelle tl_attendees_exams entfernen (Wert auf 0 setzen) --> Keine Models, da Code sonst künstlich aufgebläht wäre
         $set = array('assistant_id' => 0);
         $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE assistant_id=$id")->set($set)->execute();
-
         // Aufsichtsverteilung aus Tabelle tl_supervisors_exams entfernen
         if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);

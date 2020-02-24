@@ -241,12 +241,14 @@ class MemberAdministrationModule extends \Module
                                 $examDateFrom = strtotime($examDateReadable);
                                 $examDateTo = $examDateFrom+86399;
                                 // Anzahl der Klausuren des Tages heraussuchen -> Falls 0, wird die Aufsichtsverteilung entfernt
-                                $numberOfExamsTimePeriod = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
-                                if ($numberOfExamsTimePeriod == 0) {
+                                $numberOfExamsTimePeriod = ExamsModel::findBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
+                                if (null === $numberOfExamsTimePeriod) {
                                     $supervisorExamsDate = SupervisorsExamsModel::findBy('date', $examDateFrom);
+                                    $numberOfExamsTimePeriod = "eins";
                                     if (null != $supervisorExamsDate) {
                                         foreach ($supervisorExamsDate as $supervisorExamsDateObject) {
                                             $supervisorExamsDateObject->delete();
+                                            $numberOfExamsTimePeriod = "zwei";
                                         }
                                     }
                                 }

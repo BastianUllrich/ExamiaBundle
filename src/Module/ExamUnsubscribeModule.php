@@ -1,6 +1,7 @@
 <?php
 
 namespace Baul\ExamiaBundle\Module;
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -56,6 +57,7 @@ class ExamUnsubscribeModule extends \Module
         $this->Template->unsubscribtionSuccessful = false;
 
         // Auflistung der angemeldeten Klausuren
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         // Aktueller Timestamp muss via PHP geholt werden, da SQL nur Datumformat "2020-02-02" erstellen kann
         $this->import('Database');
         $examParticipationList = array();
@@ -144,19 +146,21 @@ class ExamUnsubscribeModule extends \Module
                     // Schreibassistenz löschen
                     $writingAssistanceID = $attendeeExamData->assistant_id;
                     if ($writingAssistanceID > 0) {
-                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$writingAssistanceID")->execute()->affectedRows;
+                        $writingAssistanceObject = SupervisorsExamsModel::findByPk($writingAssistanceID);
+                        $writingAssistanceObject->delete();
                     }
 
-
                     // Klausurteilnahme löschen
-                    if ($unsubscribeFromExam = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam_id AND attendee_id=$userID")->execute()->affectedRows) {
+                    $attendeeExamObject = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$exam_id, $userID]);
+                    if ($attendeeExamObject->delete()) {
 
                         // Überprüfen, ob noch Mitglieder zu der Klausur angemeldet sind, um leere Datensätze zu vermeiden
                         $getExamRegistration = AttendeesExamsModel::findBy('exam_id', $exam_id);
 
                         // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                         if (empty($getExamRegistration->attendee_id)) {
-                            $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam_id")->execute()->affectedRows;
+                            $examObject = ExamsModel::findByPk($exam_id);
+                            $examObject->delete();
 
                             /* Werden noch Klausuren am gleichen Tag geschrieben? Falls nein, Aufsichten entfernen */
                             // Klausurdatum auf "Datum 0 Uhr" umwandeln, anschließend Timestamp von "Datum 23:59:59 Uhr" berechnen
@@ -167,7 +171,10 @@ class ExamUnsubscribeModule extends \Module
                             $numberOfExamsTimePeriod = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDayStartTimestamp, $examDayEndTimestamp]);
                             // Wenn Anzahl = 0, Aufsichten entfernen
                             if ($numberOfExamsTimePeriod == 0) {
-                                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDayStartTimestamp AND $examDayEndTimestamp")->execute()->affectedRows;
+                                $supervisorExams = SupervisorsExamsModel::findBy(['date BETWEEN ?', '?'], [$examDayStartTimestamp, $examDayEndTimestamp]);
+                                foreach ($supervisorExams as $supervisorExamsObject) {
+                                    $supervisorExamsObject->delete();
+                                }
                             }
                         }
 

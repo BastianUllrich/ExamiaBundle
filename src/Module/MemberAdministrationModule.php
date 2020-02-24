@@ -420,7 +420,6 @@ class MemberAdministrationModule extends \Module
         // Felder für Mitgliedstypen Student und Aufsicht
         if ($usertype != "Administrator") {
             $memberData->mobile = \Input::post('mobile');
-            //$mobile = \Input::post('mobile');
         }
 
         // Felder für Mitgliedstyp Student

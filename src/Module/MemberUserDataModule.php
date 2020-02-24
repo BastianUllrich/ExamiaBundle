@@ -50,7 +50,7 @@ class MemberUserDataModule extends \Module
         $userID = $objUser->id;
 
         // Daten des Mitglieds aus der Datenbank laden
-        $userdata = MemberModel::findBy('id', $userID);
+        $userdata = MemberModel::findByPk($userID);
 
         // Sprachvariablen für das Template setzen
         $this->Template->langShowMasterData = $GLOBALS['TL_LANG']['miscellaneous']['showMasterData'];

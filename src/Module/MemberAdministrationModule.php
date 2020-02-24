@@ -2,6 +2,7 @@
 
 namespace Baul\ExamiaBundle\Module;
 use Baul\ExamiaBundle\Model\ExamsModel;
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -199,7 +200,7 @@ class MemberAdministrationModule extends \Module
 
                     // Aufsichtsverteilung, Klausurzuweisung und ggf. Klausur aus Datenbank löschen
 
-                    // KlausurIDs von Teilnahme auslesen und in Array speichern
+                    // KlausurIDs von Teilnahme auslesen und in Array speichern, dann Teilnahme selbst löschen
                     $i = 0;
                     $examIDs = array();
                     $attendeesExams = AttendeesExamsModel::findBy('attendee_id', $member);
@@ -207,10 +208,9 @@ class MemberAdministrationModule extends \Module
                         while ($attendeesExams->next()) {
                             $examIDs[$i]['exam_id'] = $attendeesExams->exam_id;
                             $i++;
+                            // Klausurteilnahmen des Mitglieds aus Datenbank löschen
+                            $attendeesExams->delete();
                         }
-
-                        // Klausurteilnahmen des Mitglieds aus Datenbank löschen
-                        $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$member")->execute()->affectedRows;
 
                         // Schreibassistenten, Klausuren & Aufsichtsverteilung aus Datenbank löschen, falls die Klausuren keinen Teilnehmer mehr haben
                         foreach ($examIDs as $exam_id) {
@@ -220,13 +220,21 @@ class MemberAdministrationModule extends \Module
                             // Schreibassistenzen des Mitglieds für Klausuren entfernen
                             $assistanceID = $getAttendeesExam->assistant_id;
                             if (!empty($assistanceID)) {
-                                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistanceID")->execute()->affectedRows;
+                                $supervisorExams = SupervisorsExamsModel::findByPk($assistanceID);
+                                if (null != $supervisorExams) {
+                                    foreach ($supervisorExams as $supervisorExamsObject) {
+                                        $supervisorExamsObject->delete();
+                                    }
+                                }
                             }
 
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
                                 // Klausur löschen
-                                $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exID")->execute()->affectedRows;
+                                $examObject = ExamsModel::findByPk($exID);
+                                if (null != $examObject) {
+                                    $examObject->delete();
+                                }
                                 // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
                                 $examDate = $getAttendeesExam->date;
                                 $examDateReadable = date("d.m.Y", $examDate);
@@ -234,21 +242,31 @@ class MemberAdministrationModule extends \Module
                                 $examDateTo = $examDateFrom+86399;
                                 // Anzahl der Klausuren des Tages heraussuchen -> Falls 0, wird die Aufsichtsverteilung entfernt
                                 $numberOfExamsTimePeriod = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
-                                if ($numberOfExamsTimePeriod) {
-                                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date=$examDateFrom")->execute()->affectedRows;
+                                if ($numberOfExamsTimePeriod === 0) {
+                                    $supervisorExamsDate = SupervisorsExamsModel::findBy('date', $examDateFrom);
+                                    if (null != $supervisorExamsDate) {
+                                        foreach ($supervisorExamsDate as $supervisorExamsDateObject) {
+                                            $supervisorExamsDateObject->delete();
+                                        }
+                                    }
                                 }
-
                             }
                         }
                     }
 
                     // Aufsichtsverteilung des Mitglieds aus Datenbank löschen
                     if ($memberDeleteData->usertype == "Aufsicht") {
-                        $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE supervisor_id=$member")->execute()->affectedRows;
+                        $supervisorExamsSupervisor = SupervisorsExamsModel::findBy('supervisor_id', $member);
+                        if (null != $supervisorExamsSupervisor) {
+                            foreach ($supervisorExamsSupervisor as $supervisorExamsSupervisorObject) {
+                                $supervisorExamsSupervisorObject->delete();
+                            }
+                        }
                     }
 
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
-                    if ($deleteMember = $this->Database->prepare("DELETE FROM tl_member WHERE id=$member")->execute()->affectedRows) {
+                    $memberObject = MemberModel::findBy($member);
+                    if ($memberObject->delete()) {
                         \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                     }
                 }

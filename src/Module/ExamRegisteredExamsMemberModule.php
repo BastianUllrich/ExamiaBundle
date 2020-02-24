@@ -59,13 +59,14 @@ class ExamRegisteredExamsMemberModule extends \Module
         $this->import('Database');
         $examParticipationList = array();
         $i = 0;
-        $result = Database::getInstance()->prepare(
-            "SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_firstname, tl_exams.lecturer_lastname, tl_attendees_exams.status 
-             FROM tl_exams, tl_attendees_exams 
-             WHERE tl_exams.id=tl_attendees_exams.exam_id 
-             AND tl_attendees_exams.attendee_id=$userID
-             ORDER BY tl_exams.date
-            ")->query();
+        // Alle Klausuren des Mitglieds aus Datenbank lesen
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
+        $result = Database::getInstance()->prepare("SELECT tl_exams.date, tl_exams.begin, tl_exams.title, tl_exams.lecturer_title, tl_exams.lecturer_firstname, tl_exams.lecturer_lastname, tl_attendees_exams.status 
+                                                    FROM tl_exams, tl_attendees_exams 
+                                                    WHERE tl_exams.id=tl_attendees_exams.exam_id 
+                                                    AND tl_attendees_exams.attendee_id=$userID
+                                                    ORDER BY tl_exams.date
+                                                   ")->query();
         while ($result->next()) {
             $examParticipationList[$i]['date'] = date("d.m.Y", $result->date);
             $examParticipationList[$i]['time'] = $result->begin;

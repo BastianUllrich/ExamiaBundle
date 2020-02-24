@@ -372,6 +372,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];
 
         /* Aufsichten / Schreibassistenten heraussuchen */
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         // Tag der Klausur in timestamp umwandeln (0:00 Uhr und 23:59:59)
         $dayExamMidnightTimeStamp = strtotime($detailDate);
         $dayExamLastSecond = $dayExamMidnightTimeStamp + 86399;
@@ -397,6 +398,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->supervisorsDataList = $supervisorsData;
 
         // Klausurteilnehmer heraussuchen
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT tl_member.firstname, tl_member.lastname, tl_member.id, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit
                                                     FROM tl_member, tl_attendees_exams
                                                     WHERE tl_attendees_exams.exam_id=$examDetails->id
@@ -580,6 +582,7 @@ class ExamAdministrationModule extends \Module
     }
 
     // Alle Klausurteilnehmer anzeigen
+    // Aufgrund der speziellen Abfrage nicht über Model / Collection
     public function showAttendeeList($exam)
     {
         $examData = ExamsModel::findBy('id', $exam);

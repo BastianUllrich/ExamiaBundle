@@ -23,7 +23,7 @@ if ($this->showDetails === false) {
         <?php foreach($this->examsDataList as $examsData): ?>
             <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first"><?= $examsData['dateReadable']; ?></td>
-                <td class="body col_1 col_last"><a href="{{env::request}}?do=showDetails&date=<?= $examsData['time']; ?>" title="<?= $this->linkTitleShowExamDateDetails; ?>"><?= $this->langShowDetails; ?></a></td>
+                <td class="body col_1 col_last"><a href="klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=<?= $examsData['time']; ?>" title="<?= $this->linkTitleShowExamDateDetails; ?>"><?= $this->langShowDetails; ?></a></td>
             </tr>
             <?php
             $i++;

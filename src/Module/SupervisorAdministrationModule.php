@@ -4,6 +4,7 @@ namespace Baul\ExamiaBundle\Module;
 use Baul\ExamiaBundle\Model\AttendeesExamsModel;
 use Baul\ExamiaBundle\Model\ExamsModel;
 use Baul\ExamiaBundle\Model\MemberModel;
+use Baul\ExamiaBundle\Model\SupervisorsExamsModel;
 use Contao\Database;
 use Contao\Module;
 use Contao\FrontendUser;
@@ -133,10 +134,9 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
         $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
+        // Datenbankabfrage aktuell aufgeteilte Aufsichten
         $startTime = \Input::get("date");
         $endTime = $startTime + 86399;
-
-        // Datenbankabfrage aktuell aufgeteilte Aufsichten
         $result = Database::getInstance()->prepare("SELECT 
                                                     tl_member.firstname, tl_member.lastname, 
                                                     tl_supervisors_exams.id, tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
@@ -208,10 +208,13 @@ class SupervisorAdministrationModule extends \Module
         $timeFrom = \Input::post('timeFrom');
         $timeUntil = \Input::post('timeUntil');
         $task = "Aufsicht";
-        $this->import('Database');
+        //$this->import('Database');
         $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'date' => $date, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
 
-        if ($this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute()) {
+        // if ($this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute()) {
+        $newSupervisorExamsModel = new SupervisorsExamsModel();
+        $newSupervisorExamsModel->setRow($set);
+        if ($newSupervisorExamsModel->save()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

@@ -243,12 +243,10 @@ class MemberAdministrationModule extends \Module
                                 // Anzahl der Klausuren des Tages heraussuchen -> Falls 0, wird die Aufsichtsverteilung entfernt
                                 $numberOfExamsTimePeriod = ExamsModel::findBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
                                 if (null === $numberOfExamsTimePeriod) {
-                                    $supervisorExamsDate = SupervisorsExamsModel::findBy('date', $examDateFrom);
-                                    $numberOfExamsTimePeriod = "eins";
+                                    $supervisorExamsDate = SupervisorsExamsModel::findBy(date, $examDateFrom);
                                     if (null != $supervisorExamsDate) {
                                         foreach ($supervisorExamsDate as $supervisorExamsDateObject) {
                                             $supervisorExamsDateObject->delete();
-                                            $numberOfExamsTimePeriod = "zwei";
                                         }
                                     }
                                 }
@@ -269,7 +267,7 @@ class MemberAdministrationModule extends \Module
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
                     $memberObject = MemberModel::findByPk($member);
                     if ($memberObject->delete()) {
-                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?'.$numberOfExamsTimePeriod);
+                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?'.$examDateFrom);
                     }
                 }
                 elseif (\Input::get("confirmed") == "no") {

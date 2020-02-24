@@ -201,28 +201,33 @@ class ExamAdministrationModule extends \Module
 
             // Klausur erst nach Bestätigung löschen
             if ((\Input::get("confirmed") == "yes")) {
-                $this->import('Database');
 
-                // Klausurteilnehmer entfernen
-                $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$exam")->execute()->affectedRows;
-
-                // Aufsichten vom Klausurtag entfernen, falls am Tag der Klausur keine Klausuren mehr vorhanden sind
-                $getExamDate = ExamsModel::findBy('id', $exam);
+                $examObject = ExamsModel::findByPk($exam);
                 // Umwandeln der Time-Angabe von Tag + Uhrzeit auf Tag
-                $examDateString = date("d.m.Y", $getExamDate->date);
+                $examDateString = date("d.m.Y", $examObject->date);
                 $examDateFrom = strtotime($examDateString);
                 $examDateTo = $examDateFrom + 86399;
 
-                // Anzahl der Datensätze zählen & ggf. Aufsichten entfernen
-                $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
-                if ($resultCount != 0) {
-                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
+                // Klausurteilnehmer entfernen
+                $attendeesExams = AttendeesExamsModel::findBy('exam_id', $exam);
+                foreach ($attendeesExams as $attendeesExamsObject) {
+                    $attendeesExamsObject->delete();
                 }
 
-                // Klausur aus Datenbank löschen und zur Seite "Klausurverwaltung" zurückkehren
-                if ($deleteExam = $this->Database->prepare("DELETE FROM tl_exams WHERE id=$exam")->execute()->affectedRows) {
-                    \Controller::redirect('klausurverwaltung/klausurverwaltung.html?');
+                // Klausur aus Datenbank löschen
+                $examObject->delete();
+
+                // Aufsichten vom Klausurtag entfernen, falls am Tag der Klausur keine Klausuren mehr vorhanden sind
+                $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
+                if ($resultCount == 0) {
+                    $supervisorsExams = SupervisorsExamsModel::findBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
+                    foreach ($supervisorsExams as $supervisorsExamsObject) {
+                        $supervisorsExamsObject->delete();
+                    }
                 }
+
+                // Zur Seite "Klausurverwaltung" zurückkehren
+                \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
 
             } elseif ((\Input::get("confirmed") == "no")) {
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html');
@@ -287,9 +292,11 @@ class ExamAdministrationModule extends \Module
             // Wenn der Teilnehmer schon vorhanden ist, wird die Schreibassistenz gelöscht, dann wird er aus der "alten" Klausur gelöscht
             if (!empty($attendeeIdToExam)) {
                 if (!empty($assistantID)) {
-                    $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$assistantID")->execute()->affectedRows;
+                    $supervisorsExamsObject = SupervisorsExamsModel::findByPk($assistantID);
+                    $supervisorsExamsObject->delete();
                 }
-                $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE attendee_id=$attendeeIdToExam AND exam_id=$combineFromId")->execute()->affectedRows;
+                $attendeesExamsObject = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$attendeeIdToExam, $combineFromId]);
+                $attendeesExamsObject->delete();
             }
 
         }
@@ -299,19 +306,22 @@ class ExamAdministrationModule extends \Module
         if ($getAttendeesFromExam->save()) {
 
             // Timestamp der "alten" Klausur heraussuchen
-            $getExamDate = ExamsModel::findBy('id', $combineFromId);
+            $oldExamObject = ExamsModel::findBy('id', $combineFromId);
             // Umwandeln der Time-Angabe von Tag + Uhrzeit auf Tag
-            $examDateString = date("d.m.Y", $getExamDate->date);
+            $examDateString = date("d.m.Y", $oldExamObject->date);
             $examDateFrom = strtotime($examDateString);
             $examDateTo = $examDateFrom + 86399;
 
             // "Alte" Klausur löschen
-            $this->Database->prepare("DELETE FROM tl_exams WHERE id=$combineFromId")->execute()->affectedRows;
+            $oldExamObject->delete();
 
             // Aufsichten vom Klausurtag entfernen, falls am Tag der gelöschten Klausur keine Klausuren mehr vorhanden sind
             $resultCount = ExamsModel::countBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
             if ($resultCount != 0) {
-                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE date BETWEEN $examDateFrom AND $examDateTo")->execute()->affectedRows;
+                $supervisorsExams = SupervisorsExamsModel::findBy(['date BETWEEN ?', '?'], [$examDateFrom, $examDateTo]);
+                foreach ($supervisorsExams as $supervisorsExamsObject) {
+                    $supervisorsExamsObject->delete();
+                }
             }
 
             $this->Template->combinationSaved = true;
@@ -547,7 +557,7 @@ class ExamAdministrationModule extends \Module
         foreach ($examAttendeesData as $examAttendee) {
             $assistantID = $examAttendee->assistant_id;
             if (!empty($assistantID) && $assistantID > 0) {
-                $assistantData = SupervisorsExamsModel::findBy('id', $assistantID);
+                $assistantData = SupervisorsExamsModel::findByPk($assistantID);
                 $assistantData->date = strtotime($exam_date);
                 $assistantData->begin = $exam_begin;
 
@@ -624,8 +634,8 @@ class ExamAdministrationModule extends \Module
             }
             // Wenn eine Schreibassistenz benötigt wird und das Feld "assistant_id" mit der ID einer Schreibassistenz gefüllt ist, wird ihr Name ausgegeben
             if (!empty($result->assistant_id) && ($result->assistant_id != 0)) {
-                $supervisorsExamData = SupervisorsExamsModel::findBy('id', $result->assistant_id);
-                $assistantData = MemberModel::findBy('id', $supervisorsExamData->supervisor_id);
+                $supervisorsExamData = SupervisorsExamsModel::findByPk($result->assistant_id);
+                $assistantData = MemberModel::findByPk($supervisorsExamData->supervisor_id);
                 $assistant = $assistantData->firstname;
                 $assistant .= " ";
                 $assistant .= $assistantData->lastname;
@@ -661,9 +671,11 @@ class ExamAdministrationModule extends \Module
             // Schreibassistenz heraussuchen und entfernen
             $attendeeData = AttendeesExamsModel::findBy(['attendee_id = ?', 'exam_id = ?'], [$attendeeID, $examID]);
             $writingAssistanceID = $attendeeData->assistant_id;
-            $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$writingAssistanceID")->execute()->affectedRows;
+            $supervisorsExamsObject = SupervisorsExamsModel::findByPk($writingAssistanceID);
+            $supervisorsExamsObject->delete();
             // Teilnehmer aus Tabelle tl_attendees_exams entfernen
-            if ($deleteAttendee = $this->Database->prepare("DELETE FROM tl_attendees_exams WHERE exam_id=$examID AND attendee_id=$attendeeID")->execute()->affectedRows) {
+            $attendeesExamsObject = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
+            if ($attendeesExamsObject->delete()) {
                 \Controller::redirect('klausurverwaltung/klausurverwaltung.html?do=editAttendees&exam=' . $examID);
             }
         } elseif (\Input::get("confirmed") == "no") {
@@ -754,28 +766,37 @@ class ExamAdministrationModule extends \Module
             if ($addSupervisor === true) {
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
                 // Eintrag in Tabelle "tl_supervisors_exams" vornehmen
-                $this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute();
+                $newSupervisorsExamsObject = new SupervisorsExamsModel();
+                $newSupervisorsExamsObject->setRow($set);
+                $newSupervisorsExamsObject->save();
                 // Eingetragene ID herausfinden und in Eintrag von tl_attendees_exams eintragen
-                $latestSupervisorsExamsData = Database::getInstance()->prepare("SELECT MAX(id) AS latestID FROM tl_supervisors_exams")->query();
-                $latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
-                $set = array('assistant_id' => $latestSupervisorsExamsID);
-                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                //$latestSupervisorsExamsData = Database::getInstance()->prepare("SELECT MAX(id) AS latestID FROM tl_supervisors_exams")->query();
+                //$latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
+                $attendeesExamsObject = AttendeesExamsModel::findByPk($ae_id);
+                $attendeesExamsObject->assistant_id = $newSupervisorsExamsObject->id;
+                $attendeesExamsObject->save();
+                //$this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
-                $this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$actualSupervisorID")->execute()->affectedRows;
+                $supervisorsExamsObject = SupervisorsExamsModel::findByPk($actualSupervisorID);
+                $supervisorsExamsObject->delete();
                 // Eintrag in tl_attendees_exams aktualisieren
-                $set = array('assistant_id' => 0);
-                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                $attendeesExamsObject = AttendeesExamsModel::findByPk($ae_id);
+                $attendeesExamsObject->assistant_id = 0;
+                $attendeesExamsObject->save();
             }
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
-
+                $supervisorsExamsObject = SupervisorsExamsModel::findByPk($supervisors_exams_ID);
                 $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
-                $this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
+                $supervisorsExamsObject->setRow($set);
+                $supervisorsExamsObject->save();
+                //$this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
                 // Eintrag in tl_attendees_exams aktualisieren
-                $set = array('assistant_id' => $actualSupervisorID);
-                $this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
+                $attendeesExamsObject = AttendeesExamsModel::findByPk($ae_id);
+                $attendeesExamsObject->assistant_id = $actualSupervisorID;
+                $attendeesExamsObject->save();
             }
 
             $this->Template->attendeeChangesSaved = true;
@@ -788,6 +809,8 @@ class ExamAdministrationModule extends \Module
     // Variablen beim Editieren und Anzeigen von Teilnehmern setzen
     public function setShowEditAttendeeValues($examID, $attendeeID) {
 
+        // Klausurteilnehmer aus Datenbank auslesen
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
                                                     tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit,

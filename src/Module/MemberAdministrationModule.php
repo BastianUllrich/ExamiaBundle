@@ -230,13 +230,13 @@ class MemberAdministrationModule extends \Module
 
                             // Klausur & Aufsichtsverteilung aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                             if (empty($getAttendeesExam->exam_id)) {
-                                // Klausur löschen
                                 $examObject = ExamsModel::findByPk($exID);
+                                $examDate = $examObject->date;
+                                // Klausur löschen
                                 if (null != $examObject) {
                                     $examObject->delete();
                                 }
                                 // Klausurdatum in Timestamp des Tages, 0 Uhr umwandeln
-                                $examDate = $getAttendeesExam->date;
                                 $examDateReadable = date("d.m.Y", $examDate);
                                 $examDateFrom = strtotime($examDateReadable);
                                 $examDateTo = $examDateFrom+86399;
@@ -267,7 +267,7 @@ class MemberAdministrationModule extends \Module
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
                     $memberObject = MemberModel::findByPk($member);
                     if ($memberObject->delete()) {
-                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?'.$examDateFrom);
+                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?');
                     }
                 }
                 elseif (\Input::get("confirmed") == "no") {

@@ -808,7 +808,8 @@ class ExamAdministrationModule extends \Module
 
     // Variablen beim Editieren und Anzeigen von Teilnehmern setzen
     public function setShowEditAttendeeValues($examID, $attendeeID) {
-
+        // Klausurteilnehmer aus Datenbank auslesen
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
                                                     tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit,

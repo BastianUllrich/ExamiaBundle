@@ -175,14 +175,12 @@ class SupervisorAdministrationModule extends \Module
     // Aufsicht löschen
     public function deleteSupervisor($id, $date) {
         $this->Template->deletePerson = true;
-        // Schreibassistenz aus Tabelle tl_attendees_exams entfernen (Wert auf 0 setzen) --> Keine Models, da Code sonst künstlich aufgebläht wäre
+        // Schreibassistenz aus Tabelle tl_attendees_exams entfernen (Wert auf 0 setzen)
         $attendeesExamsAssistants = AttendeesExamsModel::findBy('assistant_id', $id);
         foreach ($attendeesExamsAssistants as $attendeesExamsAssistant) {
             $attendeesExamsAssistant->assistant_id = 0;
             $attendeesExamsAssistant->save();
         }
-        //$set = array('assistant_id' => 0);
-        //$this->Database->prepare("UPDATE tl_attendees_exams %s WHERE assistant_id=$id")->set($set)->execute();
         // Aufsichtsverteilung aus Tabelle tl_supervisors_exams entfernen
         if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);

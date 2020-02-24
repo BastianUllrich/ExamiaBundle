@@ -157,14 +157,16 @@ class ExamRegistrationModule extends \Module
 
                 // Eintrag in Tabelle "tl_exams" vornehmen
                 $newExamsObject = new ExamsModel();
-                if ($newExamsObject->setRow($examsSet)) {
+                $newExamsObject->setRow($examsSet);
+                if ($newExamsObject->save()) {
                     if (empty($extra_time)) $extra_time = 0;
                     // Insertions für Tabelle "tl_attendees_exams" definieren
                     $attendeesExamsSet = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $newExamsObject->id, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
                                                'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
                     // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
                     $newAttendeesExamsObject = new AttendeesExamsModel();
-                    if ($newAttendeesExamsObject->setRow($attendeesExamsSet)) {
+                    $newAttendeesExamsObject->setRow($attendeesExamsSet);
+                    if ($newAttendeesExamsObject->save()) {
                         $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
                         $this->submitSuccess();
                     }

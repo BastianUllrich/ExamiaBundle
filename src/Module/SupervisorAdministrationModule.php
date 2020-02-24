@@ -135,7 +135,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
         $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
-        // Datenbankabfrage aktuell aufgeteilte Aufsichten -> Abfrage zu komplex für Models / Collections
+        // Datenbankabfrage aktuell aufgeteilte Aufsichten
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $startTime = \Input::get("date");
         $endTime = $startTime + 86399;
         $result = Database::getInstance()->prepare("SELECT 

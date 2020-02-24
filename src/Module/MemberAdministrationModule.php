@@ -104,15 +104,19 @@ class MemberAdministrationModule extends \Module
         // Mitglied aktivieren / deaktivieren
         if (\Input::get("do") == "activate") {
             $member = \Input::get("member");
-            if ($member != $objUser->id) {
-                $this->Database->prepare("UPDATE tl_member SET disable='' WHERE id=$member")->execute()->affectedRows;
+            $memberModelObject = MemberModel::findByPk($member);
+            if ($member != $objUser->id && null != $memberModelObject) {
+                $memberModelObject->disable = '';
+                $memberModelObject->save();
             }
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }
         if (\Input::get("do") == "deactivate") {
             $member = \Input::get("member");
-            if ($member != $objUser->id) {
-                $this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=$member")->execute()->affectedRows;
+            $memberModelObject = MemberModel::findByPk($member);
+            if ($member != $objUser->id && null != $memberModelObject) {
+                $memberModelObject->disable = 1;
+                $memberModelObject->save();
             }
             \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
         }

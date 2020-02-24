@@ -11,7 +11,11 @@ if ($this->showDetails === false) {
     <table class="all_records">
         <thead>
         <tr>
-            <th class="head col_first"><?= $this->langDate; ?></th>
+            <th class="head col_first">
+                <a href="klausurverwaltung/aufsichtsverwaltung.html?orderBy=date<?php if ($this->isOrderedBy == 'dateASC') echo 'DESC'; else echo 'ASC'; ?>" title="<?= $this->orderByDateText; ?>">
+                    <?= $this->langDate; ?>
+                </a>
+            </th>
             <th class="head col_last"><?= $this->langDetails; ?></th>
         </tr>
         </thead>

@@ -50,12 +50,35 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->showDetails = false;
         $this->Template->deletePerson = false;
 
+        // Sprachvariablen
+        $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
+        $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];
+        $this->Template->orderAltText = $GLOBALS['TL_LANG']['miscellaneous']['orderAltText'];
+        $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
+        $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
+        $this->Template->linkTitleShowExamDateDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'];
+        $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
+
         // Alle Klausurdaten laden, die ab dem aktuellen Tag um Mitternacht gelten, sortiert nach Datum
         $todayMidnight = strtotime(date("d.m.Y"));
 
-        $options = [
-            'order' => 'date ASC'
-        ];
+        // Sortierung nach Datum aufsteigend / absteigend
+        if (\Input::get("orderBy") == "dateDESC") {
+            $options = [
+                'order' => 'date DESC'
+            ];
+            $this->Template->isOrderedBy = "dateDESC";
+            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateASC'];
+
+        } else {
+            $options = [
+                'order' => 'date ASC'
+            ];
+            $this->Template->isOrderedBy = "dateASC";
+            $this->Template->orderByDateText = $GLOBALS['TL_LANG']['miscellaneous']['orderByDateDESC'];
+        }
+
+        // Datenbankabfrage nach Klausurdaten
         $results = ExamsModel::findBy(['date > ?'], [$todayMidnight], $options);
         $examsDataAllDates = array();
         $i=0;
@@ -70,15 +93,7 @@ class SupervisorAdministrationModule extends \Module
         // Gruppierung nach Datum erfolgt über Überprüfung des Arrays, weil Klausurtimestamp aus Datum & Uhrzeit besteht
         $examsDataTmp = array_unique($examsDataAllDates, SORT_REGULAR);
         $examsData = array_intersect_key($examsDataAllDates, $examsDataTmp);
-
         $this->Template->examsDataList = $examsData;
-        $this->Template->langSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'];
-        $this->Template->langDate = $GLOBALS['TL_LANG']['miscellaneous']['date'];
-        $this->Template->langDetails = $GLOBALS['TL_LANG']['miscellaneous']['details'];
-        $this->Template->langShowDetails = $GLOBALS['TL_LANG']['miscellaneous']['show_Details'];
-        $this->Template->linkTitleShowExamDateDetails = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleShowExamDateDetails'];
-
-        $this->Template->langNoDataAvailable = $GLOBALS['TL_LANG']['miscellaneous']['noDataAvailable'];
 
         if (\Input::get("do") == "showDetails") {
             $this->showDetails();

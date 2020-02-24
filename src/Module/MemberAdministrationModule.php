@@ -267,7 +267,7 @@ class MemberAdministrationModule extends \Module
                     // Mitglied aus Datenbank löschen und zur Seite "Mitglieder verwalten" zurückkehren
                     $memberObject = MemberModel::findByPk($member);
                     if ($memberObject->delete()) {
-                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html?');
+                        \Controller::redirect('benutzerbereich/mitglieder-verwalten.html');
                     }
                 }
                 elseif (\Input::get("confirmed") == "no") {

@@ -770,12 +770,9 @@ class ExamAdministrationModule extends \Module
                 $newSupervisorsExamsObject->setRow($set);
                 $newSupervisorsExamsObject->save();
                 // Eingetragene ID herausfinden und in Eintrag von tl_attendees_exams eintragen
-                //$latestSupervisorsExamsData = Database::getInstance()->prepare("SELECT MAX(id) AS latestID FROM tl_supervisors_exams")->query();
-                //$latestSupervisorsExamsID = $latestSupervisorsExamsData->latestID;
                 $attendeesExamsObject = AttendeesExamsModel::findByPk($ae_id);
                 $attendeesExamsObject->assistant_id = $newSupervisorsExamsObject->id;
                 $attendeesExamsObject->save();
-                //$this->Database->prepare("UPDATE tl_attendees_exams %s WHERE id=$ae_id")->set($set)->execute();
             }
             // Schreibassistenz löschen
             if ($deleteSupervisor === true) {
@@ -789,10 +786,13 @@ class ExamAdministrationModule extends \Module
             // Schreibassistenz aktualisieren
             if ($updateSupervisor === true) {
                 $supervisorsExamsObject = SupervisorsExamsModel::findByPk($supervisors_exams_ID);
-                $set = array('tstamp' => time(), 'supervisor_id' => $assistantID, 'date' => $dateTimestampExam, 'time_from' => $timeStringExamBegin, 'time_until' => $timeStringExamEnd, 'task' => 'Schreibassistenz');
-                $supervisorsExamsObject->setRow($set);
+                $supervisorsExamsObject->tstamp = time();
+                $supervisorsExamsObject->supervisor_id = $assistantID;
+                $supervisorsExamsObject->date = $dateTimestampExam;
+                $supervisorsExamsObject->time_from = $timeStringExamBegin;
+                $supervisorsExamsObject->time_until = $timeStringExamEnd;
+                $supervisorsExamsObject->task = 'Schreibassistenz';
                 $supervisorsExamsObject->save();
-                //$this->Database->prepare("UPDATE tl_supervisors_exams %s WHERE id=$supervisors_exams_ID")->set($set)->execute();
                 // Eintrag in tl_attendees_exams aktualisieren
                 $attendeesExamsObject = AttendeesExamsModel::findByPk($ae_id);
                 $attendeesExamsObject->assistant_id = $actualSupervisorID;
@@ -809,8 +809,6 @@ class ExamAdministrationModule extends \Module
     // Variablen beim Editieren und Anzeigen von Teilnehmern setzen
     public function setShowEditAttendeeValues($examID, $attendeeID) {
 
-        // Klausurteilnehmer aus Datenbank auslesen
-        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT
                                                     tl_member.firstname, tl_member.lastname, tl_member.username, tl_member.id, tl_member.contact_person,
                                                     tl_attendees_exams.seat, tl_attendees_exams.extra_time, tl_attendees_exams.extra_time_unit,

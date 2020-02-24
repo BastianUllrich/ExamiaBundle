@@ -197,7 +197,9 @@ class SupervisorAdministrationModule extends \Module
             $attendeesExamsAssistant->save();
         }
         // Aufsichtsverteilung aus Tabelle tl_supervisors_exams entfernen
-        if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
+        $supervisorExamsModel = SupervisorsExamsModel::findByPk($id);
+        if ($supervisorExamsModel->delete()) {
+        //if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }
@@ -208,11 +210,8 @@ class SupervisorAdministrationModule extends \Module
         $timeFrom = \Input::post('timeFrom');
         $timeUntil = \Input::post('timeUntil');
         $task = "Aufsicht";
-        //$this->import('Database');
-        $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'date' => $date, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
-
-        // if ($this->Database->prepare("INSERT INTO tl_supervisors_exams %s")->set($set)->execute()) {
         $newSupervisorExamsModel = new SupervisorsExamsModel();
+        $set = array('tstamp' => time(), 'supervisor_id' => $supervisorId, 'date' => $date, 'time_from' => $timeFrom, 'time_until' => $timeUntil, 'task' => $task);
         $newSupervisorExamsModel->setRow($set);
         if ($newSupervisorExamsModel->save()) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);

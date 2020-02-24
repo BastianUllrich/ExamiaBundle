@@ -160,8 +160,9 @@ class ExamUnsubscribeModule extends \Module
                         // Klausur aus Datenbank löschen, falls niemand mehr dafür angemeldet ist
                         if (empty($getExamRegistration->attendee_id)) {
                             $examObject = ExamsModel::findByPk($exam_id);
-                            $examObject->delete();
-
+                            if (null != $examObject) {
+                                $examObject->delete();
+                            }
                             /* Werden noch Klausuren am gleichen Tag geschrieben? Falls nein, Aufsichten entfernen */
                             // Klausurdatum auf "Datum 0 Uhr" umwandeln, anschließend Timestamp von "Datum 23:59:59 Uhr" berechnen
                             $examDateReadable = date("d.m.Y", $examFullTimestamp);

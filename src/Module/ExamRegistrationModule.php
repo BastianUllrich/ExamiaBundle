@@ -150,22 +150,21 @@ class ExamRegistrationModule extends \Module
         if ($exam_datetime > time()) {
 
             if ($examsFound == 0) {
-                // Datenbank importieren, Insertions für Tabelle "tl_exams" definieren
-                $this->import('Database');
-                $set = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_firstname' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
-                        'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
-                        'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
+                // Insertions für Tabelle "tl_exams" definieren
+                $examsSet = array('tstamp' => time(), 'title' => $exam_title, 'lecturer_title' => $lecturer_title, 'lecturer_firstname' => $lecturer_firstname, 'lecturer_lastname' => $lecturer_lastname,
+                                    'lecturer_email' => $lecturer_email, 'lecturer_mobile' => $lecturer_mobile, 'department' => $department, 'date' => $exam_datetime, 'begin' => $exam_begin,
+                                    'duration' => $exam_duration, 'tools' => $tools, 'remarks' => $remarks, 'status' => $status);
 
                 // Eintrag in Tabelle "tl_exams" vornehmen
-                if ($objInsert = $this->Database->prepare("INSERT INTO tl_exams %s")->set($set)->execute()) {
+                $newExamsObject = new ExamsModel();
+                if ($objInsert = $newExamsObject->setRow($examsSet)) {
                     if (empty($extra_time)) $extra_time = 0;
-
                     // Insertions für Tabelle "tl_attendees_exams" definieren
-                    $newset = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
-                                    'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
-
+                    $attendeesExamsSet = array('tstamp' => time(), 'attendee_id' => $userID, 'exam_id' => $objInsert->insertId, 'status' => 'in_progress', 'rehab_devices' => $rehab_devices,
+                                               'rehab_devices_others' => $rehab_devices_others, 'extra_time' => $extra_time, 'extra_time_unit' => $extra_time_unit);
                     // Eintrag in Tabelle "tl_attendees_exams" vornehmen, anschließend eine E-Mail versenden und die Funktion submitSuccess() aufrufen
-                    if ($newObjInsert = $this->Database->prepare("INSERT INTO tl_attendees_exams %s")->set($newset)->execute()) {
+                    $newAttendeesExamsObject = new AttendeesExamsModel();
+                    if ($newAttendeesExamsObject->setRow($attendeesExamsSet)) {
                         $this->sendMail($exam_title, $department, $exam_date, $exam_begin);
                         $this->submitSuccess();
                     }

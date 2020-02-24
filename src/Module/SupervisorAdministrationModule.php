@@ -115,6 +115,7 @@ class SupervisorAdministrationModule extends \Module
 
     public function showDetails() {
         $this->Template->showDetails = true;
+        $this->import('Database');
 
         // Sprachvariablen
         $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
@@ -134,7 +135,7 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
         $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
-        // Datenbankabfrage aktuell aufgeteilte Aufsichten
+        // Datenbankabfrage aktuell aufgeteilte Aufsichten -> Abfrage zu komplex für Models / Collections
         $startTime = \Input::get("date");
         $endTime = $startTime + 86399;
         $result = Database::getInstance()->prepare("SELECT 
@@ -199,7 +200,6 @@ class SupervisorAdministrationModule extends \Module
         // Aufsichtsverteilung aus Tabelle tl_supervisors_exams entfernen
         $supervisorExamsModel = SupervisorsExamsModel::findByPk($id);
         if ($supervisorExamsModel->delete()) {
-        //if ($this->Database->prepare("DELETE FROM tl_supervisors_exams WHERE id=$id")->execute()->affectedRows) {
             \Controller::redirect('klausurverwaltung/aufsichtsverwaltung.html?do=showDetails&date=' . $date);
         }
     }

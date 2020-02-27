@@ -1,5 +1,6 @@
 <h3><?= $this->langEditAttendee; ?></h3>
 <h4><?= $this->langExam; ?>: <?= $this->examTitle; ?> (ID <?= $this->examID; ?>)</h4>
+<p>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="editAttendeeData">
@@ -245,5 +246,5 @@
         </div>
     </div>
 </form>
-
-<p class="underButton"><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
+</p>
+<p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>

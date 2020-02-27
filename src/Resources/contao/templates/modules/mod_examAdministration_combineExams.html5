@@ -1,6 +1,7 @@
 <h3><?= $this->langCombineExams; ?></h3>
 <p><strong><?= $this->langCombineExamsExplanation; ?></strong></p>
 <p><?= $this->langCombineExamsTo; ?> <?= $this->examToTitle; ?> - <?= $this->examToDepartment; ?> (ID<?= $this->examToId; ?>, <?= $this->examToDate; ?> <?= $this->langExamTimeAt; ?> <?= $this->examToTime; ?> <?= $this->langExamTimeHour; ?>)</p>
+<p>
 <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="combineExams">
@@ -22,4 +23,5 @@
         </div>
     </div>
 </form>
-<p class="underButton"><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
+</p>
+<p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>

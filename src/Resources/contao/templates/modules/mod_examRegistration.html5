@@ -6,6 +6,7 @@
         <h2><?= $this->examRegistration; ?></h2>
         <p><?= $this->examRegistrationExplanation; ?></p>
     </div>
+    <p>
     <form action="{{env::request}}" method="post">
     <div class="formbody">
         <input type="hidden" name="FORM_SUBMIT" value="examRegistration">
@@ -103,7 +104,8 @@
         </fieldset>
     </div>
     </form>
-    <p class="underButton"><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
+    </p>
+    <p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
 <?php
 }
 else {

@@ -120,7 +120,7 @@ elseif ($this->showDetails === true) {
                 </div>
             </form>
         </p>
-        <p class="underButton"><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linkTitleBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
+        <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linkTitleBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }
 }

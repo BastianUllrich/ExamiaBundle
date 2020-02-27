@@ -95,7 +95,6 @@
         <?php
         }
     ?>
-
     </tbody>
 </table>
 <p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>

@@ -76,7 +76,6 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
-        <p>
             <form action="{{env::request}}" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="addSupervisor">
@@ -119,7 +118,7 @@ elseif ($this->showDetails === true) {
                     </fieldset>
                 </div>
             </form>
-        </p>
+        <br>
         <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linkTitleBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }

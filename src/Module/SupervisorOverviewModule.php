@@ -135,6 +135,9 @@ class SupervisorOverviewModule extends \Module
             // Variablen für das Template setzen
             $examData[$i]['id'] = $result->id;
             $examData[$i]['title'] = $result->title;
+
+            // Verkürzte Schreibweise für den Fachbereich, außer bei JLU
+            // Bei ZDH muss anders gekürzt werden
             if ($result->department != "department13" && $result->department != "department14") {
                 $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
                 $department = trim($department_whitespaces[1]);
@@ -143,6 +146,7 @@ class SupervisorOverviewModule extends \Module
             else {
                 $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
             }
+
             $examData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['duration'] = $result->duration;

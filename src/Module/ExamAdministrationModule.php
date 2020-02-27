@@ -118,8 +118,18 @@ class ExamAdministrationModule extends \Module
             $examData[$i]['date'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['title'] = $result->title;
-            // Verkürzte Schreibweise für den Fachbereich
-            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+
+            // Verkürzte Schreibweise für den Fachbereich, außer bei JLU
+            // Bei ZDH muss anders gekürzt werden
+            if ($result->department != "department13" && $result->department != "department14") {
+                $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
+                $department = trim($department_whitespaces[1]);
+                $examData[$i]['department'] = $department;
+            }
+            else {
+                $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            }
+
             $examData[$i]['id'] = $result->id;
             $i++;
         }

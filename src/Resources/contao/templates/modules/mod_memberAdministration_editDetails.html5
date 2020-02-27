@@ -412,5 +412,5 @@
         <button type="submit" class="submit"><?= $this->Template->langSaveChanges; ?></button>
     </div>
 </form>
-<br>
+<p>&nbsp;</p>
 <p><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>

@@ -118,7 +118,7 @@ elseif ($this->showDetails === true) {
                     </fieldset>
                 </div>
             </form>
-        <br>
+<p>&nbsp;</p>
         <p><a href="klausurverwaltung/aufsichtsverwaltung.html" title="<?= $this->linkTitleBackToSupervisorAdministration; ?>"><?= $this->linktextBackToSupervisorAdministration; ?></a></p>
         <?php
     }

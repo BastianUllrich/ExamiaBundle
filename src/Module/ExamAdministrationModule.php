@@ -263,15 +263,15 @@ class ExamAdministrationModule extends \Module
         $this->Template->examToTitle = $examDetails->title;
         $this->Template->examToDate = date("d.m.Y", $examDetails->date);
         $this->Template->examToTime = $examDetails->begin;
-        
+
         // Verkürzte Schreibweise für den Fachbereich
         // Bei ZDH muss anders gekürzt werden
-        if ($result->department != "department13" && $result->department != "department14") {
-            $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
+        if ($examDetails->department != "department13" && $examDetails->department != "department14") {
+            $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$examDetails->department]);
             $this->Template->examToDepartment = trim($department_whitespaces[1]);
         }
         else {
-            $this->Template->examToDepartment = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            $this->Template->examToDepartment = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$examDetails->department], 0, 5)));
         }
 
         // Andere Klausuren aus Datenbank holen (nur aktuelle)

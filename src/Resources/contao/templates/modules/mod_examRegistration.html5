@@ -103,6 +103,7 @@
         </fieldset>
     </div>
     </form>
+    <p class="underButton"><a href="javascript:history.go(-1)" title="<?= $this->linkTitleBack; ?>"><?= $this->linktextBack; ?></a></p>
 <?php
 }
 else {

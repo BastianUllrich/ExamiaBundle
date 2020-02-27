@@ -135,7 +135,13 @@ class SupervisorOverviewModule extends \Module
             // Variablen für das Template setzen
             $examData[$i]['id'] = $result->id;
             $examData[$i]['title'] = $result->title;
-            $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            if ($result->department != "department13" && $result->department != "department14") {
+                $department = preg_replace(".\- (.*)\ -.","\\1",$result->department);
+                $examData[$i]['department'] = $department;
+            }
+            else {
+                $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            }
             $examData[$i]['dateReadable'] = date("d.m.Y", $result->date);
             $examData[$i]['begin'] = $result->begin;
             $examData[$i]['duration'] = $result->duration;

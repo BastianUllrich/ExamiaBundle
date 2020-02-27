@@ -136,7 +136,7 @@ class SupervisorOverviewModule extends \Module
             $examData[$i]['id'] = $result->id;
             $examData[$i]['title'] = $result->title;
             if ($result->department != "department13" && $result->department != "department14") {
-                $department_whitespaces = explode("-", $result->department);
+                $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
                 $department = trim($department_whitespaces[1]);
                 $examData[$i]['department'] = $department;
             }

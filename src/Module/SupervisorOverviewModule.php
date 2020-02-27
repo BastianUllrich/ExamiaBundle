@@ -136,7 +136,7 @@ class SupervisorOverviewModule extends \Module
             $examData[$i]['id'] = $result->id;
             $examData[$i]['title'] = $result->title;
             if ($result->department != "department13" && $result->department != "department14") {
-                $department = preg_replace(".\- (.*)\ -.","\\1",$result->department);
+                $department = preg_replace(".\- (.*)\ -."," ",$result->department);
                 $examData[$i]['department'] = $department;
             }
             else {

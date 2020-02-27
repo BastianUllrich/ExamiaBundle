@@ -286,7 +286,15 @@ class ExamAdministrationModule extends \Module
             $examFromData[$i]['title'] = $result->title;
             $examFromData[$i]['date'] = date("d.m.Y", $result->date);
             $examFromData[$i]['begin'] = $result->begin;
-            $examFromData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            // Verkürzte Schreibweise für den Fachbereich
+            // Bei ZDH muss anders gekürzt werden
+            if ($result->department != "department13" && $result->department != "department14") {
+                $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
+                $examFromData[$i]['department'] = trim($department_whitespaces[1]);
+            }
+            else {
+                $examFromData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            }
             $i++;
         }
         $this->Template->examFromDataList = $examFromData;

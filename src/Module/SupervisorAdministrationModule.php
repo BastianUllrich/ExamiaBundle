@@ -122,7 +122,8 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
         $this->Template->langExamsAtThisDay = $GLOBALS['TL_LANG']['miscellaneous']['examsAtThisDay'];
         $this->Template->langExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
-        $this->Template->langMaxEndTime =$GLOBALS['TL_LANG']['tl_exams']['max_ending'];
+        $this->Template->langBegin = $GLOBALS['TL_LANG']['tl_exams']['time_begin_short'];
+        $this->Template->langMaxEndTime = $GLOBALS['TL_LANG']['tl_exams']['max_ending'];
         $this->Template->langExamDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->langCurrentSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'];
         $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];

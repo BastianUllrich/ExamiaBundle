@@ -51,7 +51,7 @@ elseif ($this->showDetails === true) {
             <tr>
                 <th class="head col_first"><?= $this->langExamTitle; ?></th>
                 <th class="head"><?= $this->langExamDepartment; ?></th>
-                <th class="head"><?= $this->langTimeFrom; ?></th>
+                <th class="head"><?= $this->langBegin; ?></th>
                 <th class="head col_last"><?= $this->langMaxEndTime; ?></th>
             </tr>
             </thead>

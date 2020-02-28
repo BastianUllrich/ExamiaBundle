@@ -119,6 +119,10 @@ class SupervisorAdministrationModule extends \Module
 
         // Sprachvariablen
         $this->Template->langEditSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'];
+        $this->Template->langExamsAtThisDay = $GLOBALS['TL_LANG']['miscellaneous']['examsAtThisDay'];
+        $this->Template->langExamTitle = $GLOBALS['TL_LANG']['tl_exams']['title_short'];
+        $this->Template->langMaxEndTime =$GLOBALS['TL_LANG']['tl_exams']['max_ending'];
+        $this->Template->langExamDepartment = $GLOBALS['TL_LANG']['tl_exams']['department_short'];
         $this->Template->langCurrentSupervisors = $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'];
         $this->Template->langSupervisorName = $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'];
         $this->Template->langTimeFrom = $GLOBALS['TL_LANG']['tl_supervisors_exams']['time_from'][0];
@@ -135,10 +139,54 @@ class SupervisorAdministrationModule extends \Module
         $this->Template->linktextBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linktextBackToSupervisorAdministration'];
         $this->Template->linkTitleBackToSupervisorAdministration = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleBackToSupervisorAdministration'];
 
-        // Datenbankabfrage aktuell aufgeteilte Aufsichten
-        // Aufgrund der speziellen Abfrage nicht über Model / Collection
+        // Datenbankabfrage Klausuren am gewählten Tag
         $startTime = \Input::get("date");
         $endTime = $startTime + 86399;
+        $results = ExamsModel::findBy(['date BETWEEN ?', '?'], [$startTime, $endTime]);
+        $examData = array();
+        $i = 0;
+        foreach ($results as $result) {
+            // Variablen für das Template setzen
+            $examData[$i]['title'] = $result->title;
+
+            // Verkürzte Schreibweise für den Fachbereich
+            // Bei ZDH muss anders gekürzt werden
+            if ($result->department != "department13" && $result->department != "department14") {
+                $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
+                $examData[$i]['department'] = trim($department_whitespaces[1]);
+            }
+            else {
+                $examData[$i]['department'] = str_ireplace("-", "", str_ireplace(" ", "", substr($GLOBALS['TL_LANG']['tl_exams'][$result->department], 0, 5)));
+            }
+
+            $examData[$i]['begin'] = $result->begin;
+
+            /* Späteste Endzeit berechnen */
+            // Maximale Dauer in Minuten berechnen
+            $resultsEndTime = AttendeesExamsModel::findBy('exam_id', $examData->id);
+            $i = 0;
+            $maxDuration = $examData->duration;
+            foreach ($resultsEndTime as $resultEndTime) {
+                if ($resultEndTime->extra_time_unit == "percent") {
+                    $multiplicator = 1 + ($resultEndTime->extra_time / 100);
+                    $duration = ($examData->duration) * $multiplicator;
+                } elseif ($resultEndTime->extra_time_unit == "minutes") {
+                    $duration = ($examData->duration) + $resultEndTime->extra_time;
+                }
+                if ($duration > $maxDuration) {
+                    $maxDuration = $duration;
+                }
+            }
+            // Späteste Endzeit aus Beginn + maximaler Dauer berechnen
+            $maxEndTime = ($examData->date) + ($maxDuration * 60);
+            $maxEndTimeReadable = date("H:i", $maxEndTime);
+            $this->Template->$examData[$i]['maxEndtime'] = $maxEndTimeReadable;
+            $i++;
+        }
+        $this->Template->examFromDataList = $examData;
+
+        // Datenbankabfrage aktuell aufgeteilte Aufsichten
+        // Aufgrund der speziellen Abfrage nicht über Model / Collection
         $result = Database::getInstance()->prepare("SELECT 
                                                     tl_member.firstname, tl_member.lastname, 
                                                     tl_supervisors_exams.id, tl_supervisors_exams.date, tl_supervisors_exams.time_from, tl_supervisors_exams.time_until, tl_supervisors_exams.task
@@ -150,27 +198,27 @@ class SupervisorAdministrationModule extends \Module
                                                     ORDER BY tl_supervisors_exams.time_from
                                                     ")->query();
         $supervisorData = array();
-        $i=0;
+        $j=0;
         while ($result->next()) {
             // Variablen für das Template setzen
-            $supervisorData[$i]['date'] = date("d.m.Y", $result->date);
-            $supervisorData[$i]['id'] = $result->id;
-            $supervisorData[$i]['name'] = $result->firstname;
-            $supervisorData[$i]['name'] .= " ";
-            $supervisorData[$i]['name'] .= $result->lastname;
-            $supervisorData[$i]['timePeriod'] = $result->time_from;
-            $supervisorData[$i]['timePeriod'] .= " - ";
-            $supervisorData[$i]['timePeriod'] .= $result->time_until;
-            $supervisorData[$i]['task'] = $result->task;
+            $supervisorData[$j]['date'] = date("d.m.Y", $result->date);
+            $supervisorData[$j]['id'] = $result->id;
+            $supervisorData[$j]['name'] = $result->firstname;
+            $supervisorData[$j]['name'] .= " ";
+            $supervisorData[$j]['name'] .= $result->lastname;
+            $supervisorData[$j]['timePeriod'] = $result->time_from;
+            $supervisorData[$j]['timePeriod'] .= " - ";
+            $supervisorData[$j]['timePeriod'] .= $result->time_until;
+            $supervisorData[$j]['task'] = $result->task;
             if ($result->task == "Aufsicht") {
-                $supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
-                $supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
+                $supervisorData[$j]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteSupervisor'];
+                $supervisorData[$j]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteSupervisorText'];
             }
             if ($result->task == "Schreibassistenz") {
-                $supervisorData[$i]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'];
-                $supervisorData[$i]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
+                $supervisorData[$j]['linkTitleDelete'] = $GLOBALS['TL_LANG']['miscellaneous']['linkTitleDeleteAssistance'];
+                $supervisorData[$j]['deleteText'] = $GLOBALS['TL_LANG']['miscellaneous']['deleteAssistanceText'];
             }
-            $i++;
+            $j++;
         }
         $this->Template->supervisorDataList = $supervisorData;
         $this->Template->date = $startTime;
@@ -178,13 +226,13 @@ class SupervisorAdministrationModule extends \Module
 
         // Datenbankabfrage alle Aufsichten
         $results = MemberModel::findBy('usertype', 'Aufsicht');
-        $i = 0;
+        $k = 0;
         $supervisorUser = array();
         foreach ($results as $result) {
-            $supervisorUser[$i]["id"] = $result->id;
-            $supervisorUser[$i]["firstname"] = $result->firstname;
-            $supervisorUser[$i]["lastname"] = $result->lastname;
-            $i++;
+            $supervisorUser[$k]["id"] = $result->id;
+            $supervisorUser[$k]["firstname"] = $result->firstname;
+            $supervisorUser[$k]["lastname"] = $result->lastname;
+            $k++;
         }
         $this->Template->supervisorUserList = $supervisorUser;
     }

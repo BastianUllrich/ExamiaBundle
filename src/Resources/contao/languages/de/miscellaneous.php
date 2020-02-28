@@ -104,6 +104,7 @@ $GLOBALS['TL_LANG']['miscellaneous']['details'] = "Details";
 $GLOBALS['TL_LANG']['miscellaneous']['show_Details'] = "Details anzeigen";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisorAdministration'] = "Aufsichtsverwaltung";
 $GLOBALS['TL_LANG']['miscellaneous']['editSupervisors'] = "Aufsichten bearbeiten";
+$GLOBALS['TL_LANG']['miscellaneous']['examsAtThisDay'] = "Klausuren an diesem Tag";
 $GLOBALS['TL_LANG']['miscellaneous']['currentSupervisors'] = "Aktuell zugewiesene Aufsichten";
 $GLOBALS['TL_LANG']['miscellaneous']['supervisorName'] = "Name";
 $GLOBALS['TL_LANG']['miscellaneous']['timePeriod'] = "Zeit (von - bis)";

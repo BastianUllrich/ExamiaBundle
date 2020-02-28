@@ -43,9 +43,43 @@ if ($this->showDetails === false) {
 elseif ($this->showDetails === true) {
 
     if ($this->deletePerson === false) {
-        $i = 0;
+        $i=0;
         ?>
-        <p><strong><?= $this->langCurrentSupervisors; ?> - <?= $this->dateReadable; ?></strong></p>
+        <p><strong><?= $this->langExamsAtThisDay; ?> - <?= $this->dateReadable; ?></strong></p>
+        <table class="all_records">
+            <thead>
+            <tr>
+                <th class="head col_first"><?= $this->langExamTitle; ?></th>
+                <th class="head"><?= $this->langExamDepartment; ?></th>
+                <th class="head"><?= $this->langTimeFrom; ?></th>
+                <th class="head col_last"><?= $this->langMaxEndTime; ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->examDataList as $examData): ?>
+            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+                <td class="body col_0 col_first"><?= $examData['title']; ?></td>
+                <td class="body col_1"><?= $examData['department']; ?></td>
+                <td class="body col_2"><?= $examData['begin']; ?></td>
+                <td class="body col_3"><?= $examData['maxEndtime']; ?></td>
+            </tr>
+            <?php
+            $i++;
+            endforeach;
+            if (empty($this->examDataList)) {
+                ?>
+                <tr class="row_even">
+                    <td class="body col_0" colspan="5"><?= $this->langNoDataAvailable; ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
+        <?php
+        $j = 0;
+        ?>
+        <p><strong><?= $this->langCurrentSupervisors; ?></strong></p>
         <table class="all_records">
             <thead>
             <tr>
@@ -57,14 +91,14 @@ elseif ($this->showDetails === true) {
             </thead>
             <tbody>
             <?php foreach($this->supervisorDataList as $supervisorData): ?>
-            <tr class="row_<?php echo $i; ?> <?php if ($i==0 || $i%2==0) echo 'even'; else echo 'odd'; ?>">
+            <tr class="row_<?php echo $j; ?> <?php if ($j==0 || $j%2==0) echo 'even'; else echo 'odd'; ?>">
                 <td class="body col_0 col_first"><?= $supervisorData['name']; ?></td>
                 <td class="body col_1"><?= $supervisorData['timePeriod']; ?></td>
                 <td class="body col_1"><?= $supervisorData['task']; ?></td>
                 <td class="body col_2 col_last"><a href="{{env::request}}&action=delete&id=<?= $supervisorData['id']; ?>" title="<?= $supervisorData['linkTitleDelete']; ?>"><?= $supervisorData['deleteText']; ?></a></td>
             </tr>
             <?php
-            $i++;
+            $j++;
             endforeach;
             if (empty($this->supervisorDataList)) {
                 ?>

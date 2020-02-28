@@ -45,6 +45,7 @@ class SupervisorAdministrationModule extends \Module
     {
         // Sprachdateien einbinden
         $this->loadLanguageFile('miscellaneous');
+        $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('tl_supervisors_exams');
 
         // Variablen zur Bestimmung des anzuzeigenden Inhalts
@@ -183,7 +184,7 @@ class SupervisorAdministrationModule extends \Module
             $this->Template->$examData[$i]['maxEndtime'] = $maxEndTimeReadable;
             $i++;
         }
-        $this->Template->examFromDataList = $examData;
+        $this->Template->examDataList = $examData;
 
         // Datenbankabfrage aktuell aufgeteilte Aufsichten
         // Aufgrund der speziellen Abfrage nicht über Model / Collection

@@ -180,7 +180,7 @@ class SupervisorAdministrationModule extends \Module
             // Späteste Endzeit aus Beginn + maximaler Dauer berechnen
             $maxEndTime = ($result->date) + ($maxDuration * 60);
             $maxEndTimeReadable = date("H:i", $maxEndTime);
-            $this->Template->$examData[$i]['maxEndTime'] = $maxEndTimeReadable;
+            $examData[$i]['maxEndTime'] = $maxEndTimeReadable;
         }
         $this->Template->examDataList = $examData;
 

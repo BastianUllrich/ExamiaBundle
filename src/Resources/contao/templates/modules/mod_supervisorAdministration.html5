@@ -110,6 +110,7 @@ elseif ($this->showDetails === true) {
             ?>
             </tbody>
         </table>
+<p>&nbsp;</p>
             <form action="{{env::request}}" method="post">
                 <div class="formbody">
                     <input type="hidden" name="FORM_SUBMIT" value="addSupervisor">

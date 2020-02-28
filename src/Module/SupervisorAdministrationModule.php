@@ -151,7 +151,7 @@ class SupervisorAdministrationModule extends \Module
             // Variablen für das Template setzen
             $examData[$i]['title'] = $result->title;
 
-            // Verkürzte Schreibweise für den Fachbereich
+            // Verkürzte Schreibweise für den Fachbereich, außer bei JLU
             // Bei ZDH muss anders gekürzt werden
             if ($result->department != "department13" && $result->department != "department14") {
                 $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);

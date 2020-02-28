@@ -61,7 +61,7 @@ elseif ($this->showDetails === true) {
                 <td class="body col_0 col_first"><?= $examData['title']; ?></td>
                 <td class="body col_1"><?= $examData['department']; ?></td>
                 <td class="body col_2"><?= $examData['begin']; ?></td>
-                <td class="body col_3"><?= $examData['maxEndtime']; ?></td>
+                <td class="body col_3"><?= $examData['maxEndTime']; ?></td>
             </tr>
             <?php
             $i++;

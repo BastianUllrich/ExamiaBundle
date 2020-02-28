@@ -164,24 +164,24 @@ class SupervisorAdministrationModule extends \Module
 
             /* Späteste Endzeit berechnen */
             // Maximale Dauer in Minuten berechnen
-            $resultsEndTime = AttendeesExamsModel::findBy('exam_id', $examData->id);
+            $resultsEndTime = AttendeesExamsModel::findBy('exam_id', $result->id);
             $i = 0;
-            $maxDuration = $examData->duration;
+            $maxDuration = $result->duration;
             foreach ($resultsEndTime as $resultEndTime) {
                 if ($resultEndTime->extra_time_unit == "percent") {
                     $multiplicator = 1 + ($resultEndTime->extra_time / 100);
-                    $duration = ($examData->duration) * $multiplicator;
+                    $duration = ($result->duration) * $multiplicator;
                 } elseif ($resultEndTime->extra_time_unit == "minutes") {
-                    $duration = ($examData->duration) + $resultEndTime->extra_time;
+                    $duration = ($result->duration) + $resultEndTime->extra_time;
                 }
                 if ($duration > $maxDuration) {
                     $maxDuration = $duration;
                 }
             }
             // Späteste Endzeit aus Beginn + maximaler Dauer berechnen
-            $maxEndTime = ($examData->date) + ($maxDuration * 60);
+            $maxEndTime = ($result->date) + ($maxDuration * 60);
             $maxEndTimeReadable = date("H:i", $maxEndTime);
-            $this->Template->$examData[$i]['maxEndtime'] = $maxEndTimeReadable;
+            $this->Template->$examData[$i]['maxEndTime'] = $maxEndTimeReadable;
             $i++;
         }
         $this->Template->examDataList = $examData;

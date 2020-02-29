@@ -66,7 +66,7 @@
                     echo $attendeesData['lastname'];
                     echo " (";
                     echo $attendeesData['extra_time'];
-                    echo " ";
+                    if (!empty($attendeesData['extra_time_unit'])) echo " ";
                     echo $attendeesData['extra_time_unit'];
                     echo ")<br>";
                     endforeach;

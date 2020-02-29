@@ -264,7 +264,7 @@ class ExamAdministrationModule extends \Module
         $this->Template->examToDate = date("d.m.Y", $examDetails->date);
         $this->Template->examToTime = $examDetails->begin;
 
-        // Verkürzte Schreibweise für den Fachbereich
+        // Verkürzte Schreibweise für den Fachbereich, außer bei JLU
         // Bei ZDH muss anders gekürzt werden
         if ($examDetails->department != "department13" && $examDetails->department != "department14") {
             $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$examDetails->department]);
@@ -286,7 +286,7 @@ class ExamAdministrationModule extends \Module
             $examFromData[$i]['title'] = $result->title;
             $examFromData[$i]['date'] = date("d.m.Y", $result->date);
             $examFromData[$i]['begin'] = $result->begin;
-            // Verkürzte Schreibweise für den Fachbereich
+            // Verkürzte Schreibweise für den Fachbereich, außer bei JLU
             // Bei ZDH muss anders gekürzt werden
             if ($result->department != "department13" && $result->department != "department14") {
                 $department_whitespaces = explode("-", $GLOBALS['TL_LANG']['tl_exams'][$result->department]);
@@ -396,13 +396,17 @@ class ExamAdministrationModule extends \Module
         $this->Template->detailLecturer .= $examDetails->lecturer_firstname;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_lastname;
-        $this->Template->detailLecturer .= " (";
-        $this->Template->detailLecturer .= $examDetails->lecturer_email;
-        if (!empty($examDetails->lecturer_mobile)) {
-            $this->Template->detailLecturer .= ", ";
-            $this->Template->detailLecturer .= $examDetails->lecturer_mobile;
+        if (!empty($examDetails->lecturer_email) || !empty($examDetails->lecturer_mobile)) {
+            $this->Template->detailLecturer .= " (";
+            $this->Template->detailLecturer .= $examDetails->lecturer_email;
+            if (!empty($examDetails->lecturer_email) && !empty($examDetails->lecturer_mobile)) {
+                $this->Template->detailLecturer .= ", ";
+            }
+            if (!empty($examDetails->lecturer_mobile)) {
+                $this->Template->detailLecturer .= $examDetails->lecturer_mobile;
+            }
+            $this->Template->detailLecturer .= ")";
         }
-        $this->Template->detailLecturer .= ")";
         $this->Template->detailDepartment = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->department];
         $this->Template->detailTools = $examDetails->tools;
         $this->Template->detailStatus = $GLOBALS['TL_LANG']['tl_exams'][$examDetails->status];

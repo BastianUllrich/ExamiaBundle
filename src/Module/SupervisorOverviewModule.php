@@ -64,7 +64,7 @@ class SupervisorOverviewModule extends \Module
                                                     AND date > $todayMidnight
                                                     GROUP BY date, task
                                                     ORDER BY date ASC
-                                                    ")->query();
+                                                   ")->query();
         $supervisorData = array();
         $i = 0;
 

@@ -48,7 +48,6 @@ class ExamRegistrationModule extends \Module
         $this->loadLanguageFile('tl_exams');
         $this->loadLanguageFile('miscellaneous');
 
-
         // FrontendUser Variablen laden
         $objUser = FrontendUser::getInstance();
         $userID = $objUser->id;
@@ -266,7 +265,7 @@ class ExamRegistrationModule extends \Module
         $objMailSubscribe->text .= $examData;
         $objMailSubscribe->text .= ".\n\n";
         $objMailSubscribe->text .= $GLOBALS['TL_LANG']['miscellaneous']['emailTextAutoMail'];
-        $objMailSubscribe->sendTo("bastian.ullrich@iem.thm.de");
+        $objMailSubscribe->sendTo("beratung@bliz.thm.de");
         unset($objMailSubscribe);
     }
 }

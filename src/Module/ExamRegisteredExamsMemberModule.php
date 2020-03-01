@@ -73,7 +73,9 @@ class ExamRegisteredExamsMemberModule extends \Module
             $examParticipationList[$i]['title'] = $result->title;
 
             $examParticipationList[$i]['lecturer_name'] = $result->lecturer_title;
-            $examParticipationList[$i]['lecturer_name'] .= ' ';
+            if (!empty($result->lecturer_title)) {
+                $examParticipationList[$i]['lecturer_name'] .= ' ';
+            }
             $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_firstname;
             $examParticipationList[$i]['lecturer_name'] .= ' ';
             $examParticipationList[$i]['lecturer_name'] .= $result->lecturer_lastname;

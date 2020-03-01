@@ -39,30 +39,30 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['department'] = array
                 (
                         'label'         => $GLOBALS['TL_LANG']['tl_member']['department'],
                         'inputType'     => 'select',
-                        'search'	=> true,
+                        'search'	    => true,
                         'options'       => array('department1', 'department2', 'department3', 'department4', 'department5', 'department6', 'department7', 'department8', 'department9', 'department10', 'department11', 'department12', 'department13', 'department14'),
-                        'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],
-			'eval'          => array(
-                                                'includeBlankOption'    => true,
-						'feGroup'		=> 'study',
-						'feEditable'		=> true,
-						'feViewable'		=> true,
-                                                'mandatory'             => true
-                        ),
+                        'reference'	    => &$GLOBALS['TL_LANG']['tl_member'],
+                        'eval'          => array(
+                                                'includeBlankOption' => true,
+                                                'feGroup' => 'study',
+						                        'feEditable' => true,
+						                        'feViewable' => true,
+                                                'mandatory' => true
+                                                ),
                         'sql'           => "varchar(80) NOT NULL default ''"
                 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['study_course'] = array
                 (
                         'label'         => $GLOBALS['TL_LANG']['tl_member']['study_course'],
-             		'inputType'	=> 'text',
+             		    'inputType' 	=> 'text',
                         'eval'          => array(
-                                                'feGroup'               => 'study',
-                                                'feEditable'            => true,
-                                                'feViewable'            => true,
-                                                'mandatory'             => true,
-                		       		'maxlength'		=> '30'
-			),
+                                                'feGroup' => 'study',
+                                                'feEditable' => true,
+                                                'feViewable' => true,
+                                                'mandatory' => true,
+                		       		            'maxlength'	=> '30'
+			                                    ),
                         'sql'           => "varchar(30) NOT NULL default ''"
                 );
 
@@ -77,7 +77,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['chipcard_nr'] = array
                                                 'feViewable'            => true,
                                                 'mandatory'             => false,
                                                 'maxlength'             => '20'
-                        ),
+                                                ),
                         'sql'           => "varchar(20) NOT NULL default ''"
                 );
 
@@ -87,25 +87,25 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['handicaps'] = array
                 (
                         'label'         => $GLOBALS['TL_LANG']['tl_member']['handicaps'],
                         'inputType'     => 'checkbox',
-			'options'	=> array(
-						'blind',
-						'visually impaired',
-						'deaf',
-						'motorically restricted',
-						'autism',
-						'mental disorder',
-						'chronic disorder',
-						'acute illness',
-						'different'
-					),
-			'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],
+                        'options'	=> array(
+                                            'blind',
+                                            'visually impaired',
+                                            'deaf',
+                                            'motorically restricted',
+                                            'autism',
+                                            'mental disorder',
+                                            'chronic disorder',
+                                            'acute illness',
+                                            'different'
+					                        ),
+			            'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],
                         'eval'          => array(
                                                 'feGroup'               => 'personal',
                                                 'feEditable'            => true,
                                                 'feViewable'            => true,
                                                 'mandatory'             => false,
-						'multiple'		=> true
-                        ),
+						                        'multiple'		        => true
+                                                ),
                         'sql'           => "blob NULL"
                 );
 
@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['handicaps_others'] = array
                                                 'feViewable'            => true,
                                                 'mandatory'             => false,
                                                 'maxlength'             => '64'
-                        ),
+                                                ),
                         'sql'           => "varchar(64) NOT NULL default ''"
                 );
 
@@ -137,18 +137,18 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['rehab_devices'] = array
                                                 'obscuration',
                                                 'writing assistance',
                                                 'high table',
-						'near door',
-                            'own room',
-						'different'
-                                        ),
+						                        'near door',
+                                                'own room',
+						                        'different'
+                                                ),
                         'reference'     => &$GLOBALS['TL_LANG']['tl_member'],
                         'eval'          => array(
-                                                'feGroup'               => 'exam',
-                                                'feEditable'            => true,
-                                                'feViewable'            => true,
-                                                'mandatory'             => false,
-                                                'multiple'              => true
-                        ),
+                                                'feGroup' => 'exam',
+                                                'feEditable' => true,
+                                                'feViewable' => true,
+                                                'mandatory' => false,
+                                                'multiple' => true
+                                                ),
                         'sql'           => "blob NULL"
                 );
 
@@ -156,13 +156,13 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['rehab_devices_others'] = array
                 (
                         'label'         => $GLOBALS['TL_LANG']['tl_member']['rehab_devices_others'],
                         'inputType'     => 'text',
-			'eval'		=> array(
-						'feGroup'	=> 'exam',
-						'feEditable'	=> true,
-						'feViewable'	=> true,
-						'mandatory'	=> false,
-						'maxlength'	=> 30
-			),
+                        'eval'		=> array(
+                                            'feGroup'	=> 'exam',
+                                            'feEditable'	=> true,
+                                            'feViewable'	=> true,
+                                            'mandatory'	=> false,
+                                            'maxlength'	=> 30
+                                            ),
 			'sql'		=> "varchar(30) NOT NULL default ''"
 );
 
@@ -182,22 +182,22 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['extra_time'] = array
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['extra_time_unit'] = array
                 (
-                        'label'         => $GLOBALS['TL_LANG']['tl_member']['extra_time_unit'],
-                        'inputType'     => 'select',
-			'sorting'	=> true,
-			'flag'		=> 1,
-			'options'	=> array(
-						'minutes',
-						'percent'
-					),
-			'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],
+                        'label'     => $GLOBALS['TL_LANG']['tl_member']['extra_time_unit'],
+                        'inputType' => 'select',
+                        'sorting'	=> true,
+                        'flag'		=> 1,
+                        'options'	=> array(
+                                            'minutes',
+                                            'percent'
+                                            ),
+                        'reference'	=> &$GLOBALS['TL_LANG']['tl_member'],
                         'eval'          => array(
-						'includeBlankOption'	=> true,
+						                        'includeBlankOption'	=> true,
                                                 'feGroup'       	=> 'exam',
                                                 'feEditable'    	=> true,
                                                 'feViewable'    	=> true,
                                                 'mandatory'    		=> false
-                        ),
+                                                ),
                         'sql'           => "varchar(10) NOT NULL default ''"
 );
 
@@ -232,8 +232,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['comments'] = array
                                                 'feEditable'            => true,
                                                 'feViewable'            => true,
                                                 'mandatory'             => false,
-						'maxlength'		=> 80
-                        ),
+                                                'maxlength'		=> 80
+                                                ),
                         'sql'           => "varchar(80) NOT NULL default ''"
 );
 

@@ -31,8 +31,8 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'delete' => [
                 'href' => 'act=delete',
                 'icon' => 'delete.svg',
-		'label' => &$GLOBALS['TL_LANG']['tl_exams']['delete'],
-		'attributes'  => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+		        'label' => &$GLOBALS['TL_LANG']['tl_exams']['delete'],
+                'attributes'  => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
             ],
             'show' => [
                 'href' => 'act=show',
@@ -81,7 +81,7 @@ $GLOBALS['TL_DCA']['tl_exams'] = [
             'label' => &$GLOBALS['TL_LANG']['tl_exams']['department'],
             'inputType' => 'select',
             'options' => ['department1', 'department2', 'department3', 'department4', 'department5', 'department6', 'department7', 'department8', 'department9', 'department10', 'department11', 'department12', 'department13', 'department14'],
-	    'reference' => &$GLOBALS['TL_LANG']['tl_exams'],
+	        'reference' => &$GLOBALS['TL_LANG']['tl_exams'],
             'eval' => ['mandatory' => true, 'includeBlankOption' => true],
             'sql' => ['type' => 'string', 'length' => 80, 'default' => '']
         ],

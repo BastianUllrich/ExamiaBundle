@@ -372,7 +372,6 @@ class ExamAdministrationModule extends \Module
         /* Späteste Endzeit berechnen */
         // Maximale Dauer in Minuten berechnen
         $results = AttendeesExamsModel::findBy('exam_id', $examDetails->id);
-        $i = 0;
         $maxDuration = $examDetails->duration;
         foreach ($results as $result) {
             if ($result->extra_time_unit == "percent") {
@@ -392,7 +391,9 @@ class ExamAdministrationModule extends \Module
 
         // Dozentendaten zusammensetzen
         $this->Template->detailLecturer = $examDetails->lecturer_title;
-        $this->Template->detailLecturer .= " ";
+        if (!empty($examDetails->lecturer_title)) {
+            $this->Template->detailLecturer .= " ";
+        }
         $this->Template->detailLecturer .= $examDetails->lecturer_firstname;
         $this->Template->detailLecturer .= " ";
         $this->Template->detailLecturer .= $examDetails->lecturer_lastname;
@@ -460,7 +461,6 @@ class ExamAdministrationModule extends \Module
             $i++;
         }
         $this->Template->attendeesDataList = $attendeesData;
-
         $this->Template->detailRemarks = $examDetails->remarks;
     }
 
@@ -629,14 +629,14 @@ class ExamAdministrationModule extends \Module
         $this->Template->examTitle = $examData->title;
         $this->Template->examID = $exam;
         $result = Database::getInstance()->prepare("SELECT
-                                                        tl_member.firstname, tl_member.lastname, tl_member.id,
-                                                        tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices,
-                                                        tl_attendees_exams.assistant_id
-                                                        FROM tl_member, tl_exams, tl_attendees_exams
-                                                        WHERE tl_member.id=tl_attendees_exams.attendee_id
-                                                        AND tl_attendees_exams.exam_id = tl_exams.id
-                                                        AND tl_exams.id = $exam
-                                                        ")->query();
+                                                    tl_member.firstname, tl_member.lastname, tl_member.id,
+                                                    tl_attendees_exams.seat, tl_attendees_exams.status, tl_attendees_exams.rehab_devices,
+                                                    tl_attendees_exams.assistant_id
+                                                    FROM tl_member, tl_exams, tl_attendees_exams
+                                                    WHERE tl_member.id=tl_attendees_exams.attendee_id
+                                                    AND tl_attendees_exams.exam_id = tl_exams.id
+                                                    AND tl_exams.id = $exam
+                                                   ")->query();
         $i = 0;
         $attendeeData = array();
         while ($result->next()) {
@@ -654,7 +654,7 @@ class ExamAdministrationModule extends \Module
             /* Überprüfen, ob eine Schreibassistenz benötigt wird */
             // Default "nicht benötigt"
             $attendeeData[$i]['writingAssistance'] = $GLOBALS['TL_LANG']['miscellaneous']['writingAssistanceNotRequired'];
-            // Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben
+            /* Wenn eine Schreibassistenz benötigt wird, den Text "nicht zugewiesen" ausgeben */
             // Erst Rehab-Devices in Array schreiben, dann überprüfen, ob "writing assistance" darin steht
             $rehab_devices = unserialize($result->rehab_devices);
             for ($j=0; $j < sizeof($rehab_devices); $j++) {
@@ -722,14 +722,12 @@ class ExamAdministrationModule extends \Module
         $attendeeID = \Input::get('editAttendee');
         $this->setShowEditAttendeeLangValues();
         $this->setShowEditAttendeeValues($examID, $attendeeID);
-
     }
 
     // Änderungen nach dem Editieren von Teilnehmern speichern
     public function saveAttendeeChanges($examID, $attendeeID) {
         $attendeeExam = AttendeesExamsModel::findBy(['exam_id = ?', 'attendee_id = ?'], [$examID, $attendeeID]);
-        $id = $attendeeExam->id;
-        $ae_id = $id;
+        $ae_id = $attendeeExam->id;
 
         $addSupervisor = false;
         $deleteSupervisor = false;
@@ -849,7 +847,7 @@ class ExamAdministrationModule extends \Module
                                                     WHERE tl_member.id=$attendeeID
                                                     AND tl_attendees_exams.exam_id = $examID
                                                     AND tl_attendees_exams.attendee_id=$attendeeID
-                                                    ")->query();
+                                                   ")->query();
 
         $examData = ExamsModel::findBy('id', $examID);
         $this->Template->examTitle = $examData->title;

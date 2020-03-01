@@ -26,16 +26,16 @@
         </td>
     </tr>
     <?php
-                $i++;
-            endforeach;
-            if (sizeof($this->attendeeDataList) == 0) {
+    $i++;
+    endforeach;
+    if (sizeof($this->attendeeDataList) == 0) {
     ?>
     <tr class="row_0 even">
         <td class="body col_0" colspan="6"><?= $this->noAttendeeExam; ?></td>
     </tr>
     <?php
-            }
-            ?>
+    }
+    ?>
     </tbody>
 </table>
 <p><a href="klausurverwaltung/klausurverwaltung.html" title="<?= $this->linkTitleBackToExamsAdministration; ?>"><?= $this->linktextBackToExamsAdministration; ?></a></p>

@@ -22,7 +22,7 @@
                 <input type="text" name="lastname" id="lastname" class="text mandatory" value="<?= $this->lastname; ?>" required="" maxlength="255" autocomplete="on">
             </div>
             <?php
-                        if ($this->memberType == "Student") {
+            if ($this->memberType == "Student") {
             ?>
             <div class="widget widget-text">
                 <label for="dateOfBirth">
@@ -48,8 +48,8 @@
                     <label id="lbl_handicaps_0" for="opt_handicaps_0">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_0" class="checkbox" value="blind"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "blind") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "blind") echo "checked";
                         }
                         ?>
                         >
@@ -58,8 +58,8 @@
                     <label id="lbl_handicaps_1" for="opt_handicaps_1">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_1" class="checkbox" value="visually impaired"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "visually impaired") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "visually impaired") echo "checked";
                         }
                         ?>
                         >
@@ -68,8 +68,8 @@
                     <label id="lbl_handicaps_2" for="opt_handicaps_2">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_2" class="checkbox" value="deaf"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "deaf") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "deaf") echo "checked";
                         }
                         ?>
                         >
@@ -78,8 +78,8 @@
                     <label id="lbl_handicaps_3" for="opt_handicaps_3">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_3" class="checkbox" value="motorically restricted"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "motorically restricted") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "motorically restricted") echo "checked";
                         }
                         ?>
                         >
@@ -88,8 +88,8 @@
                     <label id="lbl_handicaps_4" for="opt_handicaps_4">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_4" class="checkbox" value="autism"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "autism") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "autism") echo "checked";
                         }
                         ?>
                         >
@@ -98,8 +98,8 @@
                     <label id="lbl_handicaps_5" for="opt_handicaps_5">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_5" class="checkbox" value="mental disorder"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "mental disorder") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "mental disorder") echo "checked";
                         }
                         ?>
                         >
@@ -108,8 +108,8 @@
                     <label id="lbl_handicaps_6" for="opt_handicaps_6">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_6" class="checkbox" value="chronic disorder"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "chronic disorder") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "chronic disorder") echo "checked";
                         }
                         ?>
                         >
@@ -118,8 +118,8 @@
                     <label id="lbl_handicaps_7" for="opt_handicaps_7">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_7" class="checkbox" value="acute illness"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "acute illness") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "acute illness") echo "checked";
                         }
                         ?>
                         >
@@ -128,8 +128,8 @@
                     <label id="lbl_handicaps_8" for="opt_handicaps_8">
                         <input type="checkbox" name="handicaps[]" id="opt_handicaps_8" class="checkbox" value="different"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
-                        if ($this->handicaps[$i] == "different") echo "checked";
+                        for ($i = 0; $i < sizeof($this->handicaps); $i++) {
+                            if ($this->handicaps[$i] == "different") echo "checked";
                         }
                         ?>
                         >
@@ -150,27 +150,27 @@
         <fieldset>
             <legend><?= $this->langContactData; ?></legend>
             <?php
-                        if ($this->memberType == "Student") {
+            if ($this->memberType == "Student") {
+                ?>
+                <div class="widget widget-text">
+                    <label for="phone">
+                        <?= $this->langPhone; ?>
+                    </label>
+                    <input type="text" name="phone" id="phone" class="text" value="<?= $this->phone; ?>" maxlength="64" autocomplete="on">
+                </div>
+                <?php
+            }
+            if ($this->memberType == "Student" || $this->memberType == "Aufsicht") {
+                ?>
+                <div class="widget widget-text">
+                    <label for="mobile">
+                        <?= $this->langMobile; ?>
+                    </label>
+                    <input type="text" name="mobile" id="mobile" class="text" value="<?= $this->mobile; ?>" maxlength="64" autocomplete="on">
+                </div>
+                <?php
+            }
             ?>
-            <div class="widget widget-text">
-                <label for="phone">
-                    <?= $this->langPhone; ?>
-                </label>
-                <input type="text" name="phone" id="phone" class="text" value="<?= $this->phone; ?>" maxlength="64" autocomplete="on">
-            </div>
-            <?php
-                        }
-                        if ($this->memberType == "Student" || $this->memberType == "Aufsicht") {
-            ?>
-            <div class="widget widget-text">
-                <label for="mobile">
-                    <?= $this->langMobile; ?>
-                </label>
-                <input type="text" name="mobile" id="mobile" class="text" value="<?= $this->mobile; ?>" maxlength="64" autocomplete="on">
-            </div>
-            <?php
-                        }
-                        ?>
             <div class="widget widget-text mandatory">
                 <label for="email" class="mandatory">
                     <span class="invisible"><?= $this->mandatory; ?> </span>
@@ -256,8 +256,8 @@
                     <label id="lbl_pc" for="pc">
                         <input type="checkbox" name="rehab_devices[]" id="pc" class="checkbox" value="pc"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "pc") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "pc") echo "checked";
                         }
                         ?>
                         >
@@ -266,8 +266,8 @@
                     <label id="lbl_blind_workspace" for="blind_workspace">
                         <input type="checkbox" name="rehab_devices[]" id="blind_workspace" class="checkbox" value="blind workspace"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "blind workspace") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "blind workspace") echo "checked";
                         }
                         ?>
                         >
@@ -276,8 +276,8 @@
                     <label id="lbl_zoomtext" for="zoomtext">
                         <input type="checkbox" name="rehab_devices[]" id="zoomtext" class="checkbox" value="Zoomtext"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "Zoomtext") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "Zoomtext") echo "checked";
                         }
                         ?>
                         >
@@ -286,8 +286,8 @@
                     <label id="lbl_screen_magnifier" for="screen_magnifier">
                         <input type="checkbox" name="rehab_devices[]" id="screen_magnifier" class="screen_magnifier" value="screen magnifier"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "screen magnifier") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "screen magnifier") echo "checked";
                         }
                         ?>
                         >
@@ -296,8 +296,8 @@
                     <label id="lbl_screen_reader" for="screen_reader">
                         <input type="checkbox" name="rehab_devices[]" id="screen_reader" class="screen_reader" value="screen reader"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "screen reader") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "screen reader") echo "checked";
                         }
                         ?>
                         >
@@ -306,8 +306,8 @@
                     <label id="lbl_a3_print" for="a3_print">
                         <input type="checkbox" name="rehab_devices[]" id="a3_print" class="a3_print" value="a3 print"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "a3 print") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "a3 print") echo "checked";
                         }
                         ?>
                         >
@@ -316,8 +316,8 @@
                     <label id="lbl_obscuration" for="obscuration">
                         <input type="checkbox" name="rehab_devices[]" id="obscuration" class="obscuration" value="obscuration"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "obscuration") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "obscuration") echo "checked";
                         }
                         ?>
                         >
@@ -326,8 +326,8 @@
                     <label id="lbl_writing_assistance" for="writing_assistance">
                         <input type="checkbox" name="rehab_devices[]" id="writing_assistance" class="writing_assistance" value="writing assistance"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "writing assistance") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "writing assistance") echo "checked";
                         }
                         ?>
                         >
@@ -336,8 +336,8 @@
                     <label id="lbl_high_table" for="high_table">
                         <input type="checkbox" name="rehab_devices[]" id="high_table" class="high_table" value="high table"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "high table") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "high table") echo "checked";
                         }
                         ?>
                         >
@@ -346,8 +346,8 @@
                     <label id="lbl_near_door" for="near_door">
                         <input type="checkbox" name="rehab_devices[]" id="near_door" class="near_door" value="near door"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "near door") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "near door") echo "checked";
                         }
                         ?>
                         >
@@ -356,8 +356,8 @@
                     <label id="lbl_own_room" for="own_room">
                         <input type="checkbox" name="rehab_devices[]" id="own_room" class="own_room" value="own room"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "own room") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "own room") echo "checked";
                         }
                         ?>
                         >
@@ -366,8 +366,8 @@
                     <label id="lbl_different" for="different">
                         <input type="checkbox" name="rehab_devices[]" id="different" class="different" value="different"
                         <?php
-                                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
-                        if ($this->rehab_devices[$i] == "different") echo "checked";
+                        for ($i = 0; $i < sizeof($this->rehab_devices); $i++) {
+                            if ($this->rehab_devices[$i] == "different") echo "checked";
                         }
                         ?>
                         >

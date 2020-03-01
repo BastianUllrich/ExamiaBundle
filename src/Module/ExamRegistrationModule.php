@@ -133,6 +133,7 @@ class ExamRegistrationModule extends \Module
         $status = 'status1';
 
         // Überprüfen, ob das Formular doppelt abgesendet wurde, indem der Student zu einer Zeit nur eine Klausur schreiben kann
+        // Da das Feld "Dauer" gleich "Null" sein darf, wird auf die Startzeit (Beginn) der Klausur geprüft
         $checkForExams = ExamsModel::findBy('date', $exam_datetime);
         $examsFound = 0;
         if (!is_null($checkForExams)) {
